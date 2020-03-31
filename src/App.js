@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { useSelector, useDispatch } from "react-redux"
+import React from "react"
+import useSelector from "react-redux"
 import { Wizard } from "react-albus"
 import { TailwindThemeProvider } from "tailwind-react-ui"
 import { BrowserRouter, Route } from "react-router-dom"
@@ -9,9 +9,7 @@ import WelcomePage from "./WelcomePage"
 import { selectLoading } from "./surveySlice"
 
 const HomeApp = () => {
-  const count = useSelector(selectLoading)
-  const dispatch = useDispatch()
-  const [incrementAmount, setIncrementAmount] = useState("2")
+  const isLoading = useSelector(selectLoading)
 
   const wizardStep = ({ step, push }) => {
     // this is just an example of how to intercept steps
@@ -35,6 +33,7 @@ const HomeApp = () => {
             </div>
           </div>
         </nav>
+        {isLoading && <div>Loading... </div>}
         <Route path="/security" exact>
           <WelcomePage />
         </Route>
