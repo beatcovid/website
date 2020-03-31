@@ -38,6 +38,8 @@ const SurveyApp = ({ history, step, next, go }) => {
   const form = useSelector(selectForm)
   const dispatch = useDispatch()
 
+  console.log(step)
+
   return (
     <>
       <main className="bg-gray-200">
@@ -68,7 +70,7 @@ const SurveyApp = ({ history, step, next, go }) => {
                 )}
 
                 <div className="max-w-md mx-auto flex p-6 bg-white text-center rounded-lg shadow-xl">
-                  <Steps key={step.id} step={step}>
+                  <Steps key={step.id || ''} step={step || {id: ''}}>
                     <Step id="f/home">
                       <div className="flex flex-col block">
                         <span className="h-16 text-xl">

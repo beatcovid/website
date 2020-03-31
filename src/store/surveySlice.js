@@ -77,7 +77,6 @@ export const doFormSubmit = (form, next) => dispatch => {
   dispatch(clearError())
 
   console.log("formSubmit", form)
-
   api
     .submit(form)
     .then(r => {

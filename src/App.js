@@ -1,27 +1,14 @@
 import React from "react"
 import { useSelector } from "react-redux"
-import { Wizard } from "react-albus"
 import { TailwindThemeProvider } from "tailwind-react-ui"
 import { BrowserRouter, Route } from "react-router-dom"
 import theme from "./theme"
-import SurveyApp from "./components/steps/SurveyHome"
-import WelcomePage from "./components/WelcomePage"
+import WelcomePage from "./pages/WelcomePage"
+import StepsPage from "./pages/StepsPage"
 import { selectLoading } from "./store/surveySlice"
 
 const HomeApp = () => {
   const isLoading = useSelector(selectLoading)
-
-  const wizardStep = ({ step, push }) => {
-    // this is just an example of how to intercept steps
-    switch (step.id) {
-      case "stepnum": {
-        push("/path/")
-        break
-      }
-      default:
-        push()
-    }
-  }
 
   return (
     <TailwindThemeProvider theme={theme}>
@@ -33,19 +20,16 @@ const HomeApp = () => {
             </div>
           </div>
         </nav>
+        
         {isLoading && <div>Loading... </div>}
-        <Route path="/security" exact>
+        
+        <Route path="/" exact>
           <WelcomePage />
         </Route>
-        <Route
-          render={({ history }) => (
-            <Wizard
-              onNext={wizardStep}
-              history={history}
-              render={props => <SurveyApp {...props} />}
-            />
-          )}
-        />
+        
+        <Route path="/steps">
+          <StepsPage />
+        </Route>
       </BrowserRouter>
     </TailwindThemeProvider>
   )
