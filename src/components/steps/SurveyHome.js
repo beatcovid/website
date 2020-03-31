@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 import { Steps, Step, withWizard } from "react-albus"
 import { IoMdAlert } from "react-icons/io"
-import Footer from "./components/wizard/Footer"
+import Footer from "./Footer"
 import GetLocationStep from "./GetLocationStep"
 import {
   selectError,
@@ -13,7 +13,7 @@ import {
   doSetSymptomDate,
   doSetTested,
   doFormSubmit,
-} from "./store/surveySlice"
+} from "../../store/surveySlice"
 
 const SubmitForm = ({ form }) => {
   const [loaded, setLoaded] = useState(false)

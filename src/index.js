@@ -5,7 +5,7 @@ import Fingerprint2 from "fingerprintjs2"
 import * as Sentry from "@sentry/browser"
 import App from "./App"
 import store from "./store"
-import * as serviceWorker from "./serviceWorker"
+import * as serviceWorker from "./utils/serviceWorker"
 import "./styles/tailwind.css"
 
 Fingerprint2.get({}, function(components) {

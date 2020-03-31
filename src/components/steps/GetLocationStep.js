@@ -4,7 +4,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete"
-import { setLoading, setLocation, doSetLocation } from "./store/surveySlice"
+import { setLoading, setLocation, doSetLocation } from "../../store/surveySlice"
 
 const GetLocation = ({ next }) => {
   const dispatch = useDispatch()
@@ -59,7 +59,7 @@ const GetLocation = ({ next }) => {
 
   if (isFinding) {
     return (
-      <div class="flex flex-col block">
+      <div className="flex flex-col block">
         <p>Finding Location ...</p>
       </div>
     )
@@ -68,14 +68,14 @@ const GetLocation = ({ next }) => {
   const google = window.google
 
   return (
-    <div class="flex flex-col block">
-      <span class="h-16 text-xl">Your Location</span>
+    <div className="flex flex-col block">
+      <span className="h-16 text-xl">Your Location</span>
 
-      <span class="h-16 mb-6">
+      <span className="h-16 mb-6">
         We could not find your location. Please enter your suburb below.
       </span>
 
-      <label class="block">
+      <label className="block">
         <PlacesAutocomplete
           value={address}
           onChange={a => setAddress(a)}
@@ -97,7 +97,7 @@ const GetLocation = ({ next }) => {
           }) => (
             <div>
               <input
-                class="mt-5 px-4 h-12 border border-silver w-full"
+                className="mt-5 px-4 h-12 border border-silver w-full"
                 {...getInputProps({
                   placeholder: "Search Places ...",
                   className: "location-search-input",
@@ -131,7 +131,7 @@ const GetLocation = ({ next }) => {
       </label>
 
       <button
-        class="mt-8 h-12 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        className="mt-8 h-12 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
         onClick={() => dispatch(doSetLocation(geoLocation, next))}
       >
         Continue

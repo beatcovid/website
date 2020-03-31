@@ -4,7 +4,7 @@ import { Wizard } from "react-albus"
 import { TailwindThemeProvider } from "tailwind-react-ui"
 import { BrowserRouter, Route } from "react-router-dom"
 import theme from "./theme"
-import SurveyApp from "./SurveyHome"
+import SurveyApp from "./components/steps/SurveyHome"
 import WelcomePage from "./components/WelcomePage"
 import { selectLoading } from "./store/surveySlice"
 
