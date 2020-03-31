@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { api } from "./agent"
+import { api } from "../api/agent"
 
 export const slice = createSlice({
   name: "survey",

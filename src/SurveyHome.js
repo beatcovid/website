@@ -13,7 +13,7 @@ import {
   doSetSymptomDate,
   doSetTested,
   doFormSubmit,
-} from "./surveySlice"
+} from "./store/surveySlice"
 
 const SubmitForm = ({ form }) => {
   const [loaded, setLoaded] = useState(false)

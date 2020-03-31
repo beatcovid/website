@@ -4,7 +4,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete"
-import { setLoading, setLocation, doSetLocation } from "./surveySlice"
+import { setLoading, setLocation, doSetLocation } from "./store/surveySlice"
 
 const GetLocation = ({ next }) => {
   const dispatch = useDispatch()

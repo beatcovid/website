@@ -4,7 +4,7 @@ import { Provider } from "react-redux"
 import Fingerprint2 from "fingerprintjs2"
 import * as Sentry from "@sentry/browser"
 import App from "./App"
-import store from "./Store"
+import store from "./store"
 import * as serviceWorker from "./serviceWorker"
 import "./styles/tailwind.css"
 

@@ -6,7 +6,7 @@ import { BrowserRouter, Route } from "react-router-dom"
 import theme from "./theme"
 import SurveyApp from "./SurveyHome"
 import WelcomePage from "./WelcomePage"
-import { selectLoading } from "./surveySlice"
+import { selectLoading } from "./store/surveySlice"
 
 const HomeApp = () => {
   const isLoading = useSelector(selectLoading)
