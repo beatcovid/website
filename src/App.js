@@ -1,5 +1,5 @@
 import React from "react"
-import useSelector from "react-redux"
+import { useSelector } from "react-redux"
 import { Wizard } from "react-albus"
 import { TailwindThemeProvider } from "tailwind-react-ui"
 import { BrowserRouter, Route } from "react-router-dom"
