@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const WelcomePage = () => {
   return (
-    <div>
+    <div className="container">
       <span>
         The purpose of this test is to find out what
         proportion of the population has been infected by
