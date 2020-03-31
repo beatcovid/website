@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 import { Steps, Step, withWizard } from "react-albus"
 import { IoMdAlert } from "react-icons/io"
-import Footer from "./Footer"
+import StepsNavigation from "./Navigation"
 import GetLocationStep from "./GetLocationStep"
 import {
   selectError,
@@ -234,7 +234,7 @@ const SurveyApp = ({ history, step, next, go }) => {
           </CSSTransition>
         </TransitionGroup>
       </main>
-      <Footer />
+      <StepsNavigation />
     </>
   )
 }
