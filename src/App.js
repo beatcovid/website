@@ -5,7 +5,7 @@ import { TailwindThemeProvider } from "tailwind-react-ui"
 import { BrowserRouter, Route } from "react-router-dom"
 import theme from "./theme"
 import SurveyApp from "./SurveyHome"
-import WelcomePage from "./WelcomePage"
+import WelcomePage from "./components/WelcomePage"
 import { selectLoading } from "./store/surveySlice"
 
 const HomeApp = () => {
@@ -26,10 +26,10 @@ const HomeApp = () => {
   return (
     <TailwindThemeProvider theme={theme}>
       <BrowserRouter>
-        <nav class="bg-gray-800">
-          <div class=" mx-auto px-2 sm:px-6 lg:px-8">
-            <div class="relative flex items-center justify-between h-16">
-              <span class="text-white text-bold">COVID-19 Survey</span>
+        <nav className="bg-gray-800">
+          <div className=" mx-auto px-2 sm:px-6 lg:px-8">
+            <div className="relative flex items-center justify-between h-16">
+              <span className="text-white text-bold">COVID-19 Survey</span>
             </div>
           </div>
         </nav>

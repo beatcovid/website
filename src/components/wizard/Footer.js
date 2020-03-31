@@ -6,11 +6,11 @@ const Navigation = () => (
     render={({ next, previous, step, steps }) => (
       <footer
         className="footerFixed"
-        class="flex bg-white border-t border-silver p-3 align-center"
+        className="flex bg-white border-t border-silver p-3 align-center"
       >
         {steps.indexOf(step) > 0 && steps.indexOf(step) < steps.length - 2 && (
           <button
-            class="bg-blue-500 w-32 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-blue-500 w-32 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             onClick={previous}
           >
             Back
