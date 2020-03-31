@@ -24,5 +24,5 @@ const requests = {
 
 export const api = {
   submit: p => requests.post("/api/survey/result/", p),
-  getForm: () => requests.get("/api/form")
+  getForm: () => requests.get("/api/questions.json")
 };

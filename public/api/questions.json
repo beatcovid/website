@@ -1,0 +1,53 @@
+{
+  "form": [
+    {
+      "name": "age",
+      "label": "What is your age?",
+      "bind": {
+        "required": true
+      },
+      "choices": [
+        {
+          "name": "14_or_less",
+          "label": "14 years or less"
+        },
+        {
+          "name": "15_17",
+          "label": "15 - 17"
+        },
+        {
+          "name": "18_29",
+          "label": "18 - 29"
+        },
+        {
+          "name": "30_39",
+          "label": "30 - 39"
+        },
+        {
+          "name": "40_49",
+          "label": "40 - 49"
+        },
+        {
+          "name": "50_59",
+          "label": "50 - 59"
+        },
+        {
+          "name": "60_69",
+          "label": "60 - 69"
+        },
+        {
+          "name": "70_79",
+          "label": "70 - 79"
+        },
+        {
+          "name": "80_89",
+          "label": "80 - 89"
+        },
+        {
+          "name": "90_and_older",
+          "label": "90 and older"
+        }
+      ]
+    }
+  ]
+}

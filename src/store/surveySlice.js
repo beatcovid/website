@@ -9,6 +9,7 @@ export const slice = createSlice({
     submitted: false,
     currentStep: undefined,
     error: undefined,
+    questions: undefined,
     form: {
       fingerprint: "dev",
       location: undefined,
@@ -56,6 +57,9 @@ export const slice = createSlice({
     setSubmitted: state => {
       state.submitted = true
     },
+    setQuestions: (state, { payload }) => {
+      state.questions = payload
+    },
   },
 })
 
@@ -71,7 +75,18 @@ export const {
   setTestedPosition,
   setSymptomDate,
   setLocation,
+  setQuestions,
 } = slice.actions
+
+export const doQuestionsGet = () => dispatch => {
+  console.log("questionsGet")
+  api
+    .getForm()
+    .then(r => {
+      dispatch(setQuestions(r))
+    })
+    .catch(e => console.error(e))
+}
 
 export const doFormSubmit = (form, next) => dispatch => {
   dispatch(clearError())
@@ -145,5 +160,6 @@ export const selectDob = state => state.survey.form.dob
 export const selectSymptomDate = state => state.survey.form.symptomDate
 export const selectLoading = state => state.survey.isLoading
 export const selectError = state => state.survey.error
+export const surveyQuestions = state => state.survey.questions
 
 export default slice.reducer

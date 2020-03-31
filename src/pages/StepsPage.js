@@ -1,10 +1,15 @@
 import React from "react"
 import { useHistory } from "react-router-dom"
+import { useDispatch } from "react-redux"
 import { Wizard } from "react-albus"
 import SurveyApp from "../components/steps/SurveyHome"
+import { doQuestionsGet } from "../store/surveySlice"
 
 const StepsPage = () => {
   const history = useHistory()
+  const dispatch = useDispatch()
+
+  dispatch(doQuestionsGet())
 
   const wizardStep = ({ step, push }) => {
     console.log(step)
