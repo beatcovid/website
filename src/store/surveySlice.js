@@ -9,7 +9,7 @@ export const slice = createSlice({
     submitted: false,
     currentStep: undefined,
     error: undefined,
-    questions: undefined,
+    questions: [],
     form: {
       fingerprint: "dev",
       location: undefined,
@@ -80,10 +80,12 @@ export const {
 
 export const doQuestionsGet = () => dispatch => {
   console.log("questionsGet")
+  dispatch(setLoading())
   api
     .getForm()
     .then(r => {
       dispatch(setQuestions(r))
+      dispatch(unsetLoading())
     })
     .catch(e => console.error(e))
 }

@@ -1,13 +1,11 @@
 {
-  "form": [
-    {
+  "form": [{
       "name": "age",
       "label": "What is your age?",
       "bind": {
         "required": true
       },
-      "choices": [
-        {
+      "choices": [{
           "name": "14_or_less",
           "label": "14 years or less"
         },
@@ -48,6 +46,28 @@
           "label": "90 and older"
         }
       ]
+    },
+
+    {
+      "name": "covid19_tested",
+      "label": "Did you go to a medical practitioner, hospital or other health service to be tested for COVID-19 (coronavirus)?",
+      "bind": {
+        "required": true
+      },
+      "choices": [{
+          "name": "yes_tested",
+          "label": "Yes, I was tested"
+        },
+        {
+          "name": "yes_not_tested",
+          "label": "Yes, but I was not tested"
+        },
+        {
+          "name": "no",
+          "label": "No"
+        }
+      ],
+      "type": "select one"
     }
   ]
 }

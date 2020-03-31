@@ -25,8 +25,8 @@ const SubmitForm = ({ form }) => {
   }, [])
 
   return (
-    <div className="flex flex-col block">
-      <span className="h-16 text-xl">Thank You</span>
+    <div className="">
+      <span className="">Thank You</span>
 
       <span>Thank you for submitting your details.</span>
     </div>
@@ -44,92 +44,36 @@ const SurveyApp = ({ history, step, next, go }) => {
 
   return (
     <>
-      <main className="bg-gray-200">
+      <main className="">
         <TransitionGroup>
           <CSSTransition
             key={step.id}
-            classNames="trans"
+            classNames=""
             timeout={{ enter: 1, exit: 1 }}
           >
-            <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-              <div className="px-4 py-6 sm:px-0">
+            <div className="">
+              <div className="">
                 {error && (
-                  <div className="shadow mb-4" role="alert">
-                    <div className="flex">
-                      <div className="bg-red-500 w-16 text-center p-2">
-                        <div className="flex justify-center h-full items-center">
-                          <IoMdAlert className="text-white" />
+                  <div className="" role="alert">
+                    <div className="">
+                      <div className="">
+                        <div className="">
+                          <IoMdAlert className="" />
                         </div>
                       </div>
-                      <div className="bg-white border-r-4 border-red-500 w-full p-4">
+                      <div className="">
                         <div>
-                          <p className="text-grey-dark font-bold">Error</p>
-                          <p className="text-grey-dark">{error}</p>
+                          <p className="">Error</p>
+                          <p className="">{error}</p>
                         </div>
                       </div>
                     </div>
                   </div>
                 )}
 
-                <div className="max-w-md mx-auto flex p-6 bg-white text-center rounded-lg shadow-xl">
+                <div className="">
                   <Steps key={step.id || ''} step={step || {id: ''}}>
-                    <Step id="f/home">
-                      <div className="flex flex-col block">
-                        <span className="h-16 text-xl">
-                          COVID-19 Survey Welcome
-                        </span>
-
-                        <span>
-                          The purpose of this test is to find out what
-                          proportion of the population has been infected by
-                          COVID-19 and how fast it is spreading so that we can
-                          better model the virus.
-                        </span>
-
-                        <span className="mt-4">
-                          When prompted, on the next step allow us permission to
-                          access your location. You can read more on how we
-                          treat privacy and security with the links below.
-                        </span>
-
-                        <button
-                          className="mt-8 h-12 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-                          onClick={next}
-                        >
-                          Start Survey
-                        </button>
-                      </div>
-                    </Step>
-                    <Step id="f/location">
-                      <GetLocationStep next={next} />
-                    </Step>
-                    <Step id="f/sex">
-                      <div className="flex flex-col mx-auto block">
-                        <span className="h-16 text-xl">What is your sex?</span>
-
-                        <div className="inline-flex mt-6 mx-auto m-2">
-                          <button
-                            className="bg-blue-500 hover:bg-gray-400 text-white font-bold py-2 h-16 px-4 rounded-l"
-                            onClick={() => dispatch(doSetSex("male", next))}
-                          >
-                            Male
-                          </button>
-                          <button
-                            className="bg-blue-500 hover:bg-gray-400 border-l border-white border-r text-white font-bold py-2 h-16 px-4"
-                            onClick={() => dispatch(doSetSex("female", next))}
-                          >
-                            Female
-                          </button>
-                          <button
-                            className="bg-blue-500 hover:bg-gray-400 text-white font-bold py-2 h-16 px-4 rounded-r"
-                            onClick={() => dispatch(doSetSex("other", next))}
-                          >
-                            Other
-                          </button>
-                        </div>
-                      </div>
-                    </Step>
-                    <Step id="f/age">
+                    <Step id="age">
                       <form onSubmit={e => e.preventDefault()}>
                         <label className="block">
                           <span className="h-16 text-xl">
@@ -151,6 +95,70 @@ const SurveyApp = ({ history, step, next, go }) => {
                         </button>
                       </form>
                     </Step>
+
+                    <Step id="f/home">
+                      <div className="">
+                        <span className="">
+                          COVID-19 Survey Welcome
+                        </span>
+
+                        <span>
+                          The purpose of this test is to find out what
+                          proportion of the population has been infected by
+                          COVID-19 and how fast it is spreading so that we can
+                          better model the virus.
+                        </span>
+
+                        <span className="mt-4">
+                          When prompted, on the next step allow us permission to
+                          access your location. You can read more on how we
+                          treat privacy and security with the links below.
+                        </span>
+
+                        <span className="mt-4">
+                          When prompted, on the next step allow us permission to
+                          access your location. You can read more on how we
+                          treat privacy and security with the links below.
+                        </span>
+
+                        <button
+                          className=""
+                          onClick={next}
+                        >
+                          Start Survey
+                        </button>
+                      </div>
+                    </Step>
+                    <Step id="f/location">
+                      <GetLocationStep next={next} />
+                    </Step>
+                    <Step id="f/sex">
+                      <div className="">
+                        <span className="">What is your sex?</span>
+
+                        <div className="">
+                          <button
+                            className=""
+                            onClick={() => dispatch(doSetSex("male", next))}
+                          >
+                            Male
+                          </button>
+                          <button
+                            className=""
+                            onClick={() => dispatch(doSetSex("female", next))}
+                          >
+                            Female
+                          </button>
+                          <button
+                            className=""
+                            onClick={() => dispatch(doSetSex("other", next))}
+                          >
+                            Other
+                          </button>
+                        </div>
+                      </div>
+                    </Step>
+                    
                     <Step id="f/test">
                       <form onSubmit={e => e.preventDefault()}>
                         <label className="block">

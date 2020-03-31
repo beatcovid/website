@@ -59,7 +59,7 @@ const GetLocation = ({ next }) => {
 
   if (isFinding) {
     return (
-      <div className="flex flex-col block">
+      <div className="">
         <p>Finding Location ...</p>
       </div>
     )
@@ -68,14 +68,14 @@ const GetLocation = ({ next }) => {
   const google = window.google
 
   return (
-    <div className="flex flex-col block">
-      <span className="h-16 text-xl">Your Location</span>
+    <div className="">
+      <span className="">Your Location</span>
 
-      <span className="h-16 mb-6">
+      <span className="">
         We could not find your location. Please enter your suburb below.
       </span>
 
-      <label className="block">
+      <label className="">
         <PlacesAutocomplete
           value={address}
           onChange={a => setAddress(a)}
@@ -97,13 +97,13 @@ const GetLocation = ({ next }) => {
           }) => (
             <div>
               <input
-                className="mt-5 px-4 h-12 border border-silver w-full"
+                className=""
                 {...getInputProps({
                   placeholder: "Search Places ...",
                   className: "location-search-input",
                 })}
               />
-              <div className="border-silver w-full mt-5 px-4">
+              <div className="">
                 {loading && <div>Loading...</div>}
                 {suggestions.map(suggestion => {
                   const className = suggestion.active
@@ -131,7 +131,7 @@ const GetLocation = ({ next }) => {
       </label>
 
       <button
-        className="mt-8 h-12 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        className=""
         onClick={() => dispatch(doSetLocation(geoLocation, next))}
       >
         Continue
