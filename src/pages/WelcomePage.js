@@ -10,7 +10,7 @@ const WelcomePage = () => {
         COVID-19 and how fast it is spreading so that we can
         better model the virus.
       </span>
-      <Link to={`/steps`}>Start</Link>
+      <Link className="button is-primary" to={`/steps`}>Start</Link>
     </div>
   )
 }

@@ -6,7 +6,7 @@ import * as Sentry from "@sentry/browser"
 import App from "./App"
 import store from "./store"
 import * as serviceWorker from "./utils/serviceWorker"
-// import "./styles/tailwind.css"
+import "./styles/main.scss"
 
 Fingerprint2.get({}, function(components) {
   var values = components.map(function(component) {
