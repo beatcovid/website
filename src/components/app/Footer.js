@@ -4,7 +4,7 @@ import ImgArqGroup from "../../assets/img/logos/arq-group.png"
 import ImgSwinburne from "../../assets/img/logos/swinburne-logo.gif"
 
 const Footer = () => {
-  const versionNumber = process.env.REACT_APP_VERSION
+  const versionNumber = process.env.REACT_APP_VERSION || ''
   return (
     <div className="container has-text-centered">
       <div className="content is-size-7">
