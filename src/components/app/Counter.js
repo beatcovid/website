@@ -1,6 +1,6 @@
 import React from "react"
 
-const Logo = () => {
+const Counter = () => {
   let totalSurveys = 976
 
   return (
@@ -12,4 +12,4 @@ const Logo = () => {
   )
 }
 
-export default Logo
+export default Counter
