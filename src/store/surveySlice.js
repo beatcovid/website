@@ -162,6 +162,6 @@ export const selectDob = state => state.survey.form.dob
 export const selectSymptomDate = state => state.survey.form.symptomDate
 export const selectLoading = state => state.survey.isLoading
 export const selectError = state => state.survey.error
-export const surveyQuestions = state => state.survey.questions
+export const selectQuestions = state => state.survey.questions
 
 export default slice.reducer

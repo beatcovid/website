@@ -13,7 +13,7 @@ import {
   doSetSymptomDate,
   doSetTested,
   doFormSubmit,
-  surveyQuestions,
+  selectQuestions,
 } from "../../store/surveySlice"
 
 const SubmitForm = ({ form }) => {
@@ -37,7 +37,7 @@ const SurveyApp = ({ history, step, next, go }) => {
   const [stateSymptomDate, setStateSymptomDate] = useState()
   const error = useSelector(selectError)
   const form = useSelector(selectForm)
-  const questions = useSelector(surveyQuestions)
+  const questions = useSelector(selectQuestions)
   const dispatch = useDispatch()
 
   console.log(questions)

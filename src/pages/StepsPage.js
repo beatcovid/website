@@ -3,13 +3,13 @@ import { useHistory } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { Wizard } from "react-albus"
 import SurveyApp from "../components/steps/SurveyHome"
-import { doQuestionsGet, selectLoading, surveyQuestions } from "../store/surveySlice"
+import { doQuestionsGet, selectLoading, selectQuestions } from "../store/surveySlice"
 
 const StepsPage = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const isLoading = useSelector(selectLoading)
-  const questions = useSelector(surveyQuestions)
+  const questions = useSelector(selectQuestions)
 
   useEffect(() => {
     if (questions.length === 0 && !isLoading) {
