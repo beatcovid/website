@@ -5,8 +5,7 @@ const Navigation = () => (
   <WithWizard
     render={({ next, previous, step, steps }) => (
       <footer
-        className="footerFixed"
-        className="flex bg-white border-t border-silver p-3 align-center"
+        className="footerFixed flex bg-white border-t border-silver p-3 align-center"
       >
         {steps.indexOf(step) > 0 && steps.indexOf(step) < steps.length - 2 && (
           <button
