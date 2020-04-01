@@ -1,0 +1,34 @@
+.welcome-page {
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 16px;
+
+  .telemed-image {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: 1rem;
+  }
+
+  section {
+    margin-bottom: 1rem;
+
+    h3 {
+      margin-right: 0.2rem;
+      padding-bottom: 0;
+      font-weight: 700;
+    }
+
+    p {
+      line-height: 1.3em;
+    }
+  }
+
+  p {
+    font-size: 0.9em;
+  }
+}

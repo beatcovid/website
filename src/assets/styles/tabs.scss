@@ -1,0 +1,55 @@
+.site-tabs {
+  $border-color: #ddd;
+
+  font-size: 12px;
+  line-height: 1.1em;
+  border: 1px solid $border-color;
+
+  a {
+    display: block;
+  }
+
+  li {
+    padding: 5px 6px;
+    border-bottom: 1px solid $border-color;
+
+    &:hover {
+      background-color: $grey;
+    }
+
+    &.is-active {
+      background-color: $primary;
+      border-color: $primary;
+      a {
+        color: #fff;
+      }
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  @include desktop {
+    display: flex;
+
+    li {
+      border-bottom: none;
+      border-right: 1px solid $border-color;
+  
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+}
+
+.site-tab-content {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: $pink-lighter;
+
+  p {
+    margin-bottom: 0.5rem;
+  }
+}

@@ -6,7 +6,7 @@ import ImgSwinburne from "../../assets/img/logos/swinburne-logo.gif"
 const Footer = () => {
   const versionNumber = process.env.REACT_APP_VERSION || ''
   return (
-    <div className="container has-text-centered">
+    <footer className="container has-text-centered">
       <div className="content is-size-7">
         This website has been developed by a team of public
         health and astrophysics/IT researchers and staff at
@@ -30,7 +30,7 @@ const Footer = () => {
       </a>
 
       <h2>{versionNumber}</h2>
-    </div>
+    </footer>
   )
 }
 
