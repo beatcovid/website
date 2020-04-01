@@ -5,6 +5,7 @@ import AppHeader from "./components/app/Header"
 import AppFooter from "./components/app/Footer"
 import WelcomePage from "./pages/WelcomePage"
 import StepsPage from "./pages/StepsPage"
+import SummaryPage from "./pages/SummaryPage"
 import { selectLoading } from "./store/surveySlice"
 
 const HomeApp = () => {
@@ -23,6 +24,10 @@ const HomeApp = () => {
         
         <Route path="/steps">
           <StepsPage />
+        </Route>
+
+        <Route path="/summary">
+          <SummaryPage />
         </Route>
       </div>
 
