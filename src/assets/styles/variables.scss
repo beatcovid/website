@@ -9,6 +9,7 @@ $grey: #F6F6F6;
 // Update Bulma's global variables
 $family-sans-serif: Barlow, 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
 $primary: $pink;
+$info: $pink-light;
 $link: $pink;
 $widescreen-enabled: false;
 $fullhd-enabled: false;
@@ -17,3 +18,9 @@ $fullhd-enabled: false;
 $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
+
+// button
+$button-background-color: $pink-lighter;
+$button-border-color: $pink-light;
+$button-hover-border-color: $pink-lighter;
+$button-text-color: #000;

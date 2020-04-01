@@ -6,21 +6,21 @@
 // Define app variables
 @import "./variables.scss";
 
-// Import only what you need from Bulma
+// Import from Bulma
 @import "~bulma/sass/utilities/_all.sass";
 @import "~bulma/sass/base/_all.sass";
 @import "~bulma/sass/grid/columns.sass";
 @import "~bulma/sass/elements/button.sass";
 @import "~bulma/sass/elements/container.sass";
-@import "~bulma/sass/elements/title.sass";
-@import "~bulma/sass/components/navbar.sass";
-@import "~bulma/sass/layout/hero.sass";
-@import "~bulma/sass/layout/section.sass";
 @import "~bulma/sass/form/all.sass";
 
-@import "./tabs.scss";
+// App styles
+@import "./button.scss";
+@import "./tab.scss";
 @import "./app-header.scss";
+@import "./app-footer.scss";
 @import "./welcome-page.scss";
+@import "./privacy-notice.scss";
 
 .site-content {
   min-height: 50vh;

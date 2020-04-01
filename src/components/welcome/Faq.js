@@ -1,38 +1,46 @@
-import React, { useState } from "react"
+import React, { useRef, useEffect } from "react"
 
-const Faq = () => {
+const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
+
+const Faq = (props) => {
   const baseClass = 'site-tab-content is-hidden'
   const selectedClass = 'site-tab-content'
   const activeClass = 'is-active'
+  const myRef = useRef(null)
+  const currentSection = props.currentSection
 
-  const [currentSection, setCurrentSection] = useState('section1')
+  useEffect(() => {
+    if (currentSection.length > 0) {
+      scrollToRef(myRef)
+    }
+  }, [currentSection])
   
   function handleSectionToggle(section, e) {
     e.preventDefault()
-    setCurrentSection(section)
+    props.onSectionChange(section)
   }
 
   return (
-    <section className="faq-section">
+    <section ref={myRef} className="faq-section">
 
-      <ul className="site-tabs is-toggle">
+      <ul className="site-tabs is-toggle has-text-centered-mobile">
         <li className={currentSection === 'section1' ? activeClass : ''}>
-          <a href="#" onClick={(e) => handleSectionToggle('section1', e)}>
+          <a onClick={(e) => handleSectionToggle('section1', e)}>
             What is COVID19?
           </a>
         </li>
         <li className={currentSection === 'section2' ? activeClass : ''}>
-          <a href="#" onClick={(e) => handleSectionToggle('section2', e)}>
+          <a onClick={(e) => handleSectionToggle('section2', e)}>
             What is the Symptom Tracker?
           </a>
         </li>
         <li className={currentSection === 'section3' ? activeClass : ''}>
-          <a href="#" onClick={(e) => handleSectionToggle('section3', e)}>
-          What happens to my answers?
+          <a onClick={(e) => handleSectionToggle('section3', e)}>
+            What happens to my answers?
           </a>
         </li>
         <li className={currentSection === 'section4' ? activeClass : ''}>
-          <a href="#" onClick={(e) => handleSectionToggle('section4', e)}>
+          <a onClick={(e) => handleSectionToggle('section4', e)}>
             Who has approved the Symptom Tracker?
           </a>
         </li>

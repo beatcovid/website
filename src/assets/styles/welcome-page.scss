@@ -31,4 +31,25 @@
   p {
     font-size: 0.9em;
   }
+
+  .start-button {
+    .button {
+      margin-top: 1rem;
+    }
+  }
+
+  .disclaimer-section {
+    margin: 2rem auto 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid $grey;
+    max-width: 760px;
+    text-align: center;
+
+    p:first-child {
+      font-weight: 700;
+    }
+    p {
+      margin-bottom: 1rem;
+    }
+  }
 }

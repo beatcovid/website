@@ -1,0 +1,23 @@
+.site-footer {
+  margin: 1rem auto 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid $grey;
+  max-width: 760px;
+  text-align: center;
+
+  .logos {
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+
+    a {
+      display: inline-block;
+      margin: 0 1rem;
+    }
+  }
+
+  .version-number {
+    font-size: 0.8em;
+    margin-top: 2rem;
+  }
+}

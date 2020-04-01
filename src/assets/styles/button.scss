@@ -1,0 +1,18 @@
+/* button styles */
+.button {
+  transition: all .1s ease-in;
+  box-shadow: 2px 2px 0 $pink-light;
+  border: 1px solid $pink;
+  border-radius: 0;
+  font-weight: 900;
+
+  &.is-info {
+    box-shadow: 2px 2px 0 $pink-lighter;
+    border-color: $pink;
+  }
+
+  &:hover {
+    box-shadow: none;
+    border-color: $pink;
+  }
+}

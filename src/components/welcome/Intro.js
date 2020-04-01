@@ -3,7 +3,6 @@ import React from "react"
 const Intro = () => {
   return (
     <section className="intro-section">
-      <h2>7 minutes of your time can help to BEAT COVID-19 NOW.</h2>
       <section>
         <h3>Help the world:</h3>
         <p>
