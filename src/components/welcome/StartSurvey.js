@@ -15,7 +15,7 @@ const StartSurvey = (props) => {
       {
         props.disableStart
           ? <button className="button is-primary is-size-5" disabled>Click here to start</button>
-          : <Link className="button is-primary is-size-5" to={`/steps`}>Click here to start</Link>
+          : <Link className="button is-primary is-size-5" to={`/survey`}>Click here to start</Link>
       }
     </div>
   )

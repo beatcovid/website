@@ -6,7 +6,7 @@ import AppFooter from "./components/app/Footer"
 import Acknowledgement from "./components/app/Acknowledgement"
 import Contacts from "./components/app/Contacts"
 import WelcomePage from "./pages/WelcomePage"
-import StepsPage from "./pages/StepsPage"
+import SurveyPage from "./pages/SurveyPage"
 import SummaryPage from "./pages/SummaryPage"
 
 import { selectLoading } from "./store/surveySlice"
@@ -26,8 +26,8 @@ const HomeApp = () => {
           <Acknowledgement />
         </Route>
         
-        <Route path="/steps">
-          <StepsPage />
+        <Route path="/survey">
+          <SurveyPage />
         </Route>
 
         <Route path="/summary">
