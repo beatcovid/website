@@ -1,0 +1,55 @@
+.welcome-page {
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 16px;
+
+  .telemed-image {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: 1rem;
+  }
+
+  section {
+    margin-bottom: 1rem;
+
+    h3 {
+      margin-right: 0.2rem;
+      padding-bottom: 0;
+      font-weight: 700;
+    }
+
+    p {
+      line-height: 1.3em;
+    }
+  }
+
+  p {
+    font-size: 0.9em;
+  }
+
+  .start-button {
+    .button {
+      margin-top: 1rem;
+    }
+  }
+
+  .disclaimer-section {
+    margin: 2rem auto 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid $grey;
+    max-width: 760px;
+    text-align: center;
+
+    p:first-child {
+      font-weight: 700;
+    }
+    p {
+      margin-bottom: 1rem;
+    }
+  }
+}

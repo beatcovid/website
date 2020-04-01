@@ -1,21 +1,26 @@
-// Set your brand colors
-$purple: #8A4D76;
-$pink: #FA7C91;
-$brown: #757763;
-$beige-light: #D0D1CD;
-$beige-lighter: #EFF0EB;
+$pink: #FF30E6;
+$pink-light: #FFCCF9;
+$pink-lighter: #FFEEFD;
+$green: #189C90;
+$yellow: #EC8714;
+$red: #D44527;
+$grey: #F6F6F6;
 
 // Update Bulma's global variables
 $family-sans-serif: Barlow, 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
-$grey-dark: $brown;
-$grey-light: $beige-light;
-$primary: $purple;
+$primary: $pink;
+$info: $pink-light;
 $link: $pink;
 $widescreen-enabled: false;
 $fullhd-enabled: false;
 
 // Update some of Bulma's component variables
-$body-background-color: $beige-lighter;
 $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
+
+// button
+$button-background-color: $pink-lighter;
+$button-border-color: $pink-light;
+$button-hover-border-color: $pink-lighter;
+$button-text-color: #000;

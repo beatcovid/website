@@ -1,34 +1,55 @@
-import React from "react"
-import { Link } from 'react-router-dom'
+import React, { useState } from "react"
+import PrivacyNotice from "../components/welcome/PrivacyNotice"
+import Hero from "../components/welcome/Hero"
+import Intro from "../components/welcome/Intro"
+import Faq from "../components/welcome/Faq"
+import StartSurvey from "../components/welcome/StartSurvey"
+import Disclaimer from "../components/welcome/Disclaimer"
 
 const WelcomePage = () => {
+  const [currentSection, setCurrentSection] = useState('')
+  const [privacyNotice, setPrivacyNotice] = useState(true)
+
+  function handleSectionChange(section) {
+    setCurrentSection(section)
+  }
+  function handleAccept() {
+    setPrivacyNotice(false)
+  }
+
   return (
-    <div className="container">
-      <p>
-        <strong>7 minutes of your time can help to BEAT COVID-19 NOW.</strong>
-      </p>
+    <div className="welcome-page container">
+      <PrivacyNotice
+        show={privacyNotice}
+        onAccept={handleAccept} />
 
-      <p>
-        <strong>Help the world:</strong> 
-        We don't have a vaccine yet, but we have <em>people power</em>. 
-        You can help to track the spread of COVID-19 so the right help and
-        information can get to the right people. Even if you don't have symptoms,
-        completing the Symptom Tracker helps people understand what is happening with COVID-19.
-      </p>
+      <div className="columns">
+        <div className="column">
+          <Hero />
+        </div>
 
-      <p>
-        <strong>Help your community, hospitals and health services:</strong>
-        When health authorities know when and where people start to experience symptoms,
-        it can help them plan to protect your community.
-      </p>
+        <div className="column">
+          <h2 className="has-text-centered-mobile">7 minutes of your time can help to BEAT COVID-19 NOW.</h2>
 
-      <p>
-        <strong>Help yourself:</strong>
-        Following your symptoms every day will help you to monitor your health. 
-        You get an overview of your current symptoms and how they have changed over time.
-      </p>
-      
-      <Link className="button is-primary" to={`/steps`}>Click here to start</Link>
+          <section className="is-hidden-desktop">
+            <StartSurvey
+              disableStart={privacyNotice}
+              onSectionChange={handleSectionChange} />
+          </section>
+          
+          <Intro />
+
+          <Faq
+            currentSection={currentSection}
+            onSectionChange={handleSectionChange} />
+          
+          <StartSurvey
+            disableStart={privacyNotice}
+            onSectionChange={handleSectionChange} />
+        </div>
+      </div>
+
+      <Disclaimer />
     </div>
   )
 }

@@ -5,32 +5,39 @@ import ImgSwinburne from "../../assets/img/logos/swinburne-logo.gif"
 
 const Footer = () => {
   const versionNumber = process.env.REACT_APP_VERSION || ''
+
   return (
-    <div className="container has-text-centered">
-      <div className="content is-size-7">
+    <footer className="site-footer container">
+      <div className="is-size-7">
         This website has been developed by a team of public
-        health and astrophysics/IT researchers and staff at
-        <a href="https://www.swinburne.edu.au/" target="_blank" className="has-text-dark has-text-weight-bold">
-          Swinburne University of Technology</a>
-          in partnership with <a href="https://arq.group" target="_blank" className="has-text-dark has-text-weight-bold">Arq Group</a>,
-          Australia and the COVID-19 Hackathon and marketing volunteers.
-          This will help determine the current and emerging COVID-19 symptoms of
-          people across the world. This will help you improve your understanding of your health,
-          follow changes and help us to advise health authorities about what’s going on from the community’s perspective.
+        health and astrophysics/IT researchers and staff at <a href="https://www.swinburne.edu.au/" target="_blank" className="has-text-dark has-text-weight-bold">
+        Swinburne University of Technology</a> in partnership with <a href="https://arq.group" target="_blank" className="has-text-dark has-text-weight-bold">Arq Group</a>,
+        Australia and the COVID-19 Hackathon and marketing volunteers.
+        This will help determine the current and emerging COVID-19 symptoms of
+        people across the world. This will help you improve your understanding of your health,
+        follow changes and help us to advise health authorities about what’s going on from the community’s perspective.
       </div>
 
-      <a href="https://www.education.gov.au/national-collaborative-research-infrastructure-strategy-ncris" target="_blank">
-        <img src={ImgNcris} alt="NCRIS Logo" />
-      </a>
-      <a href="https://www.swinburne.edu.au/" target="_blank">
-        <img src={ImgArqGroup} alt="Swinburne Logo" />
-      </a>
-      <a href="https://arq.group/" target="_blank">
-        <img src={ImgSwinburne} alt="Arq Group Logo" />
-      </a>
+      <section className="logos">
+        <a href="https://www.education.gov.au/national-collaborative-research-infrastructure-strategy-ncris" target="_blank">
+          <img src={ImgNcris} alt="NCRIS Logo" />
+        </a>
+        <a href="https://www.swinburne.edu.au/" target="_blank">
+          <img src={ImgSwinburne} alt="Swinburne Logo" />
+        </a>
+        <a href="https://arq.group/" target="_blank">
+          <img src={ImgArqGroup} alt="Arq Group Logo" />
+        </a>
+      </section>
 
-      <h2>{versionNumber}</h2>
-    </div>
+      <p className="is-size-7">
+        No part of the Coronavirus Symptom Tracker may be copied, printed, or re-produced for any 
+        purpose, including research, translation or commercial, without the expressed written approval
+        of Swinburne University of Technology.
+      </p>
+
+      <p className="version-number">v{versionNumber}</p>
+    </footer>
   )
 }
 
