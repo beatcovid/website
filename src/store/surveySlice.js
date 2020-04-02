@@ -84,7 +84,7 @@ export const doQuestionsGet = () => dispatch => {
   api
     .getForm()
     .then(r => {
-      dispatch(setQuestions(r))
+      dispatch(setQuestions(r.form))
       dispatch(unsetLoading())
     })
     .catch(e => console.error(e))

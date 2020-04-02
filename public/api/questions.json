@@ -45,7 +45,9 @@
           "name": "90_and_older",
           "label": "90 and older"
         }
-      ]
+      ],
+      "type": "select",
+      "errorMessage": "Please select your age range."
     },
 
     {
@@ -67,7 +69,31 @@
           "label": "No"
         }
       ],
-      "type": "select one"
+      "type": "radio",
+      "errorMessage": "Please select an option."
+    },
+
+    {
+      "name": "covid19_contact",
+      "label": "Have you been in contact with anyone confirmed to have COVID-19?",
+      "bind": {
+        "required": true
+      },
+      "choices": [{
+          "name": "yes",
+          "label": "Yes"
+        },
+        {
+          "name": "no",
+          "label": "No"
+        },
+        {
+          "name": "unsure",
+          "label": "Unsure"
+        }
+      ],
+      "type": "radio",
+      "errorMessage": "Please select an option."
     }
   ]
 }

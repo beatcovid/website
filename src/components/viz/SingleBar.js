@@ -25,7 +25,6 @@ const SingleBar = (props) => {
     }
   }
 
-
   return (
     <section className="single-bar-viz">
       <header>
