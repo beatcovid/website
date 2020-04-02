@@ -1,0 +1,49 @@
+
+/* Style all font awesome icons */
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 70px;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  /* Set a specific color for each brand */
+  /* Facebook */
+  &.fa-facebook {
+    background: #3b5998;
+    color: white;
+  }
+
+  /* Twitter */
+  &.fa-twitter {
+    background: #55acee;
+    color: white;
+  }
+
+  /* Linkedin */
+  &.fa-linkedin {
+    background: #0077b5;
+    color: white;
+  }
+
+  /* Whatsapp */
+  &.fa-whatsapp {
+    background: #00e676;
+    color: white;
+  }
+
+  /* Raw URL */
+  &.fa-link {
+    background: #444444;
+    color: white;
+  }
+
+  &.fa-envelope-square {
+    background: white;
+    color: #0077b5;
+  }
+}

@@ -1,0 +1,117 @@
+.summary-page {
+  padding: 2rem;
+
+  @include mobile {
+    padding: 1rem;
+  }
+
+  .columns {
+    align-items: stretch;
+  }
+
+  .result-section {
+    h2 {
+      font-weight: 700;
+      line-height: 1.3em;
+      font-size: 1.2em;
+    }
+
+    .result-container {
+      margin-top: 1rem;
+      font-weight: 700;
+      font-size: 0.9em;
+    }
+  }
+
+  .thankyou-section {
+    .person-counter {
+      text-align: center;
+      font-size: 1.3em;
+      margin: 2rem 0;
+
+      span {
+        display: block;
+        font-weight: 700;
+      }
+
+      .count {
+        font-weight: 900;
+        font-size: 3em;
+        color: $primary;
+      }
+    }
+  }
+
+  .track-daily-section {
+    .clock-wrapper {
+      margin: 2.5rem 0;
+      text-align: center;
+      img {
+        max-width: 30%;
+      }
+    }
+  }
+
+  .share-section {
+    p {
+      margin-bottom: 3rem;
+    }
+
+    .social-sharing {
+      display: flex;
+
+      a {
+        display: block;
+        margin-left: 3px;
+        width: 100%;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+
+      .fa {
+        margin: 2px;
+        padding: 15px;
+        font-size: 30px;
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+      }
+    } 
+  }
+
+  .thankyou-section .card-content,
+  .track-daily-section .card-content,
+  .share-section .card-content {
+    font-size: 0.8em;
+  }
+
+  .info-table {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 2rem;
+
+    button {
+      margin-top: 2rem;
+    }
+  }
+
+  .symptoms-score-section {
+    .table {
+      margin-bottom: 2rem;
+    }
+    th {
+      font-size: 0.8em;
+    }
+    .data-value-col {
+      width: 120px;
+    }
+  }
+
+  .summary-of-symptoms-section {
+    header {
+      text-align: left;
+    }
+  }
+}

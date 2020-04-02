@@ -1,0 +1,39 @@
+.card {
+  padding: 1rem;
+  background-color: $pink-lighter;
+  height: 100%;
+
+  &.is-success {
+    background-color: $green;
+    color: #fff;
+  }
+
+  &.is-warning {
+    background-color: $yellow;
+    color: #fff;
+  }
+
+  &.is-danger {
+    background-color: $red;
+    color: #fff;
+  }
+
+  &.is-info {
+    background-color: $grey;
+  }
+
+  .card-content {
+    font-size: 0.9em;
+  }
+
+  header {
+    text-align: center;
+    font-weight: 900;
+    font-size: 1.3em;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-bottom: 0.5rem;
+  }
+}

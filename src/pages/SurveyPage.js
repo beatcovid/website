@@ -2,10 +2,10 @@ import React, { useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { Wizard } from "react-albus"
-import SurveyApp from "../components/steps/SurveyHome"
+import SurveyApp from "../components/survey/SurveyHome"
 import { doQuestionsGet, selectLoading, selectQuestions } from "../store/surveySlice"
 
-const StepsPage = () => {
+const SurveyPage = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const isLoading = useSelector(selectLoading)
@@ -33,10 +33,10 @@ const StepsPage = () => {
     <Wizard
       onNext={wizardStep}
       history={history}
-      basename={'/steps'}
+      basename={'/survey'}
       render={props => <SurveyApp {...props} />}
     />
   )
 }
 
-export default StepsPage
+export default SurveyPage

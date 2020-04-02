@@ -19,6 +19,7 @@ const WelcomePage = () => {
 
   return (
     <div className="welcome-page container">
+
       <PrivacyNotice
         show={privacyNotice}
         onAccept={handleAccept} />
