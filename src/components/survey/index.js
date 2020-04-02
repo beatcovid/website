@@ -11,7 +11,7 @@ const SurveyApp = ({ history, step, next, go }) => {
   const questions = useSelector(selectQuestions)
   const questionAge = questions.form
     ? questions.form.find(d => d.name === 'age')
-    : { label: '', choices: [] }
+    : { label: '', choices: [], bind: false }
 
   return (
     <>
@@ -19,8 +19,10 @@ const SurveyApp = ({ history, step, next, go }) => {
         <Step id="age">
           <form onSubmit={e => e.preventDefault()}>
             <Select
+              required={questionAge.bind.required}
               label={questionAge.label}
               options={questionAge.choices}
+              errorMessage={'Please select your age range.'}
               onChange={value => console.log(value)} />
           </form>
         </Step>

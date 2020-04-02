@@ -1,8 +1,11 @@
-import React from "react"
+import React, { useState } from "react"
 
 const Select = (props) => {
+  const required = props.required || false
   const label = props.label || ''
   const options = props.options || []
+  const errorMessage = props.errorMessage || ''
+  const [error, setError] = useState(false)
 
   function renderOptions(option) {
     return (
@@ -13,22 +16,46 @@ const Select = (props) => {
       </option>
     )
   }
+
+  function fieldClasses() {
+    const baseClass = 'select'
+    if (error) {
+      return baseClass + ' is-danger'
+    }
+    return baseClass
+  }
   
   function handleChange(e) {
-    props.onChange(e.currentTarget.value)
+    const value = e.currentTarget.value
+    if (required && value === 'none') {
+      setError(true)
+    } else {
+      setError(false)
+      props.onChange(value)
+    }
   }
 
   return (
     <div className="field">
-      <label className="label">{label}</label>
+      <label className="label">
+        {required &&
+          <span>*</span>
+        }
+        {label}
+      </label>
+      
       <div className="control">
-        <div className="select">
+        <div className={fieldClasses()}>
           <select onChange={handleChange}>
-            <option>--</option>
+            <option value="none">--</option>
             {options.map(renderOptions)}
           </select>
         </div>
       </div>
+      
+      {error &&
+        <p className="help is-danger">{errorMessage}</p>
+      }
     </div>
   )
 }
