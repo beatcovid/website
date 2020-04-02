@@ -10,7 +10,10 @@ const SummaryOfSymptoms = (props) => {
         key={scoreTitle}
         title={scoreTitle}
         score={summaryScores[scoreTitle].score}
-        domains={summaryScores[scoreTitle].domains} />
+        domains={summaryScores[scoreTitle].domains}
+        max={3}
+        warningScore={1}
+        dangerScore={3} />
     )
   }
 
