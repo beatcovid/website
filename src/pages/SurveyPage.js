@@ -1,40 +1,46 @@
-import React, { useEffect } from "react"
-// import { useHistory } from "react-router-dom"
+import React, { useEffect, useState, useMemo } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { Wizard } from "react-albus"
 import Survey from "../components/survey"
-import { doQuestionsGet, selectLoading, selectQuestions } from "../store/surveySlice"
+import SurveyProgress from "../components/survey/Progress"
+import {
+  doQuestionsGet,
+  // selectLoading,
+  selectQuestions
+} from "../store/surveySlice"
 
 const SurveyPage = () => {
-  // const history = useHistory()
   const dispatch = useDispatch()
-  const isLoading = useSelector(selectLoading)
+  // const isLoading = useSelector(selectLoading)
   const questions = useSelector(selectQuestions)
+  const [steps, setSteps] = useState([])
+  const [currentStep, setCurrentStep] = useState()
+  const currentStepIndex =
+    useMemo(() => steps.findIndex((s, i) => s === currentStep) + 1, [steps, currentStep])
 
   useEffect(() => {
-    if (questions.length === 0 && !isLoading) {
+    if (questions.length > 0) {
+      setSteps(questions.map(d => d.name))
+    } else {
       dispatch(doQuestionsGet())
     }
-  })
+  }, [questions, dispatch])
 
-  const wizardStep = ({ step, push }) => {
-    // this is just an example of how to intercept steps
-    switch (step.id) {
-      // case "f/home": {
-      //   push("f/sex")
-      //   break
-      // }
-      default:
-        push()
-    }
+  function handleStepChange(step) {
+    setCurrentStep(step)
   }
+
   return (
     <div className="survey-page container">
-      <Wizard
-        onNext={wizardStep}
-        // history={history}
-        // basename={'/survey'}
-        render={props => <Survey {...props} />}
+      <header>
+        <h1>Your Progress</h1> 
+        <SurveyProgress
+          total={10}
+          current={currentStepIndex} />
+      </header>
+      <Survey
+        steps={steps}
+        questions={questions}
+        onStepChange={handleStepChange}
       />
     </div>
   )

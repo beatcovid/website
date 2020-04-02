@@ -4,6 +4,9 @@ const SingleBar = (props) => {
   const title = props.title || ''
   const score = props.score || 0.0
   const domains = props.domains || []
+  const max = props.max || 0
+  const warningScore = props.warningScore || 0
+  const dangerScore = props.dangerScore || 0
 
   function renderDomains(domain) {
     return (
@@ -13,15 +16,14 @@ const SingleBar = (props) => {
 
   function progressClasses() {
     let baseClass = 'progress'
-    if (score < 1) {
+    if (score < warningScore) {
       return baseClass + ' is-success'
-    } else if (score < 3) {
+    } else if (score < dangerScore) {
       return baseClass + ' is-warning'
     } else {
       return baseClass + ' is-danger'
     }
   }
-
 
   return (
     <section className="single-bar-viz">
@@ -31,7 +33,7 @@ const SingleBar = (props) => {
       <progress
         className={progressClasses()}
         value={score}
-        max="3" />
+        max={max} />
       <div className="progress-labels">
         {domains.map(renderDomains)}
       </div>

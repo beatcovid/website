@@ -17,30 +17,16 @@
 @import "~bulma/sass/form/all.sass";
 
 // App styles
-@import "./icons.scss";
-@import "./button.scss";
-@import "./tab.scss";
-@import "./card.scss";
-@import "./viz.scss";
-@import "./app-header.scss";
-@import "./app-footer.scss";
-@import "./privacy-notice.scss";
-@import "./welcome-page.scss";
-@import "./summary-page.scss";
-
-.site-content {
-  min-height: 50vh;
-}
-
-.contacts-section {
-  max-width: 640px;
-  p {
-    margin-bottom: 1rem;
-  }
-}
-
-ul.has-list-type {
-  list-style-type: disc;
-  margin-left: 1.5rem;
-  margin-top: 0.5rem;
-}
+@import "./components/icons.scss";
+@import "./components/button.scss";
+@import "./components/tab.scss";
+@import "./components/card.scss";
+@import "./components/viz.scss";
+@import "./components/form.scss";
+@import "./pages/app-header.scss";
+@import "./pages/app-footer.scss";
+@import "./pages/app.scss";
+@import "./pages/privacy-notice.scss";
+@import "./pages/welcome-page.scss";
+@import "./pages/survey-page.scss";
+@import "./pages/summary-page.scss";

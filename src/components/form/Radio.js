@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-const Select = (props) => {
+const Radio = (props) => {
   const name = props.name || ''
   const label = props.label || ''
   const options = props.options || []
@@ -10,35 +10,38 @@ const Select = (props) => {
 
   function renderOptions(option) {
     return (
-      <option
-        key={option.name}
-        value={option.name}>
-        {option.label}
-      </option>
+      <label key={option.name} className="radio">
+        <input
+          type="radio"
+          name={name}
+          value={option.name}
+          onClick={handleChange} />
+        <span>{option.label}</span>
+      </label>
     )
   }
 
   function fieldClasses() {
-    const baseClass = 'select'
+    const baseClass = 'label'
     if (error) {
-      return baseClass + ' is-danger'
+      return baseClass + ' has-text-danger'
     }
     return baseClass
   }
   
   function handleChange(e) {
     const value = e.currentTarget.value
-    if (required && value === 'none') {
+    if (required && value === '') {
       setError(true)
     } else {
       setError(false)
-      props.onChange(value)
+      props.onClick(value)
     }
   }
 
   return (
-    <div className="survey-select field">
-      <label className="label">
+    <div className="survey-radio field">
+      <label className={fieldClasses()}>
         {required &&
           <span>*</span>
         }
@@ -46,12 +49,7 @@ const Select = (props) => {
       </label>
       
       <div className="control">
-        <div className={fieldClasses()}>
-          <select name={name} onChange={handleChange}>
-            <option value="none">--</option>
-            {options.map(renderOptions)}
-          </select>
-        </div>
+        {options.map(renderOptions)}
       </div>
       
       {error &&
@@ -61,4 +59,4 @@ const Select = (props) => {
   )
 }
 
-export default Select
+export default Radio
