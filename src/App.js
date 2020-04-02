@@ -12,11 +12,13 @@ import SummaryPage from "./pages/SummaryPage"
 import { selectLoading } from "./store/surveySlice"
 
 const HomeApp = () => {
+  const count = 976
+  const version = process.env.REACT_APP_VERSION || ''
   const isLoading = useSelector(selectLoading)
 
   return (
     <BrowserRouter>
-      <AppHeader />
+      <AppHeader count={count}/>
       
       {isLoading && <div>Loading... </div>}
 
@@ -36,7 +38,7 @@ const HomeApp = () => {
         </Route>
       </div>
 
-      <AppFooter />
+      <AppFooter version={version}/>
     </BrowserRouter>
   )
 }

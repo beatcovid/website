@@ -1,7 +1,7 @@
 import React from "react"
 
-const Footer = () => {
-  const versionNumber = process.env.REACT_APP_VERSION || ''
+const Footer = (props) => {
+  const version = props.version
 
   return (
     <footer className="site-footer container">
@@ -11,7 +11,7 @@ const Footer = () => {
         of Swinburne University of Technology.
       </p>
 
-      <p className="version-number">v{versionNumber}</p>
+      <p className="version-number">v{version}</p>
     </footer>
   )
 }
