@@ -15,11 +15,6 @@ const Navigation = () => (
             Back
           </button>
         )}
-        {/* <p>{((steps.indexOf(step) + 1) / steps.length) * 100} % done</p> */}
-        {/* <p>
-          Step {steps.indexOf(step) + 1} of {steps.length}
-        </p> */}
-        {/* <a href="/security">security</a> */}
       </footer>
     )}
   />

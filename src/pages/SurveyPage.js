@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { Wizard } from "react-albus"
-import SurveyApp from "../components/survey/SurveyHome"
+import Survey from "../components/survey"
 import { doQuestionsGet, selectLoading, selectQuestions } from "../store/surveySlice"
 
 const SurveyPage = () => {
@@ -30,12 +30,14 @@ const SurveyPage = () => {
     }
   }
   return (
-    <Wizard
-      onNext={wizardStep}
-      history={history}
-      basename={'/survey'}
-      render={props => <SurveyApp {...props} />}
-    />
+    <div className="survey-page container">
+      <Wizard
+        onNext={wizardStep}
+        // history={history}
+        // basename={'/survey'}
+        render={props => <Survey {...props} />}
+      />
+    </div>
   )
 }
 
