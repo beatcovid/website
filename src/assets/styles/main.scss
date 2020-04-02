@@ -11,17 +11,36 @@
 @import "~bulma/sass/base/_all.sass";
 @import "~bulma/sass/grid/columns.sass";
 @import "~bulma/sass/elements/button.sass";
+@import "~bulma/sass/elements/table.sass";
 @import "~bulma/sass/elements/container.sass";
+@import "~bulma/sass/elements/progress.sass";
 @import "~bulma/sass/form/all.sass";
 
 // App styles
+@import "./icons.scss";
 @import "./button.scss";
 @import "./tab.scss";
+@import "./card.scss";
+@import "./viz.scss";
 @import "./app-header.scss";
 @import "./app-footer.scss";
-@import "./welcome-page.scss";
 @import "./privacy-notice.scss";
+@import "./welcome-page.scss";
+@import "./summary-page.scss";
 
 .site-content {
   min-height: 50vh;
+}
+
+.contacts-section {
+  max-width: 640px;
+  p {
+    margin-bottom: 1rem;
+  }
+}
+
+ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  margin-top: 0.5rem;
 }

@@ -2,7 +2,7 @@ import React from "react"
 
 const Contacts = () => {
   return (
-    <footer className="site-footer container">
+    <footer className="site-footer contacts-section container">
       <p>
         We do not expect that completing the Symptom Tracker will cause you any distress. 
         However, if you are experiencing distress,

@@ -1,0 +1,20 @@
+.single-bar-viz {
+  margin: 2rem 0;
+
+  header {
+    margin-bottom: 0;
+    font-size: 1.1em;
+  }
+  .progress {
+    margin-bottom: 0;
+  }
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+
+    span:last-child {
+      text-align: right;
+    }
+  }
+}
