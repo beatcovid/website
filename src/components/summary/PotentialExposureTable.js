@@ -23,11 +23,11 @@ const PotentialExposureTable = (props) => {
           <tr>
             <td>You have had casual contact with someone who is infected with COVID-19:
               <div className="content is-size-7">
-                <ul>
-                <li>in a closed space with a confirmed case for less than two hours in the 24 hours period before the onset of
-                their symptoms, or:</li>
-                <li>for less than 15 minutes face-to-face contact in any setting with a confirmed case in the 24 hours period
-                before the onset of their symptoms</li>
+                <ul className="has-list-type">
+                  <li>in a closed space with a confirmed case for less than two hours in the 24 hours period before the onset of
+                  their symptoms, or:</li>
+                  <li>for less than 15 minutes face-to-face contact in any setting with a confirmed case in the 24 hours period
+                  before the onset of their symptoms</li>
                 </ul>
               </div>
             </td>
