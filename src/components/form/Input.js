@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 
 const Input = (props) => {
+  const type = props.type || 'text'
   const name = props.name || ''
   const label = props.label || ''
   const required = props.required || false
@@ -44,7 +45,7 @@ const Input = (props) => {
       <div className="control">
         <input
           className={inputClasses()}
-          type="text"
+          type={type}
           name={name}
           onChange={handleChange} />
       </div>

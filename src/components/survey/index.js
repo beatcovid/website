@@ -43,8 +43,17 @@ const Survey = (props) => {
   }
 
   function renderInput(question, index) {
+    let type = ''
+    switch (question.type) {
+      case 'input_number':
+        type = 'number'
+        break;
+      default:
+        type = 'text'
+    }
     return (
       <Input
+        type={type}
         name={question.name}
         required={question.bind.required}
         label={question.label}
@@ -83,7 +92,8 @@ const Survey = (props) => {
 
     return (
       <form key={stepId} onSubmit={e => e.preventDefault()}>
-        {question.type === 'text' && currentStep === step &&
+        {(question.type === 'input_text' || question.type === 'input_number')
+          && currentStep === step &&
           renderInput(question, index)
         }
 

@@ -141,7 +141,17 @@
       "bind": {
         "required": true
       },
-      "type": "text",
+      "type": "input_text",
+      "errorMessage": "Please fill up."
+    },
+
+    {
+      "name": "number_field",
+      "label": "Enter some number",
+      "bind": {
+        "required": true
+      },
+      "type": "input_number",
       "errorMessage": "Please fill up."
     }
   ]
