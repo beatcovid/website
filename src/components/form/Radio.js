@@ -22,7 +22,7 @@ const Radio = (props) => {
   }
 
   function labelClasses() {
-    const baseClass = 'label'
+    const baseClass = 'question-label label'
     if (error) {
       return baseClass + ' has-text-danger'
     }

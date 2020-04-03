@@ -6,6 +6,7 @@ const Survey = (props) => {
   const steps = props.steps
   const questions = props.questions
   const [currentStep, setCurrentStep] = useState()
+  const [allowNext, setAllowNext] = useState(false)
   const isFirstQuestion =
     useMemo(() => currentStep === steps[0], [steps, currentStep])
   const isLastQuestion =
@@ -20,14 +21,18 @@ const Survey = (props) => {
   }, [props, currentStep])
 
   function handleValueUpdate(value, index) {
-    if (!isLastQuestion) {
-      setCurrentStep(steps[index + 1])
-    }
+    setAllowNext(true)
+    console.log(value)
   }
 
   function handlePreviousButtonClick() {
     const findIndex = steps.findIndex(s => s === currentStep)
     setCurrentStep(steps[findIndex - 1])
+  }
+  function handleNextButtonClick() {
+    const findIndex = steps.findIndex(s => s === currentStep)
+    setCurrentStep(steps[findIndex + 1])
+    setAllowNext(false)
   }
 
   function renderRadio(question, index) {
@@ -117,8 +122,9 @@ const Survey = (props) => {
       {steps.map((s, i) => renderSteps(s, i))}
 
       <div className="survey-navigation">
-        {!isFirstQuestion &&
-          <button className="button" onClick={handlePreviousButtonClick}>&larr; Previous</button>
+        <button className="button" onClick={handlePreviousButtonClick} disabled={isFirstQuestion}>&larr; Previous</button>
+        {!isLastQuestion &&
+          <button className="button" onClick={handleNextButtonClick} disabled={!allowNext}>Next &rarr;</button>
         }
         {isLastQuestion &&
           <Link className="submit-button button is-primary" to={`/summary`}>Submit</Link>

@@ -32,7 +32,7 @@ const SurveyPage = () => {
   return (
     <div className="survey-page container">
       <header>
-        <h1>Your Progress</h1> 
+        {/* <h1>Your Progress</h1>  */}
         <SurveyProgress
           total={10}
           current={currentStepIndex} />

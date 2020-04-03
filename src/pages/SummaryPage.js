@@ -8,7 +8,7 @@ import SummaryOfSymptoms from "../components/summary/SummaryOfSymptoms"
 import SymptomsScore from "../components/summary/SymptomsScore"
 
 const SummaryPage = () => {
-  const [showDetail, setShowDetail] = useState(true)
+  const [showDetail, setShowDetail] = useState(false)
   const result = 'risk-D'
   const counter = 976
   const hasInternationalTravel = 'No'
