@@ -133,6 +133,16 @@
       ],
       "type": "checkbox",
       "errorMessage": "Please select at least one option."
+    },
+
+    {
+      "name": "text_field",
+      "label": "Enter some text",
+      "bind": {
+        "required": true
+      },
+      "type": "text",
+      "errorMessage": "Please fill up."
     }
   ]
 }

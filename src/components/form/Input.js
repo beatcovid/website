@@ -1,25 +1,11 @@
 import React, { useState } from "react"
 
-const Checkbox = (props) => {
+const Input = (props) => {
   const name = props.name || ''
   const label = props.label || ''
-  const options = props.options || []
   const required = props.required || false
   const errorMessage = props.errorMessage || ''
   const [error, setError] = useState(false)
-
-  function renderOptions(option) {
-    return (
-      <label key={option.name} className="checkbox">
-        <input
-          type="checkbox"
-          name={name}
-          value={option.name}
-          onClick={handleClick} />
-        <span>{option.label}</span>
-      </label>
-    )
-  }
 
   function labelClasses() {
     const baseClass = 'label'
@@ -28,14 +14,26 @@ const Checkbox = (props) => {
     }
     return baseClass
   }
+  function inputClasses() {
+    const baseClass = 'input'
+    if (error) {
+      return baseClass + ' is-danger'
+    }
+    return baseClass
+  }
   
-  function handleClick(e) {
+  function handleChange(e) {
     const value = e.currentTarget.value
-    props.onClick(value)
+    if (required && value === '') {
+      setError(true)
+    } else {
+      setError(false)
+      props.onChange(value)
+    }
   }
 
   return (
-    <div className="survey-checkbox field">
+    <div className="survey-input field">
       <label className={labelClasses()}>
         {required &&
           <span>*</span>
@@ -44,7 +42,11 @@ const Checkbox = (props) => {
       </label>
       
       <div className="control">
-        {options.map(renderOptions)}
+        <input
+          className={inputClasses()}
+          type="text"
+          name={name}
+          onChange={handleChange} />
       </div>
       
       {error &&
@@ -54,4 +56,4 @@ const Checkbox = (props) => {
   )
 }
 
-export default Checkbox
+export default Input
