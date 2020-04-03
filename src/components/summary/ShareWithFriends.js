@@ -1,6 +1,17 @@
 import React from "react"
 
 const ShareWithFriends = () => {
+  function createHtml() {
+    return {
+      __html:`
+        <a href="javascript:copyTextToClipboard('https://beatcovid19now.org');" title="Copy link to clipboard">
+          <i class="fa fa-link"></i>
+        </a>
+      `
+    }
+  }
+  
+  
   return (
     <section className="share-section card is-info">
       <header>
@@ -25,9 +36,8 @@ const ShareWithFriends = () => {
             data-action="share/whatsapp/share">
             <i className="fa fa-whatsapp"></i>
           </a>
-          <a href="javascript:copyTextToClipboard('https://beatcovid19now.org');" title="Copy link to clipboard">
-            <i className="fa fa-link"></i>
-          </a>
+          <span dangerouslySetInnerHTML={createHtml()} />
+          
           <a href="mailto:?subject=BeatCOVID19Now&body=BeatCovid19Now by completeing their tracker. Together we are mapping the spread and symptoms of Covid19, leading to better outcomes for all of us. Help too at https://beatcovid19now.org">
             <i className="fa fa-envelope-square"></i>
           </a>
