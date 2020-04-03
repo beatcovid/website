@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react"
-import { Select, Radio } from "../form"
+import { Select, Radio, Checkbox } from "../form"
 import { Link } from "react-router-dom"
 
 const Survey = (props) => {
@@ -42,6 +42,18 @@ const Survey = (props) => {
     )
   }
 
+  function renderCheckbox(question, index) {
+    return (
+      <Checkbox
+        name={question.name}
+        required={question.bind.required}
+        label={question.label}
+        options={question.choices}
+        errorMessage={question.errorMessage}
+        onClick={value => handleValueUpdate(value, index)} />
+    )
+  }
+
   function renderSelect(question, index) {
     return (
       <Select
@@ -62,6 +74,10 @@ const Survey = (props) => {
       <form key={stepId} onSubmit={e => e.preventDefault()}>
         {question.type === 'radio' && currentStep === step &&
           renderRadio(question, index)
+        }
+
+        {question.type === 'checkbox' && currentStep === step &&
+          renderCheckbox(question, index)
         }
 
         {question.type === 'select' && currentStep === step &&
