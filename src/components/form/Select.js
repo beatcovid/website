@@ -4,6 +4,7 @@ const Select = (props) => {
   const name = props.name || ''
   const label = props.label || ''
   const options = props.options || []
+  const selectedOption = props.selectedOption || ''
   const required = props.required || false
   const errorMessage = props.errorMessage || ''
   const [error, setError] = useState(false)
@@ -47,7 +48,7 @@ const Select = (props) => {
       
       <div className="control">
         <div className={fieldClasses()}>
-          <select name={name} onChange={handleChange}>
+          <select name={name} value={selectedOption} onChange={handleChange}>
             <option value="none">--</option>
             {options.map(renderOptions)}
           </select>

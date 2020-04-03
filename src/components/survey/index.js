@@ -3,8 +3,9 @@ import { Select, Radio, Checkbox, Input } from "../form"
 import { Link } from "react-router-dom"
 
 const Survey = (props) => {
-  const steps = props.steps
-  const questions = props.questions
+  const steps = props.steps || []
+  const questions = props.questions || []
+  const results = props.results || null
   const [currentStep, setCurrentStep] = useState()
   const [allowNext, setAllowNext] = useState(false)
   const isFirstQuestion =
@@ -18,13 +19,17 @@ const Survey = (props) => {
 
   useEffect(() => {
     props.onStepChange(currentStep)
-  }, [props, currentStep])
+    if (results && [currentStep]) {
+      setAllowNext(true)
+    } else {
+      setAllowNext(false)
+    }
+  }, [props, currentStep, results])
 
-  function handleValueUpdate(value, index) {
+  function handleValueUpdate(question, value) {
+    props.onResultUpdate(question.name, value)
     setAllowNext(true)
-    console.log(value)
   }
-
   function handlePreviousButtonClick() {
     const findIndex = steps.findIndex(s => s === currentStep)
     setCurrentStep(steps[findIndex - 1])
@@ -32,7 +37,6 @@ const Survey = (props) => {
   function handleNextButtonClick() {
     const findIndex = steps.findIndex(s => s === currentStep)
     setCurrentStep(steps[findIndex + 1])
-    setAllowNext(false)
   }
 
   function renderRadio(question, index) {
@@ -42,8 +46,9 @@ const Survey = (props) => {
         required={question.bind.required}
         label={question.label}
         options={question.choices}
+        selectedOption={results[question.name]}
         errorMessage={question.errorMessage}
-        onClick={value => handleValueUpdate(value, index)} />
+        onChange={value => handleValueUpdate(question, value)} />
     )
   }
 
@@ -62,8 +67,9 @@ const Survey = (props) => {
         name={question.name}
         required={question.bind.required}
         label={question.label}
+        value={results[question.name]}
         errorMessage={question.errorMessage}
-        onChange={value => handleValueUpdate(value, index)} />
+        onChange={value => handleValueUpdate(question, value)} />
     )
   }
 
@@ -74,8 +80,9 @@ const Survey = (props) => {
         required={question.bind.required}
         label={question.label}
         options={question.choices}
+        selectedOptions={results[question.name]}
         errorMessage={question.errorMessage}
-        onClick={value => handleValueUpdate(value, index)} />
+        onChange={value => handleValueUpdate(question, value)} />
     )
   }
 
@@ -86,8 +93,9 @@ const Survey = (props) => {
         required={question.bind.required}
         label={question.label}
         options={question.choices}
+        selectedOption={results[question.name]}
         errorMessage={question.errorMessage}
-        onChange={value => handleValueUpdate(value, index)} />
+        onChange={value => handleValueUpdate(question, value)} />
     )
   }
 

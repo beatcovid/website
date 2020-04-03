@@ -4,18 +4,24 @@ const Radio = (props) => {
   const name = props.name || ''
   const label = props.label || ''
   const options = props.options || []
+  const selectedOption = props.selectedOption || ''
   const required = props.required || false
   const errorMessage = props.errorMessage || ''
   const [error, setError] = useState(false)
 
   function renderOptions(option) {
+    let optionClass = 'radio'
+    if (option.name === selectedOption.name) {
+      optionClass += ' selected'
+    }
     return (
-      <label key={option.name} className="radio">
+      <label key={option.name} className={optionClass}>
         <input
           type="radio"
           name={name}
           value={option.name}
-          onClick={handleClick} />
+          checked={selectedOption === option.name}
+          onChange={handleChange} />
         <span>{option.label}</span>
       </label>
     )
@@ -29,13 +35,13 @@ const Radio = (props) => {
     return baseClass
   }
   
-  function handleClick(e) {
+  function handleChange(e) {
     const value = e.currentTarget.value
     if (required && value === '') {
       setError(true)
     } else {
       setError(false)
-      props.onClick(value)
+      props.onChange(value)
     }
   }
 

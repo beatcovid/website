@@ -12,6 +12,7 @@ const SurveyPage = () => {
   const dispatch = useDispatch()
   // const isLoading = useSelector(selectLoading)
   const questions = useSelector(selectQuestions)
+  const [results, setResults] = useState()
   const [steps, setSteps] = useState([])
   const [currentStep, setCurrentStep] = useState()
   const currentStepIndex =
@@ -25,8 +26,26 @@ const SurveyPage = () => {
     }
   }, [questions, dispatch])
 
+  useEffect(() => {
+    const resultObj = {}
+      steps.forEach(s => {
+        resultObj[s] = null
+      })
+      setResults(resultObj)
+  }, [steps])
+
+  // useEffect(() => {
+  //   console.log(results)
+  // }, [results])
+
   function handleStepChange(step) {
     setCurrentStep(step)
+  }
+
+  function handleResultUpdate(questionName, answer) {
+    const r = {...results}
+    r[questionName] = answer
+    setResults(r)
   }
 
   return (
@@ -40,7 +59,9 @@ const SurveyPage = () => {
       <Survey
         steps={steps}
         questions={questions}
+        results={results}
         onStepChange={handleStepChange}
+        onResultUpdate={handleResultUpdate}
       />
     </div>
   )
