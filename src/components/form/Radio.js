@@ -15,13 +15,13 @@ const Radio = (props) => {
           type="radio"
           name={name}
           value={option.name}
-          onClick={handleChange} />
+          onClick={handleClick} />
         <span>{option.label}</span>
       </label>
     )
   }
 
-  function fieldClasses() {
+  function labelClasses() {
     const baseClass = 'label'
     if (error) {
       return baseClass + ' has-text-danger'
@@ -29,7 +29,7 @@ const Radio = (props) => {
     return baseClass
   }
   
-  function handleChange(e) {
+  function handleClick(e) {
     const value = e.currentTarget.value
     if (required && value === '') {
       setError(true)
@@ -41,7 +41,7 @@ const Radio = (props) => {
 
   return (
     <div className="survey-radio field">
-      <label className={fieldClasses()}>
+      <label className={labelClasses()}>
         {required &&
           <span>*</span>
         }
