@@ -4,6 +4,7 @@ const Checkbox = (props) => {
   const name = props.name || ''
   const label = props.label || ''
   const options = props.options || []
+  const selectedOptions = props.selectedOptions || []
   const required = props.required || false
   const errorMessage = props.errorMessage || ''
   const [error, setError] = useState(false)
@@ -15,23 +16,40 @@ const Checkbox = (props) => {
           type="checkbox"
           name={name}
           value={option.name}
-          onClick={handleClick} />
+          onChange={(e) => handleChange(e)}
+          checked={isChecked(option.name)} />
         <span>{option.label}</span>
       </label>
     )
   }
 
+  function isChecked(name) {
+    return selectedOptions.indexOf(name) > -1
+  }
+ 
   function labelClasses() {
-    const baseClass = 'label'
+    const baseClass = 'question-label label'
     if (error) {
       return baseClass + ' has-text-danger'
     }
     return baseClass
   }
   
-  function handleClick(e) {
+  function handleChange(e) {
     const value = e.currentTarget.value
-    props.onClick(value)
+    const selected = [...selectedOptions]
+    const findSelected = selected.indexOf(value)
+    if (findSelected === -1) {
+      selected.push(value)
+    } else {
+      selected.splice(findSelected, 1)
+    }
+    if (selected.length === 0) {
+      setError(true)
+    } else {
+      setError(false)
+    }
+    props.onChange(selected)
   }
 
   return (

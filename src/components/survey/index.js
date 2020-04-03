@@ -3,9 +3,11 @@ import { Select, Radio, Checkbox, Input } from "../form"
 import { Link } from "react-router-dom"
 
 const Survey = (props) => {
-  const steps = props.steps
-  const questions = props.questions
+  const steps = props.steps || []
+  const questions = props.questions || []
+  const results = props.results || null
   const [currentStep, setCurrentStep] = useState()
+  const [allowNext, setAllowNext] = useState(false)
   const isFirstQuestion =
     useMemo(() => currentStep === steps[0], [steps, currentStep])
   const isLastQuestion =
@@ -17,17 +19,24 @@ const Survey = (props) => {
 
   useEffect(() => {
     props.onStepChange(currentStep)
-  }, [props, currentStep])
-
-  function handleValueUpdate(value, index) {
-    if (!isLastQuestion) {
-      setCurrentStep(steps[index + 1])
+    if (results && [currentStep]) {
+      setAllowNext(true)
+    } else {
+      setAllowNext(false)
     }
-  }
+  }, [props, currentStep, results])
 
+  function handleValueUpdate(question, value) {
+    props.onResultUpdate(question.name, value)
+    setAllowNext(true)
+  }
   function handlePreviousButtonClick() {
     const findIndex = steps.findIndex(s => s === currentStep)
     setCurrentStep(steps[findIndex - 1])
+  }
+  function handleNextButtonClick() {
+    const findIndex = steps.findIndex(s => s === currentStep)
+    setCurrentStep(steps[findIndex + 1])
   }
 
   function renderRadio(question, index) {
@@ -37,8 +46,9 @@ const Survey = (props) => {
         required={question.bind.required}
         label={question.label}
         options={question.choices}
+        selectedOption={results[question.name]}
         errorMessage={question.errorMessage}
-        onClick={value => handleValueUpdate(value, index)} />
+        onChange={value => handleValueUpdate(question, value)} />
     )
   }
 
@@ -57,8 +67,9 @@ const Survey = (props) => {
         name={question.name}
         required={question.bind.required}
         label={question.label}
+        value={results[question.name]}
         errorMessage={question.errorMessage}
-        onChange={value => handleValueUpdate(value, index)} />
+        onChange={value => handleValueUpdate(question, value)} />
     )
   }
 
@@ -69,8 +80,9 @@ const Survey = (props) => {
         required={question.bind.required}
         label={question.label}
         options={question.choices}
+        selectedOptions={results[question.name]}
         errorMessage={question.errorMessage}
-        onClick={value => handleValueUpdate(value, index)} />
+        onChange={value => handleValueUpdate(question, value)} />
     )
   }
 
@@ -81,8 +93,9 @@ const Survey = (props) => {
         required={question.bind.required}
         label={question.label}
         options={question.choices}
+        selectedOption={results[question.name]}
         errorMessage={question.errorMessage}
-        onChange={value => handleValueUpdate(value, index)} />
+        onChange={value => handleValueUpdate(question, value)} />
     )
   }
 
@@ -117,8 +130,9 @@ const Survey = (props) => {
       {steps.map((s, i) => renderSteps(s, i))}
 
       <div className="survey-navigation">
-        {!isFirstQuestion &&
-          <button className="button" onClick={handlePreviousButtonClick}>&larr; Previous</button>
+        <button className="button" onClick={handlePreviousButtonClick} disabled={isFirstQuestion}>&larr; Previous</button>
+        {!isLastQuestion &&
+          <button className="button" onClick={handleNextButtonClick} disabled={!allowNext}>Next &rarr;</button>
         }
         {isLastQuestion &&
           <Link className="submit-button button is-primary" to={`/summary`}>Submit</Link>

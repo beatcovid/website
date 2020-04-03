@@ -4,6 +4,7 @@ const Input = (props) => {
   const type = props.type || 'text'
   const name = props.name || ''
   const label = props.label || ''
+  const value = props.value || ''
   const required = props.required || false
   const errorMessage = props.errorMessage || ''
   const [error, setError] = useState(false)
@@ -29,8 +30,8 @@ const Input = (props) => {
       setError(true)
     } else {
       setError(false)
-      props.onChange(value)
     }
+    props.onChange(value)
   }
 
   return (
@@ -47,6 +48,7 @@ const Input = (props) => {
           className={inputClasses()}
           type={type}
           name={name}
+          value={value}
           onChange={handleChange} />
       </div>
       
