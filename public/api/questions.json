@@ -94,6 +94,45 @@
       ],
       "type": "radio",
       "errorMessage": "Please select an option."
+    },
+
+    {
+      "name": "long_term_conditions",
+      "label": "Optional: Do you have any of the following long-term conditions?",
+      "bind": {
+        "required": false
+      },
+      "choices": [{
+          "name": "diabetes",
+          "label": "Diabetes"
+        },
+        {
+          "name": "high_blood_pressure",
+          "label": "High blood pressure"
+        },
+        {
+          "name": "lung_disease",
+          "label": "Lung disease (e.g. Asthma, COPD)"
+        },
+        {
+          "name": "heart_disease",
+          "label": "Heart disease"
+        },
+        {
+          "name": "Cancer",
+          "label": "Cancer (diagnosis or treatment within past 2 years)"
+        },
+        {
+          "name": "Other",
+          "label": "Other long-term condition name that may lower my immune system"
+        },
+        {
+          "name": "None",
+          "label": "None of the above"
+        }
+      ],
+      "type": "checkbox",
+      "errorMessage": "Please select at least one option."
     }
   ]
 }
