@@ -1,6 +1,6 @@
 {
   "name": "beat-covid19-now",
-  "version": "1.1",
+  "version": "0.0.2",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.1.0",
@@ -32,8 +32,20 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "devDependencies": {
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.2.1",
+    "lint-staged": "^10.0.7",
+    "prettier": "^1.19.1",
+    "purge-cloudflare-cache": "^1.2.2",
+    "source-map-explorer": "^2.2.2"
+  },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "plugin:prettier/recommended"
+    ]
   },
   "browserslist": {
     "production": [
@@ -47,5 +59,14 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ]
+  }
 }

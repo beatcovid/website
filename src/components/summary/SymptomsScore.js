@@ -1,13 +1,11 @@
 import React from "react"
 
-const SymptomsScore = (props) => {
+const SymptomsScore = props => {
   const headers = props.headers || []
   const data = props.data || {}
 
   function renderHeader(header) {
-    return (
-      <th key={header}>{header}</th>
-    )
+    return <th key={header}>{header}</th>
   }
 
   function renderTBody(row) {
@@ -23,13 +21,9 @@ const SymptomsScore = (props) => {
     <section className="symptoms-score-section">
       <table className="table is-narrow is-fullwidth is-striped">
         <thead>
-          <tr>
-            {headers.map(renderHeader)}
-          </tr>
+          <tr>{headers.map(renderHeader)}</tr>
         </thead>
-        <tbody>
-          {Object.keys(data).map(renderTBody)}
-        </tbody>
+        <tbody>{Object.keys(data).map(renderTBody)}</tbody>
       </table>
     </section>
   )

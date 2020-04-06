@@ -72,7 +72,7 @@ const SurveyApp = ({ history, step, next, go }) => {
                 )}
 
                 <div className="">
-                  <Steps key={step.id || ''} step={step || {id: ''}}>
+                  <Steps key={step.id || ""} step={step || { id: "" }}>
                     <Step id="age">
                       <form onSubmit={e => e.preventDefault()}>
                         <label className="block">
@@ -98,9 +98,7 @@ const SurveyApp = ({ history, step, next, go }) => {
 
                     <Step id="f/home">
                       <div className="">
-                        <span className="">
-                          COVID-19 Survey Welcome
-                        </span>
+                        <span className="">COVID-19 Survey Welcome</span>
 
                         <span>
                           The purpose of this test is to find out what
@@ -121,10 +119,7 @@ const SurveyApp = ({ history, step, next, go }) => {
                           treat privacy and security with the links below.
                         </span>
 
-                        <button
-                          className=""
-                          onClick={next}
-                        >
+                        <button className="" onClick={next}>
                           Start Survey
                         </button>
                       </div>
@@ -158,7 +153,7 @@ const SurveyApp = ({ history, step, next, go }) => {
                         </div>
                       </div>
                     </Step>
-                    
+
                     <Step id="f/test">
                       <form onSubmit={e => e.preventDefault()}>
                         <label className="block">

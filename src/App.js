@@ -13,13 +13,13 @@ import { selectLoading } from "./store/surveySlice"
 
 const HomeApp = () => {
   const count = 976
-  const version = process.env.REACT_APP_VERSION || ''
+  const version = process.env.REACT_APP_VERSION || ""
   const isLoading = useSelector(selectLoading)
 
   return (
     <BrowserRouter>
-      <AppHeader count={count}/>
-      
+      <AppHeader count={count} />
+
       {isLoading && <div>Loading... </div>}
 
       <div className="site-content">
@@ -27,7 +27,7 @@ const HomeApp = () => {
           <WelcomePage />
           <Acknowledgement />
         </Route>
-        
+
         <Route path="/survey">
           <SurveyPage />
         </Route>
@@ -38,7 +38,7 @@ const HomeApp = () => {
         </Route>
       </div>
 
-      <AppFooter version={version}/>
+      <AppFooter version={version} />
     </BrowserRouter>
   )
 }
