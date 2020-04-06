@@ -9,53 +9,50 @@ import SymptomsScore from "../components/summary/SymptomsScore"
 
 const SummaryPage = () => {
   const [showDetail, setShowDetail] = useState(false)
-  const result = 'risk-D'
+  const result = "risk-D"
   const counter = 976
-  const hasInternationalTravel = 'No'
-  const hasContact = 'No'
-  const hasCasualContact = 'No'
+  const hasInternationalTravel = "No"
+  const hasContact = "No"
+  const hasCasualContact = "No"
   const summaryScores = {
-    'Respiratory symptoms': {
-      domains: ['None', 'Severe'],
-      score: 0.5
+    "Respiratory symptoms": {
+      domains: ["None", "Severe"],
+      score: 0.5,
     },
-    'General symptoms': {
-      domains: ['None', 'Severe'],
-      score: 1.5
+    "General symptoms": {
+      domains: ["None", "Severe"],
+      score: 1.5,
     },
-    'Ability to do daily activities': {
-      domains: ['No difficulty', 'Great difficulty'],
-      score: 3
-    }
+    "Ability to do daily activities": {
+      domains: ["No difficulty", "Great difficulty"],
+      score: 3,
+    },
   }
   const mainSymptoms = {
-    headers: [
-      'Main COVID-19 Symptoms',
-      'Your score today'
-    ],
+    headers: ["Main COVID-19 Symptoms", "Your score today"],
     scores: {
-      'Cough': 'None',
-      'Sore throat': 'None',
-      'Feeling feverish': 'None',
-      'Shortness of breath': 'None',
-      'Fatigue (severe tiredness)': 'None'
-    }
+      Cough: "None",
+      "Sore throat": "None",
+      "Feeling feverish": "None",
+      "Shortness of breath": "None",
+      "Fatigue (severe tiredness)": "None",
+    },
   }
   const otherSymptoms = {
     headers: [
-      'Other symptoms of respiratory illnesses (maybe related to COVID-19)',
-      'Your score today'
+      "Other symptoms of respiratory illnesses (maybe related to COVID-19)",
+      "Your score today",
     ],
     scores: {
-      'Headache': 'None',
-      'Body aches and pains': 'None',
-      'Neck pain': 'None',
-      'Interrupted sleep': 'None',
-      'Loss of appetite': 'None',
-      'Wheezing': 'None',
-      'Coughing up phlegm (sputum)': 'None',
-      'Nasal congestion': 'None'
-    }
+      Headache: "None",
+      "Body aches and pains": "None",
+      "Neck pain": "None",
+      "Interrupted sleep": "None",
+      "Loss of appetite": "None",
+      Wheezing: "None",
+      "Coughing up phlegm (sputum)": "None",
+      "Nasal congestion": "None",
+    },
   }
 
   function handleShowDetailClick() {
@@ -64,14 +61,14 @@ const SummaryPage = () => {
 
   return (
     <div className="summary-page container">
-
       <div className="columns">
         <div className="column">
           <div className="card is-size-5">
-            The Symptom Tracker does not diagnose COVID-19 and it does not provide
-            medical advice. Please seek urgent medical help if you have difficulty breathing.
-            Contact your relevant local health authority or medical practitioner for health advice
-            about COVID-19 and to find out what to do if you think you have symptoms.
+            The Symptom Tracker does not diagnose COVID-19 and it does not
+            provide medical advice. Please seek urgent medical help if you have
+            difficulty breathing. Contact your relevant local health authority
+            or medical practitioner for health advice about COVID-19 and to find
+            out what to do if you think you have symptoms.
           </div>
         </div>
 
@@ -98,16 +95,17 @@ const SummaryPage = () => {
         <PotentialExposureTable
           hasInternationalTravel={hasInternationalTravel}
           hasContact={hasContact}
-          hasCasualContact={hasCasualContact} />
-        
-        {!showDetail &&
+          hasCasualContact={hasCasualContact}
+        />
+
+        {!showDetail && (
           <button className="button is-primary" onClick={handleShowDetailClick}>
             Click here for more detailed information
           </button>
-        }
+        )}
       </div>
 
-      {showDetail &&
+      {showDetail && (
         <div className="columns">
           <div className="column">
             <SummaryOfSymptoms summaryScores={summaryScores} />
@@ -116,14 +114,15 @@ const SummaryPage = () => {
           <div className="column">
             <SymptomsScore
               headers={mainSymptoms.headers}
-              data={mainSymptoms.scores} />
+              data={mainSymptoms.scores}
+            />
             <SymptomsScore
               headers={otherSymptoms.headers}
-              data={otherSymptoms.scores} />
+              data={otherSymptoms.scores}
+            />
           </div>
         </div>
-      }
-
+      )}
     </div>
   )
 }

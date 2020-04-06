@@ -7,7 +7,7 @@ import StartSurvey from "../components/welcome/StartSurvey"
 import Disclaimer from "../components/welcome/Disclaimer"
 
 const WelcomePage = () => {
-  const [currentSection, setCurrentSection] = useState('')
+  const [currentSection, setCurrentSection] = useState("")
   const [privacyNotice, setPrivacyNotice] = useState(true)
 
   function handleSectionChange(section) {
@@ -19,10 +19,7 @@ const WelcomePage = () => {
 
   return (
     <div className="welcome-page container">
-
-      <PrivacyNotice
-        show={privacyNotice}
-        onAccept={handleAccept} />
+      <PrivacyNotice show={privacyNotice} onAccept={handleAccept} />
 
       <div className="columns">
         <div className="column">
@@ -30,23 +27,28 @@ const WelcomePage = () => {
         </div>
 
         <div className="column">
-          <h2 className="has-text-centered-mobile">7 minutes of your time can help to BEAT COVID-19 NOW.</h2>
+          <h2 className="has-text-centered-mobile">
+            7 minutes of your time can help to BEAT COVID-19 NOW.
+          </h2>
 
           <section className="is-hidden-desktop">
             <StartSurvey
               disableStart={privacyNotice}
-              onSectionChange={handleSectionChange} />
+              onSectionChange={handleSectionChange}
+            />
           </section>
-          
+
           <Intro />
 
           <Faq
             currentSection={currentSection}
-            onSectionChange={handleSectionChange} />
-          
+            onSectionChange={handleSectionChange}
+          />
+
           <StartSurvey
             disableStart={privacyNotice}
-            onSectionChange={handleSectionChange} />
+            onSectionChange={handleSectionChange}
+          />
         </div>
       </div>
 

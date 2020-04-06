@@ -5,7 +5,7 @@ import SurveyProgress from "../components/survey/Progress"
 import {
   doQuestionsGet,
   // selectLoading,
-  selectQuestions
+  selectQuestions,
 } from "../store/surveySlice"
 
 const SurveyPage = () => {
@@ -15,8 +15,10 @@ const SurveyPage = () => {
   const [results, setResults] = useState()
   const [steps, setSteps] = useState([])
   const [currentStep, setCurrentStep] = useState()
-  const currentStepIndex =
-    useMemo(() => steps.findIndex((s, i) => s === currentStep) + 1, [steps, currentStep])
+  const currentStepIndex = useMemo(
+    () => steps.findIndex((s, i) => s === currentStep) + 1,
+    [steps, currentStep],
+  )
 
   useEffect(() => {
     if (questions.length > 0) {
@@ -28,10 +30,10 @@ const SurveyPage = () => {
 
   useEffect(() => {
     const resultObj = {}
-      steps.forEach(s => {
-        resultObj[s] = null
-      })
-      setResults(resultObj)
+    steps.forEach(s => {
+      resultObj[s] = null
+    })
+    setResults(resultObj)
   }, [steps])
 
   // useEffect(() => {
@@ -43,7 +45,7 @@ const SurveyPage = () => {
   }
 
   function handleResultUpdate(questionName, answer) {
-    const r = {...results}
+    const r = { ...results }
     r[questionName] = answer
     setResults(r)
   }
@@ -52,9 +54,7 @@ const SurveyPage = () => {
     <div className="survey-page container">
       <header>
         {/* <h1>Your Progress</h1>  */}
-        <SurveyProgress
-          total={10}
-          current={currentStepIndex} />
+        <SurveyProgress total={10} current={currentStepIndex} />
       </header>
       <Survey
         steps={steps}

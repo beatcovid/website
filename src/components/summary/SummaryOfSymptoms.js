@@ -1,7 +1,7 @@
 import React from "react"
 import SingleBar from "../viz/SingleBar"
 
-const SummaryOfSymptoms = (props) => {
+const SummaryOfSymptoms = props => {
   const summaryScores = props.summaryScores
 
   function renderBarViz(scoreTitle) {
@@ -13,17 +13,17 @@ const SummaryOfSymptoms = (props) => {
         domains={summaryScores[scoreTitle].domains}
         max={3}
         warningScore={1}
-        dangerScore={3} />
+        dangerScore={3}
+      />
     )
   }
 
   return (
     <section className="summary-of-symptoms-section card is-info">
-      <header>
-        Summary of Symptoms
-      </header>
+      <header>Summary of Symptoms</header>
       <p>
-        This section gives a score between 0 (no symptoms) and 3 (many severe symptoms).
+        This section gives a score between 0 (no symptoms) and 3 (many severe
+        symptoms).
       </p>
       <div className="card-content">
         {Object.keys(summaryScores).map(renderBarViz)}
