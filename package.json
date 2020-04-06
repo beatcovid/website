@@ -10,8 +10,10 @@
     "@testing-library/user-event": "^7.1.2",
     "autoprefixer": "^9.7.4",
     "axios": "^0.19.2",
+    "bulma": "^0.8.1",
     "date-fns": "^2.11.0",
     "fingerprintjs2": "^2.1.0",
+    "node-sass": "^4.13.1",
     "postcss-cli": "^7.1.0",
     "react": "^16.13.1",
     "react-albus": "^2.0.0",
@@ -45,8 +47,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "bulma": "^0.8.1",
-    "node-sass": "^4.13.1"
-  }
+  "devDependencies": {}
 }
