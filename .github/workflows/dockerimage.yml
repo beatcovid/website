@@ -1,7 +1,7 @@
 name: Docker Image CI
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,7 +10,6 @@ jobs:
       - name: Build the Docker image
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          name: beatcovid/website
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-    
+          name: beatcovid/website/website
+          username: ${{ github.actor }}
+          registry: docker.pkg.github.com
