@@ -29,16 +29,43 @@ const Question = props => {
       />
     )
   }
+  function renderCheckbox() {
+    return (
+      <Checkbox
+        name={name}
+        required={required}
+        label={label}
+        options={choices}
+        selectedOptions={result}
+        errorMessage={constraintMessage}
+        onChange={value => handleValueUpdate(value)}
+      />
+    )
+  }
 
-  function renderSelect(question) {
+  function renderSelect() {
     return (
       <Select
         name={name}
         required={required}
         label={label}
         options={choices}
-        // selectedOption={results[question.name]}
+        selectedOption={result}
         errorMessage={constraintMessage}
+        onChange={value => handleValueUpdate(value)}
+      />
+    )
+  }
+
+  function renderInput() {
+    return (
+      <Input
+        type={type}
+        name={name}
+        required={required}
+        label={label}
+        value={result}
+        errorMessage={question.constraintMessage}
         onChange={value => handleValueUpdate(value)}
       />
     )
@@ -47,9 +74,17 @@ const Question = props => {
   function renderQuestion() {
     switch (type) {
       case "select_one":
-        return renderRadio()
+        return renderSelect()
+      case "select_multiple":
+        return renderCheckbox()
+      case "text":
+        return renderInput()
       default:
-        return <h4>{label} (no component made yet)</h4>
+        return (
+          <h4>
+            {label} (no component made for <strong>{type}</strong> type)
+          </h4>
+        )
     }
   }
 

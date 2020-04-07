@@ -9,17 +9,23 @@ const Checkbox = props => {
   const errorMessage = props.errorMessage || ""
   const [error, setError] = useState(false)
 
+  function createHtml(html) {
+    return {
+      __html: html,
+    }
+  }
+
   function renderOptions(option) {
     return (
-      <label key={option.name} className="checkbox">
+      <label key={option.value} className="checkbox">
         <input
           type="checkbox"
           name={name}
-          value={option.name}
+          value={option.value}
           onChange={e => handleChange(e)}
-          checked={isChecked(option.name)}
+          checked={isChecked(option.value)}
         />
-        <span>{option.label}</span>
+        <span dangerouslySetInnerHTML={createHtml(option.label)} />
       </label>
     )
   }

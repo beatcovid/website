@@ -16,10 +16,6 @@ const Steps = props => {
     [stepNames, currentStep],
   )
 
-  useEffect(() => {
-    console.log(surveyResults)
-  }, [surveyResults])
-
   // Event handlers
   function handleNextButtonClick() {
     props.onNextClick(currentStep)

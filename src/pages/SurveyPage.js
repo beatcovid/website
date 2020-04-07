@@ -61,6 +61,7 @@ const SurveyPage = () => {
     const updatedSurveyResults = { ...surveyResults }
     updatedSurveyResults[name][id] = answer
     setSurveyResults(updatedSurveyResults)
+    console.log("Survey results", updatedSurveyResults)
   }
 
   return (

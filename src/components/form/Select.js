@@ -11,7 +11,7 @@ const Select = props => {
 
   function renderOptions(option) {
     return (
-      <option key={option.name} value={option.name}>
+      <option key={option.value} value={option.value}>
         {option.label}
       </option>
     )
