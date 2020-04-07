@@ -2,17 +2,21 @@ import React, { useState, useEffect, useMemo } from "react"
 import { Select, Radio, Checkbox, Input } from "../form"
 import { Link } from "react-router-dom"
 
-const Survey = (props) => {
+const Survey = props => {
   const steps = props.steps || []
   const questions = props.questions || []
   const results = props.results || null
   const [currentStep, setCurrentStep] = useState()
   const [allowNext, setAllowNext] = useState(false)
-  const isFirstQuestion =
-    useMemo(() => currentStep === steps[0], [steps, currentStep])
-  const isLastQuestion =
-    useMemo(() => currentStep === steps[steps.length - 1], [steps, currentStep])
-  
+  const isFirstQuestion = useMemo(() => currentStep === steps[0], [
+    steps,
+    currentStep,
+  ])
+  const isLastQuestion = useMemo(
+    () => currentStep === steps[steps.length - 1],
+    [steps, currentStep],
+  )
+
   useEffect(() => {
     setCurrentStep(steps[0])
   }, [steps])
@@ -48,18 +52,19 @@ const Survey = (props) => {
         options={question.choices}
         selectedOption={results[question.name]}
         errorMessage={question.errorMessage}
-        onChange={value => handleValueUpdate(question, value)} />
+        onChange={value => handleValueUpdate(question, value)}
+      />
     )
   }
 
   function renderInput(question, index) {
-    let type = ''
+    let type = ""
     switch (question.type) {
-      case 'input_number':
-        type = 'number'
-        break;
+      case "input_number":
+        type = "number"
+        break
       default:
-        type = 'text'
+        type = "text"
     }
     return (
       <Input
@@ -69,7 +74,8 @@ const Survey = (props) => {
         label={question.label}
         value={results[question.name]}
         errorMessage={question.errorMessage}
-        onChange={value => handleValueUpdate(question, value)} />
+        onChange={value => handleValueUpdate(question, value)}
+      />
     )
   }
 
@@ -82,7 +88,8 @@ const Survey = (props) => {
         options={question.choices}
         selectedOptions={results[question.name]}
         errorMessage={question.errorMessage}
-        onChange={value => handleValueUpdate(question, value)} />
+        onChange={value => handleValueUpdate(question, value)}
+      />
     )
   }
 
@@ -95,7 +102,8 @@ const Survey = (props) => {
         options={question.choices}
         selectedOption={results[question.name]}
         errorMessage={question.errorMessage}
-        onChange={value => handleValueUpdate(question, value)} />
+        onChange={value => handleValueUpdate(question, value)}
+      />
     )
   }
 
@@ -105,22 +113,21 @@ const Survey = (props) => {
 
     return (
       <form key={stepId} onSubmit={e => e.preventDefault()}>
-        {(question.type === 'input_text' || question.type === 'input_number')
-          && currentStep === step &&
-          renderInput(question, index)
-        }
+        {(question.type === "input_text" || question.type === "input_number") &&
+          currentStep === step &&
+          renderInput(question, index)}
 
-        {question.type === 'radio' && currentStep === step &&
-          renderRadio(question, index)
-        }
+        {question.type === "radio" &&
+          currentStep === step &&
+          renderRadio(question, index)}
 
-        {question.type === 'checkbox' && currentStep === step &&
-          renderCheckbox(question, index)
-        }
+        {question.type === "checkbox" &&
+          currentStep === step &&
+          renderCheckbox(question, index)}
 
-        {question.type === 'select' && currentStep === step &&
-          renderSelect(question, index)
-        }
+        {question.type === "select" &&
+          currentStep === step &&
+          renderSelect(question, index)}
       </form>
     )
   }
@@ -130,13 +137,27 @@ const Survey = (props) => {
       {steps.map((s, i) => renderSteps(s, i))}
 
       <div className="survey-navigation">
-        <button className="button" onClick={handlePreviousButtonClick} disabled={isFirstQuestion}>&larr; Previous</button>
-        {!isLastQuestion &&
-          <button className="button" onClick={handleNextButtonClick} disabled={!allowNext}>Next &rarr;</button>
-        }
-        {isLastQuestion &&
-          <Link className="submit-button button is-primary" to={`/summary`}>Submit</Link>
-        }
+        <button
+          className="button"
+          onClick={handlePreviousButtonClick}
+          disabled={isFirstQuestion}
+        >
+          &larr; Previous
+        </button>
+        {!isLastQuestion && (
+          <button
+            className="button"
+            onClick={handleNextButtonClick}
+            disabled={!allowNext}
+          >
+            Next &rarr;
+          </button>
+        )}
+        {isLastQuestion && (
+          <Link className="submit-button button is-primary" to={`/summary`}>
+            Submit
+          </Link>
+        )}
       </div>
     </>
   )

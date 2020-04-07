@@ -3,22 +3,22 @@ import React from "react"
 const ShareWithFriends = () => {
   function createHtml() {
     return {
-      __html:`
+      __html: `
         <a href="javascript:copyTextToClipboard('https://beatcovid19now.org');" title="Copy link to clipboard">
           <i class="fa fa-link"></i>
         </a>
-      `
+      `,
     }
   }
-  
-  
+
   return (
     <section className="share-section card is-info">
-      <header>
-        Share with friends
-      </header>
+      <header>Share with friends</header>
       <div className="card-content">
-        <p>Let’s spread this Symptom Tracker quicker than COVID-19 spreads. Share with your friends NOW.</p>
+        <p>
+          Let’s spread this Symptom Tracker quicker than COVID-19 spreads. Share
+          with your friends NOW.
+        </p>
 
         <div className="social-sharing">
           <a href="http://www.facebook.com/sharer.php?u=BeatCovid19now.org">
@@ -32,12 +32,14 @@ const ShareWithFriends = () => {
           </a>
         </div>
         <div className="social-sharing">
-          <a href="whatsapp://send?&text=I%27m+helping+%23BeatCovid19Now+by+completing+their+tracker.+Together+we+are+mapping+the+spread+and+symptoms+of+Covid19%2C+leading+to+better+outcomes+for+all+of+us.%0D%0AHelp+too+at+https%3A%2F%2Fbeatcovid19now.org"
-            data-action="share/whatsapp/share">
+          <a
+            href="whatsapp://send?&text=I%27m+helping+%23BeatCovid19Now+by+completing+their+tracker.+Together+we+are+mapping+the+spread+and+symptoms+of+Covid19%2C+leading+to+better+outcomes+for+all+of+us.%0D%0AHelp+too+at+https%3A%2F%2Fbeatcovid19now.org"
+            data-action="share/whatsapp/share"
+          >
             <i className="fa fa-whatsapp"></i>
           </a>
           <span dangerouslySetInnerHTML={createHtml()} />
-          
+
           <a href="mailto:?subject=BeatCOVID19Now&body=BeatCovid19Now by completeing their tracker. Together we are mapping the spread and symptoms of Covid19, leading to better outcomes for all of us. Help too at https://beatcovid19now.org">
             <i className="fa fa-envelope-square"></i>
           </a>

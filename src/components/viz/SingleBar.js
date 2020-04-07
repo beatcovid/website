@@ -1,7 +1,7 @@
 import React from "react"
 
-const SingleBar = (props) => {
-  const title = props.title || ''
+const SingleBar = props => {
+  const title = props.title || ""
   const score = props.score || 0.0
   const domains = props.domains || []
   const max = props.max || 0
@@ -9,19 +9,17 @@ const SingleBar = (props) => {
   const dangerScore = props.dangerScore || 0
 
   function renderDomains(domain) {
-    return (
-      <span key={domain}>{domain}</span>
-    )
+    return <span key={domain}>{domain}</span>
   }
 
   function progressClasses() {
-    let baseClass = 'progress'
+    let baseClass = "progress"
     if (score < warningScore) {
-      return baseClass + ' is-success'
+      return baseClass + " is-success"
     } else if (score < dangerScore) {
-      return baseClass + ' is-warning'
+      return baseClass + " is-warning"
     } else {
-      return baseClass + ' is-danger'
+      return baseClass + " is-danger"
     }
   }
 
@@ -30,13 +28,8 @@ const SingleBar = (props) => {
       <header>
         {title}: {score}
       </header>
-      <progress
-        className={progressClasses()}
-        value={score}
-        max={max} />
-      <div className="progress-labels">
-        {domains.map(renderDomains)}
-      </div>
+      <progress className={progressClasses()} value={score} max={max} />
+      <div className="progress-labels">{domains.map(renderDomains)}</div>
     </section>
   )
 }

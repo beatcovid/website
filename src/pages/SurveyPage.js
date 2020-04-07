@@ -1,68 +1,86 @@
 import React, { useEffect, useState, useMemo } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import Survey from "../components/survey"
 import SurveyProgress from "../components/survey/Progress"
-import {
-  doQuestionsGet,
-  // selectLoading,
-  selectQuestions
-} from "../store/surveySlice"
+import SurveySteps from "../components/survey/Steps"
+import { doSchemaGet, selectSurvey } from "../store/schemaSlice"
+import { doSetGlobal, doSetSteps, selectSteps } from "../store/surveySlice"
 
 const SurveyPage = () => {
   const dispatch = useDispatch()
-  // const isLoading = useSelector(selectLoading)
-  const questions = useSelector(selectQuestions)
-  const [results, setResults] = useState()
-  const [steps, setSteps] = useState([])
+  const survey = useSelector(selectSurvey)
+  const surveySteps = useSelector(selectSteps)
+
+  const [stepNames, setStepNames] = useState([])
+  const [surveyResults, setSurveyResults] = useState(null)
   const [currentStep, setCurrentStep] = useState()
-  const currentStepIndex =
-    useMemo(() => steps.findIndex((s, i) => s === currentStep) + 1, [steps, currentStep])
+  const currentStepIndex = useMemo(
+    () => stepNames.findIndex((s, i) => s === currentStep) + 1,
+    [stepNames, currentStep],
+  )
 
   useEffect(() => {
-    if (questions.length > 0) {
-      setSteps(questions.map(d => d.name))
-    } else {
-      dispatch(doQuestionsGet())
-    }
-  }, [questions, dispatch])
-
-  useEffect(() => {
-    const resultObj = {}
-      steps.forEach(s => {
-        resultObj[s] = null
+    const results = {}
+    if (surveySteps.length > 0) {
+      surveySteps.forEach(s => {
+        results[s.name] = {}
+        if (s.questions.length > 0) {
+          s.questions.forEach(q => {
+            results[s.name][q.id] = null
+          })
+        }
       })
-      setResults(resultObj)
-  }, [steps])
+      setSurveyResults(results)
+    }
+  }, [surveySteps])
 
-  // useEffect(() => {
-  //   console.log(results)
-  // }, [results])
+  useEffect(() => {
+    setStepNames(surveySteps.map(d => d.name))
+  }, [surveySteps])
 
-  function handleStepChange(step) {
-    setCurrentStep(step)
+  useEffect(() => {
+    if (survey) {
+      dispatch(doSetGlobal(survey.global))
+      dispatch(doSetSteps(survey.steps))
+      setCurrentStep(survey.steps[0].name)
+    } else {
+      dispatch(doSchemaGet())
+    }
+  }, [survey, dispatch])
+
+  function handleNextClick() {
+    const findIndex = stepNames.findIndex(s => s === currentStep)
+    setCurrentStep(stepNames[findIndex + 1])
   }
 
-  function handleResultUpdate(questionName, answer) {
-    const r = {...results}
-    r[questionName] = answer
-    setResults(r)
+  function handlePreviousClick() {
+    const findIndex = stepNames.findIndex(s => s === currentStep)
+    setCurrentStep(stepNames[findIndex - 1])
+  }
+
+  function handleResultsChange(name, id, answer) {
+    const updatedSurveyResults = { ...surveyResults }
+    updatedSurveyResults[name][id] = answer
+    setSurveyResults(updatedSurveyResults)
+    console.log("Survey results", updatedSurveyResults)
   }
 
   return (
     <div className="survey-page container">
       <header>
-        {/* <h1>Your Progress</h1>  */}
-        <SurveyProgress
-          total={10}
-          current={currentStepIndex} />
+        <SurveyProgress total={stepNames.length} current={currentStepIndex} />
       </header>
-      <Survey
-        steps={steps}
-        questions={questions}
-        results={results}
-        onStepChange={handleStepChange}
-        onResultUpdate={handleResultUpdate}
-      />
+
+      <form onSubmit={e => e.preventDefault()}>
+        <SurveySteps
+          stepNames={stepNames}
+          steps={surveySteps}
+          currentStep={currentStep}
+          surveyResults={surveyResults}
+          onNextClick={handleNextClick}
+          onPreviousClick={handlePreviousClick}
+          onResultsChange={handleResultsChange}
+        />
+      </form>
     </div>
   )
 }

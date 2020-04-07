@@ -1,35 +1,33 @@
 import React, { useState } from "react"
 
-const Select = (props) => {
-  const name = props.name || ''
-  const label = props.label || ''
+const Select = props => {
+  const name = props.name || ""
+  const label = props.label || ""
   const options = props.options || []
-  const selectedOption = props.selectedOption || ''
+  const selectedOption = props.selectedOption || ""
   const required = props.required || false
-  const errorMessage = props.errorMessage || ''
+  const errorMessage = props.errorMessage || ""
   const [error, setError] = useState(false)
 
   function renderOptions(option) {
     return (
-      <option
-        key={option.name}
-        value={option.name}>
+      <option key={option.value} value={option.value}>
         {option.label}
       </option>
     )
   }
 
   function fieldClasses() {
-    const baseClass = 'select'
+    const baseClass = "select"
     if (error) {
-      return baseClass + ' is-danger'
+      return baseClass + " is-danger"
     }
     return baseClass
   }
-  
+
   function handleChange(e) {
     const value = e.currentTarget.value
-    if (required && value === 'none') {
+    if (required && value === "none") {
       setError(true)
     } else {
       setError(false)
@@ -40,12 +38,10 @@ const Select = (props) => {
   return (
     <div className="survey-select field">
       <label className="label">
-        {required &&
-          <span>*</span>
-        }
+        {required && <span>*</span>}
         {label}
       </label>
-      
+
       <div className="control">
         <div className={fieldClasses()}>
           <select name={name} value={selectedOption} onChange={handleChange}>
@@ -54,10 +50,8 @@ const Select = (props) => {
           </select>
         </div>
       </div>
-      
-      {error &&
-        <p className="help is-danger">{errorMessage}</p>
-      }
+
+      {error && <p className="help is-danger">{errorMessage}</p>}
     </div>
   )
 }
