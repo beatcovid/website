@@ -1,5 +1,6 @@
-import React, { useMemo, useEffect } from "react"
+import React, { useMemo } from "react"
 import Question from "./Question"
+import QuestionsTable from "./QuestionsTable"
 
 const Steps = props => {
   const stepNames = props.stepNames
@@ -15,6 +16,11 @@ const Steps = props => {
     () => currentStep === stepNames[stepNames.length - 1],
     [stepNames, currentStep],
   )
+
+  // This assumes if one of the questions is 'list-nolabel', render it as a table of radio buttons
+  function isTableRadioGroup(questions) {
+    return questions.find(q => q.appearance === "list-nolabel") ? true : false
+  }
 
   // Event handlers
   function handleNextButtonClick() {
@@ -44,11 +50,25 @@ const Steps = props => {
     const questions = step.questions
     if (currentStep === name) {
       const surveyResult = surveyResults[currentStep]
-      return (
-        <section key={name}>
-          {questions.map(q => renderQuestions(name, q, surveyResult[q.id]))}
-        </section>
-      )
+
+      if (isTableRadioGroup(questions)) {
+        return (
+          <section key={name}>
+            <QuestionsTable
+              name={name}
+              questions={questions}
+              tableResults={surveyResult}
+              onValueChange={(id, value) => handleResultChange(name, id, value)}
+            />
+          </section>
+        )
+      } else {
+        return (
+          <section key={name}>
+            {questions.map(q => renderQuestions(name, q, surveyResult[q.id]))}
+          </section>
+        )
+      }
     }
   }
 

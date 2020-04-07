@@ -87,7 +87,7 @@ const Question = props => {
   function renderQuestion() {
     switch (type) {
       case "select_one":
-        return renderSelect()
+        return renderRadio()
       case "select_multiple":
         return renderCheckbox()
       case "text":

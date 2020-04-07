@@ -5,20 +5,27 @@
   "date_created": "2020-04-05T20:30:28.753660Z",
   "summary": {
     "default_translation": "English (en)",
-    "labels": ["What is your age?", "Did you go to a medical practitioner, hospital or other health service to be tested for COVID-19 (coronavirus)?", "What was the result of your test?", "What date were you tested?", "Have you been in face-to-face contact with anyone confirmed or suspected to have COVID-19?"],
     "languages": ["English (en)"],
-    "row_count": 97,
+    "labels": ["What is your age?", "Did you go to a medical practitioner, hospital or other health service to be tested for COVID-19 (coronavirus)?", "What was the result of your test?", "What date were you tested?", "Have you been in face-to-face contact with anyone confirmed or suspected to have COVID-19?"],
+    "naming_conflicts": ["face_contact_outings"],
+    "row_count": 99,
     "geo": true,
-    "columns": ["appearance", "type", "name", "select_from_list_name", "constraint_message", "required", "carry-forward", "constraint", "label", "relevant", "v1.0-label", "hint", "parameters", "calculation"]
+    "columns": ["appearance", "type", "name", "select_from_list_name", "constraint_message", "required", "constraint", "retain", "label", "relevant", "hint", "parameters", "calculation"]
   },
-  "date_modified": "2020-04-06T01:37:12.335130Z",
-  "version_count": 4,
+  "date_modified": "2020-04-06T20:59:01.594199Z",
+  "version_count": 5,
   "has_deployment": true,
   "deployed_versions": {
-    "count": 2,
+    "count": 3,
     "next": null,
     "previous": null,
     "results": [{
+      "uid": "vybrNSuH2JgxJohbM43mY7",
+      "url": "https://kobo.stopcovid.infotorch.org/assets/a2zNyo7imc7FYKUuGZfLfF/versions/vybrNSuH2JgxJohbM43mY7/",
+      "content_hash": "f7649d995ee7b887703ce80f532e5669b58e380c",
+      "date_deployed": "2020-04-06T20:58:55.315064Z",
+      "date_modified": "2020-04-06 20:58:55.315064+00:00"
+    }, {
       "uid": "vasyPAdpvYXGat58NKgrUR",
       "url": "https://kobo.stopcovid.infotorch.org/assets/a2zNyo7imc7FYKUuGZfLfF/versions/vasyPAdpvYXGat58NKgrUR/",
       "content_hash": "a04eebdc7099eae85a3deabaa56f1d42f75cf7c5",
@@ -36,30 +43,30 @@
   "user": {},
   "survey": {
     "global": [{
-      "id": "rnJI8T35v",
+      "id": "BihNLjOEG",
       "type": "start",
       "name": "start",
       "required": false
     }, {
-      "id": "ukcWmnMBE",
+      "id": "HB6dtm2NT",
       "type": "end",
       "name": "end",
       "required": false
     }, {
-      "id": "UbXsFTTGk",
+      "id": "Orr9SDL5j",
       "type": "end_group",
       "required": false
     }, {
-      "id": "0ZNZaXwUJ",
+      "id": "s1sgTSecJ",
       "type": "calculate",
       "name": "version",
       "required": false,
-      "calculation": "20200406.002"
+      "calculation": "20200406.003"
     }],
     "steps": [{
       "name": "age_group",
       "questions": [{
-        "id": "bjWzdVtve",
+        "id": "x26hZScuu",
         "type": "select_one",
         "name": "age",
         "label": "What is your age?",
@@ -111,7 +118,7 @@
     }, {
       "name": "tested_group",
       "questions": [{
-        "id": "9ZUuVD48a",
+        "id": "VV5KOBIBZ",
         "type": "select_one",
         "name": "tested",
         "label": "Did you go to a medical practitioner, hospital or other health service to be tested for COVID-19 (coronavirus)?",
@@ -130,7 +137,7 @@
           "label": "No"
         }]
       }, {
-        "id": "YyurGac5t",
+        "id": "3vjvOOrzO",
         "type": "select_one",
         "name": "test_result",
         "label": "What was the result of your test?",
@@ -158,7 +165,7 @@
           "label": "I prefer not to say"
         }]
       }, {
-        "id": "DJjaEUzvB",
+        "id": "HOhRpuXn3",
         "type": "date",
         "name": "test_date",
         "label": "What date were you tested?",
@@ -170,7 +177,7 @@
     }, {
       "name": "contact_group",
       "questions": [{
-        "id": "bUNL2Xq3p",
+        "id": "5TPgWIHOZ",
         "type": "select_one",
         "name": "contact",
         "label": "Have you been in face-to-face contact with anyone confirmed or suspected to have COVID-19?",
@@ -193,7 +200,7 @@
           "label": "Unsure"
         }]
       }, {
-        "id": "k9vQbglXO",
+        "id": "gwquZR6M0",
         "type": "date",
         "name": "contact_last_date",
         "label": "What is the date of last contact?",
@@ -202,7 +209,7 @@
         "constraint": ".<= date(today())",
         "constraint_message": "You cannot select a date in the future."
       }, {
-        "id": "xeyS1KbcG",
+        "id": "KWgwzN8Mu",
         "type": "select_one",
         "name": "contact_type",
         "label": "Please select one of the following",
@@ -237,7 +244,7 @@
     }, {
       "name": "travel_group",
       "questions": [{
-        "id": "CIWGhE7BW",
+        "id": "kMNODSOLX",
         "type": "select_one",
         "name": "travel",
         "label": "Have you travelled internationally in the past 2 months?",
@@ -252,14 +259,14 @@
           "label": "No"
         }]
       }, {
-        "id": "JJ4PLAFIW",
+        "id": "EH9mjfGAB",
         "type": "geopoint",
         "name": "travel_country",
         "label": "Which city and country did you travel to?",
         "relevant": "${travel} = 'yes'",
         "required": true
       }, {
-        "id": "J7xkI5xJV",
+        "id": "vj5vrIKgD",
         "type": "date",
         "name": "travel_date",
         "label": "What date did you return to the country you are in now?",
@@ -271,7 +278,7 @@
     }, {
       "name": "face_contact_group",
       "questions": [{
-        "id": "a3vXz4QMb",
+        "id": "ygcMWYP4S",
         "type": "select_one",
         "name": "face_contact_people",
         "label": "Who are you in face-to-face contact with?",
@@ -302,13 +309,13 @@
           "label": "No one or almost no one"
         }]
       }, {
-        "id": "q89QRasEY",
+        "id": "4TgrAJqMc",
         "type": "begin_group",
         "name": "face_contact_outings_group",
         "relevant": "${face_contact_people} != '' and ${face_contact_people} != 'anyone'",
         "required": false
       }, {
-        "id": "3aUresjuF",
+        "id": "McGxAgngZ",
         "type": "select_multiple",
         "name": "face_contact_outings",
         "label": "Do you go out of your home to do the following? (Select all that apply)",
@@ -354,14 +361,60 @@
           "label": "Other"
         }]
       }, {
-        "id": "blIhWxwmJ",
+        "id": "7yrpqbiil",
+        "type": "select_multiple",
+        "name": "face_contact_outings",
+        "label": "Do you go out of your home to do the following? (Select all that apply)",
+        "relevant": "${face_contact_people} = 'small_circle' or ${face_contact_people} = 'household_plus'",
+        "required": true,
+        "constraint": "count-selected(${face_contact_outings}) >= 1",
+        "constraint_message": "Please select at least one option.",
+        "choices": [{
+          "id": "face_contact_outings",
+          "value": "socialise",
+          "label": "Socialise with other people"
+        }, {
+          "id": "face_contact_outings",
+          "value": "food",
+          "label": "Get food"
+        }, {
+          "id": "face_contact_outings",
+          "value": "medicine_health",
+          "label": "Get medicine or health care"
+        }, {
+          "id": "face_contact_outings",
+          "value": "work_study",
+          "label": "Work, study or volunteer"
+        }, {
+          "id": "face_contact_outings",
+          "value": "school_childcare",
+          "label": "School or childcare"
+        }, {
+          "id": "face_contact_outings",
+          "value": "family_friends",
+          "label": "Visit family or friends"
+        }, {
+          "id": "face_contact_outings",
+          "value": "support_others",
+          "label": "Support others who cannot look after themselves"
+        }, {
+          "id": "face_contact_outings",
+          "value": "exercise_relax",
+          "label": "Exercise or relax"
+        }, {
+          "id": "face_contact_outings",
+          "value": "other",
+          "label": "Other"
+        }]
+      }, {
+        "id": "vTQiwE85Z",
         "type": "text",
         "name": "face_contact_outings_other",
         "label": "Please describe",
         "relevant": "selected(${face_contact_outings}, 'other')",
         "required": true
       }, {
-        "id": "giDyW4i4i",
+        "id": "M7nvUbaS7",
         "type": "select_multiple",
         "name": "face_contact_limit",
         "label": "Why are you limiting face-to-face contact with other people? (Select all that apply)",
@@ -402,14 +455,14 @@
           "label": "Other"
         }]
       }, {
-        "id": "XQwVbdm2M",
+        "id": "i3dKj7SWq",
         "type": "text",
         "name": "face_contact_limit_other",
         "label": "Please describe",
         "relevant": "selected(${face_contact_limit}, 'other')",
         "required": true
       }, {
-        "id": "DWbssbZ4F",
+        "id": "u6dhJt7zK",
         "type": "date",
         "name": "face_contact_limit_date",
         "label": "When did you start limiting face-to-face contact with others?",
@@ -417,7 +470,7 @@
         "constraint": ".<= date(today())",
         "constraint_message": "You cannot select a date in the future."
       }, {
-        "id": "cSg9hQbco",
+        "id": "3MT1vDsdB",
         "type": "text",
         "name": "face_contact_limit_experience",
         "label": "Optional: Thinking about the past 24 hours, please describe your experience of limiting face-to-face contact with other people.",
@@ -426,7 +479,7 @@
     }, {
       "name": "infection_group",
       "questions": [{
-        "id": "yjVzbtvNV",
+        "id": "jqj8c40Bx",
         "type": "select_one",
         "name": "infection",
         "label": "Do you have influenza or a lung infection that is not COVID-19?",
@@ -445,7 +498,7 @@
           "label": "Don't know"
         }]
       }, {
-        "id": "5RUk8ntXU",
+        "id": "pTE7SEpi0",
         "type": "text",
         "name": "infection_type",
         "label": "What type of lung infection do you have?",
@@ -455,14 +508,14 @@
     }, {
       "name": "symptom_group",
       "questions": [{
-        "id": "OrYRiOSzr",
+        "id": "mnqS2a9nt",
         "type": "note",
         "name": "__symptom_header",
         "label": "Since this time yesterday, have you had the following symptoms:",
         "hint": ["Whether or not you have symptoms, it is important to record if you do or donâ€™t have symptoms today. This helps to understand what is going on across communities and if there are changes over time."],
         "required": false
       }, {
-        "id": "HbtUvT3RI",
+        "id": "aTFwiZOvI",
         "type": "select_one",
         "name": "__symptom_labels",
         "appearance": "label",
@@ -485,7 +538,7 @@
           "label": "Severe"
         }]
       }, {
-        "id": "5CYVoOqTh",
+        "id": "9AOQkB1iB",
         "type": "select_one",
         "name": "symptom_cough",
         "label": "Cough",
@@ -509,7 +562,7 @@
           "label": "Severe"
         }]
       }, {
-        "id": "cilmigwyb",
+        "id": "3Rag4sbbo",
         "type": "select_one",
         "name": "symptom_sorethroat",
         "label": "Sore throat",
@@ -533,7 +586,7 @@
           "label": "Severe"
         }]
       }, {
-        "id": "4uLSBIskj",
+        "id": "TdINZtVqk",
         "type": "select_one",
         "name": "symptom_headache",
         "label": "Headache",
@@ -557,7 +610,7 @@
           "label": "Severe"
         }]
       }, {
-        "id": "FkadhLG2m",
+        "id": "Sgf4RAUKv",
         "type": "select_one",
         "name": "symptom_nasal_congestion",
         "label": "Nasal congestion",
@@ -581,7 +634,7 @@
           "label": "Severe"
         }]
       }, {
-        "id": "ruslCwKIT",
+        "id": "1yxNLE0Vx",
         "type": "select_one",
         "name": "symptom_feverish",
         "label": "Feeling feverish",
@@ -605,7 +658,7 @@
           "label": "Severe"
         }]
       }, {
-        "id": "WdubNCBbV",
+        "id": "0V5dtWpqR",
         "type": "select_one",
         "name": "symptom_aches",
         "label": "Body aches and pains",
@@ -629,7 +682,7 @@
           "label": "Severe"
         }]
       }, {
-        "id": "BKJcgcyuw",
+        "id": "0a8RJS3Dl",
         "type": "select_one",
         "name": "symptom_fatigue",
         "label": "Fatigue (tiredness)",
@@ -653,7 +706,7 @@
           "label": "Severe"
         }]
       }, {
-        "id": "5XaqVYsaL",
+        "id": "vAOYUGnUp",
         "type": "select_one",
         "name": "symptom_neckpain",
         "label": "Neck pain",
@@ -677,7 +730,7 @@
           "label": "Severe"
         }]
       }, {
-        "id": "ze7frc0Y3",
+        "id": "FTarSHWV3",
         "type": "select_one",
         "name": "symptom_nosleep",
         "label": "Interrupted sleep",
@@ -701,7 +754,7 @@
           "label": "Severe"
         }]
       }, {
-        "id": "M6LVAxJE2",
+        "id": "v3kJOhglK",
         "type": "select_one",
         "name": "symptom_wheezing",
         "label": "Wheezing",
@@ -725,7 +778,7 @@
           "label": "Severe"
         }]
       }, {
-        "id": "N4vS34pzm",
+        "id": "l8V8fMo4t",
         "type": "select_one",
         "name": "symptom_phlegm",
         "label": "Coughing up phlegm (sputum)",
@@ -749,7 +802,7 @@
           "label": "Severe"
         }]
       }, {
-        "id": "GO9FIoyfb",
+        "id": "bD3qt7b13",
         "type": "select_one",
         "name": "symptom_nobreath",
         "label": "Shortness of breath",
@@ -773,7 +826,7 @@
           "label": "Severe"
         }]
       }, {
-        "id": "0cXYAPpbK",
+        "id": "2yOgrLKDf",
         "type": "select_one",
         "name": "symptom_noappetite",
         "label": "Loss of appetite",
@@ -797,7 +850,7 @@
           "label": "Severe"
         }]
       }, {
-        "id": "IozICOX5M",
+        "id": "w29HbnLYI",
         "type": "select_one",
         "name": "symptom_nosmell",
         "label": "Loss of smell",
@@ -821,7 +874,7 @@
           "label": "Severe"
         }]
       }, {
-        "id": "eO7zIOjEM",
+        "id": "5ImjFNRYT",
         "type": "select_one",
         "name": "symptom_nausea",
         "label": "Nausea",
@@ -845,7 +898,7 @@
           "label": "Severe"
         }]
       }, {
-        "id": "dNR1z5UKN",
+        "id": "OGRuVmo6d",
         "type": "select_one",
         "name": "symptom_taste",
         "label": "Loss of taste",
@@ -869,7 +922,7 @@
           "label": "Severe"
         }]
       }, {
-        "id": "hZOYebgCj",
+        "id": "eMaOepbEo",
         "type": "select_one",
         "name": "symptom_diarrhoea",
         "label": "Diarrhoea",
@@ -896,13 +949,13 @@
     }, {
       "name": "activity_group",
       "questions": [{
-        "id": "2KlQYAy1u",
+        "id": "9Cpc4l5Iw",
         "type": "note",
         "name": "__activity_header",
         "label": "Since this time yesterday, have you had difficulty to:",
         "required": false
       }, {
-        "id": "hJgrr99pG",
+        "id": "vDjUQVoM8",
         "type": "select_one",
         "name": "__activity_labels",
         "appearance": "label",
@@ -925,7 +978,7 @@
           "label": "Great difficulty"
         }]
       }, {
-        "id": "wGpOKMXLZ",
+        "id": "YYxaSd2BR",
         "type": "select_one",
         "name": "activity_bed",
         "label": "Get out of bed",
@@ -949,7 +1002,7 @@
           "label": "Great difficulty"
         }]
       }, {
-        "id": "6AVO9HvqC",
+        "id": "TqNI4m26p",
         "type": "select_one",
         "name": "activity_home",
         "label": "Leave your home",
@@ -973,7 +1026,7 @@
           "label": "Great difficulty"
         }]
       }, {
-        "id": "JtTWaILks",
+        "id": "oyLZrJZxl",
         "type": "select_one",
         "name": "activity_meals",
         "label": "Prepare meals / get your own food",
@@ -997,7 +1050,7 @@
           "label": "Great difficulty"
         }]
       }, {
-        "id": "wMwjYmMUG",
+        "id": "thUTPamdL",
         "type": "select_one",
         "name": "activity_activities",
         "label": "Perform usual activities",
@@ -1021,7 +1074,7 @@
           "label": "Great difficulty"
         }]
       }, {
-        "id": "fi9jrB9MU",
+        "id": "EviRGpLIM",
         "type": "select_one",
         "name": "activity_tasks",
         "label": "Concentrate on tasks",
@@ -1045,7 +1098,7 @@
           "label": "Great difficulty"
         }]
       }, {
-        "id": "wJHuyWAHx",
+        "id": "13s3wf2pa",
         "type": "select_one",
         "name": "activity_selfcare",
         "label": "Take care of yourself",
@@ -1069,7 +1122,7 @@
           "label": "Great difficulty"
         }]
       }, {
-        "id": "57BnMDcHs",
+        "id": "25VQ6B24Y",
         "type": "select_one",
         "name": "activity_leaveroom",
         "label": "Go out of the room you are in",
@@ -1096,13 +1149,13 @@
     }, {
       "name": "activity_feeling_group",
       "questions": [{
-        "id": "MtSQOaL3D",
+        "id": "kIopfOSu2",
         "type": "note",
         "name": "__feeling_header",
         "label": "Since this time yesterday, have you felt:",
         "required": false
       }, {
-        "id": "st8NfY8io",
+        "id": "1E6dZXlT5",
         "type": "select_one",
         "name": "__feeling_labels",
         "appearance": "label",
@@ -1125,7 +1178,7 @@
           "label": "Extremely"
         }]
       }, {
-        "id": "RNveEUpP9",
+        "id": "pJbC7Jii3",
         "type": "select_one",
         "name": "feeling_irritable",
         "label": "Irritable",
@@ -1149,7 +1202,7 @@
           "label": "Extremely"
         }]
       }, {
-        "id": "INLJxAl1J",
+        "id": "LAjJThCjQ",
         "type": "select_one",
         "name": "feeling_helpless",
         "label": "Helpless",
@@ -1173,7 +1226,7 @@
           "label": "Extremely"
         }]
       }, {
-        "id": "ArHc627bM",
+        "id": "JbvzGQWNV",
         "type": "select_one",
         "name": "feeling_worrid",
         "label": "Worried",
@@ -1197,7 +1250,7 @@
           "label": "Extremely"
         }]
       }, {
-        "id": "JmoSOkXvQ",
+        "id": "7GOogEJ6b",
         "type": "select_one",
         "name": "feeling_frustrated",
         "label": "Frustrated",
@@ -1224,13 +1277,13 @@
     }, {
       "name": "activity_worry_group",
       "questions": [{
-        "id": "PYtx94Gam",
+        "id": "xBzKkoN8V",
         "type": "note",
         "name": "__worry_header",
         "label": "Today, are you worried about how you can:",
         "required": false
       }, {
-        "id": "dCJiLvncc",
+        "id": "rDAEZsOSM",
         "type": "select_one",
         "name": "__worry_labels",
         "appearance": "label",
@@ -1253,7 +1306,7 @@
           "label": "Very worried"
         }]
       }, {
-        "id": "ZS7aVdHqk",
+        "id": "nJSvg3e2R",
         "type": "select_one",
         "name": "worry_healthy_food",
         "label": "Get enough healthy food",
@@ -1277,7 +1330,7 @@
           "label": "Very worried"
         }]
       }, {
-        "id": "MWwOCYNJa",
+        "id": "qwdv9R01l",
         "type": "select_one",
         "name": "worry_medecine",
         "label": "Get the medicines that you or your family need",
@@ -1301,7 +1354,7 @@
           "label": "Very worried"
         }]
       }, {
-        "id": "J65mPhTRC",
+        "id": "y9BIv0Flf",
         "type": "select_one",
         "name": "worry_health_care",
         "label": "Get health care when you need to",
@@ -1325,7 +1378,7 @@
           "label": "Very worried"
         }]
       }, {
-        "id": "pvHX7HzIs",
+        "id": "nOfpnTjRP",
         "type": "select_one",
         "name": "worry_caring",
         "label": "Care for people who you have a responsibility for",
@@ -1349,7 +1402,7 @@
           "label": "Very worried"
         }]
       }, {
-        "id": "3iJUCYU90",
+        "id": "1Qjbjx5g4",
         "type": "select_one",
         "name": "worry_social",
         "label": "Keep in contact with family and friends",
@@ -1373,7 +1426,7 @@
           "label": "Very worried"
         }]
       }, {
-        "id": "pDkqt8Req",
+        "id": "kwE2B30bR",
         "type": "select_one",
         "name": "worry_children",
         "label": "Care for children and their education",
@@ -1397,7 +1450,7 @@
           "label": "Very worried"
         }]
       }, {
-        "id": "tzfBH3Kz1",
+        "id": "oqsHLujeD",
         "type": "select_one",
         "name": "worry_mental",
         "label": "Look after your mental wellbeing",
@@ -1421,7 +1474,7 @@
           "label": "Very worried"
         }]
       }, {
-        "id": "wJkCBY3LW",
+        "id": "FpO6ggjPs",
         "type": "select_one",
         "name": "worry_physical",
         "label": "Look after your physical health",
@@ -1445,7 +1498,7 @@
           "label": "Very worried"
         }]
       }, {
-        "id": "I81XkBcYS",
+        "id": "fMoEddrYI",
         "type": "select_one",
         "name": "worry_money",
         "label": "Have enough money",
@@ -1469,7 +1522,7 @@
           "label": "Very worried"
         }]
       }, {
-        "id": "stbBXtEue",
+        "id": "N8sMTPpgh",
         "type": "select_one",
         "name": "worry_work",
         "label": "Do your work or business (optional)",
@@ -1493,10 +1546,10 @@
           "label": "Very worried"
         }]
       }, {
-        "id": "PIOEnNboY",
+        "id": "47PJ1dmlC",
         "type": "select_one",
         "name": "worry_other",
-        "label": "Other (optional)",
+        "label": "Other",
         "appearance": "list-nolabel",
         "required": false,
         "choices": [{
@@ -1517,29 +1570,34 @@
           "label": "Very worried"
         }]
       }, {
-        "id": "cawdeFacd",
+        "id": "3550jRxFB",
         "type": "text",
         "name": "worry_other_desc",
-        "label": "Describe your other worry",
+        "label": "What is your other worry?",
         "relevant": "${worry_other} != ''",
         "required": true
+      }, {
+        "id": "v8neuQsdL",
+        "type": "text",
+        "label": "Where do you get the information you need to help you in the COVID-19 situation?",
+        "required": false
       }]
     }, {
       "name": "userdetail_group",
       "questions": [{
-        "id": "tKNKlfFea",
+        "id": "Jkd0fIxlx",
         "type": "geopoint",
         "name": "userdetail_city",
         "label": "What area, town or city are you in now?",
         "required": true
       }, {
-        "id": "krnfxFGsV",
+        "id": "foR97xhqO",
         "type": "geopoint",
         "name": "userdetail_postcode",
         "label": "What is your postcode?",
         "required": true
       }, {
-        "id": "Mja2KAYco",
+        "id": "nweuANOgQ",
         "type": "select_one",
         "name": "userdetail_gender",
         "label": "What is your gender?",
@@ -1558,14 +1616,14 @@
           "label": "Prefer to describe"
         }]
       }, {
-        "id": "WuvTsqInK",
+        "id": "PyR9eAyul",
         "type": "text",
         "name": "userdetail_gender_other",
         "label": "Option to describe",
         "relevant": "${userdetail_gender} = \"other\"",
         "required": true
       }, {
-        "id": "U9y6ZTtDu",
+        "id": "WRXshZg0Y",
         "type": "select_one",
         "name": "userdetail_first_nations",
         "label": "Do you identify as an Aboriginal or Torres Strait Islander person, or as a First Nations person?",
@@ -1580,13 +1638,13 @@
           "label": "No"
         }]
       }, {
-        "id": "0bUe6IfUl",
+        "id": "c92owUVK9",
         "type": "text",
         "name": "userdetail_language",
         "label": "What language(s) do you speak at home?",
         "required": true
       }, {
-        "id": "zeYQgkF8p",
+        "id": "7oh19FJ64",
         "type": "select_one",
         "name": "userdetail_healthcare",
         "label": "Are you working in healthcare (e.g., doctor, nurse, allied health professional, aged care worker)",
@@ -1601,7 +1659,7 @@
           "label": "No"
         }]
       }, {
-        "id": "EIQRfKeNQ",
+        "id": "OTKkctr8I",
         "type": "select_one",
         "name": "userdetail_essential",
         "label": "Do you work in an essential service? (e.g., hospital, supermarket, school, pharmacy, bank, petrol station)",
@@ -1616,14 +1674,14 @@
           "label": "No"
         }]
       }, {
-        "id": "2cxJsSk9M",
+        "id": "iUqIXSs2r",
         "type": "range",
         "name": "userdetail_household",
         "label": "Including yourself, how many people (adults and children) live in your household/place of residence?",
         "required": true,
         "parameters": "start=1;end=10;step=1"
       }, {
-        "id": "KDQzq3cDG",
+        "id": "RzymcGX7T",
         "type": "select_one",
         "name": "userdetail_employment",
         "label": "Optional: What is your employment status?",
@@ -1666,7 +1724,7 @@
           "label": "I am uncertain about my employment"
         }]
       }, {
-        "id": "sUfsDuR9E",
+        "id": "VI36sedZG",
         "type": "select_multiple",
         "name": "userdetail_conditions",
         "label": "Optional: Do you have any of the following conditions?",
@@ -1707,37 +1765,37 @@
           "label": "None"
         }]
       }, {
-        "id": "2Z0Z8s9jx",
+        "id": "uPQTohPpq",
         "type": "calculate",
         "name": "__condition_none",
         "required": false,
         "calculation": "selected(${userdetail_conditions}, 'none')"
       }, {
-        "id": "89Es8JGfq",
+        "id": "xTdUPedWp",
         "type": "calculate",
         "name": "__condition_count",
         "required": false,
         "calculation": "count-selected(${userdetail_conditions})"
       }, {
-        "id": "fqN8wWFpF",
+        "id": "kTLks60bY",
         "type": "calculate",
         "name": "__condition_no_answer",
         "required": false,
         "calculation": "${userdetail_conditions} = ''"
       }, {
-        "id": "s47aoDaeb",
+        "id": "7MFQShS2W",
         "type": "calculate",
         "name": "__condition_none_only",
         "required": false,
         "calculation": "${__condition_none} = 'true' and ${__condition_count} = 1"
       }, {
-        "id": "HPg56nCpn",
+        "id": "gqkmYKvDK",
         "type": "calculate",
         "name": "__condition_not_none",
         "required": false,
         "calculation": "${__condition_none} = 'false' and ${__condition_count} >= 1"
       }, {
-        "id": "BLgCmNdkP",
+        "id": "LitIYzfby",
         "type": "calculate",
         "name": "__condition_valid",
         "required": false,
