@@ -26,4 +26,5 @@ export const api = {
   submit: p => requests.post("/api/survey/result/", p),
   getForm: (formName = "beatcovid19now") =>
     requests.get(`/api/form/schema/${formName}/`),
+  getForm2: () => requests.get("/api/form-schema.json"),
 }

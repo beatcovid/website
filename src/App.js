@@ -9,7 +9,7 @@ import WelcomePage from "./pages/WelcomePage"
 import SurveyPage from "./pages/SurveyPage"
 import SummaryPage from "./pages/SummaryPage"
 
-import { selectLoading } from "./store/surveySlice"
+import { selectLoading } from "./store/survey2Slice"
 
 const HomeApp = () => {
   const count = 976

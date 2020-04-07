@@ -9,21 +9,27 @@ const Radio = props => {
   const errorMessage = props.errorMessage || ""
   const [error, setError] = useState(false)
 
+  function createHtml(html) {
+    return {
+      __html: html,
+    }
+  }
+
   function renderOptions(option) {
     let optionClass = "radio"
-    if (option.name === selectedOption.name) {
+    if (option.value === selectedOption.value) {
       optionClass += " selected"
     }
     return (
-      <label key={option.name} className={optionClass}>
+      <label key={option.value} className={optionClass}>
         <input
           type="radio"
           name={name}
-          value={option.name}
-          checked={selectedOption === option.name}
+          value={option.value}
+          checked={selectedOption === option.value}
           onChange={handleChange}
         />
-        <span>{option.label}</span>
+        <span dangerouslySetInnerHTML={createHtml(option.label)} />
       </label>
     )
   }
