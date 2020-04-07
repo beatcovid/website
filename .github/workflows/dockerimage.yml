@@ -12,4 +12,5 @@ jobs:
         with:
           name: beatcovid/website/website
           username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
