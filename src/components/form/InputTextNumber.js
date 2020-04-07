@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-const Input = props => {
+const InputTextNumber = props => {
   const type = props.type || "text"
   const name = props.name || ""
   const label = props.label || ""
@@ -56,4 +56,4 @@ const Input = props => {
   )
 }
 
-export default Input
+export default InputTextNumber

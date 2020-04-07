@@ -1,6 +1,6 @@
 import Radio from "./Radio"
 import Checkbox from "./Checkbox"
 import Select from "./Select"
-import Input from "./Input"
+import InputTextNumber from "./InputTextNumber"
 
-export { Radio, Checkbox, Select, Input }
+export { Radio, Checkbox, Select, InputTextNumber }

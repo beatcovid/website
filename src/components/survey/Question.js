@@ -1,5 +1,5 @@
 import React from "react"
-import { Select, Radio, Checkbox, Input } from "../form"
+import { Select, Radio, Checkbox, InputTextNumber } from "../form"
 
 const Question = props => {
   const question = props.question
@@ -57,9 +57,9 @@ const Question = props => {
     )
   }
 
-  function renderInput() {
+  function renderInputTextNumber() {
     return (
-      <Input
+      <InputTextNumber
         type={type}
         name={name}
         required={required}
@@ -78,7 +78,7 @@ const Question = props => {
       case "select_multiple":
         return renderCheckbox()
       case "text":
-        return renderInput()
+        return renderInputTextNumber()
       default:
         return (
           <h4>
