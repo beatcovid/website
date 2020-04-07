@@ -1,5 +1,5 @@
 import React from "react"
-import { Select, Radio, Checkbox, InputTextNumber } from "../form"
+import { Select, Radio, Checkbox, InputTextNumber, InputDate } from "../form"
 
 const Question = props => {
   const question = props.question
@@ -71,6 +71,19 @@ const Question = props => {
     )
   }
 
+  function renderDate() {
+    return (
+      <InputDate
+        name={name}
+        required={required}
+        label={label}
+        value={result}
+        errorMessage={question.constraintMessage}
+        onChange={value => handleValueUpdate(value)}
+      />
+    )
+  }
+
   function renderQuestion() {
     switch (type) {
       case "select_one":
@@ -79,6 +92,8 @@ const Question = props => {
         return renderCheckbox()
       case "text":
         return renderInputTextNumber()
+      case "date":
+        return renderDate()
       default:
         return (
           <h4>

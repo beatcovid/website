@@ -35,7 +35,7 @@ const Checkbox = props => {
   }
 
   function labelClasses() {
-    const baseClass = "question-label label"
+    const baseClass = "label"
     if (error) {
       return baseClass + " has-text-danger"
     }
