@@ -29,7 +29,7 @@ export const { setLoading, unsetLoading, setUid, setSurvey } = slice.actions
 export const doSchemaGet = () => dispatch => {
   dispatch(setLoading())
   api
-    .getForm2()
+    .getForm()
     .then(r => {
       console.log(r)
       dispatch(setSurvey(r.survey))
