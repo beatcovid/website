@@ -5,9 +5,9 @@ const Counter = props => {
   return (
     <h2 className="logo-ticker">
       <span className="logo-ticker__num">
-        <strong>{count}</strong> people have already
+        <strong>{count}</strong> people are helping
         <br />
-        completed the Symptom Tracker.
+        to #BeatCovid19Now
       </span>
     </h2>
   )
