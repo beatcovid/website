@@ -1,0 +1,49 @@
+.fade-enter.step {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.fade-enter-active.step {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.fade-exit.step {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.fade-exit-active.step {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.fade-enter-active.step,
+.fade-exit-active.step {
+  transition: opacity 170ms, transform ease-out 200ms;
+}
+
+.fade-back-enter.step {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.fade-back-enter-active.step {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.fade-back-exit.step {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.fade-back-exit-active.step {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.fade-back-enter-active.step,
+.fade-back-exit-active.step {
+  transition: opacity 170ms, transform ease-out 200ms;
+}

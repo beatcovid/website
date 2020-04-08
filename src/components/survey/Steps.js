@@ -53,7 +53,7 @@ const Steps = props => {
 
       if (isTableRadioGroup(questions)) {
         return (
-          <section key={name}>
+          <section className="step" key={name}>
             <QuestionsTable
               name={name}
               questions={questions}
@@ -64,7 +64,7 @@ const Steps = props => {
         )
       } else {
         return (
-          <section key={name}>
+          <section className="step" key={name}>
             {questions.map(q => renderQuestions(name, q, surveyResult[q.id]))}
           </section>
         )

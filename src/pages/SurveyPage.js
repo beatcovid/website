@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react"
+import { SwitchTransition, CSSTransition } from "react-transition-group"
 import { useSelector, useDispatch } from "react-redux"
 import SurveyProgress from "../components/survey/Progress"
 import SurveySteps from "../components/survey/Steps"
@@ -9,7 +10,8 @@ const SurveyPage = () => {
   const dispatch = useDispatch()
   const survey = useSelector(selectSurvey)
   const surveySteps = useSelector(selectSteps)
-
+  const [state, setState] = React.useState(true)
+  const [transitionClass, setTransitionClass] = React.useState()
   const [stepNames, setStepNames] = useState([])
   const [surveyResults, setSurveyResults] = useState(null)
   const [currentStep, setCurrentStep] = useState()
@@ -48,17 +50,20 @@ const SurveyPage = () => {
   }, [survey, dispatch])
 
   useEffect(() => {
+    setState(state => !state)
     window.scrollTo(0, 0)
   }, [currentStep])
 
   function handleNextClick() {
     const findIndex = stepNames.findIndex(s => s === currentStep)
     setCurrentStep(stepNames[findIndex + 1])
+    setTransitionClass("fade")
   }
 
   function handlePreviousClick() {
     const findIndex = stepNames.findIndex(s => s === currentStep)
     setCurrentStep(stepNames[findIndex - 1])
+    setTransitionClass("fade-back")
   }
 
   function handleResultsChange(name, id, answer) {
@@ -75,15 +80,25 @@ const SurveyPage = () => {
       </header>
 
       <form onSubmit={e => e.preventDefault()}>
-        <SurveySteps
-          stepNames={stepNames}
-          steps={surveySteps}
-          currentStep={currentStep}
-          surveyResults={surveyResults}
-          onNextClick={handleNextClick}
-          onPreviousClick={handlePreviousClick}
-          onResultsChange={handleResultsChange}
-        />
+        <SwitchTransition mode="out-in">
+          <CSSTransition
+            key={state}
+            addEndListener={(node, done) => {
+              node.addEventListener("transitionend", done, false)
+            }}
+            classNames={transitionClass}
+          >
+            <SurveySteps
+              stepNames={stepNames}
+              steps={surveySteps}
+              currentStep={currentStep}
+              surveyResults={surveyResults}
+              onNextClick={handleNextClick}
+              onPreviousClick={handlePreviousClick}
+              onResultsChange={handleResultsChange}
+            />
+          </CSSTransition>
+        </SwitchTransition>
       </form>
     </div>
   )
