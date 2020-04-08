@@ -1,5 +1,12 @@
 import React from "react"
-import { Select, Radio, Checkbox, InputTextNumber, InputDate } from "../form"
+import {
+  Select,
+  Radio,
+  Checkbox,
+  InputTextNumber,
+  InputDate,
+  Range,
+} from "../form"
 
 const Question = props => {
   const question = props.question
@@ -9,6 +16,7 @@ const Question = props => {
   const type = question.type
   const required = question.required
   const choices = question.choices
+  const parameters = question.parameters
   const constraint = question.constraint
   const constraintMessage = question.constraint_message
 
@@ -71,7 +79,7 @@ const Question = props => {
     )
   }
 
-  function renderDate() {
+  function renderInputDate() {
     return (
       <InputDate
         name={name}
@@ -79,6 +87,19 @@ const Question = props => {
         label={label}
         value={result}
         errorMessage={question.constraintMessage}
+        onChange={value => handleValueUpdate(value)}
+      />
+    )
+  }
+
+  function renderRange() {
+    return (
+      <Range
+        name={name}
+        parameters={parameters}
+        required={required}
+        label={label}
+        value={result}
         onChange={value => handleValueUpdate(value)}
       />
     )
@@ -92,8 +113,10 @@ const Question = props => {
         return renderCheckbox()
       case "text":
         return renderInputTextNumber()
+      case "range":
+        return renderRange()
       case "date":
-        return renderDate()
+        return renderInputDate()
       default:
         return (
           <h4>
