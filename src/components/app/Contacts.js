@@ -13,7 +13,14 @@ const Contacts = () => {
       </p>
       <p>
         If you have any questions about the Symptom Tracker, please contact the
-        Chief Investigator,{" "}
+        Chief Investigator at the{" "}
+        <a
+          href="https://www.swinburne.edu.au/research/global-health-equity/"
+          aria-label="Link to Centre for Global Health and Equity"
+        >
+          Centre for Global Health and Equity
+        </a>
+        ,
         <a
           href="mailto:beatcovid19now@swin.edu.au"
           aria-label="Email Professor Richard Osborne"

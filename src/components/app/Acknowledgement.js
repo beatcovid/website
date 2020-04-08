@@ -11,6 +11,7 @@ const Acknowledgement = () => {
         astrophysics/IT researchers and staff at{" "}
         <a
           href="https://www.swinburne.edu.au/"
+          rel="noopener noreferrer"
           target="_blank"
           className="has-text-dark has-text-weight-bold"
         >
@@ -19,6 +20,7 @@ const Acknowledgement = () => {
         in partnership with{" "}
         <a
           href="https://arq.group"
+          rel="noopener noreferrer"
           target="_blank"
           className="has-text-dark has-text-weight-bold"
         >
@@ -34,14 +36,19 @@ const Acknowledgement = () => {
       <section className="logos">
         <a
           href="https://www.education.gov.au/national-collaborative-research-infrastructure-strategy-ncris"
+          rel="noopener noreferrer"
           target="_blank"
         >
           <img src={ImgNcris} alt="NCRIS Logo" />
         </a>
-        <a href="https://www.swinburne.edu.au/" target="_blank">
+        <a
+          href="https://www.swinburne.edu.au/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img src={ImgSwinburne} alt="Swinburne Logo" />
         </a>
-        <a href="https://arq.group/" target="_blank">
+        <a href="https://arq.group/" target="_blank" rel="noopener noreferrer">
           <img src={ImgArqGroup} alt="Arq Group Logo" />
         </a>
       </section>
