@@ -47,6 +47,10 @@ const SurveyPage = () => {
     }
   }, [survey, dispatch])
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [currentStep])
+
   function handleNextClick() {
     const findIndex = stepNames.findIndex(s => s === currentStep)
     setCurrentStep(stepNames[findIndex + 1])

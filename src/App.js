@@ -1,6 +1,7 @@
 import React from "react"
 import { useSelector } from "react-redux"
 import { BrowserRouter, Route } from "react-router-dom"
+import ScrollToTop from "./components/app/ScrollToTop"
 import AppHeader from "./components/app/Header"
 import AppFooter from "./components/app/Footer"
 import AppLoader from "./components/app/Loader"
@@ -19,6 +20,7 @@ const HomeApp = () => {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <AppHeader count={count} />
 
       {isLoading && <AppLoader />}
