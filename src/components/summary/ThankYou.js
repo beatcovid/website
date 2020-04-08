@@ -6,21 +6,20 @@ const ThankYou = props => {
     <section className="thankyou-section card is-info">
       <header>Thank you</header>
       <div className="card-content">
-        <p>
-          Today you helped us to learn more about COVID-19. Thank you so much
-          for your help.
+        <p className="has-text-centered is-size-6">
+          Today you helped us to learn more about COVID-19. <br /> Thank you.
         </p>
 
         <div className="person-counter">
-          <span>You are person</span>
+          <span>You are one of the</span>
           <span className="count">{counter}</span>
-          <span>to complete this survey</span>
+          <span>people using this Symptom Tracker</span>
         </div>
 
         <p>
           Please come back tomorrow and ask your family, friends and colleagues
-          to do the same. Your input speeds up the progress to Beat COVID-19
-          Now.
+          to complete the Tracker. You are helping to speed up the progress to
+          Beat COVID-19 Now.
         </p>
       </div>
     </section>

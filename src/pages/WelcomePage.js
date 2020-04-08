@@ -26,10 +26,14 @@ const WelcomePage = () => {
           <Hero />
         </div>
 
-        <div className="column">
-          <h2 className="has-text-centered-mobile">
-            7 minutes of your time can help to BEAT COVID-19 NOW.
-          </h2>
+        <section className="column">
+          <header className="has-text-centered-mobile">
+            <h2>
+              With people power we can map the spread of COVID-19 around the
+              world.
+            </h2>
+            <h2>7 minutes of your time can help to BEAT COVID-19 NOW.</h2>
+          </header>
 
           <section className="is-hidden-desktop">
             <StartSurvey
@@ -49,7 +53,7 @@ const WelcomePage = () => {
             disableStart={privacyNotice}
             onSectionChange={handleSectionChange}
           />
-        </div>
+        </section>
       </div>
 
       <Disclaimer />

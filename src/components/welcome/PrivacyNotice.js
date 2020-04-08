@@ -25,11 +25,9 @@ const PrivacyNotice = props => {
       </div>
       <div className="message-body has-text-centered">
         <div className="content">
-          We are using anonymous data from cookies to ensure that multiple
+          This site is using anonymous data from cookies to ensure that multiple
           responses from the same person can be easily matched. This feature is
-          only used if you select "Track your symptoms over time". If you do not
-          wish to participate, simply select the "One-time symptom check" and no
-          cookies will be used.
+          only used so that you can track your symptoms over time.
         </div>
         <button className="button" type="button" onClick={handleClick}>
           I Understand

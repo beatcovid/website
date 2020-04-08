@@ -9,6 +9,18 @@
     align-items: stretch;
   }
 
+  .button-wrapper {
+    margin: 1rem auto;
+  }
+
+  .disclaimer-card {
+    height: 100%;
+
+    @include tablet {
+      padding-top: 4rem;
+    }
+  }
+
   .result-section {
     h2 {
       font-weight: 700;
@@ -20,7 +32,20 @@
       margin-top: 1rem;
       font-weight: 700;
       font-size: 0.9em;
+
+      a {
+        color: #fff;
+        text-decoration: underline;
+      }
+
+      p {
+        margin-bottom: 1rem;
+      }
     }
+  }
+
+  .potential-exposure-section {
+    margin-top: 3rem;
   }
 
   .thankyou-section {
@@ -43,9 +68,12 @@
   }
 
   .track-daily-section {
+    margin-bottom: 1.5rem;
+
     .clock-wrapper {
       margin: 2.5rem 0;
       text-align: center;
+
       img {
         max-width: 30%;
       }
@@ -60,7 +88,7 @@
     .social-sharing {
       display: flex;
 
-      & > span {
+      &>span {
         display: block;
         width: 100%;
         margin-left: 3px;
@@ -84,7 +112,7 @@
         text-align: center;
         text-decoration: none;
       }
-    } 
+    }
   }
 
   .thankyou-section .card-content,
@@ -107,9 +135,11 @@
     .table {
       margin-bottom: 2rem;
     }
+
     th {
       font-size: 0.8em;
     }
+
     .data-value-col {
       width: 120px;
     }

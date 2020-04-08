@@ -10,6 +10,8 @@ const agent = axios.create({
   },
 })
 
+console.info(`Set API endpoint at ${API_ROOT}`)
+
 export const handleErrors = err => {
   if (err && err.response && err.response.status === 401) {
     console.error(err)
@@ -24,7 +26,10 @@ const requests = {
 
 export const api = {
   submit: p => requests.post("/api/survey/result/", p),
-  getForm: (formName = "beatcovid19now") =>
-    requests.get(`/api/form/schema/${formName}/`),
-  getForm2: () => requests.get("/api/form-schema.json"),
+  getForm: (formName = "beatcovid19now") => {
+    if (API_ROOT) {
+      return requests.get(`/api/form/schema/${formName}/`)
+    }
+    return requests.get("/api/form.json")
+  },
 }
