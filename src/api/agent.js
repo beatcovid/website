@@ -26,7 +26,10 @@ const requests = {
 
 export const api = {
   submit: p => requests.post("/api/survey/result/", p),
-  getForm: (formName = "beatcovid19now") =>
-    requests.get(`/api/form/schema/${formName}/`),
-  getForm2: () => requests.get("/api/form-schema.json"),
+  getForm: (formName = "beatcovid19now") => {
+    if (API_ROOT) {
+      return requests.get(`/api/form/schema/${formName}/`)
+    }
+    return requests.get("/api/form.json")
+  },
 }
