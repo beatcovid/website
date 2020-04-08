@@ -1,4 +1,5 @@
 import React, { useMemo } from "react"
+import { Link } from "react-router-dom"
 import Question from "./Question"
 import QuestionsTable from "./QuestionsTable"
 
@@ -88,6 +89,11 @@ const Steps = props => {
           <button className="button" onClick={handleNextButtonClick}>
             Next &rarr;
           </button>
+        )}
+        {isLastQuestion && (
+          <Link className="submit-button button is-primary" to={`/summary`}>
+            Submit
+          </Link>
         )}
       </div>
     </>
