@@ -6,6 +6,7 @@ import {
   InputTextNumber,
   InputDate,
   Range,
+  Geopoint,
 } from "../form"
 
 const Question = props => {
@@ -105,6 +106,19 @@ const Question = props => {
     )
   }
 
+  function renderGeopoint() {
+    return (
+      <Geopoint
+        name={name}
+        required={required}
+        label={label}
+        value={result}
+        errorMessage={question.constraintMessage}
+        onChange={value => handleValueUpdate(value)}
+      />
+    )
+  }
+
   function renderQuestion() {
     switch (type) {
       case "select_one":
@@ -117,6 +131,8 @@ const Question = props => {
         return renderRange()
       case "date":
         return renderInputDate()
+      case "geopoint":
+        return renderGeopoint()
       default:
         return (
           <h4>
