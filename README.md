@@ -29,3 +29,15 @@ $ yarn start
 ```
 
 Server will be available and reporting on port `3000` by default and live reloading any development changes
+
+## Development
+
+Checkout a branch with `feat` `fix` etc. prefix tags
+
+Commit and bump minor version with:
+
+```sh
+$ yarn version --patch
+```
+
+It will be linted and commited
