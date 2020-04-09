@@ -20,6 +20,14 @@ const TrackDaily = () => {
           your symptoms change over time. The questions in the Symptom Tracker
           may change as we learn more about COVID-19.
         </p>
+
+        <p>
+          Follow us on{" "}
+          <a href="https://www.facebook.com/groups/453230132092365/">
+            Facebook
+          </a>{" "}
+          or <a href="https://twitter.com/BeatCovid19Now">Twitter</a>
+        </p>
       </div>
     </section>
   )

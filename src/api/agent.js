@@ -11,6 +11,8 @@ const agent = axios.create({
   },
 })
 
+console.info(`Set API endpoint at ${API_ROOT}`)
+
 export const handleErrors = err => {
   if (err && err.response && err.response.status === 401) {
     console.error(err)

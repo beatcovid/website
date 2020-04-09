@@ -8,8 +8,8 @@ import SummaryOfSymptoms from "../components/summary/SummaryOfSymptoms"
 import SymptomsScore from "../components/summary/SymptomsScore"
 
 const SummaryPage = () => {
-  const [showDetail, setShowDetail] = useState(false)
-  const result = "risk-D"
+  const [showDetail, setShowDetail] = useState(true)
+  const result = "risk-A"
   const counter = 976
   const hasInternationalTravel = "No"
   const hasContact = "No"
@@ -63,7 +63,11 @@ const SummaryPage = () => {
     <div className="summary-page container">
       <div className="columns">
         <div className="column">
-          <div className="card is-size-5">
+          <ThankYou counter={counter} />
+        </div>
+
+        <div className="column">
+          <div className="disclaimer-card card is-size-5">
             The Symptom Tracker does not diagnose COVID-19 and it does not
             provide medical advice. Please seek urgent medical help if you have
             difficulty breathing. Contact your relevant local health authority
@@ -71,33 +75,32 @@ const SummaryPage = () => {
             out what to do if you think you have symptoms.
           </div>
         </div>
-
-        <div className="column">
-          <Result result={result} />
-        </div>
       </div>
 
       <div className="columns">
-        <div className="column">
-          <ThankYou counter={counter} />
+        <div className="column is-two-thirds">
+          <Result result={result} />
+
+          <div className="button-wrapper has-text-centered">
+            <a className="button is-size-7" href="#more-details">
+              &darr; more detailed results
+            </a>
+          </div>
+
+          <PotentialExposureTable
+            hasInternationalTravel={hasInternationalTravel}
+            hasContact={hasContact}
+            hasCasualContact={hasCasualContact}
+          />
         </div>
 
         <div className="column">
           <TrackDaily />
-        </div>
-
-        <div className="column">
           <ShareWithFriends />
         </div>
       </div>
 
       <div className="info-table">
-        <PotentialExposureTable
-          hasInternationalTravel={hasInternationalTravel}
-          hasContact={hasContact}
-          hasCasualContact={hasCasualContact}
-        />
-
         {!showDetail && (
           <button className="button is-primary" onClick={handleShowDetailClick}>
             Click here for more detailed information
@@ -106,7 +109,7 @@ const SummaryPage = () => {
       </div>
 
       {showDetail && (
-        <div className="columns">
+        <div className="columns" id="more-details">
           <div className="column">
             <SummaryOfSymptoms summaryScores={summaryScores} />
           </div>
@@ -123,6 +126,12 @@ const SummaryPage = () => {
           </div>
         </div>
       )}
+
+      <div className="button-wrapper has-text-centered">
+        <button className="print-button button" onClick={() => window.print()}>
+          Print this page
+        </button>
+      </div>
     </div>
   )
 }

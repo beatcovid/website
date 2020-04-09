@@ -1,13 +1,11 @@
 .site-navbar {
   color: #000;
-  padding: 2rem 1rem;
-  border-bottom: 1px solid #F6F6F6;
-  background-color: #F6F6F6;
+  border-bottom: 1px solid #f6f6f6;
+  background-color: #f6f6f6;
   font-size: 24px;
 
   @include mobile {
     font-size: 18px;
-    padding: 1rem;
   }
 
   h1 {
@@ -15,6 +13,7 @@
     font-weight: 900;
     line-height: 0.8em;
   }
+
   h2 {
     font-size: 1em;
     line-height: 1.1em;
@@ -22,10 +21,26 @@
     margin-top: -3px;
     text-align: right;
   }
+
   .container {
     justify-content: space-between;
     max-width: 760px;
+    padding: 2rem 1rem;
     display: flex;
+
+    @include mobile {
+      font-size: 18px;
+      padding: 1rem;
+    }
+
+    &.small-head {
+      padding: 2rem 1rem;
+      justify-content: center;
+
+      @include mobile {
+        padding: 0.6rem;
+      }
+    }
   }
 }
 
@@ -36,16 +51,19 @@
   span {
     display: inline-block;
   }
+
   .logo-text__beat {
     padding: 1px 5px 1px;
   }
+
   .logo-text__covid19 {
     padding: 1px 5px 4px;
     white-space: nowrap;
   }
+
   .logo-text__now {
     padding: 1px 5px 4px;
-    background-color: #FF30E6;
+    background-color: #ff30e6;
     color: #fff;
   }
 }
@@ -54,12 +72,18 @@
   span {
     display: inline-block;
   }
+
   .logo-ticker__num {
     padding: 5px;
   }
+
   .logo-ticker__num strong {
     padding: 0 2px 1px;
-    background-color: #FF30E6;
+    background-color: #ff30e6;
     color: #fff;
   }
+}
+
+.small-head .logo-text {
+  margin-right: 0;
 }

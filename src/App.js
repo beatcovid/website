@@ -1,8 +1,10 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { BrowserRouter, Route } from "react-router-dom"
+import ScrollToTop from "./components/app/ScrollToTop"
 import AppHeader from "./components/app/Header"
 import AppFooter from "./components/app/Footer"
+import AppLoader from "./components/app/Loader"
 import Acknowledgement from "./components/app/Acknowledgement"
 import Contacts from "./components/app/Contacts"
 import WelcomePage from "./pages/WelcomePage"
@@ -26,23 +28,25 @@ const HomeApp = () => {
     <BrowserRouter>
       <AppHeader count={stats.submissions} />
 
-      {isLoading && <div>Loading... </div>}
+      {isLoading && <AppLoader />}
 
-      <div className="site-content">
-        <Route path="/" exact>
-          <WelcomePage />
-          <Acknowledgement />
-        </Route>
+      {!isLoading && (
+        <div className="site-content">
+          <Route path="/" exact>
+            <WelcomePage />
+            <Acknowledgement />
+          </Route>
 
-        <Route path="/survey">
-          <SurveyPage />
-        </Route>
+          <Route path="/survey">
+            <SurveyPage />
+          </Route>
 
-        <Route path="/summary">
-          <SummaryPage />
-          <Contacts />
-        </Route>
-      </div>
+          <Route path="/summary">
+            <SummaryPage />
+            <Contacts />
+          </Route>
+        </div>
+      )}
 
       <AppFooter version={version} />
     </BrowserRouter>

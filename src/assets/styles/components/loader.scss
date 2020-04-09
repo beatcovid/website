@@ -1,0 +1,46 @@
+.loader {
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 6rem;
+  height: 4rem;
+  margin-top: 2rem;
+  overflow: hidden;
+  position: relative;
+  height: 0.5rem;
+  background: rgba($pink-light, 0.25);
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: -130%;
+    width: 100%;
+    height: 100%;
+    background: rgba($pink, 0.5);
+    animation: progress 2s ease-in-out infinite;
+  }
+}
+
+@keyframes progress {
+  0% {
+    left: -130%;
+    background: rgba($pink, 1);
+  }
+
+  50% {
+    left: 130%;
+    background: rgba($pink, 1);
+  }
+
+  51% {
+    background: rgba($pink, 1);
+  }
+
+  100% {
+    background: rgba($pink, 1);
+  }
+}
