@@ -11,7 +11,7 @@ import WelcomePage from "./pages/WelcomePage"
 import SurveyPage from "./pages/SurveyPage"
 import SummaryPage from "./pages/SummaryPage"
 
-import { selectLoading } from "./store/survey2Slice"
+import { selectLoading } from "./store/schemaSlice"
 import { selectStats, fetchStats } from "./store/statsSlice"
 
 const HomeApp = () => {
@@ -26,6 +26,7 @@ const HomeApp = () => {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <AppHeader count={stats.submissions} />
 
       {isLoading && <AppLoader />}
