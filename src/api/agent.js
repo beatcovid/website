@@ -1,6 +1,7 @@
 import axios from "axios"
 
 const API_ROOT = process.env.REACT_APP_API_ENDPOINT
+const FORM_NAME = process.env.REACT_APP_FORM_NAME || "beatcovid19now"
 
 const agent = axios.create({
   baseURL: API_ROOT,
@@ -25,11 +26,11 @@ const requests = {
 }
 
 export const api = {
-  submit: p => requests.post("/api/survey/result/", p),
-  getForm: (formName = "beatcovid19now") => {
-    if (API_ROOT) {
-      return requests.get(`/api/form/schema/${formName}/`)
-    }
-    return requests.get("/api/form.json")
-  },
+  // submit: p => requests.post("/api/survey/result/", p),
+  submitForm: (formData, formName = FORM_NAME) =>
+    requests.post(`/api/form/stats/${formName}/`, formData),
+  getStats: (formName = FORM_NAME) =>
+    requests.get(`/api/form/stats/${formName}/`),
+  getForm: (formName = FORM_NAME) =>
+    requests.get(`/api/form/schema/${formName}/`),
 }

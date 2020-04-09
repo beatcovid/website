@@ -1,5 +1,5 @@
-import React from "react"
-import { useSelector } from "react-redux"
+import React, { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
 import { BrowserRouter, Route } from "react-router-dom"
 import ScrollToTop from "./components/app/ScrollToTop"
 import AppHeader from "./components/app/Header"
@@ -12,16 +12,22 @@ import SurveyPage from "./pages/SurveyPage"
 import SummaryPage from "./pages/SummaryPage"
 
 import { selectLoading } from "./store/schemaSlice"
+import { selectStats, fetchStats } from "./store/statsSlice"
 
 const HomeApp = () => {
-  const count = 976
+  const dispatch = useDispatch()
+  const stats = useSelector(selectStats)
   const version = process.env.REACT_APP_VERSION || ""
   const isLoading = useSelector(selectLoading)
+
+  useEffect(() => {
+    dispatch(fetchStats())
+  }, [dispatch])
 
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <AppHeader count={count} />
+      <AppHeader count={stats.submissions} />
 
       {isLoading && <AppLoader />}
 

@@ -1,7 +1,7 @@
 .site-navbar {
   color: #000;
-  border-bottom: 1px solid #F6F6F6;
-  background-color: #F6F6F6;
+  border-bottom: 1px solid #f6f6f6;
+  background-color: #f6f6f6;
   font-size: 24px;
 
   @include mobile {
@@ -63,7 +63,7 @@
 
   .logo-text__now {
     padding: 1px 5px 4px;
-    background-color: #FF30E6;
+    background-color: #ff30e6;
     color: #fff;
   }
 }
@@ -79,7 +79,7 @@
 
   .logo-ticker__num strong {
     padding: 0 2px 1px;
-    background-color: #FF30E6;
+    background-color: #ff30e6;
     color: #fff;
   }
 }

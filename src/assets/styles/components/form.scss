@@ -21,7 +21,7 @@
 }
 
 .survey-radio {
-  .radio+.radio {
+  .radio + .radio {
     margin-left: 0;
   }
 
@@ -41,17 +41,17 @@
       display: block;
     }
 
-    input[type=radio] {
+    input[type="radio"] {
       position: absolute;
       top: 12px;
 
-      &:checked~span {
+      &:checked ~ span {
         color: $pink;
         text-shadow: 1px 1px 1px $pink-lighter;
         font-weight: 700;
 
         &::after {
-          content: '\2713 ';
+          content: "\2713 ";
           position: absolute;
           right: 0.3rem;
           top: 8px;
@@ -78,11 +78,11 @@
       display: block;
     }
 
-    input[type=checkbox] {
+    input[type="checkbox"] {
       position: absolute;
       top: 12px;
 
-      &:checked~span {
+      &:checked ~ span {
         color: $pink;
         text-shadow: 1px 1px 1px $pink-lighter;
         font-weight: 700;
