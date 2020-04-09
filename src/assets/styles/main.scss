@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 // Import a Google Font
-@import url('https://fonts.googleapis.com/css?family=Barlow:400,700,900&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Barlow:400,700,900&display=swap");
 
 // Define app variables
 @import "./variables.scss";
@@ -15,14 +15,18 @@
 @import "~bulma/sass/elements/container.sass";
 @import "~bulma/sass/elements/progress.sass";
 @import "~bulma/sass/form/all.sass";
+@import "~bulma/sass/components/dropdown.sass";
 
 // App styles
+@import "./components/loader.scss";
 @import "./components/icons.scss";
 @import "./components/button.scss";
 @import "./components/tab.scss";
 @import "./components/card.scss";
 @import "./components/viz.scss";
 @import "./components/form.scss";
+@import "./components/step-transitions.scss";
+@import "./components/datepicker.scss";
 @import "./pages/app-header.scss";
 @import "./pages/app-footer.scss";
 @import "./pages/app.scss";

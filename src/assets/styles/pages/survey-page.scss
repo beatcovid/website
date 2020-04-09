@@ -1,7 +1,10 @@
 .survey-page {
-  margin-top: 2rem;
   padding: 1rem;
   max-width: 640px;
+
+  @include tablet {
+    margin-top: 2rem;
+  }
 
   form {
     .question-label {

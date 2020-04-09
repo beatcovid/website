@@ -1,4 +1,5 @@
 import React, { useMemo } from "react"
+import { Link } from "react-router-dom"
 import Question from "./Question"
 import QuestionsTable from "./QuestionsTable"
 
@@ -53,7 +54,7 @@ const Steps = props => {
 
       if (isTableRadioGroup(questions)) {
         return (
-          <section key={name}>
+          <section className="step" key={name}>
             <QuestionsTable
               name={name}
               questions={questions}
@@ -64,7 +65,7 @@ const Steps = props => {
         )
       } else {
         return (
-          <section key={name}>
+          <section className="step" key={name}>
             {questions.map(q => renderQuestions(name, q, surveyResult[q.id]))}
           </section>
         )
@@ -88,6 +89,11 @@ const Steps = props => {
           <button className="button" onClick={handleNextButtonClick}>
             Next &rarr;
           </button>
+        )}
+        {isLastQuestion && (
+          <Link className="submit-button button is-primary" to={`/summary`}>
+            Submit
+          </Link>
         )}
       </div>
     </>
