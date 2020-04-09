@@ -12,6 +12,7 @@
     "axios": "^0.19.2",
     "bulma": "^0.8.1",
     "date-fns": "^2.11.0",
+    "enketo-xpathjs": "^1.9.4",
     "fingerprintjs2": "^2.1.0",
     "node-sass": "^4.13.1",
     "postcss-cli": "^7.1.0",
@@ -40,6 +41,7 @@
     "lint-staged": "^10.0.7",
     "prettier": "^1.19.1",
     "purge-cloudflare-cache": "^1.2.2",
+    "react-test-renderer": "^16.13.1",
     "source-map-explorer": "^2.2.2"
   },
   "eslintConfig": {
