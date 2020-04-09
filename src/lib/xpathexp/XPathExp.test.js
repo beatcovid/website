@@ -1,4 +1,4 @@
-import { checkConstraint } from "./index"
+import { checkConstraint, checkRelevant } from "./index"
 
 test("Contraint test: not equal to constraint .!='under_14'", () => {
   const constraint = ".!='under_14'"
@@ -26,7 +26,7 @@ test("Contraint test: not equal to constraint .!='under_14'", () => {
 
 // @TODO dynamically generate test dates so that this test doesn't
 // break in 2023
-test("Constraint test: date less than or equal to constraint .<= date(today())", () => {
+test("Constraint test: date less than or equal to constraint", () => {
   const constraint = ".<= date(today())"
 
   const values = [
@@ -46,6 +46,35 @@ test("Constraint test: date less than or equal to constraint .<= date(today())",
 
   values.map(i => {
     let result = checkConstraint(i.value, constraint)
+    expect(result).toEqual(i.expected)
+  })
+})
+
+test("Relevant: Equality test", () => {
+  // eslint-disable-next-line no-template-curly-in-string
+  const relevance = "${tested} = 'yes_tested'"
+
+  // const baseState = {
+  //   tested: "no_tested",
+  // }
+
+  const values = [
+    {
+      value: "<tested>no_tested</tested>",
+      expected: false,
+    },
+    {
+      value: "<tested></tested>",
+      expected: false,
+    },
+    {
+      value: "<tested>yes_tested</tested>",
+      expected: true,
+    },
+  ]
+
+  values.map(i => {
+    let result = checkConstraint(i.value, relevance)
     expect(result).toEqual(i.expected)
   })
 })
