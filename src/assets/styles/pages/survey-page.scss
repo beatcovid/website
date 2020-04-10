@@ -1,5 +1,5 @@
 .survey-page {
-  padding: 1rem;
+  padding: 1rem 1rem 0;
   max-width: 640px;
 
   @include tablet {
@@ -17,7 +17,15 @@
     }
   }
 
-  header {
+  header.survey-header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    background-color: #fff;
+    padding: 1rem 0;
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.9);
+
     h1 {
       font-size: 1.4em;
       font-weight: 700;
@@ -25,7 +33,7 @@
   }
 
   .survey-progress {
-    margin: 0.5rem 0 2rem;
+    margin: 0.5rem 0;
     display: flex;
 
     .bar {
@@ -46,10 +54,17 @@
   }
 
   .survey-navigation {
-    margin-top: 3rem;
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+    z-index: 999;
+    background-color: #fff;
+    padding: 2rem 0;
     text-align: center;
     justify-content: space-between;
     display: flex;
+    border-top: 1px solid $pink-light;
+    box-shadow: 10px 0 30px rgba(255, 255, 255, 1);
 
     .button {
       margin-right: 2rem;
@@ -60,6 +75,10 @@
         margin-right: 0;
       }
     }
+  }
+
+  section.step {
+    margin-bottom: 3rem;
   }
 
   .questions-table {

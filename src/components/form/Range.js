@@ -34,10 +34,7 @@ const Range = props => {
 
   return (
     <div className="survey-range field">
-      <label className="label">
-        {required && <span>*</span>}
-        {label}
-      </label>
+      <label className="label">{label}</label>
 
       <div className="control">
         <InputRange

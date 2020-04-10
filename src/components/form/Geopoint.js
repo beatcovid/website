@@ -52,10 +52,7 @@ const Geopoint = props => {
 
   return (
     <div className="survey-geopoint field">
-      <label className={labelClasses()}>
-        {required && <span>*</span>}
-        {label}
-      </label>
+      <label className={labelClasses()}>{label}</label>
       <PlacesAutocomplete
         value={address}
         onChange={handleChange}

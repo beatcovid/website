@@ -36,10 +36,7 @@ const Checkbox = props => {
 
   function labelClasses() {
     const baseClass = "label"
-    if (error) {
-      return baseClass + " has-text-danger"
-    }
-    return baseClass
+    return error ? `${baseClass} has-text-danger` : baseClass
   }
 
   function handleChange(e) {
@@ -61,10 +58,7 @@ const Checkbox = props => {
 
   return (
     <div className="survey-checkbox field">
-      <label className={labelClasses()}>
-        {required && <span>*</span>}
-        {label}
-      </label>
+      <label className={labelClasses()}>{label}</label>
 
       <div className="control">{options.map(renderOptions)}</div>
 

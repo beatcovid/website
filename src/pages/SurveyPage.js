@@ -75,7 +75,7 @@ const SurveyPage = () => {
 
   return (
     <div className="survey-page container">
-      <header>
+      <header className="survey-header">
         <SurveyProgress total={stepNames.length} current={currentStepIndex} />
       </header>
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, forwardRef } from "react"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 
@@ -11,12 +11,21 @@ const InputDate = props => {
   const [error, setError] = useState(false)
   const [startDate, setStartDate] = useState()
 
+  const CustomInput = forwardRef((props, ref) => {
+    return (
+      <input
+        className="input"
+        type="text"
+        value={props.value}
+        onClick={props.onClick}
+        readOnly
+      />
+    )
+  })
+
   function labelClasses() {
     const baseClass = "label"
-    if (error) {
-      return baseClass + " has-text-danger"
-    }
-    return baseClass
+    return error ? `${baseClass} has-text-danger` : baseClass
   }
 
   function handleChange(value) {
@@ -25,16 +34,14 @@ const InputDate = props => {
 
   return (
     <div className="survey-input field">
-      <label className={labelClasses()}>
-        {required && <span>*</span>}
-        {label}
-      </label>
+      <label className={labelClasses()}>{label}</label>
 
       <div className="control">
         <DatePicker
           className="input"
           selected={value}
           dateFormat="d MMM yyyy"
+          customInput={<CustomInput />}
           onChange={date => handleChange(date)}
         />
       </div>

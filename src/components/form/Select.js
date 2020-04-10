@@ -19,10 +19,7 @@ const Select = props => {
 
   function fieldClasses() {
     const baseClass = "select"
-    if (error) {
-      return baseClass + " is-danger"
-    }
-    return baseClass
+    return error ? `${baseClass} is-danger` : baseClass
   }
 
   function handleChange(e) {
@@ -37,10 +34,7 @@ const Select = props => {
 
   return (
     <div className="survey-select field">
-      <label className="label">
-        {required && <span>*</span>}
-        {label}
-      </label>
+      <label className="label">{label}</label>
 
       <div className="control">
         <div className={fieldClasses()}>
