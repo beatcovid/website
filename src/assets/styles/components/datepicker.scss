@@ -6,7 +6,8 @@
 .react-datepicker__month-text--in-range,
 .react-datepicker__quarter-text--selected,
 .react-datepicker__quarter-text--in-selecting-range,
-.react-datepicker__quarter-text--in-range {
+.react-datepicker__quarter-text--in-range,
+.react-datepicker__day--keyboard-selected {
   background-color: $pink;
 }
 
@@ -15,7 +16,6 @@
   border-color: #efefef;
 }
 
-.react-datepicker-popper[data-placement^="bottom"]
-  .react-datepicker__triangle::before {
+.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before {
   border-bottom-color: #efefef;
 }
