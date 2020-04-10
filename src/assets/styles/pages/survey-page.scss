@@ -86,7 +86,11 @@
   }
 
   section.step {
-    margin-bottom: 150px;
+    margin-bottom: 130px;
+
+    @include tablet {
+      margin-bottom: 3rem;
+    }
   }
 
   .questions-table {
