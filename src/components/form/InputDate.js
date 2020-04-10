@@ -11,6 +11,16 @@ const InputDate = props => {
   const [error, setError] = useState(false)
   const [startDate, setStartDate] = useState()
 
+  const CustomInput = ({ value, onClick }) => (
+    <input
+      className="input"
+      type="text"
+      value={value}
+      onClick={onClick}
+      readOnly
+    />
+  )
+
   function labelClasses() {
     const baseClass = "label"
     return error ? `${baseClass} has-text-danger` : baseClass
@@ -29,6 +39,7 @@ const InputDate = props => {
           className="input"
           selected={value}
           dateFormat="d MMM yyyy"
+          customInput={<CustomInput />}
           onChange={date => handleChange(date)}
         />
       </div>
