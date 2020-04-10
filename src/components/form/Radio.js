@@ -35,11 +35,8 @@ const Radio = props => {
   }
 
   function labelClasses() {
-    const baseClass = "question-label label"
-    if (error) {
-      return baseClass + " has-text-danger"
-    }
-    return baseClass
+    const baseClass = "label"
+    return error ? `${baseClass} has-text-danger` : baseClass
   }
 
   function handleChange(e) {
@@ -54,10 +51,7 @@ const Radio = props => {
 
   return (
     <div className="survey-radio field">
-      <label className={labelClasses()}>
-        {required && <span>*</span>}
-        {label}
-      </label>
+      <label className={labelClasses()}>{label}</label>
 
       <div className="control">{options.map(renderOptions)}</div>
 

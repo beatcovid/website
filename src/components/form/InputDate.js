@@ -13,10 +13,7 @@ const InputDate = props => {
 
   function labelClasses() {
     const baseClass = "label"
-    if (error) {
-      return baseClass + " has-text-danger"
-    }
-    return baseClass
+    return error ? `${baseClass} has-text-danger` : baseClass
   }
 
   function handleChange(value) {
@@ -25,10 +22,7 @@ const InputDate = props => {
 
   return (
     <div className="survey-input field">
-      <label className={labelClasses()}>
-        {required && <span>*</span>}
-        {label}
-      </label>
+      <label className={labelClasses()}>{label}</label>
 
       <div className="control">
         <DatePicker
