@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo } from "react"
 import {
   Select,
   Radio,
@@ -19,8 +19,13 @@ const Question = props => {
   const required = question.required
   const choices = question.choices
   const parameters = question.parameters
+  const appearance = question.appearance
   const constraint = question.constraint
   const constraintMessage = question.constraint_message
+
+  const isMinimalAppearance = useMemo(() => appearance === "minimal", [
+    appearance,
+  ])
 
   function handleValueUpdate(value) {
     props.onValueChange(value)
@@ -123,7 +128,7 @@ const Question = props => {
   function renderQuestion() {
     switch (type) {
       case "select_one":
-        return renderRadio()
+        return isMinimalAppearance ? renderSelect() : renderRadio()
       case "select_multiple":
         return renderCheckbox()
       case "text":
