@@ -7,6 +7,7 @@ import {
   InputDate,
   Range,
   Geopoint,
+  Note,
 } from "../form"
 
 const Question = props => {
@@ -133,6 +134,8 @@ const Question = props => {
         return renderInputDate()
       case "geopoint":
         return renderGeopoint()
+      case "note":
+        return <Note label={label} />
       default:
         return (
           <h4>
