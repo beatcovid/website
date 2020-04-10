@@ -141,6 +141,9 @@ const Question = props => {
         return renderGeopoint()
       case "note":
         return <Note label={label} />
+      case "calculate":
+      case "begin_group":
+        return false
       default:
         return (
           <h4>
