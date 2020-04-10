@@ -54,9 +54,10 @@
   }
 
   .survey-navigation {
-    position: -webkit-sticky;
-    position: sticky;
+    position: fixed;
     bottom: 0;
+    left: 1rem;
+    right: 1rem;
     z-index: 999;
     background-color: #fff;
     padding: 2rem 0;
@@ -65,6 +66,13 @@
     display: flex;
     border-top: 1px solid $pink-light;
     box-shadow: 10px 0 30px rgba(255, 255, 255, 1);
+
+    @include tablet {
+      position: -webkit-sticky;
+      position: sticky;
+      left: auto;
+      right: auto;
+    }
 
     .button {
       margin-right: 2rem;
@@ -78,7 +86,7 @@
   }
 
   section.step {
-    margin-bottom: 3rem;
+    margin-bottom: 150px;
   }
 
   .questions-table {

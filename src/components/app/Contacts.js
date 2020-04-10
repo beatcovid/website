@@ -20,7 +20,7 @@ const Contacts = () => {
         >
           Centre for Global Health and Equity
         </a>
-        ,
+        ,{" "}
         <a
           href="mailto:beatcovid19now@swin.edu.au"
           aria-label="Email Professor Richard Osborne"
