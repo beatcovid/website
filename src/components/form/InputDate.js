@@ -34,7 +34,7 @@ const InputDate = props => {
 
   return (
     <div className="survey-input field">
-      <label className={labelClasses()}>{label}</label>
+      <label className={labelClasses()} dangerouslySetInnerHTML={label} />
 
       <div className="control">
         <DatePicker

@@ -9,12 +9,6 @@ const Radio = props => {
   const errorMessage = props.errorMessage || ""
   const [error, setError] = useState(false)
 
-  function createHtml(html) {
-    return {
-      __html: html,
-    }
-  }
-
   function renderOptions(option) {
     let optionClass = "radio"
     if (option.value === selectedOption.value) {
@@ -29,7 +23,7 @@ const Radio = props => {
           checked={selectedOption === option.value}
           onChange={handleChange}
         />
-        <span dangerouslySetInnerHTML={createHtml(option.label)} />
+        <span dangerouslySetInnerHTML={option.label} />
       </label>
     )
   }
@@ -51,8 +45,7 @@ const Radio = props => {
 
   return (
     <div className="survey-radio field">
-      <label className={labelClasses()}>{label}</label>
-
+      <label className={labelClasses()} dangerouslySetInnerHTML={label} />
       <div className="control">{options.map(renderOptions)}</div>
 
       {error && <p className="help is-danger">{errorMessage}</p>}

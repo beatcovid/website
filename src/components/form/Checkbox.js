@@ -9,12 +9,6 @@ const Checkbox = props => {
   const errorMessage = props.errorMessage || ""
   const [error, setError] = useState(false)
 
-  function createHtml(html) {
-    return {
-      __html: html,
-    }
-  }
-
   function renderOptions(option) {
     return (
       <label key={option.value} className="checkbox">
@@ -25,7 +19,7 @@ const Checkbox = props => {
           onChange={e => handleChange(e)}
           checked={isChecked(option.value)}
         />
-        <span dangerouslySetInnerHTML={createHtml(option.label)} />
+        <span dangerouslySetInnerHTML={option.label} />
       </label>
     )
   }
@@ -58,7 +52,7 @@ const Checkbox = props => {
 
   return (
     <div className="survey-checkbox field">
-      <label className={labelClasses()}>{label}</label>
+      <label className={labelClasses()} dangerouslySetInnerHTML={label} />
 
       <div className="control">{options.map(renderOptions)}</div>
 

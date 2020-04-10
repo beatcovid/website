@@ -11,9 +11,11 @@ const Select = props => {
 
   function renderOptions(option) {
     return (
-      <option key={option.value} value={option.value}>
-        {option.label}
-      </option>
+      <option
+        key={option.value}
+        value={option.value}
+        dangerouslySetInnerHTML={option.label}
+      />
     )
   }
 
@@ -34,7 +36,7 @@ const Select = props => {
 
   return (
     <div className="survey-select field">
-      <label className="label">{label}</label>
+      <label className="label" dangerouslySetInnerHTML={label} />
 
       <div className="control">
         <div className={fieldClasses()}>

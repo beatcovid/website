@@ -17,12 +17,31 @@ const Question = props => {
   const label = question.label
   const type = question.type
   const required = question.required
-  const choices = question.choices
+  const choices = question.choices || []
   const parameters = question.parameters
   const appearance = question.appearance
   const constraint = question.constraint
   const constraintMessage = question.constraint_message
 
+  const htmlChoicesLabels = useMemo(
+    () =>
+      choices.map(c => {
+        return {
+          id: c.id,
+          value: c.value,
+          label: {
+            __html: c.label,
+          },
+        }
+      }),
+    [choices],
+  )
+  const htmlLabel = useMemo(
+    () => ({
+      __html: label,
+    }),
+    [label],
+  )
   const isMinimalAppearance = useMemo(() => appearance === "minimal", [
     appearance,
   ])
@@ -36,8 +55,8 @@ const Question = props => {
       <Radio
         name={name}
         required={required}
-        label={label}
-        options={choices}
+        label={htmlLabel}
+        options={htmlChoicesLabels}
         selectedOption={result}
         errorMessage={constraintMessage}
         onChange={value => handleValueUpdate(value)}
@@ -49,8 +68,8 @@ const Question = props => {
       <Checkbox
         name={name}
         required={required}
-        label={label}
-        options={choices}
+        label={htmlLabel}
+        options={htmlChoicesLabels}
         selectedOptions={result}
         errorMessage={constraintMessage}
         onChange={value => handleValueUpdate(value)}
@@ -63,8 +82,8 @@ const Question = props => {
       <Select
         name={name}
         required={required}
-        label={label}
-        options={choices}
+        label={htmlLabel}
+        options={htmlChoicesLabels}
         selectedOption={result}
         errorMessage={constraintMessage}
         onChange={value => handleValueUpdate(value)}
@@ -78,7 +97,7 @@ const Question = props => {
         type={type}
         name={name}
         required={required}
-        label={label}
+        label={htmlLabel}
         value={result}
         errorMessage={question.constraintMessage}
         onChange={value => handleValueUpdate(value)}
@@ -91,7 +110,7 @@ const Question = props => {
       <InputDate
         name={name}
         required={required}
-        label={label}
+        label={htmlLabel}
         value={result}
         errorMessage={question.constraintMessage}
         onChange={value => handleValueUpdate(value)}
@@ -105,7 +124,7 @@ const Question = props => {
         name={name}
         parameters={parameters}
         required={required}
-        label={label}
+        label={htmlLabel}
         value={result}
         onChange={value => handleValueUpdate(value)}
       />
@@ -117,7 +136,7 @@ const Question = props => {
       <Geopoint
         name={name}
         required={required}
-        label={label}
+        label={htmlLabel}
         value={result}
         errorMessage={question.constraintMessage}
         onChange={value => handleValueUpdate(value)}
@@ -140,7 +159,7 @@ const Question = props => {
       case "geopoint":
         return renderGeopoint()
       case "note":
-        return <Note label={label} />
+        return <Note label={htmlLabel} />
       case "calculate":
       case "begin_group":
         return false
