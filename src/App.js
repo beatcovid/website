@@ -12,11 +12,11 @@ import SurveyPage from "./pages/SurveyPage"
 import SummaryPage from "./pages/SummaryPage"
 
 import { selectLoading } from "./store/schemaSlice"
-import { selectStats, fetchStats } from "./store/statsSlice"
+import { selectSubmissions, fetchStats } from "./store/statsSlice"
 
 const HomeApp = () => {
   const dispatch = useDispatch()
-  const stats = useSelector(selectStats)
+  const submissionCount = useSelector(selectSubmissions)
   const version = process.env.REACT_APP_VERSION || ""
   const isLoading = useSelector(selectLoading)
 
@@ -27,7 +27,7 @@ const HomeApp = () => {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <AppHeader count={stats.submissions} />
+      <AppHeader count={submissionCount} />
 
       {isLoading && <AppLoader />}
 

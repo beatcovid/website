@@ -11,8 +11,10 @@ export const slice = createSlice({
   },
   reducers: {
     setStats: (state, { payload }) => {
-      // @TODO sanity check
-      state.stats = payload
+      state.submissions = payload.submissions
+      state.submissions_today = payload.submissions_today
+      state.submission_last = payload.submission_last
+      state.date_modified = payload.date_modified
     },
   },
 })
@@ -20,7 +22,6 @@ export const slice = createSlice({
 export const { setStats } = slice.actions
 
 export const fetchStats = () => dispatch => {
-  // @TODO add loading either global or just for the number
   api
     .getStats()
     .then(r => {
@@ -30,6 +31,9 @@ export const fetchStats = () => dispatch => {
     .catch(e => console.error(e))
 }
 
-export const selectStats = state => state.stats
+export const selectSubmissions = state => state.submissions
+export const selectSubmissionsToday = state => state.submissions_today
+export const selectLastSubmissionDate = state => state.submission_last
+export const selectDateModified = state => state.date_modified
 
 export default slice.reducer
