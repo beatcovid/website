@@ -20,7 +20,7 @@ test("Contraint test: not equal to constraint .!='under_14'", () => {
 
   values.map(i => {
     let result = checkConstraint(i.value, constraint)
-    expect(result).toEqual(i.expected)
+    expect(result).toBe(i.expected)
   })
 })
 
@@ -46,17 +46,13 @@ test("Constraint test: date less than or equal to constraint", () => {
 
   values.map(i => {
     let result = checkConstraint(i.value, constraint)
-    expect(result).toEqual(i.expected)
+    expect(result).toBe(i.expected)
   })
 })
 
-test("Relevant: Equality test", () => {
+test("Relevant: Equality test single XML", () => {
   // eslint-disable-next-line no-template-curly-in-string
   const relevance = "${tested} = 'yes_tested'"
-
-  // const baseState = {
-  //   tested: "no_tested",
-  // }
 
   const values = [
     {
@@ -74,7 +70,102 @@ test("Relevant: Equality test", () => {
   ]
 
   values.map(i => {
-    let result = checkConstraint(i.value, relevance)
-    expect(result).toEqual(i.expected)
+    let result = checkRelevant(i.value, relevance)
+    expect(result).toBe(i.expected)
+  })
+})
+
+test("Relevant: Equality test single JSON", () => {
+  // eslint-disable-next-line no-template-curly-in-string
+  const relevance = "${tested} = 'yes_tested'"
+
+  const values = [
+    {
+      value: {
+        tested: "no_tested",
+      },
+      expected: false,
+    },
+    {
+      value: {
+        tested: undefined,
+      },
+      expected: false,
+    },
+    {
+      value: {
+        tested: "yes_tested",
+      },
+      expected: true,
+    },
+  ]
+
+  values.map(i => {
+    let result = checkRelevant(i.value, relevance)
+    expect(result).toBe(i.expected)
+  })
+})
+
+test("Relevant: Equality test or XML", () => {
+  // eslint-disable-next-line no-template-curly-in-string
+  const relevance = "${tested} = 'yes_tested' or ${tested} = 'not'"
+
+  const values = [
+    {
+      value: "<tested>no_tested</tested>",
+      expected: false,
+    },
+    {
+      value: "<tested></tested>",
+      expected: false,
+    },
+    {
+      value: "<tested>yes_tested</tested>",
+      expected: true,
+    },
+  ]
+
+  values.map(i => {
+    let result = checkRelevant(i.value, relevance)
+    expect(result).toBe(i.expected)
+  })
+})
+
+test("Relevant: Equality test or XML", () => {
+  // eslint-disable-next-line no-template-curly-in-string
+  const relevance = "${tested} = 'yes_tested' or ${tested} = 'not'"
+
+  const values = [
+    {
+      value: {
+        tested: "no_tested",
+      },
+      expected: false,
+    },
+    {
+      value: {
+        tested: undefined,
+      },
+      expected: false,
+    },
+    {
+      value: {
+        tested: "yes_tested",
+      },
+      expected: true,
+    },
+    {
+      value: undefined,
+      expected: false,
+    },
+    {
+      __no_key: "yes_tested",
+      expected: false,
+    },
+  ]
+
+  values.map(i => {
+    let result = checkRelevant(i.value, relevance)
+    expect(result).toBe(i.expected)
   })
 })
