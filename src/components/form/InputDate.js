@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, forwardRef } from "react"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 
@@ -11,15 +11,17 @@ const InputDate = props => {
   const [error, setError] = useState(false)
   const [startDate, setStartDate] = useState()
 
-  const CustomInput = ({ value, onClick }) => (
-    <input
-      className="input"
-      type="text"
-      value={value}
-      onClick={onClick}
-      readOnly
-    />
-  )
+  const CustomInput = forwardRef((props, ref) => {
+    return (
+      <input
+        className="input"
+        type="text"
+        value={props.value}
+        onClick={props.onClick}
+        readOnly
+      />
+    )
+  })
 
   function labelClasses() {
     const baseClass = "label"
