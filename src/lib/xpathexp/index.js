@@ -70,6 +70,8 @@ export const checkRelevant = (nodeOrState, relevancy) => {
 
   let res
 
+  // console.debug(expression, value)
+
   try {
     res = window.document.evaluate(
       expression,
@@ -100,7 +102,7 @@ const compileExpression = expression => {
   return components
 }
 
-const replaceOperators = o => o.replace("or", "|").replace("and", "&")
+const replaceOperators = o => o.replace("or", "|").replace("and", "and")
 
 const regReplaceMod = new RegExp(/\$\{(\w+)\}(.*)/, "i")
 
