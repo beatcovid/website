@@ -5,6 +5,7 @@ const FORM_NAME = process.env.REACT_APP_FORM_NAME || "beatcovid19now"
 
 const agent = axios.create({
   baseURL: API_ROOT,
+  withCredentials: true,
   timeout: 30000,
   validateStatus: function(status) {
     return status >= 200 && status < 403
