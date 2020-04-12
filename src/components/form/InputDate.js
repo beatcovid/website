@@ -1,4 +1,6 @@
 import React, { forwardRef, useMemo, useState } from "react"
+import parseISO from "date-fns/parseISO"
+import formatISO from "date-fns/formatISO"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 
@@ -10,6 +12,9 @@ const InputDate = props => {
   const valid = props.valid
   const [interacted, setInteracted] = useState(false)
 
+  const dateValue = useMemo(() => {
+    return value ? parseISO(value) : ""
+  }, [value])
   const labelClasses = useMemo(() => {
     const baseClass = "label"
     return valid || !interacted ? baseClass : `${baseClass} has-text-danger`
@@ -29,7 +34,7 @@ const InputDate = props => {
   })
 
   function handleChange(value) {
-    props.onChange(value)
+    props.onChange(formatISO(value))
     setInteracted(true)
   }
 
@@ -39,7 +44,7 @@ const InputDate = props => {
 
       <div className="control">
         <DatePicker
-          selected={value}
+          selected={dateValue}
           dateFormat="d MMM yyyy"
           customInput={<CustomInput />}
           onChange={date => handleChange(date)}
