@@ -11,6 +11,7 @@ import WelcomePage from "./pages/WelcomePage"
 import SurveyPage from "./pages/SurveyPage"
 import SummaryPage from "./pages/SummaryPage"
 import PrivacyPage from "./pages/PrivacyPage"
+import InformationPage from "./pages/InformationPage"
 
 import { selectLoading } from "./store/schemaSlice"
 import { selectSubmissions, fetchStats } from "./store/statsSlice"
@@ -37,6 +38,10 @@ const HomeApp = () => {
           <Route path="/" exact>
             <WelcomePage />
             <Acknowledgement />
+          </Route>
+
+          <Route path="/information" exact>
+            <InformationPage />
           </Route>
 
           <Route path="/privacy" exact>
