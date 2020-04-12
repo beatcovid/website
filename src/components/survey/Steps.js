@@ -1,5 +1,4 @@
 import React, { useMemo, useState, useEffect } from "react"
-import { Link } from "react-router-dom"
 import { checkConstraint, checkRelevant } from "../../lib/xpathexp"
 import Question from "./Question"
 
