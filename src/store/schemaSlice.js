@@ -5,6 +5,7 @@ export const slice = createSlice({
   name: "schema",
   initialState: {
     isLoading: false,
+    isSubmitted: false,
     uid: undefined,
     survey: undefined,
   },
@@ -15,6 +16,9 @@ export const slice = createSlice({
     unsetLoading: state => {
       state.isLoading = false
     },
+    setSubmitted: (state, { payload }) => {
+      state.isSubmitted = payload
+    },
     setUid: (state, { payload }) => {
       state.uid = payload
     },
@@ -24,7 +28,26 @@ export const slice = createSlice({
   },
 })
 
-export const { setLoading, unsetLoading, setUid, setSurvey } = slice.actions
+export const {
+  setLoading,
+  unsetLoading,
+  setSubmitted,
+  setUid,
+  setSurvey,
+} = slice.actions
+
+function getFormData(results) {
+  const formData = {}
+  Object.keys(results).forEach(r => {
+    Object.keys(results[r]).forEach(name => {
+      const value = results[r][name]
+      if (value !== null) {
+        formData[name] = value
+      }
+    })
+  })
+  return formData
+}
 
 export const doSchemaGet = () => dispatch => {
   dispatch(setLoading())
@@ -34,12 +57,29 @@ export const doSchemaGet = () => dispatch => {
       console.log(r)
       dispatch(setSurvey(r.survey))
       dispatch(setUid(r.uid))
-      dispatch(unsetLoading())
     })
     .catch(e => console.error(e))
+    .then(() => {
+      dispatch(unsetLoading())
+    })
+}
+export const doSubmit = results => dispatch => {
+  const formData = getFormData(results)
+  dispatch(setLoading())
+  // @TODO: send to error page if submission fails
+  api
+    .submitForm(formData)
+    .then(r => {
+      dispatch(setSubmitted(true))
+    })
+    .catch(e => console.error(e))
+    .then(() => {
+      dispatch(unsetLoading())
+    })
 }
 
 export const selectLoading = state => state.schema.isLoading
+export const selectSubmitted = state => state.schema.isSubmitted
 export const selectUid = state => state.schema.uid
 export const selectSurvey = state => state.schema.survey
 

@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useMemo } from "react"
 import { SwitchTransition, CSSTransition } from "react-transition-group"
+import { useHistory } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import SurveyProgress from "../components/survey/Progress"
 import SurveySteps from "../components/survey/Steps"
-import { doSchemaGet, selectSurvey } from "../store/schemaSlice"
+import { doSchemaGet, doSubmit, selectSurvey } from "../store/schemaSlice"
 import {
   doSetCurrentStep,
   doSetGlobal,
@@ -14,6 +15,7 @@ import {
 } from "../store/surveySlice"
 
 const SurveyPage = () => {
+  const history = useHistory()
   const dispatch = useDispatch()
   const survey = useSelector(selectSurvey)
   const surveySteps = useSelector(selectSteps)
@@ -77,6 +79,11 @@ const SurveyPage = () => {
     console.log("Survey results", updatedSurveyResults)
   }
 
+  function handleSurveySubmit() {
+    dispatch(doSubmit(surveyResults))
+    history.push("/summary")
+  }
+
   return (
     <div className="survey-page container">
       <header className="survey-header">
@@ -100,6 +107,7 @@ const SurveyPage = () => {
               onNextClick={handleNextClick}
               onPreviousClick={handlePreviousClick}
               onResultsChange={handleResultsChange}
+              onSubmit={handleSurveySubmit}
             />
           </CSSTransition>
         </SwitchTransition>

@@ -95,6 +95,9 @@ const Steps = props => {
   function handlePreviousButtonClick() {
     props.onPreviousClick(currentStep)
   }
+  function handleSubmit() {
+    props.onSubmit()
+  }
 
   function handleResultChange(stepName, questionName, answer) {
     props.onResultsChange(stepName, questionName, answer)
@@ -160,9 +163,13 @@ const Steps = props => {
           </button>
         )}
         {isLastQuestion && (
-          <Link className="submit-button button is-primary" to={`/summary`}>
+          <button
+            className="button is-primary"
+            onClick={handleSubmit}
+            disabled={disableNext}
+          >
             Submit
-          </Link>
+          </button>
         )}
       </div>
     </>
