@@ -1,13 +1,18 @@
-import React, { useState } from "react"
+import React, { useMemo, useState } from "react"
 
 const Select = props => {
   const name = props.name || ""
   const label = props.label || ""
   const options = props.options || []
   const selectedOption = props.selectedOption || ""
-  const required = props.required || false
+  const valid = props.valid
   const errorMessage = props.errorMessage || ""
-  const [error, setError] = useState(false)
+  const [interacted, setInteracted] = useState(false)
+
+  const labelClasses = useMemo(() => {
+    const baseClass = "label"
+    return valid || !interacted ? baseClass : `${baseClass} has-text-danger`
+  }, [valid, interacted])
 
   function renderOptions(option) {
     return (
@@ -19,35 +24,26 @@ const Select = props => {
     )
   }
 
-  function fieldClasses() {
-    const baseClass = "select"
-    return error ? `${baseClass} is-danger` : baseClass
-  }
-
   function handleChange(e) {
     const value = e.currentTarget.value
-    if (required && value === "none") {
-      setError(true)
-    } else {
-      setError(false)
-      props.onChange(value)
-    }
+    props.onChange(value)
+    setInteracted(true)
   }
 
   return (
     <div className="survey-select field">
-      <label className="label" dangerouslySetInnerHTML={label} />
+      <label className={labelClasses} dangerouslySetInnerHTML={label} />
 
       <div className="control">
-        <div className={fieldClasses()}>
+        <div className="select">
           <select name={name} value={selectedOption} onChange={handleChange}>
-            <option value="none">--</option>
+            <option value="">--</option>
             {options.map(renderOptions)}
           </select>
         </div>
       </div>
 
-      {error && <p className="help is-danger">{errorMessage}</p>}
+      {!valid && interacted && <p className="help is-danger">{errorMessage}</p>}
     </div>
   )
 }

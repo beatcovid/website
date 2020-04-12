@@ -20,41 +20,117 @@
   }
 }
 
+.select:not(.is-multiple):not(.is-loading)::after {
+  z-index: 2;
+}
+
 .survey-radio {
-  .radio + .radio {
+  .radio+.radio {
     margin-left: 0;
   }
 
   label.radio {
-    border: 1px solid #efefef;
-    display: block;
     padding: 0.5rem 1.5rem 0.5rem 1rem;
-    margin-bottom: 0.5rem;
+    display: block;
 
     &:hover {
       background-color: $pink-lighter;
     }
+  }
 
-    span {
-      font-size: 16px;
-      margin-left: 30px;
-      display: block;
+  &.grid {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    border-bottom: 1px solid #efefef;
+    align-items: center;
+
+    .control {
+      display: flex;
     }
 
-    input[type="radio"] {
-      position: absolute;
-      top: 12px;
+    &.radio-only {
+      .control label span {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+      }
 
-      &:checked ~ span {
-        color: $pink;
-        text-shadow: 1px 1px 1px $pink-lighter;
-        font-weight: 700;
+      label.label {
+        width: 100%;
+        margin: 0;
+        padding: 0 1rem;
+        font-weight: 500;
+      }
 
-        &::after {
-          content: "\2713 ";
-          position: absolute;
-          right: 0.3rem;
-          top: 8px;
+      label.radio {
+        width: 60px;
+        text-align: center;
+        padding: 0.5rem 1rem;
+        border-left: 1px solid #efefef;
+      }
+    }
+
+    &.label-only {
+      .control label input {
+        display: none;
+      }
+
+      label.label {
+        width: 100%;
+      }
+
+      label.radio {
+        cursor: default;
+        width: 60px;
+        text-align: center;
+        padding: 0;
+
+        &:hover {
+          background-color: transparent;
+        }
+
+        span {
+          font-size: 0.7em;
+          font-weight: 700;
+          line-height: 1.1em;
+          display: block;
+        }
+      }
+    }
+  }
+
+  &.stack {
+    label.radio {
+      border: 1px solid #efefef;
+      margin-bottom: 0.5rem;
+
+      span {
+        font-size: 16px;
+        margin-left: 30px;
+        display: block;
+      }
+
+      input[type="radio"] {
+        position: absolute;
+        top: 12px;
+
+        &:checked~span {
+          color: $pink;
+          text-shadow: 1px 1px 1px $pink-lighter;
+          font-weight: 700;
+
+          &::after {
+            content: "\2713 ";
+            position: absolute;
+            right: 0.3rem;
+            top: 8px;
+          }
         }
       }
     }
@@ -82,7 +158,7 @@
       position: absolute;
       top: 12px;
 
-      &:checked ~ span {
+      &:checked~span {
         color: $pink;
         text-shadow: 1px 1px 1px $pink-lighter;
         font-weight: 700;

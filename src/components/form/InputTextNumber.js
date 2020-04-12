@@ -1,40 +1,32 @@
-import React, { useState } from "react"
+import React, { useMemo, useState } from "react"
 
 const InputTextNumber = props => {
   const type = props.type || "text"
   const name = props.name || ""
   const label = props.label || ""
   const value = props.value || ""
-  const required = props.required || false
+  const valid = props.valid
   const errorMessage = props.errorMessage || ""
-  const [error, setError] = useState(false)
+  const [interacted, setInteracted] = useState(false)
 
-  function labelClasses() {
+  const labelClasses = useMemo(() => {
     const baseClass = "label"
-    return error ? `${baseClass} has-text-danger` : baseClass
-  }
-  function inputClasses() {
-    const baseClass = "input"
-    return error ? `${baseClass} is-danger` : baseClass
-  }
+    return valid || !interacted ? baseClass : `${baseClass} has-text-danger`
+  }, [valid, interacted])
 
   function handleChange(e) {
     const value = e.currentTarget.value
-    if (required && value === "") {
-      setError(true)
-    } else {
-      setError(false)
-    }
     props.onChange(value)
+    setInteracted(true)
   }
 
   return (
     <div className="survey-input field">
-      <label className={labelClasses()} dangerouslySetInnerHTML={label} />
+      <label className={labelClasses} dangerouslySetInnerHTML={label} />
 
       <div className="control">
         <input
-          className={inputClasses()}
+          className="input"
           type={type}
           name={name}
           value={value}
@@ -42,7 +34,7 @@ const InputTextNumber = props => {
         />
       </div>
 
-      {error && <p className="help is-danger">{errorMessage}</p>}
+      {!valid && interacted && <p className="help is-danger">{errorMessage}</p>}
     </div>
   )
 }

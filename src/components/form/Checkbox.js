@@ -1,13 +1,18 @@
-import React, { useState } from "react"
+import React, { useMemo, useState } from "react"
 
 const Checkbox = props => {
   const name = props.name || ""
   const label = props.label || ""
   const options = props.options || []
   const selectedOptions = props.selectedOptions || []
-  const required = props.required || false
   const errorMessage = props.errorMessage || ""
-  const [error, setError] = useState(false)
+  const valid = props.valid
+  const [interacted, setInteracted] = useState(false)
+
+  const labelClasses = useMemo(() => {
+    const baseClass = "label"
+    return valid || !interacted ? baseClass : `${baseClass} has-text-danger`
+  }, [valid, interacted])
 
   function renderOptions(option) {
     return (
@@ -28,11 +33,6 @@ const Checkbox = props => {
     return selectedOptions.indexOf(name) > -1
   }
 
-  function labelClasses() {
-    const baseClass = "label"
-    return error ? `${baseClass} has-text-danger` : baseClass
-  }
-
   function handleChange(e) {
     const value = e.currentTarget.value
     const selected = [...selectedOptions]
@@ -42,21 +42,17 @@ const Checkbox = props => {
     } else {
       selected.splice(findSelected, 1)
     }
-    if (selected.length === 0) {
-      setError(true)
-    } else {
-      setError(false)
-    }
     props.onChange(selected)
+    setInteracted(true)
   }
 
   return (
     <div className="survey-checkbox field">
-      <label className={labelClasses()} dangerouslySetInnerHTML={label} />
+      <label className={labelClasses} dangerouslySetInnerHTML={label} />
 
       <div className="control">{options.map(renderOptions)}</div>
 
-      {error && <p className="help is-danger">{errorMessage}</p>}
+      {!valid && interacted && <p className="help is-danger">{errorMessage}</p>}
     </div>
   )
 }

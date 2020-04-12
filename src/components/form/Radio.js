@@ -1,13 +1,22 @@
-import React, { useState } from "react"
+import React, { useMemo, useState } from "react"
 
 const Radio = props => {
+  const layout = props.layout || ""
   const name = props.name || ""
   const label = props.label || ""
   const options = props.options || []
   const selectedOption = props.selectedOption || ""
-  const required = props.required || false
+  const valid = props.valid
   const errorMessage = props.errorMessage || ""
-  const [error, setError] = useState(false)
+  const [interacted, setInteracted] = useState(false)
+
+  const fieldClasses = useMemo(() => {
+    return `${layout} survey-radio field`
+  }, [layout])
+  const labelClasses = useMemo(() => {
+    const baseClass = "label"
+    return valid || !interacted ? baseClass : `${baseClass} has-text-danger`
+  }, [valid, interacted])
 
   function renderOptions(option) {
     let optionClass = "radio"
@@ -28,27 +37,18 @@ const Radio = props => {
     )
   }
 
-  function labelClasses() {
-    const baseClass = "label"
-    return error ? `${baseClass} has-text-danger` : baseClass
-  }
-
   function handleChange(e) {
     const value = e.currentTarget.value
-    if (required && value === "") {
-      setError(true)
-    } else {
-      setError(false)
-      props.onChange(value)
-    }
+    props.onChange(value)
+    setInteracted(true)
   }
 
   return (
-    <div className="survey-radio field">
-      <label className={labelClasses()} dangerouslySetInnerHTML={label} />
+    <div className={fieldClasses}>
+      <label className={labelClasses} dangerouslySetInnerHTML={label} />
       <div className="control">{options.map(renderOptions)}</div>
 
-      {error && <p className="help is-danger">{errorMessage}</p>}
+      {!valid && interacted && <p className="help is-danger">{errorMessage}</p>}
     </div>
   )
 }

@@ -13,16 +13,18 @@ import {
 const Question = props => {
   const question = props.question
   const result = props.result
+  const show = props.show
+  const valid = props.valid
+  const errorMessage = props.errorMessage
+
   const name = question.name
   const label = question.label
   const type = question.type
-  const required = question.required
   const choices = question.choices || []
   const parameters = question.parameters
   const appearance = question.appearance
-  const constraint = question.constraint
-  const constraintMessage = question.constraint_message
 
+  // prepare labels to be rendered as HTML
   const htmlChoicesLabels = useMemo(
     () =>
       choices.map(c => {
@@ -42,36 +44,47 @@ const Question = props => {
     }),
     [label],
   )
+  const isLabelOnly = useMemo(() => appearance === "label", [appearance])
   const isMinimalAppearance = useMemo(() => appearance === "minimal", [
     appearance,
   ])
+  const isListNoLabel = useMemo(() => appearance === "list-nolabel", [
+    appearance,
+  ])
+  const questionClasses = useMemo(() => {
+    const subtype = appearance ? `-${appearance}` : ""
+    const baseClass = `question question-${type}${subtype}`
+    return show ? baseClass : `${baseClass} is-hidden`
+  }, [show, type, appearance])
 
   function handleValueUpdate(value) {
     props.onValueChange(value)
   }
 
-  function renderRadio() {
+  function renderRadio(layout) {
     return (
       <Radio
+        layout={layout}
         name={name}
-        required={required}
         label={htmlLabel}
         options={htmlChoicesLabels}
         selectedOption={result}
-        errorMessage={constraintMessage}
+        valid={valid}
+        errorMessage={errorMessage}
         onChange={value => handleValueUpdate(value)}
       />
     )
   }
+
   function renderCheckbox() {
     return (
       <Checkbox
         name={name}
-        required={required}
         label={htmlLabel}
         options={htmlChoicesLabels}
         selectedOptions={result}
-        errorMessage={constraintMessage}
+        valid={valid}
+        errorMessage={errorMessage}
         onChange={value => handleValueUpdate(value)}
       />
     )
@@ -81,11 +94,11 @@ const Question = props => {
     return (
       <Select
         name={name}
-        required={required}
         label={htmlLabel}
         options={htmlChoicesLabels}
         selectedOption={result}
-        errorMessage={constraintMessage}
+        valid={valid}
+        errorMessage={errorMessage}
         onChange={value => handleValueUpdate(value)}
       />
     )
@@ -96,10 +109,10 @@ const Question = props => {
       <InputTextNumber
         type={type}
         name={name}
-        required={required}
         label={htmlLabel}
         value={result}
-        errorMessage={question.constraintMessage}
+        valid={valid}
+        errorMessage={errorMessage}
         onChange={value => handleValueUpdate(value)}
       />
     )
@@ -109,10 +122,10 @@ const Question = props => {
     return (
       <InputDate
         name={name}
-        required={required}
         label={htmlLabel}
         value={result}
-        errorMessage={question.constraintMessage}
+        valid={valid}
+        errorMessage={errorMessage}
         onChange={value => handleValueUpdate(value)}
       />
     )
@@ -123,9 +136,10 @@ const Question = props => {
       <Range
         name={name}
         parameters={parameters}
-        required={required}
         label={htmlLabel}
         value={result}
+        valid={valid}
+        errorMessage={errorMessage}
         onChange={value => handleValueUpdate(value)}
       />
     )
@@ -135,10 +149,10 @@ const Question = props => {
     return (
       <Geopoint
         name={name}
-        required={required}
         label={htmlLabel}
         value={result}
-        errorMessage={question.constraintMessage}
+        valid={valid}
+        errorMessage={errorMessage}
         onChange={value => handleValueUpdate(value)}
       />
     )
@@ -147,7 +161,16 @@ const Question = props => {
   function renderQuestion() {
     switch (type) {
       case "select_one":
-        return isMinimalAppearance ? renderSelect() : renderRadio()
+        if (isMinimalAppearance) {
+          return renderSelect()
+        }
+        if (isLabelOnly) {
+          return renderRadio("grid label-only")
+        }
+        if (isListNoLabel) {
+          return renderRadio("grid radio-only")
+        }
+        return renderRadio("stack")
       case "select_multiple":
         return renderCheckbox()
       case "text":
@@ -172,7 +195,7 @@ const Question = props => {
     }
   }
 
-  return <div className="question">{renderQuestion()}</div>
+  return <div className={questionClasses}>{renderQuestion()}</div>
 }
 
 export default Question

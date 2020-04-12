@@ -6,7 +6,7 @@ const Range = props => {
   const name = props.name || ""
   const label = props.label || ""
   const value = props.value || ""
-  const required = props.required || false
+  const valid = props.valid
   const parameters = props.parameters || ""
   const numValue = useMemo(() => parseInt(value) || 1, [value])
   const [start, setStart] = useState(0)

@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from "react"
+import React, { forwardRef, useMemo, useState } from "react"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 
@@ -6,15 +6,20 @@ const InputDate = props => {
   const name = props.name || ""
   const label = props.label || ""
   const value = props.value || ""
-  const required = props.required || false
   const errorMessage = props.errorMessage || ""
-  const [error, setError] = useState(false)
-  const [startDate, setStartDate] = useState()
+  const valid = props.valid
+  const [interacted, setInteracted] = useState(false)
+
+  const labelClasses = useMemo(() => {
+    const baseClass = "label"
+    return valid || !interacted ? baseClass : `${baseClass} has-text-danger`
+  }, [valid, interacted])
 
   const CustomInput = forwardRef((props, ref) => {
     return (
       <input
         className="input"
+        name={name}
         type="text"
         value={props.value}
         onClick={props.onClick}
@@ -23,22 +28,17 @@ const InputDate = props => {
     )
   })
 
-  function labelClasses() {
-    const baseClass = "label"
-    return error ? `${baseClass} has-text-danger` : baseClass
-  }
-
   function handleChange(value) {
     props.onChange(value)
+    setInteracted(true)
   }
 
   return (
     <div className="survey-input field">
-      <label className={labelClasses()} dangerouslySetInnerHTML={label} />
+      <label className={labelClasses} dangerouslySetInnerHTML={label} />
 
       <div className="control">
         <DatePicker
-          className="input"
           selected={value}
           dateFormat="d MMM yyyy"
           customInput={<CustomInput />}
@@ -46,7 +46,7 @@ const InputDate = props => {
         />
       </div>
 
-      {error && <p className="help is-danger">{errorMessage}</p>}
+      {!valid && interacted && <p className="help is-danger">{errorMessage}</p>}
     </div>
   )
 }

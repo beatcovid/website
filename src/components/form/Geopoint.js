@@ -1,29 +1,24 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useMemo } from "react"
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete"
 
 const Geopoint = props => {
+  const google = window.google
   const name = props.name || ""
   const label = props.label || ""
   const value = props.value || ""
-  const required = props.required || false
   const errorMessage = props.errorMessage || ""
-
-  const google = window.google
-  const [address, setAddress] = useState("")
+  const valid = props.valid
   const [geoLocation, setGeoLocation] = useState(null)
-  const [error, setError] = useState(false)
+  const [interacted, setInteracted] = useState(false)
 
-  function labelClasses() {
+  const labelClasses = useMemo(() => {
     const baseClass = "label"
-    return error ? `${baseClass} has-text-danger` : baseClass
-  }
-  function inputClasses() {
-    const baseClass = "input"
-    return error ? `${baseClass} is-danger` : baseClass
-  }
+    return valid || !interacted ? baseClass : `${baseClass} has-text-danger`
+  }, [valid, interacted])
+
   function suggestionClasses(active) {
     const baseClass = "suggestion-item"
     return active ? `${baseClass} is-active` : baseClass
@@ -34,27 +29,25 @@ const Geopoint = props => {
   }
 
   function handleChange(address) {
-    setAddress(address)
     setGeoLocation(null)
+    props.onChange(address)
+    setInteracted(true)
   }
 
   function handleSelect(address) {
-    setAddress(address)
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
       .then(latLng => setGeoLocation(latLng))
       .catch(error => console.error("Error", error))
+    props.onChange(address)
+    setInteracted(true)
   }
-
-  useEffect(() => {
-    console.log(geoLocation)
-  }, [geoLocation])
 
   return (
     <div className="survey-geopoint field">
-      <label className={labelClasses()} dangerouslySetInnerHTML={label} />
+      <label className={labelClasses} dangerouslySetInnerHTML={label} />
       <PlacesAutocomplete
-        value={address}
+        value={value}
         onChange={handleChange}
         onSelect={handleSelect}
         searchOptions={{
@@ -72,6 +65,7 @@ const Geopoint = props => {
               {...getInputProps({
                 placeholder: "Search",
                 className: "input",
+                name,
               })}
             />
             {suggestions.length > 0 && (
@@ -94,7 +88,7 @@ const Geopoint = props => {
         )}
       </PlacesAutocomplete>
 
-      {error && <p className="help is-danger">{errorMessage}</p>}
+      {!valid && interacted && <p className="help is-danger">{errorMessage}</p>}
     </div>
   )
 }
