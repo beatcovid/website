@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown"
 const markdownSource =
   "https://raw.githubusercontent.com/beatcovid/policies/master/privacy.md"
 
-const WelcomePage = () => {
+const PrivacyPage = () => {
   const [inputContent, setInputContent] = useState("")
 
   useEffect(() => {
@@ -24,4 +24,4 @@ const WelcomePage = () => {
   )
 }
 
-export default WelcomePage
+export default PrivacyPage
