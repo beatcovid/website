@@ -50,15 +50,14 @@ export const compileExpression = expression => {
 
   let components = expression.split(/ (and|or) /)
   components = components
-    .map(c =>
-      !!c.match(/\$\{\w+\}/) ? replaceModelVars(c) : replaceOperators(c),
-    )
+    .map(c => (!!c.match(/\$\{\w+\}/) ? replaceModelVars(c) : c))
     .join(" ")
 
   return components
 }
 
-const replaceOperators = o => o.replace("or", "|").replace("and", "and")
+const replaceTypes = o =>
+  o.replace("'true'", "true()").replace("'false'", "false()")
 
 const regReplaceVars = new RegExp(/\$\{([\w_]+)\}/)
 const regShortCutEval = new RegExp(/(\/models\/[\w_]+)(!?=)'([\w_]*)'/, "i")
@@ -71,6 +70,7 @@ const replaceModelVars = expression => {
   exp = exp.replace(/"/g, "'")
   exp = exp.replace(regReplaceVars, "/models/$1")
   exp = exp.replace(regShortCutEval, "$1[.$2'$3']")
+  exp = replaceTypes(exp)
 
   return exp
 }

@@ -34,7 +34,7 @@ describe("Xpath compiler tests", () => {
   test("equality or", () => {
     const expression = "${tested} = 'yes_tested' or ${tested} = 'not'"
     expect(compileExpression(expression)).toBe(
-      "/models/tested[.='yes_tested'] | /models/tested[.='not']",
+      "/models/tested[.='yes_tested'] or /models/tested[.='not']",
     )
   })
 

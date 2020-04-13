@@ -1,5 +1,5 @@
 /* eslint-disable no-template-curly-in-string */
-/* eslint-disable array-callback-return */
+/* eslint-disable array-callback-return,no-multi-str */
 
 import { checkConstraint, checkRelevant, evalExpression } from "./index"
 
@@ -254,5 +254,50 @@ describe("Test all relevancy checks", () => {
       face_contact_outings: "one two three",
     })
     expect(result).toBe(false)
+  })
+
+  test("A value is selected and only it is selected", () => {
+    const expression =
+      "selected(${userdetail_conditions}, 'none') = 'true' \
+      and count-selected(${userdetail_conditions}) = 1"
+
+    let result = evalExpression(expression, {
+      userdetail_conditions: "none",
+    })
+    expect(result).toBe(true)
+  })
+
+  test("A value is selected but not only it is selected", () => {
+    const expression =
+      "selected(${userdetail_conditions}, 'none') = 'true' \
+      and count-selected(${userdetail_conditions}) = 1"
+
+    let result = evalExpression(expression, {
+      userdetail_conditions: "none baa",
+    })
+    expect(result).toBe(false)
+  })
+
+  test("A value is not selected but more than one other is selected", () => {
+    const expression =
+      "selected(${userdetail_conditions}, 'none') = 'false' \
+      and count-selected(${userdetail_conditions}) >= 1"
+
+    let result = evalExpression(expression, {
+      userdetail_conditions: "faa laa baa",
+    })
+    expect(result).toBe(true)
+  })
+
+  test("That super-long expression simon wrote should work", () => {
+    const expression =
+      "${userdetail_conditions} = '' or \
+    (selected(${userdetail_conditions}, 'none') = 'true' and count-selected(${userdetail_conditions}) = 1) \
+     or (selected(${userdetail_conditions}, 'none') = 'false' and count-selected(${userdetail_conditions}) >= 1)"
+
+    let result = evalExpression(expression, {
+      userdetail_conditions: "faa laa baa",
+    })
+    expect(result).toBe(true)
   })
 })
