@@ -289,7 +289,7 @@ describe("Test all relevancy checks", () => {
     expect(result).toBe(true)
   })
 
-  test("That super-long expression simon wrote should work", () => {
+  test("That super-long expression simon wrote should work if the user has selected three values", () => {
     const expression =
       "${userdetail_conditions} = '' or \
     (selected(${userdetail_conditions}, 'none') = 'true' and count-selected(${userdetail_conditions}) = 1) \
@@ -299,5 +299,23 @@ describe("Test all relevancy checks", () => {
       userdetail_conditions: "faa laa baa",
     })
     expect(result).toBe(true)
+  })
+
+  test("If the user has selected none in a multi select make sure it's the only selection", () => {
+    const expression =
+      "selected(${userdetail_conditions}, 'none') = true() and count-selected(${userdetail_conditions}) = 1"
+    let result = evalExpression(expression, {
+      userdetail_conditions: "none",
+    })
+    expect(result).toBe(true)
+  })
+
+  test("If the user has selected none in a multi select make sure it's the only selection", () => {
+    const expression =
+      "selected(${userdetail_conditions}, 'none') = true() and count-selected(${userdetail_conditions}) = 1"
+    let result = evalExpression(expression, {
+      userdetail_conditions: "none second",
+    })
+    expect(result).toBe(false)
   })
 })
