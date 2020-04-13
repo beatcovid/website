@@ -50,13 +50,15 @@ const Steps = props => {
           return false
         }
 
-        try {
-          constraintCheck = q.constraint
-            ? checkConstraint(answer, q.constraint)
-            : true
-        } catch (e) {
-          console.error("checkConstraint:", q.constraint)
-          return false
+        if (answer) {
+          try {
+            constraintCheck = q.constraint
+              ? checkConstraint(answer, q.constraint)
+              : true
+          } catch (e) {
+            console.error("checkConstraint:", answer, q.constraint)
+            return false
+          }
         }
 
         if (relevancyCheck) {
