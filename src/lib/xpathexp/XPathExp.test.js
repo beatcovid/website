@@ -310,7 +310,7 @@ describe("Test all relevancy checks", () => {
     expect(result).toBe(true)
   })
 
-  test("If the user has selected none in a multi select make sure it's the only selection", () => {
+  test("If the user has selected none and one other value in a multi select make sure it returns false", () => {
     const expression =
       "selected(${userdetail_conditions}, 'none') = true() and count-selected(${userdetail_conditions}) = 1"
     let result = evalExpression(expression, {
