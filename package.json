@@ -14,6 +14,7 @@
     "date-fns": "^2.11.0",
     "enketo-xpathjs": "^1.9.4",
     "fingerprintjs2": "^2.1.0",
+    "invariant": "^2.2.4",
     "node-sass": "^4.13.1",
     "numeral": "^2.0.6",
     "postcss-cli": "^7.1.0",
@@ -30,11 +31,13 @@
     "react-scripts": "3.4.1",
     "react-transition-group": "^4.3.0",
     "showdown": "^1.9.1",
-    "xml-js": "^1.6.11"
+    "xml-js": "^1.6.11",
+    "xmlserializer": "^0.6.1"
   },
   "scripts": {
     "start": "REACT_APP_VERSION=$(node -pe 'require(\"./package.json\").version') react-scripts start",
     "build": "REACT_APP_VERSION=$(node -pe 'require(\"./package.json\").version') react-scripts build",
+    "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
