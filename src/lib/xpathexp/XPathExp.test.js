@@ -219,4 +219,40 @@ describe("Test all relevancy checks", () => {
     let result = evalExpression(expression, { tested: "__random string" })
     expect(result).toBe(true)
   })
+
+  test("Should have two values selected from a multi-select", () => {
+    const expression = "count-selected(${face_contact_outings}) = 2"
+
+    let result = evalExpression(expression, {
+      face_contact_outings: "one two",
+    })
+    expect(result).toBe(true)
+  })
+
+  test("Should have more than three values selected in a multi-select", () => {
+    const expression = "count-selected(${face_contact_outings}) >= 3"
+
+    let result = evalExpression(expression, {
+      face_contact_outings: "one two three four",
+    })
+    expect(result).toBe(true)
+  })
+
+  test("Should return true if there is a value from a multi-select", () => {
+    const expression = "selected(${face_contact_outings}, 'other')"
+
+    let result = evalExpression(expression, {
+      face_contact_outings: "one two other",
+    })
+    expect(result).toBe(true)
+  })
+
+  test("Should return false if a multi-select does not contain a value", () => {
+    const expression = "selected(${face_contact_outings}, 'other')"
+
+    let result = evalExpression(expression, {
+      face_contact_outings: "one two three",
+    })
+    expect(result).toBe(false)
+  })
 })
