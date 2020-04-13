@@ -51,9 +51,14 @@ const Steps = props => {
         }
 
         if (answer) {
+          let checkAnswer = answer
+          if (Array.isArray(answer)) {
+            checkAnswer = {}
+            checkAnswer[q.name] = answer
+          }
           try {
             constraintCheck = q.constraint
-              ? checkConstraint(answer, q.constraint)
+              ? checkConstraint(checkAnswer, q.constraint)
               : true
           } catch (e) {
             console.error("checkConstraint:", answer, q.constraint)
