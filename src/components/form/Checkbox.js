@@ -4,11 +4,13 @@ const Checkbox = props => {
   const name = props.name || ""
   const label = props.label || ""
   const options = props.options || []
-  const selectedOptions = props.selectedOptions || []
+  const selectedOptions = props.selectedOptions || ""
   const errorMessage = props.errorMessage || ""
   const valid = props.valid
   const [interacted, setInteracted] = useState(false)
-
+  const selectedOptionsArray = useMemo(() => {
+    return selectedOptions.trim().split(" ")
+  }, [selectedOptions])
   const labelClasses = useMemo(() => {
     const baseClass = "label"
     return valid || !interacted ? baseClass : `${baseClass} has-text-danger`
@@ -30,19 +32,20 @@ const Checkbox = props => {
   }
 
   function isChecked(name) {
-    return selectedOptions.indexOf(name) > -1
+    return selectedOptionsArray.indexOf(name) > -1
   }
 
   function handleChange(e) {
     const value = e.currentTarget.value
-    const selected = [...selectedOptions]
+    const selected = [...selectedOptionsArray]
     const findSelected = selected.indexOf(value)
     if (findSelected === -1) {
       selected.push(value)
     } else {
       selected.splice(findSelected, 1)
     }
-    props.onChange(selected)
+
+    props.onChange(selected.join(" ").trim())
     setInteracted(true)
   }
 

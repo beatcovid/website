@@ -31,15 +31,10 @@ const Steps = props => {
 
       // check questions
       stepQuestions.forEach(q => {
-        const answer = results[q.name]
+        let answer = results[q.name]
         let requireCheck = q.required ? answer && answer !== "" : true
         let constraintCheck = true
         let relevancyCheck = true
-
-        // require check for answers with arrays
-        if (q.required && q.type === "select_multiple" && answer) {
-          requireCheck = answer.length > 0
-        }
 
         try {
           relevancyCheck = q.relevant
@@ -51,14 +46,13 @@ const Steps = props => {
         }
 
         if (answer) {
-          let checkAnswer = answer
-          if (Array.isArray(answer)) {
-            checkAnswer = {}
-            checkAnswer[q.name] = answer
+          if (q.type === "select_multiple") {
+            answer = {}
+            answer[q.name] = results[q.name].split(" ")
           }
           try {
             constraintCheck = q.constraint
-              ? checkConstraint(checkAnswer, q.constraint)
+              ? checkConstraint(answer, q.constraint)
               : true
           } catch (e) {
             console.error("checkConstraint:", answer, q.constraint)
@@ -117,6 +111,7 @@ const Steps = props => {
     const result = results[questionName]
     let showQuestion = true
     if (relevant) {
+      // console.log(results, relevant)
       showQuestion = checkRelevant(results, relevant)
     }
     return (
