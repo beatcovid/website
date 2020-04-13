@@ -9,8 +9,6 @@ XPathJS.bindDomLevel3XPath()
 
 const parser = new DOMParser()
 
-const debug = require("debug")("xpatheval")
-
 /**
  * Will check a string of XML, JSON object with values or
  * a DOMNode against an OpenRosa expression to evaluate if
