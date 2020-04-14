@@ -10,6 +10,7 @@ import {
   doSetGlobal,
   doSetSteps,
   selectCurrentStep,
+  selectGlobal,
   selectSteps,
   selectStepNames,
 } from "../store/surveySlice"
@@ -18,6 +19,7 @@ const SurveyPage = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const survey = useSelector(selectSurvey)
+  const global = useSelector(selectGlobal)
   const surveySteps = useSelector(selectSteps)
   const stepNames = useSelector(selectStepNames)
   const currentStep = useSelector(selectCurrentStep)
@@ -80,7 +82,7 @@ const SurveyPage = () => {
   }
 
   function handleSurveySubmit() {
-    dispatch(doSubmit(surveyResults))
+    dispatch(doSubmit(surveyResults, global))
     history.push("/summary")
   }
 

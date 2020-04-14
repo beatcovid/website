@@ -36,8 +36,20 @@ export const {
   setSurvey,
 } = slice.actions
 
-function getFormData(results) {
+function getFormData(results, global) {
   const formData = {}
+
+  // add start date manually
+  formData.start = new Date().toISOString()
+
+  // append global propoerties with a calculate field
+  global.forEach(g => {
+    if (g.type === "calculate" && g.calculation) {
+      formData[g.name] = g.calculation
+    }
+  })
+
+  // flatten the results for form data
   Object.keys(results).forEach(r => {
     Object.keys(results[r]).forEach(name => {
       const value = results[r][name]
@@ -46,6 +58,7 @@ function getFormData(results) {
       }
     })
   })
+
   return formData
 }
 
@@ -63,8 +76,8 @@ export const doSchemaGet = () => dispatch => {
       dispatch(unsetLoading())
     })
 }
-export const doSubmit = results => dispatch => {
-  const formData = getFormData(results)
+export const doSubmit = (results, global) => dispatch => {
+  const formData = getFormData(results, global)
   dispatch(setLoading())
   // @TODO: send to error page if submission fails
   api
