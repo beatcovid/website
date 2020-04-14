@@ -66,6 +66,12 @@
         margin: 0;
         padding: 0 1rem;
         font-weight: 500;
+
+        @include mobile {
+          font-size: 0.8em;
+          padding: 0;
+          line-height: 1.1em;
+        }
       }
 
       label.radio {
@@ -73,6 +79,11 @@
         text-align: center;
         padding: 0.5rem 1rem;
         border-left: 1px solid #efefef;
+
+        @include mobile {
+          padding: 0.5rem;
+          width: 50px;
+        }
       }
     }
 
@@ -89,10 +100,14 @@
         cursor: default;
         width: 60px;
         text-align: center;
-        padding: 0;
+        padding: 0 0 4px;
 
         &:hover {
           background-color: transparent;
+        }
+
+        @include mobile {
+          width: 50px;
         }
 
         span {
@@ -100,6 +115,10 @@
           font-weight: 700;
           line-height: 1.1em;
           display: block;
+
+          @include mobile {
+            font-size: 0.6em;
+          }
         }
       }
     }
