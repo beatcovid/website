@@ -36,10 +36,6 @@ const Steps = props => {
         let constraintCheck = true
         let relevancyCheck = true
 
-        if (q.required && q.type === "select_multiple" && answer) {
-          requireCheck = answer.length > 0
-        }
-
         try {
           relevancyCheck = q.relevant
             ? evalExpression(q.relevant, results)
