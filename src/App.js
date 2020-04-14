@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { BrowserRouter, Route } from "react-router-dom"
+import { BrowserRouter, Route, Switch } from "react-router-dom"
 import ScrollToTop from "./components/app/ScrollToTop"
 import AppHeader from "./components/app/Header"
 import AppFooter from "./components/app/Footer"
@@ -12,6 +12,7 @@ import SurveyPage from "./pages/SurveyPage"
 import SummaryPage from "./pages/SummaryPage"
 import PrivacyPage from "./pages/PrivacyPage"
 import InformationPage from "./pages/InformationPage"
+import NoMatchPage from "./pages/NoMatchPage"
 
 import { selectLoading } from "./store/schemaSlice"
 import { selectSubmissions, fetchStats } from "./store/statsSlice"
@@ -35,27 +36,38 @@ const HomeApp = () => {
 
       {!isLoading && (
         <div className="site-content">
-          <Route path="/" exact>
-            <WelcomePage />
-            <Acknowledgement />
-          </Route>
+          <Switch>
+            <Route path="/" exact>
+              <WelcomePage />
+              <Acknowledgement />
+            </Route>
 
-          <Route path="/information" exact>
-            <InformationPage />
-          </Route>
+            <Route path="/information" exact>
+              <InformationPage />
+            </Route>
 
-          <Route path="/privacy" exact>
-            <PrivacyPage />
-          </Route>
+            <Route path="/privacy" exact>
+              <PrivacyPage />
+            </Route>
 
-          <Route path="/survey">
-            <SurveyPage />
-          </Route>
+            <Route path="/survey">
+              <SurveyPage />
+            </Route>
 
-          <Route path="/summary">
-            <SummaryPage />
-            <Contacts />
-          </Route>
+            <Route path="/summary">
+              <SummaryPage />
+              <Contacts />
+            </Route>
+
+            <Route path="/summary">
+              <SummaryPage />
+              <Contacts />
+            </Route>
+
+            <Route path="*">
+              <NoMatchPage />
+            </Route>
+          </Switch>
         </div>
       )}
 
