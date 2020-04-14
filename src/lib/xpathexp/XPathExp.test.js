@@ -8,12 +8,12 @@ describe("Correct data types being passed", () => {
     test: ["one"],
   }
 
-  test("Should throw error on undefined expression", () => {
-    expect(() => evalExpression(undefined, model)).toThrow(Error)
+  test("Should return true on undefined expression", () => {
+    expect(evalExpression(undefined, model)).toBe(true)
   })
 
-  test("Should throw error on bad expression type", () => {
-    expect(() => evalExpression(false, model)).toThrow(Error)
+  test("Should return true on none-string", () => {
+    expect(evalExpression(false, model)).toBe(true)
   })
 })
 
@@ -317,5 +317,15 @@ describe("Test all relevancy checks", () => {
       userdetail_conditions: "none second",
     })
     expect(result).toBe(false)
+  })
+
+  test("User should be able to select one condition that is not none", () => {
+    const expression =
+      "selected(${userdetail_conditions}, 'none') = false() and count-selected(${userdetail_conditions}) >= 1 "
+
+    let result = evalExpression(expression, {
+      userdetail_conditions: "diabetes ",
+    })
+    expect(result).toBe(true)
   })
 })

@@ -25,7 +25,7 @@ export const evalExpression = (expression, nodeOrState) => {
     !nodeOrState ||
     typeof expression !== "string"
   ) {
-    return false
+    return true
   }
 
   invariant(nodeOrState, "Invalid node or state")
