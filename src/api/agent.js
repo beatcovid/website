@@ -28,7 +28,7 @@ const requests = {
 
 export const api = {
   submitForm: (formData, formName = FORM_NAME) =>
-    requests.post(`/api/form/schema/${formName}/`, formData),
+    requests.post(`/api/form/submit/${formName}/`, formData),
   getStats: (formName = FORM_NAME) =>
     requests.get(`/api/form/stats/${formName}/`),
   getForm: (formName = FORM_NAME) =>
