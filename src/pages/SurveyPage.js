@@ -36,6 +36,13 @@ const SurveyPage = () => {
     () => stepNames.findIndex((s, i) => s === currentStep) + 1,
     [stepNames, currentStep],
   )
+  const surveyReady = useMemo(
+    () =>
+      surveyResults &&
+      Object.keys(surveyResults).length > 0 &&
+      surveyResults.constructor === Object,
+    [surveyResults],
+  )
 
   useEffect(() => {
     const results = {}
@@ -98,28 +105,30 @@ const SurveyPage = () => {
         <SurveyProgress total={stepNames.length} current={currentStepIndex} />
       </header>
 
-      <form onSubmit={e => e.preventDefault()}>
-        <SwitchTransition mode="out-in">
-          <CSSTransition
-            key={state}
-            addEndListener={(node, done) => {
-              node.addEventListener("transitionend", done, false)
-            }}
-            classNames={transitionClass}
-          >
-            <SurveySteps
-              stepNames={stepNames}
-              steps={surveySteps}
-              currentStep={currentStep}
-              surveyResults={surveyResults}
-              onNextClick={handleNextClick}
-              onPreviousClick={handlePreviousClick}
-              onResultsChange={handleResultsChange}
-              onSubmit={handleSurveySubmit}
-            />
-          </CSSTransition>
-        </SwitchTransition>
-      </form>
+      {surveyReady && (
+        <form onSubmit={e => e.preventDefault()}>
+          <SwitchTransition mode="out-in">
+            <CSSTransition
+              key={state}
+              addEndListener={(node, done) => {
+                node.addEventListener("transitionend", done, false)
+              }}
+              classNames={transitionClass}
+            >
+              <SurveySteps
+                stepNames={stepNames}
+                steps={surveySteps}
+                currentStep={currentStep}
+                surveyResults={surveyResults}
+                onNextClick={handleNextClick}
+                onPreviousClick={handlePreviousClick}
+                onResultsChange={handleResultsChange}
+                onSubmit={handleSurveySubmit}
+              />
+            </CSSTransition>
+          </SwitchTransition>
+        </form>
+      )}
     </div>
   )
 }

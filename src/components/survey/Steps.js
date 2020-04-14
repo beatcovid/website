@@ -7,7 +7,7 @@ const Steps = props => {
   const stepNames = props.stepNames
   const steps = props.steps || []
   const currentStep = props.currentStep || ""
-  const surveyResults = props.surveyResults || {}
+  const surveyResults = props.surveyResults
   const [currentStepValidChecks, setCurrentStepValidChecks] = useState([])
   const [currentStepErrorMessages, setCurrentStepErrorMessages] = useState([])
   const [disableNext, setDisableNext] = useState(true)
