@@ -25,6 +25,10 @@ const Steps = props => {
     const baseClass = "button"
     return disableNext ? `${baseClass} is-disabled` : baseClass
   }, [disableNext])
+  const submitButtonClasses = useMemo(() => {
+    const baseClass = "button is-primary"
+    return disableNext ? `${baseClass} is-disabled` : baseClass
+  }, [disableNext])
 
   // Check question relevancy and validate answers
   useEffect(() => {
@@ -173,7 +177,7 @@ const Steps = props => {
           </button>
         )}
         {isLastQuestion && (
-          <button className="button is-primary" onClick={handleSubmit}>
+          <button className={submitButtonClasses} onClick={handleSubmit}>
             Submit
           </button>
         )}

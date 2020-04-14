@@ -10,6 +10,21 @@
     border-color: $pink;
   }
 
+  &.is-disabled {
+    box-shadow: none;
+    border-color: $dark-grey;
+    color: $dark-grey;
+    background-color: $grey;
+    cursor: not-allowed;
+
+    &:hover {
+      box-shadow: none;
+      border-color: $dark-grey;
+      color: $dark-grey;
+      background-color: $grey;
+    }
+  }
+
   &:hover {
     box-shadow: none;
     border-color: $pink;
