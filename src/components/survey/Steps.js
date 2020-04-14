@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from "react"
-import { checkConstraint, checkRelevant } from "../../lib/xpathexp"
+import { evalExpression } from "../../lib/xpathexp"
 import Question from "./Question"
 
 const Steps = props => {
@@ -43,7 +43,7 @@ const Steps = props => {
 
         try {
           relevancyCheck = q.relevant
-            ? checkRelevant(results, q.relevant)
+            ? evalExpression(q.relevant, results)
             : true
         } catch (e) {
           console.error("checkRelevant:", q.relevant)
@@ -52,7 +52,7 @@ const Steps = props => {
 
         try {
           constraintCheck = q.constraint
-            ? checkConstraint(answer, q.constraint)
+            ? evalExpression(q.constraint, answer)
             : true
         } catch (e) {
           console.error("checkConstraint:", q.constraint)
@@ -110,7 +110,7 @@ const Steps = props => {
     const result = results[questionName]
     let showQuestion = true
     if (relevant) {
-      showQuestion = checkRelevant(results, relevant)
+      showQuestion = evalExpression(relevant, result)
     }
     return (
       <Question
