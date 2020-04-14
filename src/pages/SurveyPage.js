@@ -8,7 +8,7 @@ import {
   doSchemaGet,
   doSubmit,
   selectSurvey,
-  selectUserId,
+  selectUser,
 } from "../store/schemaSlice"
 import {
   doSetCurrentStep,
@@ -19,12 +19,15 @@ import {
   selectSteps,
   selectStepNames,
 } from "../store/surveySlice"
+import { doSetUser, selectUserId, selectUserResults } from "../store/userSlice"
 
 const SurveyPage = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const survey = useSelector(selectSurvey)
+  const user = useSelector(selectUser)
   const userId = useSelector(selectUserId)
+  const userResults = useSelector(selectUserResults)
   const surveyVersion = useSelector(selectSurveyVersion)
   const surveySteps = useSelector(selectSteps)
   const stepNames = useSelector(selectStepNames)
@@ -45,19 +48,29 @@ const SurveyPage = () => {
   )
 
   useEffect(() => {
-    const results = {}
-    if (surveySteps.length > 0) {
-      surveySteps.forEach(s => {
-        results[s.name] = {}
-        if (s.questions.length > 0) {
-          s.questions.forEach(q => {
-            results[s.name][q.name] = null
-          })
-        }
-      })
-      setSurveyResults(results)
+    function createSurveyResults() {
+      const results = {}
+      if (surveySteps.length > 0) {
+        surveySteps.forEach(s => {
+          results[s.name] = {}
+          if (s.questions.length > 0) {
+            s.questions.forEach(q => {
+              results[s.name][q.name] = null
+
+              // prepopulate answers from user
+              if (userResults[q.name]) {
+                results[s.name][q.name] = userResults[q.name]
+              }
+            })
+          }
+        })
+        setSurveyResults(results)
+      }
     }
-  }, [surveySteps])
+    if (userResults) {
+      createSurveyResults()
+    }
+  }, [userResults, surveySteps])
 
   useEffect(() => {
     if (survey) {
@@ -68,6 +81,12 @@ const SurveyPage = () => {
       dispatch(doSchemaGet())
     }
   }, [survey, dispatch])
+
+  useEffect(() => {
+    if (user) {
+      dispatch(doSetUser(user))
+    }
+  }, [user, dispatch])
 
   useEffect(() => {
     setState(state => !state)
@@ -88,7 +107,6 @@ const SurveyPage = () => {
 
   function handleResultsChange(stepName, questionName, answer) {
     const updatedSurveyResults = { ...surveyResults }
-    // updatedSurveyResults[name][id] = answer
     updatedSurveyResults[stepName][questionName] = answer
     setSurveyResults(updatedSurveyResults)
     console.log("Survey results", updatedSurveyResults)

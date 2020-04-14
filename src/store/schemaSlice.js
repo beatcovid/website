@@ -7,7 +7,7 @@ export const slice = createSlice({
     isLoading: false,
     isSubmitted: false,
     uid: undefined,
-    userId: undefined,
+    user: undefined,
     survey: undefined,
   },
   reducers: {
@@ -23,8 +23,8 @@ export const slice = createSlice({
     setUid: (state, { payload }) => {
       state.uid = payload
     },
-    setUserId: (state, { payload }) => {
-      state.userId = payload
+    setUser: (state, { payload }) => {
+      state.user = payload
     },
     setSurvey: (state, { payload }) => {
       state.survey = payload
@@ -37,7 +37,7 @@ export const {
   unsetLoading,
   setSubmitted,
   setUid,
-  setUserId,
+  setUser,
   setSurvey,
 } = slice.actions
 
@@ -70,8 +70,8 @@ export const doSchemaGet = () => dispatch => {
       dispatch(setSurvey(r.survey))
       dispatch(setUid(r.uid))
 
-      if (r.user && r.user.id) {
-        dispatch(setUserId(r.user.id))
+      if (r.user) {
+        dispatch(setUser(r.user))
       }
     })
     .catch(e => console.error(e))
@@ -97,7 +97,7 @@ export const doSubmit = (userId, version, results) => dispatch => {
 export const selectLoading = state => state.schema.isLoading
 export const selectSubmitted = state => state.schema.isSubmitted
 export const selectUid = state => state.schema.uid
-export const selectUserId = state => state.schema.userId
+export const selectUser = state => state.schema.user
 export const selectSurvey = state => state.schema.survey
 
 export default slice.reducer

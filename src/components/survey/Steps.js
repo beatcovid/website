@@ -42,7 +42,6 @@ const Steps = props => {
             : true
         } catch (e) {
           console.error("checkRelevant:", q.relevant)
-          return false
         }
 
         if (answer) {
@@ -55,7 +54,6 @@ const Steps = props => {
               : true
           } catch (e) {
             console.error("checkConstraint:", answer, q.constraint)
-            return false
           }
         }
 
