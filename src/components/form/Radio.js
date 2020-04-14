@@ -24,7 +24,7 @@ const Radio = props => {
 
   function renderOptions(option) {
     let optionClass = "radio"
-    if (option.value === selectedOption.value) {
+    if (option.value === selectedOption) {
       optionClass += " selected"
     }
     return (
@@ -35,15 +35,24 @@ const Radio = props => {
           value={option.value}
           checked={selectedOption === option.value}
           onChange={handleChange}
+          onClick={handleClick}
         />
         <span dangerouslySetInnerHTML={option.label} />
       </label>
     )
   }
 
+  function handleClick(e) {
+    const value = e.currentTarget.value
+    if (selectedOption === value) {
+      // clear radio
+      props.onChange(null)
+    }
+    setInteracted(true)
+  }
+
   function handleChange(e) {
     const value = e.currentTarget.value
-    setInteracted(true)
     props.onChange(value)
   }
 
