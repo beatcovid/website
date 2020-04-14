@@ -14,6 +14,7 @@ const Question = props => {
   const question = props.question
   const result = props.result
   const show = props.show
+  const stepInteracted = props.stepInteracted
   const valid = props.valid
   const errorMessage = props.errorMessage
 
@@ -69,6 +70,7 @@ const Question = props => {
         label={htmlLabel}
         options={htmlChoicesLabels}
         selectedOption={result}
+        stepInteracted={stepInteracted}
         valid={valid}
         errorMessage={errorMessage}
         onChange={value => handleValueUpdate(value)}
@@ -83,6 +85,7 @@ const Question = props => {
         label={htmlLabel}
         options={htmlChoicesLabels}
         selectedOptions={result}
+        stepInteracted={stepInteracted}
         valid={valid}
         errorMessage={errorMessage}
         onChange={value => handleValueUpdate(value)}
@@ -97,6 +100,7 @@ const Question = props => {
         label={htmlLabel}
         options={htmlChoicesLabels}
         selectedOption={result}
+        stepInteracted={stepInteracted}
         valid={valid}
         errorMessage={errorMessage}
         onChange={value => handleValueUpdate(value)}
@@ -111,6 +115,7 @@ const Question = props => {
         name={name}
         label={htmlLabel}
         value={result}
+        stepInteracted={stepInteracted}
         valid={valid}
         errorMessage={errorMessage}
         onChange={value => handleValueUpdate(value)}
@@ -124,6 +129,7 @@ const Question = props => {
         name={name}
         label={htmlLabel}
         value={result}
+        stepInteracted={stepInteracted}
         valid={valid}
         errorMessage={errorMessage}
         onChange={value => handleValueUpdate(value)}
@@ -138,6 +144,7 @@ const Question = props => {
         parameters={parameters}
         label={htmlLabel}
         value={result}
+        stepInteracted={stepInteracted}
         valid={valid}
         errorMessage={errorMessage}
         onChange={value => handleValueUpdate(value)}
@@ -151,6 +158,7 @@ const Question = props => {
         name={name}
         label={htmlLabel}
         value={result}
+        stepInteracted={stepInteracted}
         valid={valid}
         errorMessage={errorMessage}
         onChange={value => handleValueUpdate(value)}

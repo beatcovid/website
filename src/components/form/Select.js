@@ -1,18 +1,18 @@
-import React, { useMemo, useState } from "react"
+import React, { useMemo } from "react"
 
 const Select = props => {
   const name = props.name || ""
   const label = props.label || ""
   const options = props.options || []
   const selectedOption = props.selectedOption || ""
+  const stepInteracted = props.stepInteracted
   const valid = props.valid
   const errorMessage = props.errorMessage || ""
-  const [interacted, setInteracted] = useState(false)
 
   const labelClasses = useMemo(() => {
     const baseClass = "label"
-    return valid || !interacted ? baseClass : `${baseClass} has-text-danger`
-  }, [valid, interacted])
+    return valid || !stepInteracted ? baseClass : `${baseClass} has-text-danger`
+  }, [valid, stepInteracted])
 
   function renderOptions(option) {
     return (
@@ -27,7 +27,6 @@ const Select = props => {
   function handleChange(e) {
     const value = e.currentTarget.value
     props.onChange(value)
-    setInteracted(true)
   }
 
   return (
@@ -43,7 +42,9 @@ const Select = props => {
         </div>
       </div>
 
-      {!valid && interacted && <p className="help is-danger">{errorMessage}</p>}
+      {!valid && stepInteracted && (
+        <p className="help is-danger">{errorMessage}</p>
+      )}
     </div>
   )
 }

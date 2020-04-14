@@ -11,13 +11,14 @@ const Geopoint = props => {
   const value = props.value || ""
   const errorMessage = props.errorMessage || ""
   const valid = props.valid
+  const stepInteracted = props.stepInteracted
+
   const [geoLocation, setGeoLocation] = useState(null)
-  const [interacted, setInteracted] = useState(false)
 
   const labelClasses = useMemo(() => {
     const baseClass = "label"
-    return valid || !interacted ? baseClass : `${baseClass} has-text-danger`
-  }, [valid, interacted])
+    return valid || !stepInteracted ? baseClass : `${baseClass} has-text-danger`
+  }, [valid, stepInteracted])
 
   function suggestionClasses(active) {
     const baseClass = "suggestion-item"
@@ -31,7 +32,6 @@ const Geopoint = props => {
   function handleChange(address) {
     setGeoLocation(null)
     props.onChange(address)
-    setInteracted(true)
   }
 
   function handleSelect(address) {
@@ -40,7 +40,6 @@ const Geopoint = props => {
       .then(latLng => setGeoLocation(latLng))
       .catch(error => console.error("Error", error))
     props.onChange(address)
-    setInteracted(true)
   }
 
   return (
@@ -88,7 +87,9 @@ const Geopoint = props => {
         )}
       </PlacesAutocomplete>
 
-      {!valid && interacted && <p className="help is-danger">{errorMessage}</p>}
+      {!valid && stepInteracted && (
+        <p className="help is-danger">{errorMessage}</p>
+      )}
     </div>
   )
 }

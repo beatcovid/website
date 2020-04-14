@@ -1,23 +1,22 @@
-import React, { useMemo, useState } from "react"
+import React, { useMemo } from "react"
 
 const InputTextNumber = props => {
   const type = props.type || "text"
   const name = props.name || ""
   const label = props.label || ""
   const value = props.value || ""
+  const stepInteracted = props.stepInteracted
   const valid = props.valid
   const errorMessage = props.errorMessage || ""
-  const [interacted, setInteracted] = useState(false)
 
   const labelClasses = useMemo(() => {
     const baseClass = "label"
-    return valid || !interacted ? baseClass : `${baseClass} has-text-danger`
-  }, [valid, interacted])
+    return valid || !stepInteracted ? baseClass : `${baseClass} has-text-danger`
+  }, [valid, stepInteracted])
 
   function handleChange(e) {
     const value = e.currentTarget.value
     props.onChange(value)
-    setInteracted(true)
   }
 
   return (
@@ -34,7 +33,9 @@ const InputTextNumber = props => {
         />
       </div>
 
-      {!valid && interacted && <p className="help is-danger">{errorMessage}</p>}
+      {!valid && stepInteracted && (
+        <p className="help is-danger">{errorMessage}</p>
+      )}
     </div>
   )
 }

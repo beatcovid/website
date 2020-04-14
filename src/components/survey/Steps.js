@@ -3,7 +3,7 @@ import { evalExpression } from "../../lib/xpathexp"
 import Question from "./Question"
 
 const Steps = props => {
-  const requiredMessage = "This field is required" // @TODO: to be localised
+  const requiredMessage = ""
   const stepNames = props.stepNames
   const steps = props.steps || []
   const currentStep = props.currentStep || ""
@@ -11,6 +11,7 @@ const Steps = props => {
   const [currentStepValidChecks, setCurrentStepValidChecks] = useState([])
   const [currentStepErrorMessages, setCurrentStepErrorMessages] = useState([])
   const [disableNext, setDisableNext] = useState(true)
+  const [stepInteracted, setStepInteracted] = useState(false)
 
   const isFirstQuestion = useMemo(() => currentStep === stepNames[0], [
     stepNames,
@@ -20,6 +21,10 @@ const Steps = props => {
     () => currentStep === stepNames[stepNames.length - 1],
     [stepNames, currentStep],
   )
+  const nextButtonClasses = useMemo(() => {
+    const baseClass = "button"
+    return disableNext ? `${baseClass} is-disabled` : baseClass
+  }, [disableNext])
 
   // Check question relevancy and validate answers
   useEffect(() => {
@@ -87,16 +92,27 @@ const Steps = props => {
 
   // Event handlers
   function handleNextButtonClick() {
-    props.onNextClick(currentStep)
+    if (disableNext) {
+      setStepInteracted(true)
+    } else {
+      props.onNextClick(currentStep)
+      setStepInteracted(false)
+    }
   }
   function handlePreviousButtonClick() {
     props.onPreviousClick(currentStep)
   }
   function handleSubmit() {
-    props.onSubmit()
+    if (disableNext) {
+      setStepInteracted(true)
+    } else {
+      props.onSubmit()
+      setStepInteracted(false)
+    }
   }
 
   function handleResultChange(stepName, questionName, answer) {
+    setStepInteracted(true)
     props.onResultsChange(stepName, questionName, answer)
   }
 
@@ -118,6 +134,7 @@ const Steps = props => {
         valid={currentStepValidChecks[questionName]}
         errorMessage={currentStepErrorMessages[questionName]}
         show={showQuestion}
+        stepInteracted={stepInteracted}
         onValueChange={value =>
           handleResultChange(stepName, questionName, value)
         }
@@ -151,20 +168,12 @@ const Steps = props => {
           &larr; Previous
         </button>
         {!isLastQuestion && (
-          <button
-            className="button"
-            onClick={handleNextButtonClick}
-            disabled={disableNext}
-          >
+          <button className={nextButtonClasses} onClick={handleNextButtonClick}>
             Next &rarr;
           </button>
         )}
         {isLastQuestion && (
-          <button
-            className="button is-primary"
-            onClick={handleSubmit}
-            disabled={disableNext}
-          >
+          <button className="button is-primary" onClick={handleSubmit}>
             Submit
           </button>
         )}
