@@ -1,10 +1,16 @@
 import React from "react"
-import { useLocation } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const NoMatchPage = () => {
-  const { pathname } = useLocation()
-
-  return <h1>{pathname} not found.</h1>
+  return (
+    <div className="no-match-page container has-text-centered">
+      <h1>Page not found.</h1>
+      <p>You might have entered the incorrect address.</p>
+      <p>
+        Back to <Link to="/">homepage</Link>.
+      </p>
+    </div>
+  )
 }
 
 export default NoMatchPage
