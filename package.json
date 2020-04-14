@@ -32,6 +32,7 @@
     "react-scripts": "3.4.1",
     "react-transition-group": "^4.3.0",
     "showdown": "^1.9.1",
+    "store": "^2.0.12",
     "xml-js": "^1.6.11",
     "xmlserializer": "^0.6.1"
   },

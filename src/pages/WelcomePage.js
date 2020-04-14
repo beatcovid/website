@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import store from "store"
 import PrivacyNotice from "../components/welcome/PrivacyNotice"
 import Hero from "../components/welcome/Hero"
 import Intro from "../components/welcome/Intro"
@@ -6,14 +7,17 @@ import Faq from "../components/welcome/Faq"
 import StartSurvey from "../components/welcome/StartSurvey"
 import Disclaimer from "../components/welcome/Disclaimer"
 
+const privacyNoticeAccept = store.get("privacy-notice-accept") || false
+
 const WelcomePage = () => {
   const [currentSection, setCurrentSection] = useState("")
-  const [privacyNotice, setPrivacyNotice] = useState(true)
+  const [privacyNotice, setPrivacyNotice] = useState(!privacyNoticeAccept)
 
   function handleSectionChange(section) {
     setCurrentSection(section)
   }
   function handleAccept() {
+    store.set("privacy-notice-accept", true)
     setPrivacyNotice(false)
   }
 
