@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React, { useMemo, useState } from "react"
 
 const Radio = props => {
   const layout = props.layout || ""
@@ -9,14 +9,18 @@ const Radio = props => {
   const stepInteracted = props.stepInteracted
   const valid = props.valid
   const errorMessage = props.errorMessage || ""
+  const [interacted, setInteracted] = useState(false)
 
   const fieldClasses = useMemo(() => {
     return `${layout} survey-radio field`
   }, [layout])
+  const showError = useMemo(() => {
+    return !valid && (stepInteracted || interacted)
+  }, [valid, stepInteracted, interacted])
   const labelClasses = useMemo(() => {
     const baseClass = "label"
-    return valid || !stepInteracted ? baseClass : `${baseClass} has-text-danger`
-  }, [valid, stepInteracted])
+    return showError ? `${baseClass} has-text-danger` : baseClass
+  }, [showError])
 
   function renderOptions(option) {
     let optionClass = "radio"
@@ -39,6 +43,7 @@ const Radio = props => {
 
   function handleChange(e) {
     const value = e.currentTarget.value
+    setInteracted(true)
     props.onChange(value)
   }
 
@@ -47,7 +52,7 @@ const Radio = props => {
       <label className={labelClasses} dangerouslySetInnerHTML={label} />
       <div className="control">{options.map(renderOptions)}</div>
 
-      {!valid && stepInteracted && layout === "stack" && (
+      {showError && layout === "stack" && (
         <p className="help is-danger">{errorMessage}</p>
       )}
     </div>

@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo } from "react"
+import React, { forwardRef, useMemo, useState } from "react"
 import parseISO from "date-fns/parseISO"
 import formatISO from "date-fns/formatISO"
 import DatePicker from "react-datepicker"
@@ -11,14 +11,18 @@ const InputDate = props => {
   const errorMessage = props.errorMessage || ""
   const valid = props.valid
   const stepInteracted = props.stepInteracted
+  const [interacted, setInteracted] = useState(false)
 
   const dateValue = useMemo(() => {
     return value ? parseISO(value) : ""
   }, [value])
+  const showError = useMemo(() => {
+    return !valid && (stepInteracted || interacted)
+  }, [valid, stepInteracted, interacted])
   const labelClasses = useMemo(() => {
     const baseClass = "label"
-    return valid || !stepInteracted ? baseClass : `${baseClass} has-text-danger`
-  }, [valid, stepInteracted])
+    return showError ? `${baseClass} has-text-danger` : baseClass
+  }, [showError])
 
   const CustomInput = forwardRef((props, ref) => {
     return (
@@ -34,6 +38,7 @@ const InputDate = props => {
   })
 
   function handleChange(value) {
+    setInteracted(true)
     props.onChange(formatISO(value))
   }
 
@@ -50,9 +55,7 @@ const InputDate = props => {
         />
       </div>
 
-      {!valid && stepInteracted && (
-        <p className="help is-danger">{errorMessage}</p>
-      )}
+      {showError && <p className="help is-danger">{errorMessage}</p>}
     </div>
   )
 }

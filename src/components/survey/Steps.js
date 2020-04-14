@@ -116,7 +116,6 @@ const Steps = props => {
   }
 
   function handleResultChange(stepName, questionName, answer) {
-    setStepInteracted(true)
     props.onResultsChange(stepName, questionName, answer)
   }
 

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React, { useMemo, useState } from "react"
 
 const Checkbox = props => {
   const name = props.name || ""
@@ -8,14 +8,18 @@ const Checkbox = props => {
   const errorMessage = props.errorMessage || ""
   const valid = props.valid
   const stepInteracted = props.stepInteracted
+  const [interacted, setInteracted] = useState(false)
 
   const selectedOptionsArray = useMemo(() => {
     return selectedOptions.trim().split(" ")
   }, [selectedOptions])
+  const showError = useMemo(() => {
+    return !valid && (stepInteracted || interacted)
+  }, [valid, stepInteracted, interacted])
   const labelClasses = useMemo(() => {
     const baseClass = "label"
-    return valid || !stepInteracted ? baseClass : `${baseClass} has-text-danger`
-  }, [valid, stepInteracted])
+    return showError ? `${baseClass} has-text-danger` : baseClass
+  }, [showError])
 
   function renderOptions(option) {
     return (
@@ -45,7 +49,7 @@ const Checkbox = props => {
     } else {
       selected.splice(findSelected, 1)
     }
-
+    setInteracted(true)
     props.onChange(selected.join(" ").trim())
   }
 
@@ -55,9 +59,7 @@ const Checkbox = props => {
 
       <div className="control">{options.map(renderOptions)}</div>
 
-      {!valid && stepInteracted && (
-        <p className="help is-danger">{errorMessage}</p>
-      )}
+      {showError && <p className="help is-danger">{errorMessage}</p>}
     </div>
   )
 }
