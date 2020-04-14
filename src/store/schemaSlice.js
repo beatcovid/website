@@ -7,6 +7,7 @@ export const slice = createSlice({
     isLoading: false,
     isSubmitted: false,
     uid: undefined,
+    userId: undefined,
     survey: undefined,
   },
   reducers: {
@@ -22,6 +23,9 @@ export const slice = createSlice({
     setUid: (state, { payload }) => {
       state.uid = payload
     },
+    setUserId: (state, { payload }) => {
+      state.userId = payload
+    },
     setSurvey: (state, { payload }) => {
       state.survey = payload
     },
@@ -33,21 +37,16 @@ export const {
   unsetLoading,
   setSubmitted,
   setUid,
+  setUserId,
   setSurvey,
 } = slice.actions
 
-function getFormData(results, global) {
-  const formData = {}
-
-  // add start date manually
-  formData.start = new Date().toISOString()
-
-  // append global propoerties with a calculate field
-  global.forEach(g => {
-    if (g.type === "calculate" && g.calculation) {
-      formData[g.name] = g.calculation
-    }
-  })
+function getFormData(user_id, version, results) {
+  const formData = {
+    start: new Date().toISOString(),
+    user_id,
+    version,
+  }
 
   // flatten the results for form data
   Object.keys(results).forEach(r => {
@@ -70,14 +69,18 @@ export const doSchemaGet = () => dispatch => {
       console.log(r)
       dispatch(setSurvey(r.survey))
       dispatch(setUid(r.uid))
+
+      if (r.user && r.user.id) {
+        dispatch(setUserId(r.user.id))
+      }
     })
     .catch(e => console.error(e))
     .then(() => {
       dispatch(unsetLoading())
     })
 }
-export const doSubmit = (results, global) => dispatch => {
-  const formData = getFormData(results, global)
+export const doSubmit = (userId, version, results) => dispatch => {
+  const formData = getFormData(userId, version, results)
   dispatch(setLoading())
   // @TODO: send to error page if submission fails
   api
@@ -94,6 +97,7 @@ export const doSubmit = (results, global) => dispatch => {
 export const selectLoading = state => state.schema.isLoading
 export const selectSubmitted = state => state.schema.isSubmitted
 export const selectUid = state => state.schema.uid
+export const selectUserId = state => state.schema.userId
 export const selectSurvey = state => state.schema.survey
 
 export default slice.reducer

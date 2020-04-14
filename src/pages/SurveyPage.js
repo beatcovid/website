@@ -4,13 +4,18 @@ import { useHistory } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import SurveyProgress from "../components/survey/Progress"
 import SurveySteps from "../components/survey/Steps"
-import { doSchemaGet, doSubmit, selectSurvey } from "../store/schemaSlice"
+import {
+  doSchemaGet,
+  doSubmit,
+  selectSurvey,
+  selectUserId,
+} from "../store/schemaSlice"
 import {
   doSetCurrentStep,
   doSetGlobal,
   doSetSteps,
   selectCurrentStep,
-  selectGlobal,
+  selectSurveyVersion,
   selectSteps,
   selectStepNames,
 } from "../store/surveySlice"
@@ -19,7 +24,8 @@ const SurveyPage = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const survey = useSelector(selectSurvey)
-  const global = useSelector(selectGlobal)
+  const userId = useSelector(selectUserId)
+  const surveyVersion = useSelector(selectSurveyVersion)
   const surveySteps = useSelector(selectSteps)
   const stepNames = useSelector(selectStepNames)
   const currentStep = useSelector(selectCurrentStep)
@@ -82,7 +88,7 @@ const SurveyPage = () => {
   }
 
   function handleSurveySubmit() {
-    dispatch(doSubmit(surveyResults, global))
+    dispatch(doSubmit(userId, surveyVersion, surveyResults))
     history.push("/summary")
   }
 

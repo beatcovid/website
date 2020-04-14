@@ -52,6 +52,13 @@ export const doSetResults = results => dispatch => {
 
 export const selectCurrentStep = state => state.survey.currentStep
 export const selectGlobal = state => state.survey.global
+export const selectSurveyVersion = state => {
+  const findVersion = state.survey.global.find(g => g.name === "version")
+  if (findVersion) {
+    return findVersion.calculation
+  }
+  return ""
+}
 export const selectSteps = state => state.survey.steps
 export const selectStepNames = state => state.survey.stepNames
 export const selectResults = state => state.survey.results
