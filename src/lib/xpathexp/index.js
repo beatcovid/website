@@ -18,6 +18,16 @@ const parser = new DOMParser()
  * @param {string} relevancy
  */
 export const evalExpression = (expression, nodeOrState) => {
+  if (
+    expression === undefined ||
+    nodeOrState === undefined ||
+    !expression ||
+    !nodeOrState ||
+    typeof expression !== "string"
+  ) {
+    return true
+  }
+
   invariant(nodeOrState, "Invalid node or state")
   invariant(expression, "Require expression")
   invariant(typeof expression === "string", "Expression must be a string")
