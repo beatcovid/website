@@ -31,9 +31,9 @@ export const fetchStats = () => dispatch => {
     .catch(e => console.error(e))
 }
 
-export const selectSubmissions = state => state.submissions
-export const selectSubmissionsToday = state => state.submissions_today
-export const selectLastSubmissionDate = state => state.submission_last
-export const selectDateModified = state => state.date_modified
+export const selectSubmissions = state => state.stats.submissions
+export const selectSubmissionsToday = state => state.stats.submissions_today
+export const selectLastSubmissionDate = state => state.stats.submission_last
+export const selectDateModified = state => state.stats.date_modified
 
 export default slice.reducer
