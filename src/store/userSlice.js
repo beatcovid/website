@@ -1,13 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const ignoreKeys = [
-  "id",
-  "submission",
-  "last_submission",
-  "last_login",
-  "first_login",
-]
-
 export const slice = createSlice({
   name: "user",
   initialState: {
@@ -28,13 +20,14 @@ export const { setUserId, setResults } = slice.actions
 
 export const doSetUser = user => dispatch => {
   const userObj = { ...user }
+  const lastSubmission = userObj.last_submission
   const results = {}
 
-  Object.keys(userObj).forEach(key => {
-    if (ignoreKeys.indexOf(key) === -1) {
-      results[key] = userObj[key]
-    }
-  })
+  if (lastSubmission) {
+    Object.keys(lastSubmission).forEach(key => {
+      results[key] = lastSubmission[key]
+    })
+  }
 
   dispatch(setResults(results))
   dispatch(setUserId(userObj.id))
