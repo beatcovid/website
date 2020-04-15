@@ -1,5 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import parseISO from "date-fns/parseISO"
+import format from "date-fns/format"
+
 import { doSubmissionsGet, selectSubmissions } from "../store/submissionsSlice"
 
 const systemKeys = [
@@ -33,8 +36,16 @@ const SubmissionsPage = () => {
   useEffect(() => {
     if (!hasSubmissions) {
       dispatch(doSubmissionsGet())
+    } else {
+      setCurrentSubmission(submissions[0])
     }
-  }, [hasSubmissions, dispatch])
+  }, [hasSubmissions, submissions, dispatch])
+
+  function formatDate(isoString) {
+    return isoString
+      ? format(parseISO(isoString), "iii dd-LLL-yyyy HH:mm:ss")
+      : ""
+  }
 
   function sortByName(a, b) {
     var nameA = a.name.toUpperCase()
@@ -97,7 +108,7 @@ const SubmissionsPage = () => {
             </tr>
             <tr>
               <th>submission_time</th>
-              <td>{systemFields.submission_time}</td>
+              <td>{formatDate(systemFields.submission_time)}</td>
             </tr>
 
             <tr>
@@ -115,11 +126,11 @@ const SubmissionsPage = () => {
 
             <tr>
               <th>start</th>
-              <td>{systemFields.start}</td>
+              <td>{formatDate(systemFields.start)}</td>
             </tr>
             <tr>
               <th>end</th>
-              <td>{systemFields.end}</td>
+              <td>{formatDate(systemFields.end)}</td>
             </tr>
 
             <tr>
@@ -157,7 +168,7 @@ const SubmissionsPage = () => {
 
   function renderSubmissions(submission) {
     const id = `sub_${submission.uuid}`
-    const startDate = submission.start
+    const submissionDate = submission.submission_time
     const isActive = currentSubmission
       ? submission.uuid === currentSubmission.uuid
       : false
@@ -173,7 +184,7 @@ const SubmissionsPage = () => {
         key={id}
         onClick={() => handleSubmissionClick(submission)}
       >
-        {startDate}
+        {formatDate(submissionDate)}
       </div>
     )
   }
@@ -181,9 +192,11 @@ const SubmissionsPage = () => {
   return (
     <div className="submissions-page container">
       <div className="columns">
-        <div className="column submission-list">
-          <h2>Submissions</h2>
-          {hasSubmissions && submissions.map(s => renderSubmissions(s))}
+        <div className="column">
+          <div className="submission-list">
+            <h2>Submissions</h2>
+            {hasSubmissions && submissions.map(s => renderSubmissions(s))}
+          </div>
         </div>
 
         <div className="column is-two-thirds">

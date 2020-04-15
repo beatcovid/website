@@ -1,8 +1,17 @@
 .submissions-page {
+  font-size: 0.8em;
   padding: 2rem;
+
+  th {
+    width: 200px
+  }
 
   .submission-list {
     border-right: 1px solid #eee;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 1rem;
+    z-index: 99;
 
     h2 {
       font-size: 1.3rem;
