@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { Link } from "react-router-dom"
 import parseISO from "date-fns/parseISO"
 import format from "date-fns/format"
 
@@ -191,18 +192,28 @@ const SubmissionsPage = () => {
 
   return (
     <div className="submissions-page container">
-      <div className="columns">
-        <div className="column">
-          <div className="submission-list">
-            <h2>Submissions</h2>
-            {hasSubmissions && submissions.map(s => renderSubmissions(s))}
+      {hasSubmissions && (
+        <div className="columns">
+          <div className="column">
+            <div className="submission-list">
+              <h2>Submissions</h2>
+              {submissions.map(s => renderSubmissions(s))}
+            </div>
+          </div>
+
+          <div className="column is-two-thirds">
+            {hasCurrentSubmission && renderSubmission()}
           </div>
         </div>
-
-        <div className="column is-two-thirds">
-          {hasCurrentSubmission && renderSubmission()}
+      )}
+      {!hasSubmissions && (
+        <div className="no-submissions">
+          <h1>You have no submissions recorded.</h1>
+          <p>
+            <Link to="/">Start Symptom Tracker</Link>.
+          </p>
         </div>
-      </div>
+      )}
     </div>
   )
 }
