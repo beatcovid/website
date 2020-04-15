@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { Helmet } from "react-helmet"
 import parseISO from "date-fns/parseISO"
 import format from "date-fns/format"
-
+import AppLoader from "../components/app/Loader"
 import {
   doSubmissionsGet,
   selectSubmissions,
@@ -161,11 +161,7 @@ const SubmissionsPage = () => {
           </p>
         </div>
       )}
-      {!hasSubmissions && isLoading && (
-        <div className="no-submissions">
-          <h1>Loading...</h1>
-        </div>
-      )}
+      {!hasSubmissions && isLoading && <AppLoader />}
     </div>
   )
 }
