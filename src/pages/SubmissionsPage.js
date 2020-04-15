@@ -163,7 +163,7 @@ const SubmissionsPage = () => {
           </tbody>
         </table>
 
-        <h3>Submission values</h3>
+        <h3>Responses</h3>
         <table className="table is-fullwidth is-narrow is-bordered is-striped">
           <thead>
             <tr>
