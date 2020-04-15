@@ -59,11 +59,6 @@ const HomeApp = () => {
               <Contacts />
             </Route>
 
-            <Route path="/summary">
-              <SummaryPage />
-              <Contacts />
-            </Route>
-
             <Route path="*">
               <NoMatchPage />
             </Route>
