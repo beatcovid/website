@@ -37,6 +37,15 @@ const SubmissionsPage = () => {
       : ""
   }
 
+  function isDateField(name) {
+    return (
+      name === "_submission_time" ||
+      name === "start" ||
+      name === "end" ||
+      name.indexOf("_date") !== -1
+    )
+  }
+
   function sortByName(a, b) {
     var nameA = a.name.toUpperCase()
     var nameB = b.name.toUpperCase()
@@ -62,11 +71,31 @@ const SubmissionsPage = () => {
       <tr key={id}>
         <th>{name}</th>
         <td className="value-cell">
-          <code>{JSON.stringify(value, null, 2)}</code>
+          {isDateField(name) && <code>{formatDate(value)}</code>}
+          {!isDateField(name) && <code>{JSON.stringify(value, null, 2)}</code>}
         </td>
       </tr>
     )
   }
+
+  const systemKeys = [
+    "_id",
+    "_uuid",
+    "user_id",
+    "_submission_time",
+    "_status",
+    "user_agent",
+    "version",
+    "start",
+    "end",
+    "_xform_id_string",
+    "_validation_status",
+    "_tags",
+    "_notes",
+    "_geolocation",
+    "_timezone",
+    "_submitted_by",
+  ]
 
   function renderSubmission() {
     const formFields = []
@@ -78,19 +107,20 @@ const SubmissionsPage = () => {
         key === "user_id" ||
         key === "version"
       ) {
-        systemFields.push({
-          name: key,
-          value: currentSubmission[key],
-        })
+        // ignore these fields
       } else {
         formFields.push({
           name: key,
           value: currentSubmission[key],
         })
-        // systemFields[key] = currentSubmission[key]
       }
     })
-    systemFields.sort(sortByName)
+    systemKeys.forEach(key => {
+      systemFields.push({
+        name: key,
+        value: currentSubmission[key],
+      })
+    })
     formFields.sort(sortByName)
     return (
       <div className="submissions-detail">
@@ -104,7 +134,7 @@ const SubmissionsPage = () => {
           </tbody>
         </table>
 
-        <h3>Responses</h3>
+        <h3>Data</h3>
         <table className="table is-fullwidth is-narrow is-bordered is-striped">
           <tbody>
             {formFields.map((f, i) => renderFormField(f, `form_${i}`))}
