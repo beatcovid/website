@@ -21,29 +21,12 @@ const SummaryPage = () => {
   const submissions = useSelector(selectSubmissions)
   const isTrackerError = useSelector(selectIsTrackerError)
   const scoresSummary = useMemo(() => {
-    const summary = {
-      respiratory: {
-        label: "Respiratory symptoms",
-        domains: ["None", "Severe"],
-        score: 0,
-        max: 3,
-      },
-      general: {
-        label: "General symptoms",
-        domains: ["None", "Severe"],
-        score: 0,
-        max: 3,
-      },
-      activity: {
-        label: "Ability to do daily activities",
-        domains: ["No difficulty", "Great difficulty"],
-        score: 0,
-        max: 3,
-      },
-    }
+    const summary = {}
     if (tracker) {
       const trackerScores = tracker.scores.summary
       Object.keys(trackerScores).forEach(key => {
+        summary[key] = {}
+        summary[key].label = key
         summary[key].score = trackerScores[key].value
         summary[key].max = trackerScores[key].max
       })
