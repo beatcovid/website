@@ -10,7 +10,7 @@ const PotentialExposureTable = props => {
       <table className="table is-fullwidth is-striped">
         <tbody>
           <tr>
-            <th colSpan="2">Potential Exposure in the past 14 days:</th>
+            <th colSpan="2">Potential Exposure:</th>
           </tr>
           <tr>
             <td>International travel</td>
