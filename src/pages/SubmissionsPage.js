@@ -4,7 +4,12 @@ import { Link } from "react-router-dom"
 import parseISO from "date-fns/parseISO"
 import format from "date-fns/format"
 
-import { doSubmissionsGet, selectSubmissions } from "../store/submissionsSlice"
+import {
+  doSubmissionsGet,
+  selectSubmissions,
+  selectIsCompleted,
+  selectIsLoading,
+} from "../store/submissionsSlice"
 
 const systemKeys = [
   "id",
@@ -28,6 +33,8 @@ const systemKeys = [
 const SubmissionsPage = () => {
   const dispatch = useDispatch()
   const submissions = useSelector(selectSubmissions)
+  const isLoading = useSelector(selectIsLoading)
+  const isCompleted = useSelector(selectIsCompleted)
   const [currentSubmission, setCurrentSubmission] = useState(null)
   const hasSubmissions = useMemo(() => submissions.length > 0, [submissions])
   const hasCurrentSubmission = useMemo(() => currentSubmission, [
@@ -35,12 +42,12 @@ const SubmissionsPage = () => {
   ])
 
   useEffect(() => {
-    if (!hasSubmissions) {
+    if (!hasSubmissions && !isLoading && !isCompleted) {
       dispatch(doSubmissionsGet())
-    } else {
+    } else if (submissions.length > 0) {
       setCurrentSubmission(submissions[0])
     }
-  }, [hasSubmissions, submissions, dispatch])
+  }, [hasSubmissions, submissions, isLoading, isCompleted, dispatch])
 
   function formatDate(isoString) {
     return isoString
@@ -218,12 +225,17 @@ const SubmissionsPage = () => {
           </div>
         </div>
       )}
-      {!hasSubmissions && (
+      {!hasSubmissions && !isLoading && (
         <div className="no-submissions">
           <h1>You have no submissions recorded.</h1>
           <p>
             <Link to="/">Start Symptom Tracker</Link>.
           </p>
+        </div>
+      )}
+      {!hasSubmissions && isLoading && (
+        <div className="no-submissions">
+          <h1>Loading...</h1>
         </div>
       )}
     </div>
