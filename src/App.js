@@ -12,6 +12,7 @@ import SurveyPage from "./pages/SurveyPage"
 import SummaryPage from "./pages/SummaryPage"
 import PrivacyPage from "./pages/PrivacyPage"
 import InformationPage from "./pages/InformationPage"
+import SubmissionsPage from "./pages/SubmissionsPage"
 import NoMatchPage from "./pages/NoMatchPage"
 
 import { selectLoading } from "./store/schemaSlice"
@@ -57,6 +58,10 @@ const HomeApp = () => {
             <Route path="/summary">
               <SummaryPage />
               <Contacts />
+            </Route>
+
+            <Route path="/submissions">
+              <SubmissionsPage />
             </Route>
 
             <Route path="*">

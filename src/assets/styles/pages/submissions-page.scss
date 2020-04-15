@@ -1,0 +1,34 @@
+.submissions-page {
+  padding: 2rem;
+
+  .submission-list {
+    border-right: 1px solid #eee;
+
+    h2 {
+      font-size: 1.3rem;
+      font-weight: 900;
+      border-bottom: 1px solid #eee;
+    }
+
+    .item {
+      cursor: pointer;
+      padding: 3px 6px;
+
+      &:hover {
+        background-color: #efefef;
+      }
+
+      &.is-active {
+        background-color: $pink;
+        color: #fff;
+      }
+    }
+  }
+
+  .submissions-detail {
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 900;
+    }
+  }
+}
