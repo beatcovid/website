@@ -44,7 +44,7 @@ const SubmissionsPage = () => {
 
   function formatDate(isoString) {
     return isoString
-      ? format(parseISO(isoString), "iii dd-LLL-yyyy HH:mm:ss")
+      ? format(parseISO(`${isoString}Z`), "iii dd-LLL-yyyy HH:mm:ss")
       : ""
   }
 
