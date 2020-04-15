@@ -4,16 +4,19 @@ import SingleBar from "../viz/SingleBar"
 const SummaryOfSymptoms = props => {
   const summaryScores = props.summaryScores
 
-  function renderBarViz(scoreTitle) {
+  function renderBarViz(scoreName) {
+    const max = summaryScores[scoreName].max
+    const warningScore = max * (1 / 3)
+    const dangerScore = max * (2 / 3)
     return (
       <SingleBar
-        key={scoreTitle}
-        title={scoreTitle}
-        score={summaryScores[scoreTitle].score}
-        domains={summaryScores[scoreTitle].domains}
-        max={3}
-        warningScore={1}
-        dangerScore={3}
+        key={scoreName}
+        title={summaryScores[scoreName].label}
+        score={summaryScores[scoreName].score}
+        domains={summaryScores[scoreName].domains}
+        max={max}
+        warningScore={warningScore}
+        dangerScore={dangerScore}
       />
     )
   }
@@ -22,8 +25,7 @@ const SummaryOfSymptoms = props => {
     <section className="summary-of-symptoms-section card is-info">
       <header>Summary of Symptoms</header>
       <p>
-        This section gives a score between 0 (no symptoms) and 3 (many severe
-        symptoms).
+        This section gives a score between no symptoms and many severe symptoms.
       </p>
       <div className="card-content">
         {Object.keys(summaryScores).map(renderBarViz)}

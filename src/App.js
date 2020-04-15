@@ -16,6 +16,8 @@ import SubmissionsPage from "./pages/SubmissionsPage"
 import NoMatchPage from "./pages/NoMatchPage"
 
 import { selectLoading } from "./store/schemaSlice"
+import { selectTrackerLoading } from "./store/userSlice"
+
 import { selectSubmissions, fetchStats } from "./store/statsSlice"
 
 const HomeApp = () => {
@@ -23,6 +25,7 @@ const HomeApp = () => {
   const submissionCount = useSelector(selectSubmissions)
   const version = process.env.REACT_APP_VERSION || ""
   const isLoading = useSelector(selectLoading)
+  const isTrackerLoading = useSelector(selectTrackerLoading)
 
   useEffect(() => {
     dispatch(fetchStats())
@@ -33,9 +36,9 @@ const HomeApp = () => {
       <ScrollToTop />
       <AppHeader count={submissionCount} />
 
-      {isLoading && <AppLoader />}
+      {(isLoading || isTrackerLoading) && <AppLoader />}
 
-      {!isLoading && (
+      {!isLoading && !isTrackerLoading && (
         <div className="site-content">
           <Switch>
             <Route path="/" exact>
