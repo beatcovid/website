@@ -58,6 +58,16 @@
     }
   }
 
+  .value-cell {
+    width: 60%;
+
+    div {
+      overflow-x: auto;
+      white-space: nowrap;
+      width: 50%;
+    }
+  }
+
   .no-submissions {
     padding-top: 10rem;
 

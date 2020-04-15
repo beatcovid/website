@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
+import { Helmet } from "react-helmet"
 import parseISO from "date-fns/parseISO"
 import format from "date-fns/format"
 
@@ -10,25 +11,6 @@ import {
   selectIsCompleted,
   selectIsLoading,
 } from "../store/submissionsSlice"
-
-const systemKeys = [
-  "id",
-  "uuid",
-  "user_id",
-  "submission_time",
-  "status",
-  "user_agent",
-  "version",
-  "start",
-  "end",
-  "xform_id_string",
-  "validation_status",
-  "tags",
-  "notes",
-  "geolocation",
-  "timezone",
-  "submitted_by",
-]
 
 const SubmissionsPage = () => {
   const dispatch = useDispatch()
@@ -79,105 +61,51 @@ const SubmissionsPage = () => {
     return (
       <tr key={id}>
         <th>{name}</th>
-        <td>{JSON.stringify(value)}</td>
+        <td className="value-cell">
+          <code>{JSON.stringify(value, null, 2)}</code>
+        </td>
       </tr>
     )
   }
 
   function renderSubmission() {
     const formFields = []
-    const systemFields = {}
+    const systemFields = []
     Object.keys(currentSubmission).forEach(key => {
-      if (systemKeys.indexOf(key) === -1) {
-        formFields.push({
+      if (
+        key[0] === "_" ||
+        key === "start" ||
+        key === "user_id" ||
+        key === "version"
+      ) {
+        systemFields.push({
           name: key,
           value: currentSubmission[key],
         })
       } else {
-        systemFields[key] = currentSubmission[key]
+        formFields.push({
+          name: key,
+          value: currentSubmission[key],
+        })
+        // systemFields[key] = currentSubmission[key]
       }
     })
+    systemFields.sort(sortByName)
     formFields.sort(sortByName)
     return (
       <div className="submissions-detail">
+        <Helmet>
+          <title>Submissions</title>
+        </Helmet>
+        <h3>Metadata</h3>
         <table className="table is-fullwidth is-narrow is-bordered is-striped">
-          <thead>
-            <tr>
-              <th>Metadata</th>
-              <th></th>
-            </tr>
-          </thead>
           <tbody>
-            <tr>
-              <th>id</th>
-              <td>{systemFields.id}</td>
-            </tr>
-            <tr>
-              <th>uuid</th>
-              <td>{systemFields.uuid}</td>
-            </tr>
-            <tr>
-              <th>user_id</th>
-              <td>{systemFields.user_id}</td>
-            </tr>
-            <tr>
-              <th>submission_time</th>
-              <td>{formatDate(systemFields.submission_time)}</td>
-            </tr>
-
-            <tr>
-              <th>status</th>
-              <td>{systemFields.status}</td>
-            </tr>
-            <tr>
-              <th>user_agent</th>
-              <td>{systemFields.user_agent}</td>
-            </tr>
-            <tr>
-              <th>version</th>
-              <td>{systemFields.version}</td>
-            </tr>
-
-            <tr>
-              <th>start</th>
-              <td>{formatDate(systemFields.start)}</td>
-            </tr>
-            <tr>
-              <th>end</th>
-              <td>{formatDate(systemFields.end)}</td>
-            </tr>
-
-            <tr>
-              <th>xform_id_string</th>
-              <td>{systemFields.xform_id_string}</td>
-            </tr>
-            <tr>
-              <th>validation_status</th>
-              <td>{JSON.stringify(systemFields.validation_status)}</td>
-            </tr>
-            <tr>
-              <th>tags</th>
-              <td>{systemFields.tags}</td>
-            </tr>
-            <tr>
-              <th>notes</th>
-              <td>{systemFields.notes}</td>
-            </tr>
-            <tr>
-              <th>geolocation</th>
-              <td>{systemFields.geolocation}</td>
-            </tr>
+            {systemFields.map((f, i) => renderFormField(f, `system_${i}`))}
           </tbody>
         </table>
 
         <h3>Responses</h3>
         <table className="table is-fullwidth is-narrow is-bordered is-striped">
-          <thead>
-            <tr>
-              <th>Metadata</th>
-              <th></th>
-            </tr>
-          </thead>
           <tbody>
             {formFields.map((f, i) => renderFormField(f, `form_${i}`))}
           </tbody>
@@ -187,10 +115,10 @@ const SubmissionsPage = () => {
   }
 
   function renderSubmissions(submission) {
-    const id = `sub_${submission.uuid}`
-    const submissionDate = submission.submission_time
+    const id = `sub_${submission._uuid}`
+    const submissionDate = submission._submission_time
     const isActive = currentSubmission
-      ? submission.uuid === currentSubmission.uuid
+      ? submission._uuid === currentSubmission._uuid
       : false
 
     const itemClasses = () => {
