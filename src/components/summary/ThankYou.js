@@ -1,7 +1,9 @@
 import React from "react"
+import numeral from "numeral"
 
 const ThankYou = props => {
   const counter = props.counter
+  const countFormatted = numeral(counter).format("0,0")
   return (
     <section className="thankyou-section card is-info">
       <header>Thank you</header>
@@ -12,7 +14,7 @@ const ThankYou = props => {
 
         <div className="person-counter">
           <span>You are one of the</span>
-          <span className="count">{counter}</span>
+          <span className="count">{countFormatted}</span>
           <span>people using this Symptom Tracker</span>
         </div>
 
