@@ -79,7 +79,7 @@ const SubmissionsPage = () => {
     return (
       <tr key={id}>
         <th>{name}</th>
-        <td>{value}</td>
+        <td>{JSON.stringify(value)}</td>
       </tr>
     )
   }
