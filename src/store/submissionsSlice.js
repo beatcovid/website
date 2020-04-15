@@ -21,15 +21,15 @@ export const doSubmissionsGet = () => dispatch => {
   api
     .getSubmissions()
     .then(r => {
-      console.log(r)
-      if (r.length > 0) {
+      console.log("submissions", r)
+      if (r) {
         r.sort((a, b) => {
           const dateA = getTime(parseISO(a.submission_time))
           const dateB = getTime(parseISO(b.submission_time))
           return dateB - dateA
         })
+        dispatch(setSubmissions(r))
       }
-      dispatch(setSubmissions(r))
     })
     .catch(e => console.error(e))
 }

@@ -2,9 +2,26 @@
   font-size: 0.8em;
   padding: 2rem;
 
-  th {
-    width: 200px
+  .table {
+    th {
+      text-align: right;
+    }
+
+    tbody {
+      th {
+        width: 200px;
+      }
+    }
+
+    thead {
+      th {
+        background-color: $pink-lighter;
+        font-size: 0.8em;
+        color: #666;
+      }
+    }
   }
+
 
   .submission-list {
     border-right: 1px solid #eee;

@@ -94,6 +94,12 @@ const SubmissionsPage = () => {
     return (
       <div className="submissions-detail">
         <table className="table is-fullwidth is-narrow is-bordered is-striped">
+          <thead>
+            <tr>
+              <th>Metadata</th>
+              <th></th>
+            </tr>
+          </thead>
           <tbody>
             <tr>
               <th>id</th>
@@ -159,6 +165,12 @@ const SubmissionsPage = () => {
 
         <h3>Submission values</h3>
         <table className="table is-fullwidth is-narrow is-bordered is-striped">
+          <thead>
+            <tr>
+              <th>Metadata</th>
+              <th></th>
+            </tr>
+          </thead>
           <tbody>
             {formFields.map((f, i) => renderFormField(f, `form_${i}`))}
           </tbody>
