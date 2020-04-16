@@ -5,7 +5,7 @@ const Note = props => {
 
   return (
     <div className="survey-note field">
-      <label dangerouslySetInnerHTML={label} />
+      <label className="label" dangerouslySetInnerHTML={label} />
     </div>
   )
 }
