@@ -45,6 +45,13 @@ const Steps = props => {
         let constraintCheck = true
         let relevancyCheck = true
 
+        // check for geopoint
+        if (answer && q.type === "geopoint") {
+          if (answer.geo === null) {
+            requireCheck = false
+          }
+        }
+
         try {
           relevancyCheck = q.relevant
             ? evalExpression(q.relevant, results)

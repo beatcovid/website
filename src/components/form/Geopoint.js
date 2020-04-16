@@ -14,6 +14,9 @@ const Geopoint = props => {
   const stepInteracted = props.stepInteracted
   const [interacted, setInteracted] = useState(false)
   const [geoLocation, setGeoLocation] = useState(null)
+  const addressValue = useMemo(() => {
+    return value && value.name ? value.name : ""
+  }, [value])
 
   const showError = useMemo(() => {
     return !valid && (stepInteracted || interacted)
@@ -32,26 +35,36 @@ const Geopoint = props => {
     return loading ? `${baseClass} is-loading` : baseClass
   }
 
+  function getGeopointObj(address, geocode) {
+    return {
+      name: address,
+      geo: geocode,
+    }
+  }
+
   function handleChange(address) {
-    setGeoLocation(null)
     setInteracted(true)
-    props.onChange(address)
+    props.onChange(getGeopointObj(address, null))
   }
 
   function handleSelect(address) {
     geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => setGeoLocation(latLng))
+      .then(results => {
+        setInteracted(true)
+        props.onChange(getGeopointObj(address, results[0]))
+        return getLatLng(results[0])
+      })
+      .then(latLng => {
+        setGeoLocation(latLng)
+      })
       .catch(error => console.error("Error", error))
-    setInteracted(true)
-    props.onChange(address)
   }
 
   return (
     <div className="survey-geopoint field">
       <label className={labelClasses} dangerouslySetInnerHTML={label} />
       <PlacesAutocomplete
-        value={value}
+        value={addressValue}
         onChange={handleChange}
         onSelect={handleSelect}
         searchOptions={{
