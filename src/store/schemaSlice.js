@@ -9,6 +9,7 @@ export const slice = createSlice({
     uid: undefined,
     user: undefined,
     survey: undefined,
+    formVersion: "",
   },
   reducers: {
     setLoading: state => {
@@ -29,6 +30,9 @@ export const slice = createSlice({
     setSurvey: (state, { payload }) => {
       state.survey = payload
     },
+    setFormVersion: (state, { payload }) => {
+      state.formVersion = payload
+    },
   },
 })
 
@@ -39,6 +43,7 @@ export const {
   setUid,
   setUser,
   setSurvey,
+  setFormVersion,
 } = slice.actions
 
 function getFormData(user_id, version, results) {
@@ -67,7 +72,9 @@ export const doSchemaGet = () => dispatch => {
     .getForm()
     .then(r => {
       console.log(r)
+      const findVersion = r.survey.global.find(g => g.name === "version")
       dispatch(setSurvey(r.survey))
+      dispatch(setFormVersion(findVersion.calculation))
       dispatch(setUid(r.uid))
 
       if (r.user) {
@@ -99,5 +106,6 @@ export const selectSubmitted = state => state.schema.isSubmitted
 export const selectUid = state => state.schema.uid
 export const selectUser = state => state.schema.user
 export const selectSurvey = state => state.schema.survey
+export const selectFormVersion = state => state.schema.formVersion
 
 export default slice.reducer

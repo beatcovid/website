@@ -19,5 +19,9 @@
   .version-number {
     font-size: 0.8em;
     margin-top: 2rem;
+
+    small {
+      display: block;
+    }
   }
 }

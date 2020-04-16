@@ -15,7 +15,7 @@ import InformationPage from "./pages/InformationPage"
 import SubmissionsPage from "./pages/SubmissionsPage"
 import NoMatchPage from "./pages/NoMatchPage"
 
-import { selectLoading } from "./store/schemaSlice"
+import { selectLoading, selectFormVersion } from "./store/schemaSlice"
 import { selectTrackerLoading } from "./store/userSlice"
 
 import { selectSubmissions, fetchStats } from "./store/statsSlice"
@@ -23,7 +23,8 @@ import { selectSubmissions, fetchStats } from "./store/statsSlice"
 const HomeApp = () => {
   const dispatch = useDispatch()
   const submissionCount = useSelector(selectSubmissions)
-  const version = process.env.REACT_APP_VERSION || ""
+  const appVersion = process.env.REACT_APP_VERSION || ""
+  const formVersion = useSelector(selectFormVersion)
   const isLoading = useSelector(selectLoading)
   const isTrackerLoading = useSelector(selectTrackerLoading)
 
@@ -74,7 +75,7 @@ const HomeApp = () => {
         </div>
       )}
 
-      <AppFooter version={version} />
+      <AppFooter appVersion={appVersion} formVersion={formVersion} />
     </BrowserRouter>
   )
 }

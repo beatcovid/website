@@ -2,7 +2,8 @@ import React, { useMemo } from "react"
 import { useLocation, Link } from "react-router-dom"
 
 const Footer = props => {
-  const version = props.version
+  const appVersion = props.appVersion
+  const formVersion = props.formVersion
   const { pathname } = useLocation()
   const isSurvey = useMemo(() => pathname === "/survey", [pathname])
 
@@ -25,7 +26,10 @@ const Footer = props => {
         Privacy Policy
       </Link>
 
-      <p className="version-number">v{version}</p>
+      <p className="version-number">
+        v{appVersion}
+        <small>{formVersion}</small>
+      </p>
     </footer>
   )
 }
