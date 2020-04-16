@@ -1,5 +1,5 @@
 import React, { useMemo } from "react"
-import { useLocation } from "react-router-dom"
+import { useLocation, Link } from "react-router-dom"
 
 const Footer = props => {
   const version = props.version
@@ -20,6 +20,10 @@ const Footer = props => {
         commercial, without the expressed written approval of Swinburne
         University of Technology.
       </p>
+
+      <Link className="is-size-7" to={`/privacy`}>
+        Privacy Policy
+      </Link>
 
       <p className="version-number">v{version}</p>
     </footer>
