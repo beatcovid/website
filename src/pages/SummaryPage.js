@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react"
+import React, { useEffect, useMemo } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
 import Result from "../components/summary/Result"
@@ -8,12 +8,82 @@ import ShareWithFriends from "../components/summary/ShareWithFriends"
 import PotentialExposureTable from "../components/summary/PotentialExposureTable"
 import SummaryOfSymptoms from "../components/summary/SummaryOfSymptoms"
 import SymptomsScore from "../components/summary/SymptomsScore"
+import MultiLine from "../components/viz/MultiLine"
 import {
   doTrackerGet,
   selectTracker,
   selectIsTrackerError,
 } from "../store/userSlice"
 import { selectSubmissions, fetchStats } from "../store/statsSlice"
+
+const dataset = [
+  [
+    {
+      date: new Date(2020, 3, 14),
+      value: 10,
+    },
+    {
+      date: new Date(2020, 3, 13),
+      value: 10,
+    },
+    {
+      date: new Date(2020, 3, 12),
+      value: 5,
+    },
+    {
+      date: new Date(2020, 3, 11),
+      value: 30,
+    },
+    {
+      date: new Date(2020, 3, 10),
+      value: 15,
+    },
+  ],
+  [
+    {
+      date: new Date(2020, 3, 14),
+      value: 14,
+    },
+    {
+      date: new Date(2020, 3, 13),
+      value: 16,
+    },
+    {
+      date: new Date(2020, 3, 12),
+      value: 20,
+    },
+    {
+      date: new Date(2020, 3, 11),
+      value: 19,
+    },
+    {
+      date: new Date(2020, 3, 10),
+      value: 5,
+    },
+  ],
+  [
+    {
+      date: new Date(2020, 3, 14),
+      value: 20,
+    },
+    {
+      date: new Date(2020, 3, 13),
+      value: 18,
+    },
+    {
+      date: new Date(2020, 3, 12),
+      value: 15,
+    },
+    {
+      date: new Date(2020, 3, 11),
+      value: 29,
+    },
+    {
+      date: new Date(2020, 3, 10),
+      value: 1,
+    },
+  ],
+]
 
 const SummaryPage = () => {
   const dispatch = useDispatch()
@@ -121,6 +191,7 @@ const SummaryPage = () => {
           <div className="columns" id="more-details">
             <div className="column">
               <SummaryOfSymptoms summaryScores={scoresSummary} />
+              <MultiLine data={dataset} keys={["one", "two", "three"]} />
             </div>
 
             <div className="column">

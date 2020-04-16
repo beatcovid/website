@@ -88,7 +88,7 @@
     .social-sharing {
       display: flex;
 
-      & > span {
+      &>span {
         display: block;
         width: 100%;
         margin-left: 3px;
@@ -146,8 +146,14 @@
   }
 
   .summary-of-symptoms-section {
+    margin-bottom: 1rem;
+
     header {
       text-align: left;
     }
+  }
+
+  .symptoms-history-chart {
+    margin-top: 2rem;
   }
 }

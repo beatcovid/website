@@ -5,9 +5,11 @@
     margin-bottom: 0;
     font-size: 1.1em;
   }
+
   .progress {
     margin-bottom: 0;
   }
+
   .progress-labels {
     display: flex;
     justify-content: space-between;
@@ -16,5 +18,19 @@
     span:last-child {
       text-align: right;
     }
+  }
+}
+
+.d3-viz {
+  text {
+    font-family: $family-sans-serif;
+  }
+
+  .domain {
+    stroke: $grey;
+  }
+
+  .tick line {
+    stroke: $dark-grey;
   }
 }
