@@ -52,9 +52,17 @@ const MultiLine = props => {
         .style("fill", "transparent")
     }
   }, [d3Container, data])
+
+  function renderLegendItem(key) {
+    return (
+      <span key={key} className="legend-item">
+        {key}
+      </span>
+    )
+  }
   return (
     <div className="multi-line-viz">
-      <div className="viz-legend"></div>
+      <div className="viz-legend">{keys.map(renderLegendItem)}</div>
       <svg className="d3-viz" height={height} ref={d3Container} />
     </div>
   )

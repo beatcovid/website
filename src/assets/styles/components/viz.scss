@@ -21,7 +21,7 @@
   }
 }
 
-.d3-viz {
+.multi-line-viz {
   text {
     font-family: $family-sans-serif;
   }
@@ -32,5 +32,13 @@
 
   .tick line {
     stroke: $dark-grey;
+  }
+
+  .viz-legend {
+    .legend-item {
+      display: inline-block;
+      margin-right: 1rem;
+      font-size: 0.8em;
+    }
   }
 }
