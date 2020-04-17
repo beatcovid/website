@@ -182,7 +182,7 @@ const SubmissionsPage = () => {
           </div>
         </div>
       )}
-      {!hasSubmissions && !isLoading && (
+      {!hasSubmissions && isCompleted && (
         <div className="no-submissions">
           <h1>You have no submissions recorded.</h1>
           <p>
