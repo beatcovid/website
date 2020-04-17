@@ -160,7 +160,8 @@ const SubmissionsPage = () => {
         key={id}
         onClick={() => handleSubmissionClick(submission)}
       >
-        {formatDate(submissionDate)}
+        {/* {formatDate(submissionDate)} */}
+        {submission._id}
       </div>
     )
   }
