@@ -22,6 +22,7 @@ import {
 import { doSetUser, selectUserId, selectUserResults } from "../store/userSlice"
 
 const SurveyPage = () => {
+  const google = window.google
   const history = useHistory()
   const dispatch = useDispatch()
   const survey = useSelector(selectSurvey)
@@ -59,7 +60,22 @@ const SurveyPage = () => {
 
               // prepopulate answers from user
               if (userResults[q.name]) {
-                results[s.name][q.name] = userResults[q.name]
+                if (q.type === "geopoint") {
+                  const placeId = userResults[q.name]
+                  const geocoder = new google.maps.Geocoder()
+                  return geocoder.geocode(
+                    { placeId: placeId },
+                    (response, status) => {
+                      if (status === "OK")
+                        results[s.name][q.name] = {
+                          name: response[0].formatted_address,
+                          geo: response[0],
+                        }
+                    },
+                  )
+                } else {
+                  results[s.name][q.name] = userResults[q.name]
+                }
               }
             })
           }
@@ -70,7 +86,7 @@ const SurveyPage = () => {
     if (userResults) {
       createSurveyResults()
     }
-  }, [userResults, surveySteps])
+  }, [userResults, surveySteps, google])
 
   useEffect(() => {
     if (survey) {
