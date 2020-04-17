@@ -250,3 +250,15 @@
     }
   }
 }
+
+.question:last-child.question-note {
+  .label {
+    font-size: 0.8em;
+    color: #666;
+    font-weight: 500;
+
+    @include mobile {
+      display: none;
+    }
+  }
+}
