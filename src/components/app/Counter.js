@@ -1,14 +1,19 @@
 import React from "react"
+import numeral from "numeral"
 
 const Counter = props => {
-  const count = props.count || 0
+  const count = props.count
+  const countFormatted = numeral(count).format("0,0")
+
   return (
     <h2 className="logo-ticker">
-      <span className="logo-ticker__num">
-        <strong>{count}</strong> people are helping
-        <br />
-        to #BeatCovid19Now
-      </span>
+      {count && count > 0 && (
+        <span className="logo-ticker__num">
+          <strong>{countFormatted}</strong> people are helping
+          <br />
+          to #BeatCovid19Now
+        </span>
+      )}
     </h2>
   )
 }

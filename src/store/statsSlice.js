@@ -5,7 +5,7 @@ export const slice = createSlice({
   name: "stats",
   initialState: {
     submissions_today: 0,
-    submissions: 8,
+    submissions: null,
     submission_last: undefined,
     date_modified: undefined,
   },
