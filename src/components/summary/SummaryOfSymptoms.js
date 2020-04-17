@@ -23,7 +23,7 @@ const SummaryOfSymptoms = props => {
 
   return (
     <section className="summary-of-symptoms-section card is-info">
-      <header>Summary of Symptoms</header>
+      <header>Today's scores</header>
       <p>
         This section gives a score between no symptoms and many severe symptoms.
       </p>
