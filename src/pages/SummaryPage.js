@@ -72,11 +72,23 @@ const SummaryPage = () => {
   const isTrackerError = useSelector(selectIsTrackerError)
   const scoresSummary = useMemo(() => {
     const summary = {}
+    const symptomLabels = {
+      respiratory: "Respiratory symptoms",
+      general: "General symptoms",
+      activity: "Ability to do daily activities",
+    }
+    const symptomDomains = {
+      respiratory: ["None", "Severe"],
+      general: ["None", "Severe"],
+      activity: ["No difficulty", "Great difficulty"],
+    }
+
     if (tracker) {
       const trackerScores = tracker.scores.summary
       Object.keys(trackerScores).forEach(key => {
         summary[key] = {}
-        summary[key].label = key
+        summary[key].label = symptomLabels[key] || key
+        summary[key].domains = symptomDomains[key] || []
         summary[key].score = trackerScores[key].value
         summary[key].max = trackerScores[key].max
       })

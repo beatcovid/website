@@ -1,4 +1,5 @@
 import React from "react"
+import numeral from "numeral"
 
 const SingleBar = props => {
   const title = props.title || ""
@@ -8,8 +9,17 @@ const SingleBar = props => {
   const warningScore = props.warningScore || 0
   const dangerScore = props.dangerScore || 0
 
-  function renderDomains(domain) {
-    return <span key={domain}>{domain}</span>
+  function formatNumber(num) {
+    return numeral(num).format("0.0")
+  }
+
+  function renderDomains(domain, index, max) {
+    const domainValue = index === 0 ? 0 : max
+    return (
+      <span key={domain}>
+        {domain} [{domainValue}]
+      </span>
+    )
   }
 
   function progressClasses() {
@@ -26,10 +36,12 @@ const SingleBar = props => {
   return (
     <section className="single-bar-viz">
       <header>
-        {title}: {score}
+        {title}: {formatNumber(score)}
       </header>
       <progress className={progressClasses()} value={score} max={max} />
-      <div className="progress-labels">{domains.map(renderDomains)}</div>
+      <div className="progress-labels">
+        {domains.map((d, i) => renderDomains(d, i, max))}
+      </div>
     </section>
   )
 }
