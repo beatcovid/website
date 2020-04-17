@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react"
+import React, { useEffect, useMemo, useRef } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import parse from "date-fns/parse"
 import Result from "../components/summary/Result"
@@ -21,6 +21,9 @@ const SummaryPage = () => {
   const tracker = useSelector(selectTracker)
   const submissions = useSelector(selectSubmissions)
   const isTrackerError = useSelector(selectIsTrackerError)
+  const myRef = useRef(null)
+  const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop)
+
   const timeSeries = useMemo(() => {
     const dataset = []
     let keys = []
@@ -79,13 +82,20 @@ const SummaryPage = () => {
   }, [tracker])
   const mainSymptoms = useMemo(() => {
     const symptoms = {
-      headers: ["Main COVID-19 Symptoms", "Your score today"],
+      headers: [
+        "Main COVID-19 Symptoms",
+        "Your score today",
+        "Your previous score",
+      ],
       scores: {},
+      prevScores: {},
     }
     if (tracker) {
       const mainScores = tracker.scores[0].main
+      const prevMainScores = tracker.scores[1].main
       Object.keys(mainScores).forEach(key => {
         symptoms.scores[key] = mainScores[key]
+        symptoms.prevScores[key] = prevMainScores[key]
       })
     }
     return symptoms
@@ -95,13 +105,17 @@ const SummaryPage = () => {
       headers: [
         "Other symptoms of respiratory illnesses (maybe related to COVID-19)",
         "Your score today",
+        "Your previous score",
       ],
       scores: {},
+      prevScores: {},
     }
     if (tracker) {
       const otherScores = tracker.scores[0].other
+      const prevOtherScores = tracker.scores[1].other
       Object.keys(otherScores).forEach(key => {
         symptoms.scores[key] = otherScores[key]
+        symptoms.prevScores[key] = prevOtherScores[key]
       })
     }
     return symptoms
@@ -144,9 +158,12 @@ const SummaryPage = () => {
               <Result result={`risk-${tracker.risk}`} />
 
               <div className="button-wrapper has-text-centered">
-                <a className="button is-light is-size-7" href="#more-details">
+                <button
+                  className="button is-light is-size-7"
+                  onClick={() => scrollToRef(myRef)}
+                >
                   &darr; more detailed results
-                </a>
+                </button>
               </div>
 
               <PotentialExposureTable
@@ -162,7 +179,7 @@ const SummaryPage = () => {
             </div>
           </div>
 
-          <div className="columns" id="more-details">
+          <div className="columns" ref={myRef}>
             <div className="column">
               <SummaryOfSymptoms summaryScores={scoresSummary} />
               <section className="charts-section">
@@ -175,10 +192,12 @@ const SummaryPage = () => {
               <SymptomsScore
                 headers={mainSymptoms.headers}
                 data={mainSymptoms.scores}
+                prevData={mainSymptoms.prevScores}
               />
               <SymptomsScore
                 headers={otherSymptoms.headers}
                 data={otherSymptoms.scores}
+                prevData={otherSymptoms.prevScores}
               />
             </div>
           </div>
