@@ -3,7 +3,6 @@ import React from "react"
 const SymptomsScore = props => {
   const headers = props.headers || []
   const data = props.data || {}
-  const prevData = props.prevData || {}
 
   function renderHeader(header) {
     return <th key={header}>{header}</th>
@@ -13,8 +12,8 @@ const SymptomsScore = props => {
     return (
       <tr key={row}>
         <th>{row}</th>
-        <td className="data-value-col">{data[row]}</td>
-        <td className="data-value-col">{prevData[row]}</td>
+        <td className="data-value-col">{data[row].today}</td>
+        {data[row].prev && <td className="data-value-col">{data[row].prev}</td>}
       </tr>
     )
   }

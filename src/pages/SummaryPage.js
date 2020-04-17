@@ -82,40 +82,54 @@ const SummaryPage = () => {
   }, [tracker])
   const mainSymptoms = useMemo(() => {
     const symptoms = {
-      headers: [
-        "Main COVID-19 Symptoms",
-        "Your score today",
-        "Your previous score",
-      ],
+      headers: ["Main COVID-19 Symptoms", "Your score today"],
       scores: {},
-      prevScores: {},
     }
     if (tracker) {
-      const mainScores = tracker.scores[0].main
-      const prevMainScores = tracker.scores[1].main
-      Object.keys(mainScores).forEach(key => {
-        symptoms.scores[key] = mainScores[key]
-        symptoms.prevScores[key] = prevMainScores[key]
+      tracker.scores.forEach((score, index) => {
+        if (index === 0) {
+          Object.keys(score.main).forEach(m => {
+            symptoms.scores[m] = {}
+            symptoms.scores[m].today = score.main[m]
+          })
+        }
+        if (index === 1) {
+          symptoms.headers.push("Your previous score")
+          Object.keys(score.main).forEach(m => {
+            symptoms.scores[m].prev = score.main[m]
+          })
+        }
       })
     }
     return symptoms
   }, [tracker])
+
+  useEffect(() => {
+    console.log(mainSymptoms)
+  }, [mainSymptoms])
+
   const otherSymptoms = useMemo(() => {
     const symptoms = {
       headers: [
         "Other symptoms of respiratory illnesses (maybe related to COVID-19)",
         "Your score today",
-        "Your previous score",
       ],
       scores: {},
-      prevScores: {},
     }
     if (tracker) {
-      const otherScores = tracker.scores[0].other
-      const prevOtherScores = tracker.scores[1].other
-      Object.keys(otherScores).forEach(key => {
-        symptoms.scores[key] = otherScores[key]
-        symptoms.prevScores[key] = prevOtherScores[key]
+      tracker.scores.forEach((score, index) => {
+        if (index === 0) {
+          Object.keys(score.other).forEach(m => {
+            symptoms.scores[m] = {}
+            symptoms.scores[m].today = score.other[m]
+          })
+        }
+        if (index === 1) {
+          symptoms.headers.push("Your previous score")
+          Object.keys(score.other).forEach(m => {
+            symptoms.scores[m].prev = score.other[m]
+          })
+        }
       })
     }
     return symptoms
@@ -192,12 +206,10 @@ const SummaryPage = () => {
               <SymptomsScore
                 headers={mainSymptoms.headers}
                 data={mainSymptoms.scores}
-                prevData={mainSymptoms.prevScores}
               />
               <SymptomsScore
                 headers={otherSymptoms.headers}
                 data={otherSymptoms.scores}
-                prevData={otherSymptoms.prevScores}
               />
             </div>
           </div>
