@@ -43,14 +43,12 @@ const Geopoint = props => {
   }
 
   function handleChange(address) {
-    setInteracted(true)
     props.onChange(getGeopointObj(address, null))
   }
 
   function handleSelect(address) {
     geocodeByAddress(address)
       .then(results => {
-        setInteracted(true)
         props.onChange(getGeopointObj(address, results[0]))
         return getLatLng(results[0])
       })
@@ -58,6 +56,7 @@ const Geopoint = props => {
         setGeoLocation(latLng)
       })
       .catch(error => console.error("Error", error))
+      .then(() => setInteracted(true))
   }
 
   return (
@@ -67,6 +66,7 @@ const Geopoint = props => {
         value={addressValue}
         onChange={handleChange}
         onSelect={handleSelect}
+        highlightFirstSuggestion={true}
         searchOptions={{
           bounds: new google.maps.LatLngBounds(
             new google.maps.LatLng(113.338953078, -43.6345972634),
