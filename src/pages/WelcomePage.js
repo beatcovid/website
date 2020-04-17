@@ -31,12 +31,12 @@ const WelcomePage = () => {
         </div>
 
         <section className="column">
-          <header className="has-text-centered-mobile">
+          <header className="has-text-centered-mobile is-size-6">
             <h2>
               With people power we can map the spread of COVID-19 around the
               world.
             </h2>
-            <h2>7 minutes of your time can help to BEAT COVID-19 NOW.</h2>
+            <h2>A few minutes of your time can help to BEAT COVID-19 NOW.</h2>
           </header>
 
           <section className="is-hidden-desktop">
