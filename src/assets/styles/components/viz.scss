@@ -37,6 +37,12 @@
   .axis-title {
     stroke: #000;
     text-anchor: end;
+    font-size: 10px;
+  }
+
+  .axis-label {
+    text-anchor: end;
+    font-size: 9px;
   }
 
   .viz-legend {

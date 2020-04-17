@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from "react"
 import { useSelector, useDispatch } from "react-redux"
-
+import parse from "date-fns/parse"
 import Result from "../components/summary/Result"
 import ThankYou from "../components/summary/ThankYou"
 import TrackDaily from "../components/summary/TrackDaily"
@@ -16,60 +16,42 @@ import {
 } from "../store/userSlice"
 import { selectSubmissions, fetchStats } from "../store/statsSlice"
 
-const data = [
-  {
-    date: new Date(2020, 3, 14),
-    symptom1: 10,
-    symptom2: 40,
-    symptom3: 20,
-  },
-  {
-    date: new Date(2020, 3, 13),
-    symptom1: 10,
-    symptom2: 10,
-    symptom3: 10,
-  },
-  {
-    date: new Date(2020, 3, 12),
-    symptom1: 13,
-    symptom2: 4,
-    symptom3: 30,
-  },
-  {
-    date: new Date(2020, 3, 11),
-    symptom1: 30,
-    symptom2: 33,
-    symptom3: 28,
-  },
-  {
-    date: new Date(2020, 3, 10),
-    symptom1: 30,
-    symptom2: 34,
-    symptom3: 20,
-  },
-]
-
-function transformData(keys, dataset) {
-  const transformed = []
-  keys.forEach((k, i) => {
-    transformed[i] = []
-    dataset.forEach(d => {
-      transformed[i].push({
-        date: d.date,
-        value: d[k],
-      })
-    })
-  })
-  return transformed
-}
-
 const SummaryPage = () => {
-  const keys = Object.keys(data[0]).filter(d => d !== "date")
-  const dataset = transformData(keys, data)
   const dispatch = useDispatch()
   const tracker = useSelector(selectTracker)
   const submissions = useSelector(selectSubmissions)
   const isTrackerError = useSelector(selectIsTrackerError)
+  const timeSeries = useMemo(() => {
+    const dataset = []
+    let keys = []
+    let keyLabels = []
+    if (tracker) {
+      const trackerScores = tracker.scores
+      keys = ["respiratory", "general"]
+      keyLabels = ["Respiratory symptoms", "General symptoms"]
+
+      keys.forEach((key, i) => {
+        let currentDate = null
+        dataset[i] = []
+        trackerScores.forEach(score => {
+          const summary = score.summary
+          const date = parse(score.date, "dd-MM-yyyy", new Date())
+          if (!currentDate || currentDate !== score.date) {
+            dataset[i].push({
+              date,
+              value: summary[key].value,
+            })
+            currentDate = score.date
+          }
+        })
+      })
+    }
+    return {
+      keys,
+      keyLabels,
+      dataset,
+    }
+  }, [tracker])
   const scoresSummary = useMemo(() => {
     const summary = {}
     const symptomLabels = {
@@ -185,7 +167,7 @@ const SummaryPage = () => {
               <SummaryOfSymptoms summaryScores={scoresSummary} />
               <section className="charts-section">
                 <header>Your scores over time</header>
-                <MultiLine dataObj={{ keys, dataset }} />
+                <MultiLine dataObj={timeSeries} />
               </section>
             </div>
 

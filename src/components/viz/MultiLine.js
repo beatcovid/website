@@ -1,10 +1,13 @@
 import React, { useRef, useEffect, useMemo, useState } from "react"
 import * as d3 from "d3"
+import addDays from "date-fns/addDays"
+import subDays from "date-fns/subDays"
 
 const MultiLine = props => {
   const dataObj = props.dataObj
   const colours = props.colours || d3.schemeTableau10
   const keys = dataObj.keys
+  const keyLabels = dataObj.keyLabels
   const d3Container = useRef(null)
   const height = 200
   let svg = useRef(null)
@@ -32,7 +35,6 @@ const MultiLine = props => {
           .selectAll(`.key-dot:not(.${hovered}) circle`)
           .style("fill", "transparent")
       } else {
-        console.log("out")
         keys.forEach((key, i) => {
           currentSvg.selectAll(`.key-path.${key}`).style("stroke", colours[i])
           currentSvg
@@ -46,33 +48,37 @@ const MultiLine = props => {
   useEffect(() => {
     const data = dataObj.dataset
     if (data && d3Container.current) {
+      const firstItem = data[0]
+      const firstDate = addDays(firstItem[0].date, 1)
+      const lastDate = subDays(firstItem[firstItem.length - 1].date, 1)
       const width = d3Container.current.parentNode.offsetWidth
       const margin = { top: 10, right: 30, bottom: 20, left: 40 }
       const x = d3
         .scaleTime()
-        .domain([new Date(2020, 3, 10), new Date(2020, 3, 14)])
+        .domain([lastDate, firstDate])
         .rangeRound([margin.left, width - margin.right])
       const y = d3
         .scaleLinear()
-        .domain([0, 40])
+        .domain([0, 7])
         .nice()
         .rangeRound([height - margin.bottom, margin.top])
       const xAxis = g =>
         g.attr("transform", `translate(0, ${height - margin.bottom})`).call(
           d3
             .axisBottom(x)
-            .tickSizeOuter(0)
+            .ticks(firstItem.length + 2)
+            .tickPadding(2)
             .tickSize(-height),
         )
       const yAxis = g =>
+        g.attr("transform", `translate(${margin.left}, 0)`).call(
+          d3
+            .axisLeft(y)
+            .ticks(7)
+            .tickSize(-width),
+        )
+      const labels = g =>
         g
-          .attr("transform", `translate(${margin.left}, 0)`)
-          .call(
-            d3
-              .axisLeft(y)
-              .ticks(null, "s")
-              .tickSize(-width),
-          )
           .append("text")
           .attr("class", "axis-title y-axis-title")
           .attr("transform", "rotate(-90)")
@@ -99,10 +105,43 @@ const MultiLine = props => {
         .append("g")
         .attr("class", "x-axis")
         .call(xAxis)
+        .selectAll(".tick text")
+        .attr("text-anchor", "start")
+        .attr("dx", 1)
+        .attr("y", 3)
       currentSvg
         .append("g")
         .attr("class", "y-axis")
         .call(yAxis)
+
+      currentSvg
+        .append("g")
+        .attr("transform", `translate(${margin.left}, 0)`)
+        .append("text")
+        .attr("class", "axis-title y-axis-title")
+        .attr("transform", "rotate(-90)")
+        .attr("x", "-70px")
+        .attr("y", "-30px")
+        .text("Symptoms")
+      currentSvg
+        .append("g")
+        .attr("transform", `translate(${margin.left}, 0)`)
+        .append("text")
+        .attr("class", "axis-label")
+        .attr("x", -10)
+        .attr("y", 13)
+        .text("Severe")
+      currentSvg
+        .append("g")
+        .attr(
+          "transform",
+          `translate(${margin.left}, ${height - margin.bottom})`,
+        )
+        .append("text")
+        .attr("class", "axis-label")
+        .attr("x", -10)
+        .attr("y", 3)
+        .text("None")
 
       // lines
       const updateLines = currentSvg
@@ -166,7 +205,7 @@ const MultiLine = props => {
         onMouseLeave={() => handleLegendLeave()}
       >
         <span className="legend-colour" style={legendColour(i)}></span>
-        <span className="legend-label">{key}</span>
+        <span className="legend-label">{keyLabels[i]}</span>
       </div>
     )
   }
