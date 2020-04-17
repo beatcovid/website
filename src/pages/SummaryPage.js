@@ -111,7 +111,7 @@ const SummaryPage = () => {
   const otherSymptoms = useMemo(() => {
     const symptoms = {
       headers: [
-        "Other symptoms of respiratory illnesses (maybe related to COVID-19)",
+        "Other symptoms of respiratory illnesses (maybe related to COVID&#8209;19)",
         "Your score today",
       ],
       scores: {},

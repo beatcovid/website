@@ -3,9 +3,14 @@ import React from "react"
 const SymptomsScore = props => {
   const headers = props.headers || []
   const data = props.data || {}
+  function createHtml(html) {
+    return {
+      __html: html,
+    }
+  }
 
   function renderHeader(header) {
-    return <th key={header}>{header}</th>
+    return <th key={header} dangerouslySetInnerHTML={createHtml(header)} />
   }
 
   function renderTBody(row) {
