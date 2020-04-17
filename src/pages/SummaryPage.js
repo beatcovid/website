@@ -140,7 +140,8 @@ const SummaryPage = () => {
               className="print-button is-light button"
               onClick={() => window.print()}
             >
-              Print this page
+              <i className="fa fa-print"></i>
+              Print
             </button>
           </div>
         </div>

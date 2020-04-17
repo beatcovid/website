@@ -13,6 +13,11 @@
     margin: 1rem auto;
   }
 
+  .button.is-light {
+    box-shadow: 2px 2px 0 #999;
+    border: 1px solid #888;
+  }
+
   .disclaimer-card {
     height: 100%;
 
@@ -88,7 +93,7 @@
     .social-sharing {
       display: flex;
 
-      & > span {
+      &>span {
         display: block;
         width: 100%;
         margin-left: 3px;
@@ -148,6 +153,15 @@
   .summary-of-symptoms-section {
     header {
       text-align: left;
+    }
+  }
+
+  .print-button {
+    .fa {
+      font-size: 18px;
+      padding: 3px;
+      margin-right: 5px;
+      width: auto;
     }
   }
 }
