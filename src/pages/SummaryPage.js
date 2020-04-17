@@ -84,7 +84,7 @@ const SummaryPage = () => {
     }
 
     if (tracker) {
-      const trackerScores = tracker.scores.summary
+      const trackerScores = tracker.scores[0].summary
       Object.keys(trackerScores).forEach(key => {
         summary[key] = {}
         summary[key].label = symptomLabels[key] || key
@@ -101,7 +101,7 @@ const SummaryPage = () => {
       scores: {},
     }
     if (tracker) {
-      const mainScores = tracker.scores.main
+      const mainScores = tracker.scores[0].main
       Object.keys(mainScores).forEach(key => {
         symptoms.scores[key] = mainScores[key]
       })
@@ -117,7 +117,7 @@ const SummaryPage = () => {
       scores: {},
     }
     if (tracker) {
-      const otherScores = tracker.scores.other
+      const otherScores = tracker.scores[0].other
       Object.keys(otherScores).forEach(key => {
         symptoms.scores[key] = otherScores[key]
       })
