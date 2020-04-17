@@ -10,6 +10,7 @@ export const slice = createSlice({
     user: undefined,
     survey: undefined,
     formVersion: "",
+    formFetchError: false,
   },
   reducers: {
     setLoading: state => {
@@ -33,6 +34,9 @@ export const slice = createSlice({
     setFormVersion: (state, { payload }) => {
       state.formVersion = payload
     },
+    setFormFetchError: (state, { payload }) => {
+      state.formFetchError = payload
+    },
   },
 })
 
@@ -44,6 +48,7 @@ export const {
   setUser,
   setSurvey,
   setFormVersion,
+  setFormFetchError,
 } = slice.actions
 
 function getFormData(user_id, version, results) {
@@ -81,7 +86,10 @@ export const doSchemaGet = () => dispatch => {
         dispatch(setUser(r.user))
       }
     })
-    .catch(e => console.error(e))
+    .catch(e => {
+      dispatch(setFormFetchError(true))
+      console.error(e)
+    })
     .then(() => {
       dispatch(unsetLoading())
     })
@@ -107,5 +115,6 @@ export const selectUid = state => state.schema.uid
 export const selectUser = state => state.schema.user
 export const selectSurvey = state => state.schema.survey
 export const selectFormVersion = state => state.schema.formVersion
+export const selectFormFetchError = state => state.schema.formFetchError
 
 export default slice.reducer

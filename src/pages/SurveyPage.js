@@ -9,6 +9,7 @@ import {
   doSubmit,
   selectSurvey,
   selectUser,
+  selectFormFetchError,
 } from "../store/schemaSlice"
 import {
   doSetCurrentStep,
@@ -33,6 +34,7 @@ const SurveyPage = () => {
   const surveySteps = useSelector(selectSteps)
   const stepNames = useSelector(selectStepNames)
   const currentStep = useSelector(selectCurrentStep)
+  const formFetchError = useSelector(selectFormFetchError)
   const [state, setState] = useState(true)
   const [transitionClass, setTransitionClass] = useState()
   const [surveyResults, setSurveyResults] = useState()
@@ -93,10 +95,10 @@ const SurveyPage = () => {
       dispatch(doSetGlobal(survey.global))
       dispatch(doSetSteps(survey.steps))
       dispatch(doSetCurrentStep(survey.steps[0].name))
-    } else {
+    } else if (!formFetchError) {
       dispatch(doSchemaGet())
     }
-  }, [survey, dispatch])
+  }, [survey, formFetchError, dispatch])
 
   useEffect(() => {
     if (user) {
@@ -135,9 +137,11 @@ const SurveyPage = () => {
 
   return (
     <div className="survey-page container">
-      <header className="survey-header">
-        <SurveyProgress total={stepNames.length} current={currentStepIndex} />
-      </header>
+      {!formFetchError && (
+        <header className="survey-header">
+          <SurveyProgress total={stepNames.length} current={currentStepIndex} />
+        </header>
+      )}
 
       {surveyReady && (
         <form onSubmit={e => e.preventDefault()}>
@@ -162,6 +166,12 @@ const SurveyPage = () => {
             </CSSTransition>
           </SwitchTransition>
         </form>
+      )}
+
+      {formFetchError && (
+        <div>
+          There is an issue fetching the form. Please refresh and try again.
+        </div>
       )}
     </div>
   )
