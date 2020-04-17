@@ -60,6 +60,11 @@ const Steps = props => {
           console.error("checkRelevant:", q.relevant)
         }
 
+        if (!relevancyCheck) {
+          // clear disabled questions result
+          results[q.name] = null
+        }
+
         if (answer) {
           answer = {}
           answer[q.name] = results[q.name]
