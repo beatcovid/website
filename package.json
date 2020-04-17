@@ -14,7 +14,6 @@
     "d3": "^5.15.1",
     "date-fns": "^2.11.0",
     "enketo-xpathjs": "^1.9.4",
-    "fingerprintjs2": "^2.1.0",
     "invariant": "^2.2.4",
     "js-cookie": "^2.2.1",
     "node-sass": "^4.13.1",
