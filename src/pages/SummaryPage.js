@@ -55,6 +55,11 @@ const SummaryPage = () => {
       dataset,
     }
   }, [tracker])
+
+  const showLineChart = useMemo(
+    () => timeSeries.dataset.length > 0 && timeSeries.dataset[0].length > 1,
+    [timeSeries],
+  )
   const scoresSummary = useMemo(() => {
     const summary = {}
     const symptomLabels = {
@@ -103,10 +108,6 @@ const SummaryPage = () => {
     }
     return symptoms
   }, [tracker])
-
-  useEffect(() => {
-    console.log(mainSymptoms)
-  }, [mainSymptoms])
 
   const otherSymptoms = useMemo(() => {
     const symptoms = {
@@ -196,10 +197,12 @@ const SummaryPage = () => {
           <div className="columns" ref={myRef}>
             <div className="column">
               <SummaryOfSymptoms summaryScores={scoresSummary} />
-              <section className="charts-section">
-                <header>Your scores over time</header>
-                <MultiLine dataObj={timeSeries} />
-              </section>
+              {showLineChart && (
+                <section className="charts-section">
+                  <header>Your scores over time</header>
+                  <MultiLine dataObj={timeSeries} />
+                </section>
+              )}
             </div>
 
             <div className="column">
