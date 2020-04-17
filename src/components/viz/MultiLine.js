@@ -27,7 +27,7 @@ const MultiLine = props => {
       if (hovered) {
         currentSvg
           .selectAll(`.key-path:not(.${hovered})`)
-          .style("stroke", "#ddd")
+          .style("stroke", "transparent")
         currentSvg
           .selectAll(`.key-dot:not(.${hovered}) circle`)
           .style("fill", "transparent")
@@ -58,13 +58,21 @@ const MultiLine = props => {
         .nice()
         .rangeRound([height - margin.bottom, margin.top])
       const xAxis = g =>
-        g
-          .attr("transform", `translate(0, ${height - margin.bottom})`)
-          .call(d3.axisBottom(x).tickSizeOuter(0))
+        g.attr("transform", `translate(0, ${height - margin.bottom})`).call(
+          d3
+            .axisBottom(x)
+            .tickSizeOuter(0)
+            .tickSize(-height),
+        )
       const yAxis = g =>
         g
           .attr("transform", `translate(${margin.left}, 0)`)
-          .call(d3.axisLeft(y).ticks(null, "s"))
+          .call(
+            d3
+              .axisLeft(y)
+              .ticks(null, "s")
+              .tickSize(-width),
+          )
           .append("text")
           .attr("class", "axis-title y-axis-title")
           .attr("transform", "rotate(-90)")
@@ -75,6 +83,7 @@ const MultiLine = props => {
         .line()
         .x(d => x(d.date))
         .y(d => y(d.value))
+        .curve(d3.curveStepBefore)
 
       const currentSvg = d3.select(d3Container.current)
       svg.current = currentSvg
