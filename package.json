@@ -11,6 +11,7 @@
     "autoprefixer": "^9.7.4",
     "axios": "^0.19.2",
     "bulma": "^0.8.1",
+    "d3": "^5.15.1",
     "date-fns": "^2.11.0",
     "enketo-xpathjs": "^1.9.4",
     "fingerprintjs2": "^2.1.0",

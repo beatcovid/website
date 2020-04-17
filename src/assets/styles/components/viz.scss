@@ -5,9 +5,11 @@
     margin-bottom: 0;
     font-size: 1.1em;
   }
+
   .progress {
     margin-bottom: 0;
   }
+
   .progress-labels {
     display: flex;
     justify-content: space-between;
@@ -15,6 +17,60 @@
 
     span:last-child {
       text-align: right;
+    }
+  }
+}
+
+.multi-line-viz {
+  text {
+    font-family: $family-sans-serif;
+  }
+
+  .domain {
+    stroke: $grey;
+  }
+
+  .tick line {
+    stroke: $dark-grey;
+  }
+
+  .axis-title {
+    stroke: #000;
+    text-anchor: end;
+  }
+
+  .viz-legend {
+    display: flex;
+    justify-content: center;
+
+    .legend-item {
+      display: inline-block;
+      font-size: 0.8em;
+      display: flex;
+      align-items: center;
+      padding: 5px 0.5rem;
+      margin-right: 0.5rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &:hover {
+        background-color: #eee;
+      }
+
+      .legend-colour {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        background-color: #ddd;
+        margin-right: 0.2rem;
+      }
+
+      .legend-label {
+        font-size: 0.8em;
+        font-weight: 900;
+      }
     }
   }
 }

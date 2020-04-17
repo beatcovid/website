@@ -151,6 +151,8 @@
   }
 
   .summary-of-symptoms-section {
+    margin-bottom: 1rem;
+
     header {
       text-align: left;
     }
@@ -164,4 +166,16 @@
       width: auto;
     }
   }
+
+  .charts-section {
+    margin-top: 2rem;
+
+    header {
+      font-weight: 900;
+      font-size: 1.3em;
+      margin-bottom: 1rem;
+    }
+  }
+
+
 }

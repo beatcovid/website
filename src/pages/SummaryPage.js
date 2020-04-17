@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react"
+import React, { useEffect, useMemo } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
 import Result from "../components/summary/Result"
@@ -8,6 +8,7 @@ import ShareWithFriends from "../components/summary/ShareWithFriends"
 import PotentialExposureTable from "../components/summary/PotentialExposureTable"
 import SummaryOfSymptoms from "../components/summary/SummaryOfSymptoms"
 import SymptomsScore from "../components/summary/SymptomsScore"
+import MultiLine from "../components/viz/MultiLine"
 import {
   doTrackerGet,
   selectTracker,
@@ -15,7 +16,56 @@ import {
 } from "../store/userSlice"
 import { selectSubmissions, fetchStats } from "../store/statsSlice"
 
+const data = [
+  {
+    date: new Date(2020, 3, 14),
+    symptom1: 10,
+    symptom2: 40,
+    symptom3: 20,
+  },
+  {
+    date: new Date(2020, 3, 13),
+    symptom1: 10,
+    symptom2: 10,
+    symptom3: 10,
+  },
+  {
+    date: new Date(2020, 3, 12),
+    symptom1: 13,
+    symptom2: 4,
+    symptom3: 30,
+  },
+  {
+    date: new Date(2020, 3, 11),
+    symptom1: 30,
+    symptom2: 33,
+    symptom3: 28,
+  },
+  {
+    date: new Date(2020, 3, 10),
+    symptom1: 30,
+    symptom2: 34,
+    symptom3: 20,
+  },
+]
+
+function transformData(keys, dataset) {
+  const transformed = []
+  keys.forEach((k, i) => {
+    transformed[i] = []
+    dataset.forEach(d => {
+      transformed[i].push({
+        date: d.date,
+        value: d[k],
+      })
+    })
+  })
+  return transformed
+}
+
 const SummaryPage = () => {
+  const keys = Object.keys(data[0]).filter(d => d !== "date")
+  const dataset = transformData(keys, data)
   const dispatch = useDispatch()
   const tracker = useSelector(selectTracker)
   const submissions = useSelector(selectSubmissions)
@@ -121,6 +171,10 @@ const SummaryPage = () => {
           <div className="columns" id="more-details">
             <div className="column">
               <SummaryOfSymptoms summaryScores={scoresSummary} />
+              <section className="charts-section">
+                <header>Your scores over time</header>
+                <MultiLine dataObj={{ keys, dataset }} />
+              </section>
             </div>
 
             <div className="column">
