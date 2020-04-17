@@ -22,6 +22,11 @@
     }
   }
 
+  .value-cell {
+    max-width: 370px;
+    overflow-x: auto;
+  }
+
 
   .submission-list {
     border-right: 1px solid #eee;
