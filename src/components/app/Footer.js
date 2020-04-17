@@ -27,7 +27,7 @@ const Footer = props => {
       </Link>
 
       <p className="version-number">
-        v{appVersion} {formVersion !== "" && <small>({formVersion})</small>}
+        v{appVersion} {formVersion !== "" && <span>({formVersion})</span>}
       </p>
     </footer>
   )
