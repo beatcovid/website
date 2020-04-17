@@ -82,6 +82,9 @@ const SubmissionsPage = () => {
     "_id",
     "_uuid",
     "user_id",
+    "session_id",
+    "server_env",
+    "system_version",
     "_submission_time",
     "_status",
     "user_agent",
@@ -101,12 +104,7 @@ const SubmissionsPage = () => {
     const formFields = []
     const systemFields = []
     Object.keys(currentSubmission).forEach(key => {
-      if (
-        key[0] === "_" ||
-        key === "start" ||
-        key === "user_id" ||
-        key === "version"
-      ) {
+      if (key[0] === "_" || systemKeys.indexOf(key) !== -1) {
         // ignore these fields
       } else {
         formFields.push({
