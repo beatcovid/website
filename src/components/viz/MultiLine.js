@@ -24,6 +24,17 @@ const MultiLine = props => {
     setHovered(null)
   }
 
+  const maxValue = data => {
+    const values = []
+    data.forEach(d => {
+      d.forEach(e => {
+        values.push(e.value)
+      })
+    })
+    const max = d3.max(values)
+    return max < 3 ? 3 : max
+  }
+
   useEffect(() => {
     const currentSvg = svg.current
     if (currentSvg) {
@@ -51,6 +62,7 @@ const MultiLine = props => {
       const firstItem = data[0]
       const firstDate = addDays(firstItem[0].date, 1)
       const lastDate = subDays(firstItem[firstItem.length - 1].date, 1)
+      const max = maxValue(data)
       const width = d3Container.current.parentNode.offsetWidth
       const margin = { top: 10, right: 30, bottom: 20, left: 40 }
       const x = d3
@@ -59,7 +71,7 @@ const MultiLine = props => {
         .rangeRound([margin.left, width - margin.right])
       const y = d3
         .scaleLinear()
-        .domain([0, 7])
+        .domain([0, max])
         .nice()
         .rangeRound([height - margin.bottom, margin.top])
       const xAxis = g =>
@@ -74,17 +86,9 @@ const MultiLine = props => {
         g.attr("transform", `translate(${margin.left}, 0)`).call(
           d3
             .axisLeft(y)
-            .ticks(7)
+            .ticks(max)
             .tickSize(-width),
         )
-      const labels = g =>
-        g
-          .append("text")
-          .attr("class", "axis-title y-axis-title")
-          .attr("transform", "rotate(-90)")
-          .attr("x", "-75px")
-          .attr("y", "-30px")
-          .text("Symptoms")
       const line = d3
         .line()
         .x(d => x(d.date))
@@ -120,7 +124,7 @@ const MultiLine = props => {
         .append("text")
         .attr("class", "axis-title y-axis-title")
         .attr("transform", "rotate(-90)")
-        .attr("x", "-70px")
+        .attr("x", "-80px")
         .attr("y", "-30px")
         .text("Symptoms")
       currentSvg
@@ -129,7 +133,7 @@ const MultiLine = props => {
         .append("text")
         .attr("class", "axis-label")
         .attr("x", -10)
-        .attr("y", 13)
+        .attr("y", y(3) + 3)
         .text("Severe")
       currentSvg
         .append("g")
