@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { BrowserRouter, Route, Switch } from "react-router-dom"
+import { Route, Switch, useHistory } from "react-router-dom"
 import ScrollToTop from "./components/app/ScrollToTop"
 import AppHeader from "./components/app/Header"
 import AppFooter from "./components/app/Footer"
@@ -14,6 +14,7 @@ import PrivacyPage from "./pages/PrivacyPage"
 import InformationPage from "./pages/InformationPage"
 import SubmissionsPage from "./pages/SubmissionsPage"
 import NoMatchPage from "./pages/NoMatchPage"
+import { logPageView } from "./utils/analyticsTracker"
 
 import { selectLoading, selectFormVersion } from "./store/schemaSlice"
 import { selectTrackerLoading } from "./store/userSlice"
@@ -32,8 +33,14 @@ const HomeApp = () => {
     dispatch(fetchStats())
   }, [dispatch])
 
+  const history = useHistory()
+
+  useEffect(() => {
+    logPageView(history)
+  }, [history])
+
   return (
-    <BrowserRouter>
+    <>
       <ScrollToTop />
       <AppHeader count={submissionCount} />
 
@@ -76,7 +83,7 @@ const HomeApp = () => {
       )}
 
       <AppFooter appVersion={appVersion} formVersion={formVersion} />
-    </BrowserRouter>
+    </>
   )
 }
 

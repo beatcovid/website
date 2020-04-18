@@ -1,11 +1,15 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import { BrowserRouter } from "react-router-dom"
 import { Provider } from "react-redux"
 import * as Sentry from "@sentry/browser"
 import App from "./App"
 import store from "./store"
 import * as serviceWorker from "./utils/serviceWorker"
+import { initializeGA } from "./utils/analyticsTracker"
 import "./assets/styles/main.scss"
+
+initializeGA()
 
 Sentry.init({
   dsn:
@@ -17,7 +21,9 @@ Sentry.init({
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
   document.getElementById("root"),
 )

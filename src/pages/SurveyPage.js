@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react"
+import ReactGA from "react-ga"
 import { SwitchTransition, CSSTransition } from "react-transition-group"
 import { useHistory } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
@@ -116,12 +117,26 @@ const SurveyPage = () => {
   function handleNextClick() {
     const findIndex = stepNames.findIndex(s => s === currentStep)
     dispatch(doSetCurrentStep(stepNames[findIndex + 1]))
+
+    ReactGA.event({
+      category: "SurveyStep",
+      action: "Next",
+      value: currentStep,
+    })
+
     setTransitionClass("fade")
   }
 
   function handlePreviousClick() {
     const findIndex = stepNames.findIndex(s => s === currentStep)
     dispatch(doSetCurrentStep(stepNames[findIndex - 1]))
+
+    ReactGA.event({
+      category: "SurveyStep",
+      action: "Prev",
+      value: currentStep,
+    })
+
     setTransitionClass("fade-back")
   }
 
