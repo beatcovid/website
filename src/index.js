@@ -8,7 +8,8 @@ import * as serviceWorker from "./utils/serviceWorker"
 import "./assets/styles/main.scss"
 
 Sentry.init({
-  dsn: process.env.REACT_APP_SENTRY_DSN,
+  dsn:
+    "https://93fe68b8008640cfa4ae7a4b9c523bd4@o368785.ingest.sentry.io/5204922",
   environment: process.env.NODE_ENV,
   enabled: (() =>
     ["production", "stage", "staging"].indexOf(process.env.NODE_ENV) !== -1)(),
