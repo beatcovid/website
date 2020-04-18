@@ -54,6 +54,7 @@ export const {
 function getFormData(user_id, version, results) {
   const formData = {
     start: new Date().toISOString(),
+    timezone: new Date().getTimezoneOffset(),
     user_id,
     version,
   }
