@@ -9,6 +9,7 @@ import {
   doSubmit,
   selectSurvey,
   selectUser,
+  selectStart,
   selectFormFetchError,
 } from "../store/schemaSlice"
 import {
@@ -29,6 +30,7 @@ const SurveyPage = () => {
   const survey = useSelector(selectSurvey)
   const user = useSelector(selectUser)
   const userId = useSelector(selectUserId)
+  const start = useSelector(selectStart)
   const userResults = useSelector(selectUserResults)
   const surveyVersion = useSelector(selectSurveyVersion)
   const surveySteps = useSelector(selectSteps)
@@ -131,7 +133,7 @@ const SurveyPage = () => {
   }
 
   function handleSurveySubmit() {
-    dispatch(doSubmit(userId, surveyVersion, surveyResults))
+    dispatch(doSubmit(userId, start, surveyVersion, surveyResults))
     history.push("/summary")
   }
 

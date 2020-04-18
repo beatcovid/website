@@ -8,6 +8,7 @@ export const slice = createSlice({
     isSubmitted: false,
     uid: undefined,
     user: undefined,
+    start: undefined,
     survey: undefined,
     formVersion: "",
     formFetchError: false,
@@ -28,6 +29,9 @@ export const slice = createSlice({
     setUser: (state, { payload }) => {
       state.user = payload
     },
+    setStart: (state, { payload }) => {
+      state.start = payload
+    },
     setSurvey: (state, { payload }) => {
       state.survey = payload
     },
@@ -46,15 +50,17 @@ export const {
   setSubmitted,
   setUid,
   setUser,
+  setStart,
   setSurvey,
   setFormVersion,
   setFormFetchError,
 } = slice.actions
 
-function getFormData(user_id, version, results) {
+function getFormData(user_id, start, version, results) {
   const formData = {
-    start: new Date().toISOString(),
+    end: new Date().toISOString(),
     timezone: new Date().getTimezoneOffset(),
+    start,
     user_id,
     version,
   }
@@ -82,6 +88,7 @@ export const doSchemaGet = () => dispatch => {
       dispatch(setSurvey(r.survey))
       dispatch(setFormVersion(findVersion.calculation))
       dispatch(setUid(r.uid))
+      dispatch(setStart(new Date().toISOString()))
 
       if (r.user) {
         dispatch(setUser(r.user))
@@ -95,8 +102,9 @@ export const doSchemaGet = () => dispatch => {
       dispatch(unsetLoading())
     })
 }
-export const doSubmit = (userId, version, results) => dispatch => {
-  const formData = getFormData(userId, version, results)
+
+export const doSubmit = (userId, start, version, results) => dispatch => {
+  const formData = getFormData(userId, start, version, results)
   dispatch(setLoading())
   // @TODO: send to error page if submission fails
   api
@@ -114,6 +122,7 @@ export const selectLoading = state => state.schema.isLoading
 export const selectSubmitted = state => state.schema.isSubmitted
 export const selectUid = state => state.schema.uid
 export const selectUser = state => state.schema.user
+export const selectStart = state => state.schema.start
 export const selectSurvey = state => state.schema.survey
 export const selectFormVersion = state => state.schema.formVersion
 export const selectFormFetchError = state => state.schema.formFetchError
