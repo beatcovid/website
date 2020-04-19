@@ -34,5 +34,5 @@ export const api = {
   getForm: (formName = FORM_NAME) =>
     requests.get(`/api/form/schema/${formName}/`),
   getSubmissions: () => requests.get("/api/user/submissions"),
-  getTracker: () => requests.get("/api/tracker"),
+  getTracker: () => requests.get("/api/tracker/"),
 }
