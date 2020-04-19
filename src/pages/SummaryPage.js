@@ -37,8 +37,7 @@ const SummaryPage = () => {
         dataset[i] = []
         trackerScores.forEach(score => {
           const summary = score.summary
-          // const date = parse(score.date_day, "dd-MM-yyyy", new Date())
-          const date = parseISO(score.date_submitted)
+          const date = parseISO(`${score.date_submitted}Z`)
           dataset[i].push({
             date,
             value: summary[key].value,
