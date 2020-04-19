@@ -33,6 +33,6 @@ export const api = {
     requests.get(`/api/form/stats/${formName}/`),
   getForm: (formName = FORM_NAME) =>
     requests.get(`/api/form/schema/${formName}/`),
-  getSubmissions: () => requests.get("/api/user/submissions"),
+  getSubmissions: () => requests.get("/api/user/submissions/"),
   getTracker: () => requests.get("/api/tracker/"),
 }
