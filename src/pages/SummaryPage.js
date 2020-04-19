@@ -166,7 +166,7 @@ const SummaryPage = () => {
 
           <div className="columns">
             <div className="column is-two-thirds">
-              <Result result={`risk-${tracker.risk}`} />
+              <Result risk={tracker.risk} />
 
               <div className="button-wrapper has-text-centered">
                 <button

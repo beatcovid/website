@@ -33,6 +33,14 @@
       font-size: 1.2em;
     }
 
+    .message-wrapper {
+      margin-bottom: 1rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
     .result-container {
       margin-top: 1rem;
       font-weight: 700;
