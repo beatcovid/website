@@ -25,7 +25,8 @@ const SummaryOfSymptoms = props => {
     <section className="summary-of-symptoms-section card is-info">
       <header>Today's scores</header>
       <p>
-        This section gives a score between no symptoms and many severe symptoms.
+        This section gives a score between no symptoms (0) and many severe
+        symptoms (3).
       </p>
       <div className="card-content">
         {Object.keys(summaryScores).map(renderBarViz)}
