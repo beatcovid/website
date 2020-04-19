@@ -27,9 +27,10 @@ const Result = props => {
     }
   }
 
-  function renderMessage(m) {
+  function renderMessage(m, index) {
     return (
       <div
+        key={`message-${index}`}
         className="message-wrapper"
         dangerouslySetInnerHTML={createHtml(m)}
       />
