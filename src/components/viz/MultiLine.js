@@ -79,7 +79,7 @@ const MultiLine = props => {
         g.attr("transform", `translate(0, ${height - margin.bottom})`).call(
           d3
             .axisBottom(x)
-            .ticks(firstItem.length + 2)
+            .ticks(d3.timeDay.every(1))
             .tickPadding(2)
             .tickSize(-height),
         )
