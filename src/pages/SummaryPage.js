@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useRef } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import parse from "date-fns/parse"
 import parseISO from "date-fns/parseISO"
 import Result from "../components/summary/Result"
 import ThankYou from "../components/summary/ThankYou"
@@ -15,12 +14,12 @@ import {
   selectTracker,
   selectIsTrackerError,
 } from "../store/userSlice"
-import { selectSubmissions, fetchStats } from "../store/statsSlice"
+import { selectRespondents } from "../store/statsSlice"
 
 const SummaryPage = () => {
   const dispatch = useDispatch()
   const tracker = useSelector(selectTracker)
-  const submissions = useSelector(selectSubmissions)
+  const respondents = useSelector(selectRespondents)
   const isTrackerError = useSelector(selectIsTrackerError)
   const myRef = useRef(null)
   const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop)
@@ -137,7 +136,6 @@ const SummaryPage = () => {
   useEffect(() => {
     if (!tracker && !isTrackerError) {
       dispatch(doTrackerGet())
-      dispatch(fetchStats())
     }
   }, [dispatch, tracker, isTrackerError])
 
@@ -151,7 +149,7 @@ const SummaryPage = () => {
         <div className="summary-page container">
           <div className="columns">
             <div className="column">
-              <ThankYou counter={submissions} />
+              <ThankYou counter={respondents} />
             </div>
 
             <div className="column">

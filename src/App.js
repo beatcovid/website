@@ -19,11 +19,11 @@ import { logPageView } from "./utils/analyticsTracker"
 import { selectLoading, selectFormVersion } from "./store/schemaSlice"
 import { selectTrackerLoading } from "./store/userSlice"
 
-import { selectSubmissions, fetchStats } from "./store/statsSlice"
+import { selectRespondents, fetchStats } from "./store/statsSlice"
 
 const HomeApp = () => {
   const dispatch = useDispatch()
-  const submissionCount = useSelector(selectSubmissions)
+  const respondentsCount = useSelector(selectRespondents)
   const appVersion = process.env.REACT_APP_VERSION || ""
   const formVersion = useSelector(selectFormVersion)
   const isLoading = useSelector(selectLoading)
@@ -42,7 +42,7 @@ const HomeApp = () => {
   return (
     <>
       <ScrollToTop />
-      <AppHeader count={submissionCount} />
+      <AppHeader count={respondentsCount} />
 
       {(isLoading || isTrackerLoading) && <AppLoader />}
 
