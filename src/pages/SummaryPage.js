@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import parse from "date-fns/parse"
+import parseISO from "date-fns/parseISO"
 import Result from "../components/summary/Result"
 import ThankYou from "../components/summary/ThankYou"
 import TrackDaily from "../components/summary/TrackDaily"
@@ -34,18 +35,15 @@ const SummaryPage = () => {
       keyLabels = ["Respiratory symptoms", "General symptoms"]
 
       keys.forEach((key, i) => {
-        let currentDate = null
         dataset[i] = []
         trackerScores.forEach(score => {
           const summary = score.summary
-          const date = parse(score.date, "dd-MM-yyyy", new Date())
-          if (!currentDate || currentDate !== score.date) {
-            dataset[i].push({
-              date,
-              value: summary[key].value,
-            })
-            currentDate = score.date
-          }
+          // const date = parse(score.date_day, "dd-MM-yyyy", new Date())
+          const date = parseISO(score.date_submitted)
+          dataset[i].push({
+            date,
+            value: summary[key].value,
+          })
         })
       })
     }

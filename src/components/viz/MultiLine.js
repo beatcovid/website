@@ -69,6 +69,7 @@ const MultiLine = props => {
         .scaleTime()
         .domain([lastDate, firstDate])
         .rangeRound([margin.left, width - margin.right])
+        .nice()
       const y = d3
         .scaleLinear()
         .domain([0, max])
