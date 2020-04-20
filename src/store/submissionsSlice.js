@@ -35,8 +35,8 @@ export const doSubmissionsGet = (isLoading, isCompleted) => dispatch => {
         console.log("submissions", r)
         if (r) {
           r.sort((a, b) => {
-            const dateA = getTime(parseISO(a._submission_time))
-            const dateB = getTime(parseISO(b._submission_time))
+            const dateA = getTime(parseISO(a.end))
+            const dateB = getTime(parseISO(b.end))
             return dateB - dateA
           })
           dispatch(setSubmissions(r))

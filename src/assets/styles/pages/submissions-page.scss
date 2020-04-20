@@ -27,9 +27,7 @@
     overflow-x: auto;
   }
 
-
   .submission-list {
-    border-right: 1px solid #eee;
     position: -webkit-sticky;
     position: sticky;
     top: 1rem;
@@ -44,6 +42,15 @@
     .item {
       cursor: pointer;
       padding: 3px 6px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: monospace;
+
+      strong {
+        font-size: 1.2em;
+      }
 
       &:hover {
         background-color: #efefef;
@@ -52,6 +59,10 @@
       &.is-active {
         background-color: $pink;
         color: #fff;
+
+        strong {
+          color: #fff;
+        }
       }
     }
   }

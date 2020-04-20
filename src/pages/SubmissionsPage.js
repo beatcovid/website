@@ -33,7 +33,7 @@ const SubmissionsPage = () => {
 
   function formatDate(isoString) {
     return isoString
-      ? format(parseISO(`${isoString}Z`), "iii dd-LLL-yyyy HH:mm:ss")
+      ? format(parseISO(`${isoString}`), "iii dd-LLL-yyyy HH:mm:ss")
       : ""
   }
 
@@ -144,7 +144,7 @@ const SubmissionsPage = () => {
 
   function renderSubmissions(submission) {
     const id = `sub_${submission._uuid}`
-    const submissionDate = submission._submission_time
+    const endDate = formatDate(submission.end)
     const isActive = currentSubmission
       ? submission._uuid === currentSubmission._uuid
       : false
@@ -160,8 +160,8 @@ const SubmissionsPage = () => {
         key={id}
         onClick={() => handleSubmissionClick(submission)}
       >
-        {/* {formatDate(submissionDate)} */}
-        {submission._id}
+        <strong>{submission._id}</strong>
+        <span>{endDate}</span>
       </div>
     )
   }
