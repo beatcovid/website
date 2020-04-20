@@ -33,6 +33,20 @@ export const doSubmissionsGet = (isLoading, isCompleted) => dispatch => {
       .getSubmissions()
       .then(r => {
         console.log("submissions", r)
+
+        // @TODO: remove this workaround when _submission_time is UTC.
+        try {
+          r.forEach(submission => {
+            const timeLength = submission._submission_time.length
+            if (submission._submission_time[timeLength - 1] !== "Z") {
+              submission._submission_time += "Z"
+            }
+          })
+        } catch (e) {
+          console.error("there is a problem mutating submission response")
+        }
+        /////
+
         if (r) {
           r.sort((a, b) => {
             const dateA = getTime(parseISO(a.end))
