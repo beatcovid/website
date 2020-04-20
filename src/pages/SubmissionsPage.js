@@ -84,9 +84,7 @@ const SubmissionsPage = () => {
     "user_id",
     "session_id",
     "server_env",
-    "system_version",
     "_submission_time",
-    "_status",
     "user_agent",
     "version",
     "start",
@@ -96,30 +94,51 @@ const SubmissionsPage = () => {
     "_tags",
     "_notes",
     "_geolocation",
-    "_timezone",
     "_submitted_by",
+    "_status",
+  ]
+  const hideNullKeys = [
+    "_xform_id_string",
+    "_validation_status",
+    "_tags",
+    "_notes",
+    "_geolocation",
+    "_submitted_by",
+    "_status",
   ]
 
   function renderSubmission() {
     const formFields = []
     const systemFields = []
+
+    // Push form fields only
     Object.keys(currentSubmission).forEach(key => {
-      if (key[0] === "_" || systemKeys.indexOf(key) !== -1) {
-        // ignore these fields
-      } else {
+      if (key[0] !== "_" && systemKeys.indexOf(key) === -1) {
         formFields.push({
           name: key,
           value: currentSubmission[key],
         })
       }
     })
-    systemKeys.forEach(key => {
-      systemFields.push({
-        name: key,
-        value: currentSubmission[key],
-      })
-    })
     formFields.sort(sortByName)
+
+    // Push system fields only
+    systemKeys.forEach(key => {
+      if (hideNullKeys.indexOf(key) === -1) {
+        systemFields.push({
+          name: key,
+          value: currentSubmission[key],
+        })
+      } else {
+        if (currentSubmission[key]) {
+          systemFields.push({
+            name: key,
+            value: currentSubmission[key],
+          })
+        }
+      }
+    })
+
     return (
       <div className="submissions-detail">
         <Helmet>
