@@ -17,7 +17,7 @@ ARG REACT_APP_MAPBOX_API_KEY
 ARG BRANCH_NAME
 ARG REVISION
 
-RUN yarn run build
+RUN ENV=production yarn run build
 
 # production environment
 FROM nginx:1.16.0-alpine
