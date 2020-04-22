@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit"
-import Cookie from "js-cookie"
 import { api } from "../api/agent"
 
 export const slice = createSlice({
@@ -13,7 +12,6 @@ export const slice = createSlice({
   },
   reducers: {
     setUserId: (state, { payload }) => {
-      // Cookie.set("uid", payload)
       state.userId = payload
     },
     setResults: (state, { payload }) => {
