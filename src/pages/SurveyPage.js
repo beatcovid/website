@@ -119,9 +119,9 @@ const SurveyPage = () => {
     dispatch(doSetCurrentStep(stepNames[findIndex + 1]))
 
     ReactGA.event({
-      category: "SurveyStep",
-      action: "Next",
-      value: currentStep,
+      category: "SurveyNext",
+      action: currentStep,
+      // value: currentStep,
     })
 
     setTransitionClass("fade")
@@ -132,9 +132,9 @@ const SurveyPage = () => {
     dispatch(doSetCurrentStep(stepNames[findIndex - 1]))
 
     ReactGA.event({
-      category: "SurveyStep",
-      action: "Prev",
-      value: currentStep,
+      category: "SurveyPrev",
+      action: currentStep,
+      // action: "Prev",
     })
 
     setTransitionClass("fade-back")
