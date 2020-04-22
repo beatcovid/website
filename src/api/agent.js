@@ -1,10 +1,8 @@
 import axios from "axios"
-import { readCookie } from "../utils"
+import * as cookies from "js-cookie"
 
 const API_ROOT = process.env.REACT_APP_API_ENDPOINT
 const FORM_NAME = process.env.REACT_APP_FORM_NAME || "beatcovid19now"
-
-const uid = readCookie("uid")
 
 const agent = axios.create({
   baseURL: API_ROOT,
@@ -13,12 +11,28 @@ const agent = axios.create({
   validateStatus: function(status) {
     return status >= 200 && status < 403
   },
-  headers: {
-    "x-uid": uid,
-  },
 })
 
+agent.interceptors.request.use(
+  config => {
+    let uid_cookie_value = cookies.get("uid")
+
+    if (uid_cookie_value.length) {
+      config.headers = {
+        "x-uid": uid_cookie_value,
+      }
+    }
+
+    return config
+  },
+  error => {
+    return Promise.reject(error)
+  },
+)
+
 console.info(`Set API endpoint at ${API_ROOT}`)
+
+const uid = cookies.get("uid")
 console.info(`uid cookie is ${uid}`)
 
 export const handleErrors = err => {
