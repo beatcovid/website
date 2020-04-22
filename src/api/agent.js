@@ -17,7 +17,7 @@ agent.interceptors.request.use(
   config => {
     let uid_cookie_value = cookies.get("uid")
 
-    if (uid_cookie_value.length) {
+    if (uid_cookie_value && uid_cookie_value.length) {
       config.headers = {
         "x-uid": uid_cookie_value,
       }
