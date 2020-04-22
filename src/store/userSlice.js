@@ -13,7 +13,7 @@ export const slice = createSlice({
   },
   reducers: {
     setUserId: (state, { payload }) => {
-      Cookie.set("uid", payload)
+      // Cookie.set("uid", payload)
       state.userId = payload
     },
     setResults: (state, { payload }) => {
