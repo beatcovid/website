@@ -1,7 +1,10 @@
 import axios from "axios"
+import { readCookie } from "../utils"
 
 const API_ROOT = process.env.REACT_APP_API_ENDPOINT
 const FORM_NAME = process.env.REACT_APP_FORM_NAME || "beatcovid19now"
+
+const uid = readCookie("uid")
 
 const agent = axios.create({
   baseURL: API_ROOT,
@@ -10,9 +13,13 @@ const agent = axios.create({
   validateStatus: function(status) {
     return status >= 200 && status < 403
   },
+  headers: {
+    "x-uid": uid,
+  },
 })
 
 console.info(`Set API endpoint at ${API_ROOT}`)
+console.info(`uid cookie is ${uid}`)
 
 export const handleErrors = err => {
   if (err && err.response && err.response.status === 401) {
