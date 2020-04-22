@@ -124,6 +124,11 @@ const SurveyPage = () => {
       // value: currentStep,
     })
 
+    // If this feels hacky it's because it is
+    let page = `/survey/${currentStep}`
+    ReactGA.set({ page })
+    ReactGA.pageview(page)
+
     setTransitionClass("fade")
   }
 
@@ -136,6 +141,11 @@ const SurveyPage = () => {
       action: currentStep,
       // action: "Prev",
     })
+
+    // If this feels hacky it's because it is
+    let page = `/survey/${currentStep}`
+    ReactGA.set({ page })
+    ReactGA.pageview(page)
 
     setTransitionClass("fade-back")
   }
