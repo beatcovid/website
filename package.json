@@ -1,6 +1,6 @@
 {
   "name": "beat-covid19-now",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.1.0",
