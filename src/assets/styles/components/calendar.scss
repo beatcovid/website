@@ -1,0 +1,24 @@
+.calendar-component {
+  .calendar-month {
+    width: 100%;
+  }
+
+  .calendar-week {
+    display: flex;
+  }
+
+  .calendar-day {
+    width: 100%;
+    text-align: center;
+    border: 1px solid #000;
+  }
+}
+
+.days-of-week {
+  display: flex;
+
+  .week-day {
+    width: 100%;
+    text-align: center;
+  }
+}

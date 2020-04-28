@@ -1,6 +1,6 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useMemo } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { Route, Switch, useHistory } from "react-router-dom"
+import { Route, Switch, useHistory, useLocation } from "react-router-dom"
 import ScrollToTop from "./components/app/ScrollToTop"
 import AppHeader from "./components/app/Header"
 import AppFooter from "./components/app/Footer"
@@ -13,6 +13,7 @@ import SummaryPage from "./pages/SummaryPage"
 import PrivacyPage from "./pages/PrivacyPage"
 import InformationPage from "./pages/InformationPage"
 import SubmissionsPage from "./pages/SubmissionsPage"
+import CalendarPage from "./pages/CalendarPage"
 import NoMatchPage from "./pages/NoMatchPage"
 import { logPageView } from "./utils/analyticsTracker"
 
@@ -28,6 +29,11 @@ const HomeApp = () => {
   const formVersion = useSelector(selectFormVersion)
   const isLoading = useSelector(selectLoading)
   const isTrackerLoading = useSelector(selectTrackerLoading)
+  const { pathname } = useLocation()
+  const useSmallHeader = useMemo(
+    () => pathname === "/survey" || pathname === "/calendar",
+    [pathname],
+  )
 
   useEffect(() => {
     dispatch(fetchStats())
@@ -42,7 +48,7 @@ const HomeApp = () => {
   return (
     <>
       <ScrollToTop />
-      <AppHeader count={respondentsCount} />
+      <AppHeader count={respondentsCount} minimal={useSmallHeader} />
 
       {(isLoading || isTrackerLoading) && <AppLoader />}
 
@@ -73,6 +79,10 @@ const HomeApp = () => {
 
             <Route path="/submissions">
               <SubmissionsPage />
+            </Route>
+
+            <Route path="/calendar">
+              <CalendarPage />
             </Route>
 
             <Route path="*">
