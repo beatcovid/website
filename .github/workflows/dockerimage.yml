@@ -11,12 +11,14 @@ jobs:
         uses: elgohr/Publish-Docker-Github-Action@master
         env:
           REACT_APP_SENTRY_DSN: https://353992084b0d40cb9a6a64292482d90e@sentry.io/5172565
-          REACT_APP_API_ENDPOINT: https://api.stopcovid.infotorch.org/
+          REACT_APP_API_ENDPOINT: https://api.beatcov-staging.org/
           REACT_APP_ANALYTICS_ID: UA-153695048-2
+          NODE_ENV: development
+          ENV: development
         with:
           name: beatcovid/website/website
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          buildargs: REACT_APP_SENTRY_DSN,REACT_APP_API_ENDPOINT,REACT_APP_ANALYTICS_ID
+          buildargs: REACT_APP_SENTRY_DSN,REACT_APP_API_ENDPOINT,REACT_APP_ANALYTICS_ID,NODE_ENV,ENV
           cache: true
