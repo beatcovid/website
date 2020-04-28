@@ -9,9 +9,8 @@ import addDays from "date-fns/addDays"
 const Calendar = props => {
   const date = props.date
   const month = useMemo(() => date.getMonth(), [date])
-  const monthLabel = useMemo(() => {
-    return format(date, "LLLL")
-  }, [date])
+  const year = useMemo(() => date.getFullYear(), [date])
+  const monthLabel = useMemo(() => format(date, "LLLL"), [date])
 
   function renderDay(day) {
     const key = `calendar-comp-day-${day.getTime()}`
@@ -36,8 +35,8 @@ const Calendar = props => {
 
   function renderMonth() {
     const week = eachWeekOfInterval({
-      start: startOfMonth(new Date(2020, month, 1)),
-      end: endOfMonth(new Date(2020, month, 1)),
+      start: startOfMonth(new Date(year, month, 1)),
+      end: endOfMonth(new Date(year, month, 1)),
     })
     return <div className="calendar-month">{week.map(renderWeek)}</div>
   }
