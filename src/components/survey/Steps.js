@@ -65,23 +65,27 @@ const Steps = props => {
           results[q.name] = null
         }
 
-        if (answer) {
-          answer = {}
-          answer[q.name] = results[q.name]
+        // for constraint check, answer must be a object
+        answer = {}
+        answer[q.name] = results[q.name]
 
-          try {
-            constraintCheck = q.constraint
-              ? evalExpression(q.constraint, answer)
-              : true
-          } catch (e) {
-            console.error("checkConstraint:", answer, q.constraint)
-          }
+        // for select_multiple, convert back to array for constraint check
+        if (q.type === "select_multiple" && results[q.name] !== null) {
+          answer[q.name] = results[q.name].split(" ")
+        }
+
+        try {
+          constraintCheck = q.constraint
+            ? evalExpression(q.constraint, answer)
+            : true
+        } catch (e) {
+          console.error("checkConstraint:", answer, q.constraint)
         }
 
         if (relevancyCheck) {
-          let errorMessage = q.constraint_message
-          if (!requireCheck) {
-            errorMessage = requiredMessage
+          let errorMessage = requiredMessage
+          if (!constraintCheck) {
+            errorMessage = q.constraint_message
           }
           questionsCheck.push({
             name: q.name,
