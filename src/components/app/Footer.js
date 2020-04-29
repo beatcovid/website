@@ -16,7 +16,7 @@ const Footer = props => {
     }
 
     if (sticky) {
-      return `${baseClasses} is-sticky`
+      return `${baseClasses} is-sticky is-hidden-mobile`
     }
 
     return baseClasses
