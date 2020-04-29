@@ -39,3 +39,9 @@
 @import "./pages/submissions-page.scss";
 @import "./pages/calendar-page.scss";
 @import "./pages/no-match-page.scss";
+
+.no-scroll {
+  margin: 0;
+  height: 100%;
+  overflow: hidden
+}

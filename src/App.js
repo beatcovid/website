@@ -34,7 +34,13 @@ const HomeApp = () => {
     () => pathname === "/survey" || pathname === "/calendar",
     [pathname],
   )
-  const isFooterSticky = useMemo(() => pathname === "/calendar", [pathname])
+  const isCalendarPage = useMemo(() => pathname === "/calendar", [pathname])
+
+  useEffect(() => {
+    if (isCalendarPage) {
+      document.querySelector("html, body").classList.add("no-scroll")
+    }
+  }, [isCalendarPage])
 
   useEffect(() => {
     dispatch(fetchStats())
@@ -96,7 +102,7 @@ const HomeApp = () => {
       <AppFooter
         appVersion={appVersion}
         formVersion={formVersion}
-        sticky={isFooterSticky}
+        sticky={isCalendarPage}
       />
     </>
   )
