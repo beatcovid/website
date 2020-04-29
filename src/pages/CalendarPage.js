@@ -1,25 +1,55 @@
-import React from "react"
+import React, { useState, useEffect, useRef } from "react"
 import format from "date-fns/format"
+import isValid from "date-fns/isValid"
 import eachMonthOfInterval from "date-fns/eachMonthOfInterval"
+import addMonths from "date-fns/addMonths"
 import { Month, DaysOfWeek } from "../components/calendar"
 
 const CalendarPage = () => {
   const now = new Date()
+  const calendarMonthsRef = useRef(null)
   const startOfYear = new Date(2020, 0, 1) // nothing is collected before 2020
-  const months = eachMonthOfInterval({ start: startOfYear, end: now })
+  const months = eachMonthOfInterval({
+    start: startOfYear,
+    end: addMonths(now, 1),
+  })
+  const headerDates = {}
+  const [currentHeaderDate, setCurrentHeaderDate] = useState(null)
+
+  useEffect(() => {
+    calendarMonthsRef.current.scrollTo(
+      0,
+      calendarMonthsRef.current.scrollHeight,
+    )
+  }, [])
+
+  function handleIntersect(date, isIntersecting) {
+    headerDates[date] = isIntersecting
+    const visibleDates = []
+    Object.keys(headerDates).forEach(d => {
+      if (headerDates[d]) {
+        visibleDates.push(new Date(d))
+      }
+    })
+    const current = new Date(Math.min(...visibleDates))
+    const currentHeader = isValid(current) ? format(current, "LLLL yyyy") : ""
+    setCurrentHeaderDate(currentHeader)
+  }
 
   function renderCalendarMonth(date) {
     const key = `calendar-page-${date.getTime()}`
-    return <Month key={key} date={date} />
+    return <Month key={key} date={date} onIntersect={handleIntersect} />
   }
 
   return (
     <section className="calendar-page container">
       <header className="calendar-header">
-        <h1>{format(startOfYear, "LLLL yyyy")}</h1>
+        <h1>{currentHeaderDate}</h1>
         <DaysOfWeek week={months[0]} />
       </header>
-      {months.map(renderCalendarMonth)}
+      <div ref={calendarMonthsRef} className="calendar-months">
+        {months.map(renderCalendarMonth)}
+      </div>
     </section>
   )
 }

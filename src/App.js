@@ -30,10 +30,11 @@ const HomeApp = () => {
   const isLoading = useSelector(selectLoading)
   const isTrackerLoading = useSelector(selectTrackerLoading)
   const { pathname } = useLocation()
-  const useSmallHeader = useMemo(
+  const isMinimal = useMemo(
     () => pathname === "/survey" || pathname === "/calendar",
     [pathname],
   )
+  const isFooterSticky = useMemo(() => pathname === "/calendar", [pathname])
 
   useEffect(() => {
     dispatch(fetchStats())
@@ -48,7 +49,7 @@ const HomeApp = () => {
   return (
     <>
       <ScrollToTop />
-      <AppHeader count={respondentsCount} minimal={useSmallHeader} />
+      <AppHeader count={respondentsCount} minimal={isMinimal} />
 
       {(isLoading || isTrackerLoading) && <AppLoader />}
 
@@ -92,7 +93,11 @@ const HomeApp = () => {
         </div>
       )}
 
-      <AppFooter appVersion={appVersion} formVersion={formVersion} />
+      <AppFooter
+        appVersion={appVersion}
+        formVersion={formVersion}
+        sticky={isFooterSticky}
+      />
     </>
   )
 }

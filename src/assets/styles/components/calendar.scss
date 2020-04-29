@@ -1,4 +1,6 @@
 .calendar-component {
+  margin: 1rem 0;
+
   .calendar-month {
     width: 100%;
   }
@@ -10,12 +12,40 @@
   .calendar-day {
     width: 100%;
     text-align: center;
-    border: 1px solid #000;
+    border: 1px solid #fff;
+    font-size: 0.9em;
+    font-weight: 700;
+    color: #666;
+    padding: 3px 1px;
+    position: relative;
+
+    h5 {
+      position: absolute;
+      top: -19px;
+      font-size: 0.9em;
+      font-weight: 900;
+      color: #333;
+      left: auto;
+      right: auto;
+      width: 100%;
+    }
+
+    &.today {
+      border: 1px solid $green;
+      font-weight: 700;
+      color: $green;
+    }
+
+    &.result-success {
+      background-color: $green;
+    }
   }
 }
 
 .days-of-week {
   display: flex;
+  font-size: 0.7em;
+  color: #888;
 
   .week-day {
     width: 100%;

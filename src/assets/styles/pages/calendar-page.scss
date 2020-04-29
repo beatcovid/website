@@ -2,15 +2,33 @@
   max-width: 640px;
 
   .calendar-header {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
+    position: relative;
     z-index: 99;
     background-color: #fff;
 
     h1 {
       text-align: center;
       font-weight: 900;
+      font-size: 0.9em;
+      margin: 5px 0;
+    }
+  }
+
+  .calendar-months {
+    border-top: 1px solid $pink-light;
+    border-bottom: 1px solid $pink-light;
+    position: fixed;
+    width: 100%;
+    max-width: 640px;
+    top: 90px;
+    bottom: 71px;
+    left: auto;
+    right: auto;
+    overflow: auto;
+
+    @include tablet {
+      bottom: 100px;
+      top: 141px;
     }
   }
 }

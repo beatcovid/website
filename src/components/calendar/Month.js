@@ -1,23 +1,52 @@
-import React, { useMemo } from "react"
+import React, { useMemo, useRef, useEffect, useState } from "react"
 import format from "date-fns/format"
 import eachWeekOfInterval from "date-fns/eachWeekOfInterval"
 import eachDayOfInterval from "date-fns/eachDayOfInterval"
 import startOfMonth from "date-fns/startOfMonth"
 import endOfMonth from "date-fns/endOfMonth"
 import addDays from "date-fns/addDays"
+import isSameDay from "date-fns/isSameDay"
 
-const Calendar = props => {
+const CalendarMonth = props => {
   const date = props.date
+  const today = new Date()
+  const [isIntersecting, setIsIntersecting] = useState(false)
+  const monthRef = useRef(null)
   const month = useMemo(() => date.getMonth(), [date])
   const year = useMemo(() => date.getFullYear(), [date])
-  const monthLabel = useMemo(() => format(date, "LLLL"), [date])
+  const monthLabel = useMemo(() => format(date, "MMM"), [date])
+  const id = useMemo(() => format(date, "yyyy-LL"), [date])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsIntersecting(entry.isIntersecting)
+    })
+    if (monthRef.current) {
+      observer.observe(monthRef.current)
+    }
+  }, [monthRef])
+
+  useEffect(() => {
+    props.onIntersect(date, isIntersecting)
+  }, [isIntersecting, date, props])
 
   function renderDay(day) {
     const key = `calendar-comp-day-${day.getTime()}`
+    const isFirstDay = day.getDate() === 1
     const isCurrentMonth = day.getMonth() === month
+    const isToday = isCurrentMonth ? isSameDay(today, day) : false
+
+    function dayClasses() {
+      let c = "calendar-day"
+      if (isToday) {
+        c += " today"
+      }
+      return c
+    }
     return (
-      <div className="calendar-day" key={key}>
-        {isCurrentMonth && day.getDate()}
+      <div className={dayClasses()} key={key}>
+        {isFirstDay && isCurrentMonth && <h5>{monthLabel}</h5>}
+        <div>{isCurrentMonth && day.getDate()}</div>
       </div>
     )
   }
@@ -38,15 +67,18 @@ const Calendar = props => {
       start: startOfMonth(new Date(year, month, 1)),
       end: endOfMonth(new Date(year, month, 1)),
     })
-    return <div className="calendar-month">{week.map(renderWeek)}</div>
+    return (
+      <div ref={monthRef} className="calendar-month">
+        {week.map(renderWeek)}
+      </div>
+    )
   }
 
   return (
-    <section className="calendar-component">
-      <h1>{monthLabel}</h1>
+    <section id={id} className="calendar-component">
       {renderMonth()}
     </section>
   )
 }
 
-export default Calendar
+export default CalendarMonth
