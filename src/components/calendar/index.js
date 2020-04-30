@@ -6,7 +6,7 @@ import addMonths from "date-fns/addMonths"
 import Month from "./Month"
 import DaysOfWeek from "./DaysOfWeek"
 
-const CalendarPage = props => {
+const Calendar = props => {
   const results = props.results
   const calendarMonthsRef = useRef(null)
   const now = new Date()
@@ -63,4 +63,4 @@ const CalendarPage = props => {
   )
 }
 
-export default CalendarPage
+export default Calendar
