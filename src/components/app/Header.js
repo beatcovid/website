@@ -1,22 +1,20 @@
-import React, { useMemo } from "react"
-import { useLocation } from "react-router-dom"
+import React from "react"
 import AppLogo from "./Logo"
 import SurveyLogo from "./SurveyLogo"
 import AppCounter from "./Counter"
 
 const Header = props => {
   const count = props.count
-  const { pathname } = useLocation()
-  const useSmallHeader = useMemo(() => pathname === "/survey", [pathname])
+  const minimal = props.minimal
 
   return (
     <nav className="site-navbar">
-      {useSmallHeader && (
+      {minimal && (
         <div className="small-head container">
           <SurveyLogo />
         </div>
       )}
-      {!useSmallHeader && (
+      {!minimal && (
         <div className="container">
           <AppLogo />
           <AppCounter count={count} />

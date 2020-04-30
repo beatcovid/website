@@ -1,0 +1,68 @@
+.calendar-component {
+  margin: 1rem 0;
+
+  .calendar-month {
+    width: 100%;
+  }
+
+  .calendar-week {
+    display: flex;
+  }
+
+  .calendar-day {
+    width: 100%;
+    text-align: center;
+    border: 1px solid #fff;
+    font-size: 0.9em;
+    color: #666;
+    padding: 5px 0px;
+    position: relative;
+
+    h5 {
+      position: absolute;
+      top: -19px;
+      font-size: 0.9em;
+      font-weight: 900;
+      color: #333;
+      left: auto;
+      right: auto;
+      width: 100%;
+    }
+
+    &.today {
+      font-weight: 700;
+      color: $green;
+      background-color: #eee;
+    }
+
+    &.is-success,
+    &.is-warning,
+    &.is-danger {
+      font-weight: 900;
+      color: #fff;
+    }
+
+    &.is-success {
+      background-color: $green;
+    }
+
+    &.is-warning {
+      background-color: $yellow;
+    }
+
+    &.is-danger {
+      background-color: $red;
+    }
+  }
+}
+
+.days-of-week {
+  display: flex;
+  font-size: 0.7em;
+  color: #888;
+
+  .week-day {
+    width: 100%;
+    text-align: center;
+  }
+}
