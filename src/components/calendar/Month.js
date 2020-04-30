@@ -8,6 +8,7 @@ import addDays from "date-fns/addDays"
 import isSameDay from "date-fns/isSameDay"
 
 const CalendarMonth = props => {
+  const results = props.results
   const date = props.date
   const today = new Date()
   const [isIntersecting, setIsIntersecting] = useState(false)
@@ -35,11 +36,15 @@ const CalendarMonth = props => {
     const isFirstDay = day.getDate() === 1
     const isCurrentMonth = day.getMonth() === month
     const isToday = isCurrentMonth ? isSameDay(today, day) : false
+    const result = results.find(r => isSameDay(r.date, day))
 
     function dayClasses() {
       let c = "calendar-day"
       if (isToday) {
         c += " today"
+      }
+      if (isCurrentMonth && result) {
+        c += ` ${result.colourClass}`
       }
       return c
     }

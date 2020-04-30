@@ -15,7 +15,7 @@ const Result = props => {
         return `${baseClasses} is-warning`
       case "E":
       case "F":
-        return `${baseClasses} is-warning`
+        return `${baseClasses} is-danger`
       default:
         return baseClasses
     }

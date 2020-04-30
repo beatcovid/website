@@ -6,7 +6,8 @@ import addMonths from "date-fns/addMonths"
 import Month from "./Month"
 import DaysOfWeek from "./DaysOfWeek"
 
-const CalendarPage = () => {
+const CalendarPage = props => {
+  const results = props.results
   const calendarMonthsRef = useRef(null)
   const now = new Date()
   const startOfYear = new Date(2020, 0, 1) // nothing is collected before 2020
@@ -39,7 +40,14 @@ const CalendarPage = () => {
 
   function renderCalendarMonth(date) {
     const key = `calendar-page-${date.getTime()}`
-    return <Month key={key} date={date} onIntersect={handleIntersect} />
+    return (
+      <Month
+        key={key}
+        date={date}
+        results={results}
+        onIntersect={handleIntersect}
+      />
+    )
   }
 
   return (
