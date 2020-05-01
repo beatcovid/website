@@ -6,6 +6,7 @@ import parseISO from "date-fns/parseISO"
 import format from "date-fns/format"
 import isSameDay from "date-fns/isSameDay"
 import isValid from "date-fns/isValid"
+import dateFormat from "../utils/dateFormat"
 import Result from "../components/summary/Result"
 import PotentialExposureTable from "../components/summary/PotentialExposureTable"
 import SummaryOfSymptoms from "../components/summary/SummaryOfSymptoms"
@@ -34,7 +35,7 @@ const CalendarDatePage = props => {
   ])
   const isValidDate = useMemo(() => isValid(parsedDate), [parsedDate])
   const formattedDate = useMemo(
-    () => (isValidDate ? format(parsedDate, "PP") : ""),
+    () => (isValidDate ? dateFormat(parsedDate, "PP") : ""),
     [parsedDate, isValidDate],
   )
   const reportData = useMemo(() => {

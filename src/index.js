@@ -19,6 +19,9 @@ Sentry.init({
     ["production", "stage", "staging"].indexOf(process.env.NODE_ENV) !== -1)(),
 })
 
+// set locale
+global.__localeId__ = "enAU"
+
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
