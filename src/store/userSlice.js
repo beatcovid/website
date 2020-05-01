@@ -29,6 +29,63 @@ function getColourClass(score) {
   }
 }
 
+function getNotableDates(r) {
+  const dates = r.dates
+  const notableDates = []
+  if (dates) {
+    if (dates.contact) {
+      dates.contact.forEach(d => {
+        notableDates.push({
+          date: d,
+          iconLocation: "/img/icons/icon-contact.svg",
+        })
+      })
+    }
+    if (dates.travel) {
+      dates.travel.forEach(d => {
+        notableDates.push({
+          date: d,
+          iconLocation: "/img/icons/icon-travel.svg",
+        })
+      })
+    }
+    if (dates.test) {
+      dates.test.forEach(d => {
+        notableDates.push({
+          date: d,
+          iconLocation: "/img/icons/icon-test.svg",
+        })
+      })
+    }
+    if (dates.isolation) {
+      dates.isolation.forEach(d => {
+        notableDates.push({
+          date: d,
+          iconLocation: "/img/icons/icon-isolate.svg",
+        })
+      })
+    }
+  }
+  console.log(notableDates)
+  return notableDates
+}
+
+function getScores(r) {
+  let scores = r.scores.map(s => {
+    return {
+      date: checkDate(s.date_submitted),
+      risk: s.risk,
+      summary: s.summary,
+      main: s.main,
+      other: s.other,
+      riskScore: s.risk.score,
+      colourClass: getColourClass(s.risk.score),
+    }
+  })
+  scores.sort((a, b) => getTime(parseISO(b.date)) - getTime(parseISO(a.date)))
+  return scores
+}
+
 export const slice = createSlice({
   name: "user",
   initialState: {
@@ -98,49 +155,8 @@ export const doTrackerGet = () => dispatch => {
     .then(r => {
       console.log("tracker", r)
       dispatch(setTracker(r))
-
-      let scores = r.scores.map(s => {
-        return {
-          date: checkDate(s.date_submitted),
-          risk: s.risk,
-          summary: s.summary,
-          main: s.main,
-          other: s.other,
-          riskScore: s.risk.score,
-          colourClass: getColourClass(s.risk.score),
-        }
-      })
-      scores.sort(
-        (a, b) => getTime(parseISO(b.date)) - getTime(parseISO(a.date)),
-      )
-      dispatch(setScores(scores))
-
-      const notableDates = []
-      if (r.contact_last_date) {
-        notableDates.push({
-          date: r.contact_last_date,
-          iconLocation: "/img/icons/icon-contact.svg",
-        })
-      }
-      if (r.travel_date) {
-        notableDates.push({
-          date: r.travel_date,
-          iconLocation: "/img/icons/icon-travel.svg",
-        })
-      }
-      if (r.test_date) {
-        notableDates.push({
-          date: r.test_date,
-          iconLocation: "/img/icons/icon-test.svg",
-        })
-      }
-      if (r.face_contact_limit_date) {
-        notableDates.push({
-          date: r.face_contact_limit_date,
-          iconLocation: "/img/icons/icon-isolate.svg",
-        })
-      }
-      dispatch(setNotableDates(notableDates))
+      dispatch(setScores(getScores(r)))
+      dispatch(setNotableDates(getNotableDates(r)))
     })
     .catch(e => {
       dispatch(setIsTrackerError(true))
