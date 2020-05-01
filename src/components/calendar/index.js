@@ -46,6 +46,7 @@ const Calendar = props => {
         date={date}
         results={results}
         onIntersect={handleIntersect}
+        onDayClick={day => props.onDayClick(day)}
       />
     )
   }

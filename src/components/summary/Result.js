@@ -1,6 +1,7 @@
 import React, { useMemo } from "react"
 
 const Result = props => {
+  const hideFirstLabel = props.hideFirstLabel
   const risk = props.risk
   const score = risk.score
   const message = risk.label
@@ -20,6 +21,10 @@ const Result = props => {
         return baseClasses
     }
   }, [score])
+  const sectionClasses = useMemo(() => {
+    const baseClass = "result-section"
+    return hideFirstLabel ? `${baseClass} hide-first-message` : baseClass
+  }, [hideFirstLabel])
 
   function createHtml(html) {
     return {
@@ -36,8 +41,9 @@ const Result = props => {
       />
     )
   }
+
   return (
-    <section className="result-section">
+    <section className={sectionClasses}>
       <div className={cardClasses}>{message.map(renderMessage)}</div>
     </section>
   )

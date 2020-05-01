@@ -26,37 +26,6 @@
     }
   }
 
-  .result-section {
-    h2 {
-      font-weight: 700;
-      line-height: 1.3em;
-      font-size: 1.2em;
-    }
-
-    .message-wrapper {
-      margin-bottom: 1rem;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    .result-container {
-      margin-top: 1rem;
-      font-weight: 700;
-      font-size: 0.9em;
-
-      a {
-        color: #fff;
-        text-decoration: underline;
-      }
-
-      p {
-        margin-bottom: 1rem;
-      }
-    }
-  }
-
   .potential-exposure-section {
     margin-top: 3rem;
   }
@@ -144,30 +113,6 @@
     }
   }
 
-  .symptoms-score-section {
-    font-size: 0.9em;
-
-    .table {
-      margin-bottom: 2rem;
-    }
-
-    th {
-      font-size: 0.8em;
-    }
-
-    .data-value-col {
-      width: 120px;
-    }
-  }
-
-  .summary-of-symptoms-section {
-    margin-bottom: 1rem;
-
-    header {
-      text-align: left;
-    }
-  }
-
   .print-button {
     .fa {
       font-size: 18px;
@@ -186,6 +131,64 @@
       margin-bottom: 1rem;
     }
   }
+}
 
+.result-section {
+  h2 {
+    font-weight: 700;
+    line-height: 1.3em;
+    font-size: 1.2em;
+  }
 
+  // workaround for hiding first messaage in results
+  &.hide-first-message .message-wrapper:first-child {
+    display: none;
+  }
+
+  .message-wrapper {
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .result-container {
+    margin-top: 1rem;
+    font-weight: 700;
+    font-size: 0.9em;
+
+    a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.summary-of-symptoms-section {
+  margin-bottom: 1rem;
+
+  header {
+    text-align: left;
+  }
+}
+
+.symptoms-score-section {
+  font-size: 0.9em;
+
+  .table {
+    margin-bottom: 2rem;
+  }
+
+  th {
+    font-size: 0.8em;
+  }
+
+  .data-value-col {
+    width: 120px;
+  }
 }

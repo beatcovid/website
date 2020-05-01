@@ -1,5 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit"
+import parseISO from "date-fns/parseISO"
+import getTime from "date-fns/getTime"
 import { api } from "../api/agent"
+
+// @TODO: remove this workaround when date_submitted is UTC.
+function checkDate(d) {
+  const timeLength = d.length
+  if (d[timeLength - 1] !== "Z") {
+    return `${d}Z`
+  }
+  return d
+}
+/////
+
+function getColourClass(score) {
+  switch (score) {
+    case "A":
+      return "is-success"
+    case "B":
+    case "C":
+    case "D":
+      return "is-warning"
+    case "E":
+    case "F":
+      return "is-danger"
+    default:
+      return ""
+  }
+}
 
 export const slice = createSlice({
   name: "user",
@@ -9,6 +37,7 @@ export const slice = createSlice({
     isLoading: false,
     isTrackerError: false,
     tracker: null,
+    scores: [],
   },
   reducers: {
     setUserId: (state, { payload }) => {
@@ -26,6 +55,9 @@ export const slice = createSlice({
     setTracker: (state, { payload }) => {
       state.tracker = payload
     },
+    setScores: (state, { payload }) => {
+      state.scores = payload
+    },
   },
 })
 
@@ -35,6 +67,7 @@ export const {
   setIsLoading,
   setTracker,
   setIsTrackerError,
+  setScores,
 } = slice.actions
 
 export const doSetUser = user => dispatch => {
@@ -59,6 +92,22 @@ export const doTrackerGet = () => dispatch => {
     .getTracker()
     .then(r => {
       console.log("tracker", r)
+
+      let scores = r.scores.map(s => {
+        return {
+          date: checkDate(s.date_submitted),
+          risk: s.risk,
+          summary: s.summary,
+          main: s.main,
+          other: s.other,
+          riskScore: s.risk.score,
+          colourClass: getColourClass(s.risk.score),
+        }
+      })
+      scores.sort(
+        (a, b) => getTime(parseISO(b.date)) - getTime(parseISO(a.date)),
+      )
+      dispatch(setScores(scores))
       dispatch(setTracker(r))
     })
     .catch(e => {
@@ -75,5 +124,6 @@ export const selectUserResults = state => state.user.results
 export const selectTrackerLoading = state => state.user.isLoading
 export const selectIsTrackerError = state => state.user.isTrackerError
 export const selectTracker = state => state.user.tracker
+export const selectUserScores = state => state.user.scores
 
 export default slice.reducer
