@@ -4,8 +4,28 @@ import * as cookies from "js-cookie"
 const API_ROOT = process.env.REACT_APP_API_ENDPOINT
 const FORM_NAME = process.env.REACT_APP_FORM_NAME || "beatcovid19now"
 
+const ALLOWED_HOSTS = [
+  "beatcovid19now.org",
+  "beatcov.org",
+  "beatcov-staging.com",
+  "beatcovid.test",
+]
+
+const getApiRoot = () => {
+  const currentHost = document.location.host
+  let apiRoot = API_ROOT
+
+  if (ALLOWED_HOSTS.indexOf(currentHost) >= 0) {
+    apiRoot = `//api.${currentHost}`
+  }
+
+  console.log(`apiRoot is ${apiRoot}`)
+
+  return apiRoot
+}
+
 const agent = axios.create({
-  baseURL: API_ROOT,
+  baseURL: getApiRoot(),
   withCredentials: true,
   timeout: 30000,
   validateStatus: function(status) {
@@ -29,8 +49,6 @@ agent.interceptors.request.use(
     return Promise.reject(error)
   },
 )
-
-console.info(`Set API endpoint at ${API_ROOT}`)
 
 const uid = cookies.get("uid")
 console.info(`uid cookie is ${uid}`)
