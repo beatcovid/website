@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useMemo, useState } from "react"
 import * as d3 from "d3"
 import addDays from "date-fns/addDays"
 import subDays from "date-fns/subDays"
+import eachDayOfInterval from "date-fns/eachDayOfInterval"
 
 const MultiLine = props => {
   const dataObj = props.dataObj
@@ -62,6 +63,7 @@ const MultiLine = props => {
       const firstItem = data[0]
       const firstDate = addDays(firstItem[0].date, 1)
       const lastDate = subDays(firstItem[firstItem.length - 1].date, 1)
+      const daysBetween = eachDayOfInterval({ start: lastDate, end: firstDate })
       const max = maxValue(data)
       const width = d3Container.current.parentNode.offsetWidth
       const margin = { top: 10, right: 30, bottom: 20, left: 40 }
@@ -79,7 +81,7 @@ const MultiLine = props => {
         g.attr("transform", `translate(0, ${height - margin.bottom})`).call(
           d3
             .axisBottom(x)
-            .ticks(d3.timeDay.every(1))
+            .ticks(daysBetween.length > 4 ? 4 : d3.timeDay.every(1))
             .tickPadding(2)
             .tickSize(-height),
         )

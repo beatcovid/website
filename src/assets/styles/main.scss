@@ -27,6 +27,7 @@
 @import "./components/form.scss";
 @import "./components/step-transitions.scss";
 @import "./components/datepicker.scss";
+@import "./components/calendar.scss";
 @import "./pages/app-header.scss";
 @import "./pages/app-footer.scss";
 @import "./pages/app.scss";
@@ -36,4 +37,11 @@
 @import "./pages/survey-page.scss";
 @import "./pages/summary-page.scss";
 @import "./pages/submissions-page.scss";
+@import "./pages/calendar-page.scss";
 @import "./pages/no-match-page.scss";
+
+.no-scroll {
+  margin: 0;
+  height: 100%;
+  overflow: hidden
+}
