@@ -102,7 +102,7 @@ const CalendarDatePage = props => {
 
   return (
     <section className="calendar-date-page container">
-      <h1>Your results: {formattedDate}</h1>
+      <h1>Your report on {formattedDate}</h1>
       {reportData && (
         <div className="cards">
           <div className="columns">
