@@ -35,6 +35,11 @@
       background-color: #eee;
     }
 
+    &.notable {
+      background-color: $pink-light;
+      border-radius: 100px;
+    }
+
     &.is-success,
     &.is-warning,
     &.is-danger {
@@ -53,6 +58,25 @@
 
     &.is-danger {
       background-color: $red;
+    }
+  }
+
+  .calendar-icon-day {
+    max-width: 16px;
+    margin: auto;
+    display: inline-block;
+    position: relative;
+    top: 2px;
+  }
+
+  .calendar-icon-day:first-child:nth-last-child(4),
+  .calendar-icon-day:first-child:nth-last-child(4)~.calendar-icon-day {
+    margin-left: -5px;
+    left: 4px;
+
+    @include tablet {
+      margin-left: 0px;
+      left: 0;
     }
   }
 }

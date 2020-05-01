@@ -9,6 +9,7 @@ import {
   selectTracker,
   selectUserScores,
   selectIsTrackerError,
+  selectNotableDates,
 } from "../store/userSlice"
 
 const CalendarPage = () => {
@@ -17,6 +18,7 @@ const CalendarPage = () => {
   const tracker = useSelector(selectTracker)
   const userScores = useSelector(selectUserScores)
   const isTrackerError = useSelector(selectIsTrackerError)
+  const notableDates = useSelector(selectNotableDates)
   const results = useMemo(
     () =>
       userScores.map(s => {
@@ -42,7 +44,11 @@ const CalendarPage = () => {
 
   return (
     <section className="calendar-page container">
-      <Calendar results={results} onDayClick={handleDayClick} />
+      <Calendar
+        results={results}
+        notableDates={notableDates}
+        onDayClick={handleDayClick}
+      />
     </section>
   )
 }

@@ -9,6 +9,7 @@ import isSameDay from "date-fns/isSameDay"
 
 const CalendarMonth = props => {
   const results = props.results
+  const notableDates = props.notableDates
   const date = props.date
   const today = new Date()
   const [isIntersecting, setIsIntersecting] = useState(false)
@@ -39,6 +40,15 @@ const CalendarMonth = props => {
     }
   }
 
+  function renderNotableIcons(src) {
+    const key = `notable-icon-key-${src}`
+    return (
+      <span key={key} className="calendar-icon-day">
+        <img src={src} alt="notable icon" />
+      </span>
+    )
+  }
+
   function renderDay(day) {
     const key = `calendar-comp-day-${day.getTime()}`
     const isFirstDay = day.getDate() === 1
@@ -46,6 +56,9 @@ const CalendarMonth = props => {
     const isToday = isCurrentMonth ? isSameDay(today, day) : false
     const result = results.find(r => isSameDay(r.date, day))
     const hasResult = isCurrentMonth && result
+    const notable = notableDates.filter(n => isSameDay(n.date, day))
+    const hasNotable = isCurrentMonth && notable.length > 0
+    const iconSrcs = notable.map(n => n.iconLocation)
 
     function dayClasses() {
       let c = "calendar-day"
@@ -54,6 +67,9 @@ const CalendarMonth = props => {
       }
       if (hasResult) {
         c += ` ${result.colourClass}`
+      }
+      if (hasNotable) {
+        c += " notable"
       }
       return c
     }
@@ -64,7 +80,10 @@ const CalendarMonth = props => {
         onClick={e => handleDayClick(day, hasResult)}
       >
         {isFirstDay && isCurrentMonth && <h5>{monthLabel}</h5>}
-        <div>{isCurrentMonth && day.getDate()}</div>
+        <div>
+          {!hasNotable && isCurrentMonth && day.getDate()}
+          {hasNotable && iconSrcs.map(renderNotableIcons)}
+        </div>
       </div>
     )
   }

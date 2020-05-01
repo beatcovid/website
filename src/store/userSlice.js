@@ -38,6 +38,7 @@ export const slice = createSlice({
     isTrackerError: false,
     tracker: null,
     scores: [],
+    notableDates: [],
   },
   reducers: {
     setUserId: (state, { payload }) => {
@@ -58,6 +59,9 @@ export const slice = createSlice({
     setScores: (state, { payload }) => {
       state.scores = payload
     },
+    setNotableDates: (state, { payload }) => {
+      state.notableDates = payload
+    },
   },
 })
 
@@ -68,6 +72,7 @@ export const {
   setTracker,
   setIsTrackerError,
   setScores,
+  setNotableDates,
 } = slice.actions
 
 export const doSetUser = user => dispatch => {
@@ -92,6 +97,7 @@ export const doTrackerGet = () => dispatch => {
     .getTracker()
     .then(r => {
       console.log("tracker", r)
+      dispatch(setTracker(r))
 
       let scores = r.scores.map(s => {
         return {
@@ -108,7 +114,33 @@ export const doTrackerGet = () => dispatch => {
         (a, b) => getTime(parseISO(b.date)) - getTime(parseISO(a.date)),
       )
       dispatch(setScores(scores))
-      dispatch(setTracker(r))
+
+      const notableDates = []
+      if (r.contact_last_date) {
+        notableDates.push({
+          date: r.contact_last_date,
+          iconLocation: "/img/icons/icon-contact.svg",
+        })
+      }
+      if (r.travel_date) {
+        notableDates.push({
+          date: r.travel_date,
+          iconLocation: "/img/icons/icon-travel.svg",
+        })
+      }
+      if (r.test_date) {
+        notableDates.push({
+          date: r.test_date,
+          iconLocation: "/img/icons/icon-test.svg",
+        })
+      }
+      if (r.face_contact_limit_date) {
+        notableDates.push({
+          date: r.face_contact_limit_date,
+          iconLocation: "/img/icons/icon-isolate.svg",
+        })
+      }
+      dispatch(setNotableDates(notableDates))
     })
     .catch(e => {
       dispatch(setIsTrackerError(true))
@@ -125,5 +157,12 @@ export const selectTrackerLoading = state => state.user.isLoading
 export const selectIsTrackerError = state => state.user.isTrackerError
 export const selectTracker = state => state.user.tracker
 export const selectUserScores = state => state.user.scores
+export const selectNotableDates = state =>
+  state.user.notableDates.map(n => {
+    return {
+      date: parseISO(n.date),
+      iconLocation: n.iconLocation,
+    }
+  })
 
 export default slice.reducer
