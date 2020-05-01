@@ -1,10 +1,11 @@
 import React, { useEffect, useMemo } from "react"
 import { useSelector, useDispatch } from "react-redux"
-
+import { Link } from "react-router-dom"
 import parse from "date-fns/parse"
 import parseISO from "date-fns/parseISO"
 import format from "date-fns/format"
 import isSameDay from "date-fns/isSameDay"
+import isValid from "date-fns/isValid"
 import Result from "../components/summary/Result"
 import PotentialExposureTable from "../components/summary/PotentialExposureTable"
 import SummaryOfSymptoms from "../components/summary/SummaryOfSymptoms"
@@ -14,6 +15,7 @@ import {
   selectTracker,
   selectUserScores,
   selectIsTrackerError,
+  selectTrackerLoading,
 } from "../store/userSlice"
 
 function isYesNo(value) {
@@ -26,10 +28,15 @@ const CalendarDatePage = props => {
   const tracker = useSelector(selectTracker)
   const userScores = useSelector(selectUserScores)
   const isTrackerError = useSelector(selectIsTrackerError)
+  const isTrackerLoading = useSelector(selectTrackerLoading)
   const parsedDate = useMemo(() => parse(dateParam, "yyyy-MM-dd", new Date()), [
     dateParam,
   ])
-  const formattedDate = useMemo(() => format(parsedDate, "PP"), [parsedDate])
+  const isValidDate = useMemo(() => isValid(parsedDate), [parsedDate])
+  const formattedDate = useMemo(
+    () => (isValidDate ? format(parsedDate, "PP") : ""),
+    [parsedDate, isValidDate],
+  )
   const reportData = useMemo(() => {
     if (userScores.length < 1) return null
     const findScore = userScores.find(s =>
@@ -102,7 +109,7 @@ const CalendarDatePage = props => {
 
   return (
     <section className="calendar-date-page container">
-      <h1>Your report on {formattedDate}</h1>
+      {reportData && <h1>Your report on {formattedDate}</h1>}
       {reportData && (
         <div className="cards">
           <div className="columns">
@@ -133,6 +140,24 @@ const CalendarDatePage = props => {
               />
             </div>
           </div>
+        </div>
+      )}
+
+      {isValidDate && !reportData && !isTrackerLoading && (
+        <div className="no-date-found container has-text-centered">
+          <h1>No report found on {formattedDate}.</h1>
+          <p>
+            Back to <Link to="/calendar">calendar</Link>
+          </p>
+        </div>
+      )}
+
+      {!isValidDate && (
+        <div className="no-date-found container has-text-centered">
+          <h1>Invalid date.</h1>
+          <p>
+            Back to <Link to="/calendar">calendar</Link>
+          </p>
         </div>
       )}
     </section>
