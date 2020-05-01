@@ -66,7 +66,6 @@ function getNotableDates(r) {
       })
     }
   }
-  console.log(notableDates)
   return notableDates
 }
 
