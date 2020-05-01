@@ -14,6 +14,7 @@ const CalendarMonth = props => {
   const today = new Date()
   const [isIntersecting, setIsIntersecting] = useState(false)
   const monthRef = useRef(null)
+  const todayRef = useRef(null)
   const month = useMemo(() => date.getMonth(), [date])
   const year = useMemo(() => date.getFullYear(), [date])
   const monthLabel = useMemo(() => format(date, "MMM"), [date])
@@ -29,6 +30,12 @@ const CalendarMonth = props => {
     }
     return () => observer.unobserve(currentRef)
   }, [monthRef])
+
+  useEffect(() => {
+    if (todayRef.current) {
+      props.onTodayElement(todayRef.current)
+    }
+  }, [todayRef, props])
 
   useEffect(() => {
     props.onIntersect(date, isIntersecting)
@@ -75,6 +82,7 @@ const CalendarMonth = props => {
     }
     return (
       <div
+        ref={isToday ? todayRef : null}
         className={dayClasses()}
         key={key}
         onClick={e => handleDayClick(day, hasResult)}

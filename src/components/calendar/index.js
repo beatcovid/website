@@ -18,13 +18,14 @@ const Calendar = props => {
   })
   const headerDates = {}
   const [currentHeaderDate, setCurrentHeaderDate] = useState(null)
+  const [todayRef, setTodayRef] = useState(null)
 
-  useEffect(() => {
-    calendarMonthsRef.current.scrollTo(
-      0,
-      calendarMonthsRef.current.scrollHeight,
-    )
-  }, [])
+  function handleTodayElement(el) {
+    if (!todayRef) {
+      setTodayRef(el)
+      calendarMonthsRef.current.scrollTo(0, el.offsetTop - 100)
+    }
+  }
 
   function handleIntersect(date, isIntersecting) {
     headerDates[date] = isIntersecting
@@ -49,6 +50,7 @@ const Calendar = props => {
         notableDates={notableDates}
         onIntersect={handleIntersect}
         onDayClick={day => props.onDayClick(day)}
+        onTodayElement={handleTodayElement}
       />
     )
   }
