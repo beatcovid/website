@@ -14,6 +14,7 @@ import PrivacyPage from "./pages/PrivacyPage"
 import InformationPage from "./pages/InformationPage"
 import SubmissionsPage from "./pages/SubmissionsPage"
 import CalendarPage from "./pages/CalendarPage"
+import CalendarDatePage from "./pages/CalendarDatePage"
 import NoMatchPage from "./pages/NoMatchPage"
 import { logPageView } from "./utils/analyticsTracker"
 
@@ -31,14 +32,16 @@ const HomeApp = () => {
   const isTrackerLoading = useSelector(selectTrackerLoading)
   const { pathname } = useLocation()
   const isMinimal = useMemo(
-    () => pathname === "/survey" || pathname === "/calendar",
+    () => pathname === "/survey" || pathname.indexOf("/calendar") !== -1,
     [pathname],
   )
   const isCalendarPage = useMemo(() => pathname === "/calendar", [pathname])
 
   useEffect(() => {
     if (isCalendarPage) {
-      document.querySelector("html, body").classList.add("no-scroll")
+      document.querySelector("html").classList.add("no-scroll")
+    } else {
+      document.querySelector("html").classList.remove("no-scroll")
     }
   }, [isCalendarPage])
 
@@ -88,9 +91,11 @@ const HomeApp = () => {
               <SubmissionsPage />
             </Route>
 
-            <Route path="/calendar">
+            <Route path="/calendar" exact>
               <CalendarPage />
             </Route>
+
+            <Route path="/calendar/:date" exact component={CalendarDatePage} />
 
             <Route path="*">
               <NoMatchPage />

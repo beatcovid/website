@@ -8,6 +8,7 @@ import DaysOfWeek from "./DaysOfWeek"
 
 const Calendar = props => {
   const results = props.results
+  const notableDates = props.notableDates
   const calendarMonthsRef = useRef(null)
   const now = new Date()
   const startOfYear = new Date(2020, 0, 1) // nothing is collected before 2020
@@ -45,7 +46,9 @@ const Calendar = props => {
         key={key}
         date={date}
         results={results}
+        notableDates={notableDates}
         onIntersect={handleIntersect}
+        onDayClick={day => props.onDayClick(day)}
       />
     )
   }
