@@ -21,7 +21,7 @@ const Legend = () => {
           <span className="legend-square">
             <img src="/img/icons/icon-travel.svg" alt="Travel icon" />
           </span>
-          <span className="legend-text">Return Travel</span>
+          <span className="legend-text">Return travel</span>
         </div>
         <div className="legend-item">
           <span className="legend-square">
@@ -33,7 +33,7 @@ const Legend = () => {
           <span className="legend-square">
             <img src="/img/icons/icon-contact.svg" alt="Contact icon" />
           </span>
-          <span className="legend-text">Last Contact</span>
+          <span className="legend-text">Last contact</span>
         </div>
         <div className="legend-item">
           <span className="legend-square">
