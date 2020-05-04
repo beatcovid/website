@@ -91,3 +91,64 @@
     text-align: center;
   }
 }
+
+.calendar-legend {
+  position: fixed;
+  left: auto;
+  right: auto;
+  bottom: 0;
+  max-width: 640px;
+  width: 100%;
+  background-color: #fafafa;
+  z-index: 9;
+  font-size: 0.7em;
+  padding: 0.6rem 0 0.5rem;
+
+  @include tablet {
+    bottom: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 1rem 0.5rem;
+  }
+
+  section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-right: 0.5rem;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @include tablet {
+      margin-bottom: 0;
+    }
+  }
+
+  .legend-square {
+    display: flex;
+    align-items: center;
+    width: 16px;
+    height: 15px;
+    margin-right: 3px;
+
+    &.is-success {
+      background-color: $green;
+    }
+
+    &.is-warning {
+      background-color: $yellow;
+    }
+
+    &.is-danger {
+      background-color: $red;
+    }
+  }
+}

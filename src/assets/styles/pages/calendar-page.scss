@@ -20,13 +20,13 @@
     width: 100%;
     max-width: 640px;
     top: 90px;
-    bottom: 0;
+    bottom: 57.59px;
     left: auto;
     right: auto;
     overflow: auto;
 
     @include tablet {
-      bottom: 100px;
+      bottom: 133.59px;
       top: 141px;
     }
   }
@@ -40,8 +40,6 @@
     font-size: 1.3rem;
     color: #000;
     text-align: center;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 2rem;
     padding-bottom: 1rem;
   }
 
@@ -51,5 +49,9 @@
     h1 {
       border-bottom: 0;
     }
+  }
+
+  .result-section .result-container {
+    margin-top: 0;
   }
 }

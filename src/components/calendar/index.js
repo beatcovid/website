@@ -2,9 +2,9 @@ import React, { useState, useRef } from "react"
 import format from "date-fns/format"
 import isValid from "date-fns/isValid"
 import eachMonthOfInterval from "date-fns/eachMonthOfInterval"
-import addMonths from "date-fns/addMonths"
 import Month from "./Month"
 import DaysOfWeek from "./DaysOfWeek"
+import Legend from "./Legend"
 
 const Calendar = props => {
   const results = props.results
@@ -64,6 +64,7 @@ const Calendar = props => {
       <div ref={calendarMonthsRef} className="calendar-months">
         {months.map(renderCalendarMonth)}
       </div>
+      <Legend />
     </>
   )
 }
