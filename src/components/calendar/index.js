@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useRef } from "react"
 import format from "date-fns/format"
 import isValid from "date-fns/isValid"
 import eachMonthOfInterval from "date-fns/eachMonthOfInterval"
@@ -14,7 +14,7 @@ const Calendar = props => {
   const startOfYear = new Date(2020, 0, 1) // nothing is collected before 2020
   const months = eachMonthOfInterval({
     start: startOfYear,
-    end: addMonths(now, 1),
+    end: now,
   })
   const headerDates = {}
   const [currentHeaderDate, setCurrentHeaderDate] = useState(null)
