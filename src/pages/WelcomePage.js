@@ -6,6 +6,7 @@ import Intro from "../components/welcome/Intro"
 import Faq from "../components/welcome/Faq"
 import StartSurvey from "../components/welcome/StartSurvey"
 import Disclaimer from "../components/welcome/Disclaimer"
+import FormattedMessage from "../lib/intl/FormattedMessage"
 
 const privacyNoticeAccept = store.get("privacy-notice-accept") || false
 
@@ -33,10 +34,11 @@ const WelcomePage = () => {
         <section className="column">
           <header className="has-text-centered-mobile is-size-6">
             <h2>
-              With people power we can map the spread of COVID-19 around the
-              world.
+              <FormattedMessage msgId="web.homepage.blurb1" />
             </h2>
-            <h2>A few minutes of your time can help to BEAT COVID-19 NOW.</h2>
+            <h2>
+              <FormattedMessage msgId="web.homepage.blurb2" />
+            </h2>
           </header>
 
           <section className="is-hidden-desktop">

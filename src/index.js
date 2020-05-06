@@ -7,6 +7,7 @@ import App from "./App"
 import store from "./store"
 import * as serviceWorker from "./utils/serviceWorker"
 import { initializeGA } from "./utils/analyticsTracker"
+import IntlProvider from "./lib/intl/IntlProvider"
 import "./assets/styles/main.scss"
 
 initializeGA()
@@ -24,9 +25,11 @@ global.__localeId__ = "enAU"
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <IntlProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </IntlProvider>
   </Provider>,
   document.getElementById("root"),
 )
