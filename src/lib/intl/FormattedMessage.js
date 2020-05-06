@@ -1,24 +1,6 @@
-import React, { renderToStaticMarkup } from "react"
+import React from "react"
 import { useIntl, FormattedMessage } from "react-intl"
-import messages from "./messages"
 import { parseMarkdown } from "../../utils/markdownParser"
-
-const FormattedMsgId = ({ msgId }) => {
-  const intl = useIntl()
-
-  let m = Object.keys(messages).filter(m => messages[m].id === msgId)
-
-  if (m.length < 1) {
-    console.info(`Could not find translation for msgId ${msgId}`)
-    return null
-  }
-
-  let keyId = m.pop()
-
-  console.info(`making translation for key ${keyId}`)
-
-  return intl.formatMessage(messages[keyId])
-}
 
 export const HtmlFormattedText = props => (
   <FormattedMessage
