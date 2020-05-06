@@ -1,7 +1,11 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { useIntl } from "react-intl"
+import { FormattedMessage } from "react-intl"
 
 const StartSurvey = props => {
+  const intl = useIntl()
+
   function handleShowSection() {
     props.onSectionChange("section3")
   }
@@ -9,20 +13,29 @@ const StartSurvey = props => {
   return (
     <div className="start-button has-text-centered">
       <p className="has-text-weight-bold is-size-6">
-        By using the Symptom Tracker, you are indicating that you agree that
-        your answers can be used in{" "}
+        <FormattedMessage
+          id="web.homepage.startSurvey"
+          defaultMessage="By using the Symptom Tracker, you are indicating that you agree that your answers can be used in"
+        />{" "}
         <a aria-label="What happens to my answers?" onClick={handleShowSection}>
-          this way
+          <FormattedMessage
+            id="web.homepage.startSurveyLinkText"
+            defaultMessage="this way"
+          />
         </a>
       </p>
       {props.disableStart ? (
         <button className="button is-primary is-size-5" disabled>
-          Click here to start
+          {intl.formatMessage({
+            id: "web.homepage.startSurveyStart",
+            defaultMessage: "Click here to start",
+          })}
         </button>
       ) : (
-        <Link className="button is-primary is-size-5" to={`/survey`}>
-          Click here to start
-        </Link>
+        intl.formatMessage({
+          id: "web.homepage.startSurveyStart",
+          defaultMessage: "Click here to start",
+        })
       )}
     </div>
   )
