@@ -45,7 +45,7 @@
     "build": "REACT_APP_VERSION=$(node -pe 'require(\"./package.json\").version') react-scripts build",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
     "test": "react-scripts test",
-    "extract": "./node_modules/.bin/formatjs extract --out-file messages.json src/**/*.js"
+    "extract": "./node_modules/.bin/formatjs extract --out-file scripts/messages.json \"src/**/*.js\""
   },
   "devDependencies": {
     "eslint-config-prettier": "^6.10.0",
