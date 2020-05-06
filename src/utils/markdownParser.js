@@ -1,7 +1,7 @@
 import React from "react"
 import showdown from "showdown"
 
-const parseMarkdown = sourceText => {
+export const parseMarkdown = sourceText => {
   // bunch of options at https://github.com/showdownjs/showdown
   const converter = new showdown.Converter()
   converter.setOption("emoji", true)
