@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@formatjs/cli": "^1.6.10",
+    "@lokalise/node-api": "^3.0.3",
     "@reduxjs/toolkit": "^1.1.0",
     "@sentry/browser": "^5.15.0",
     "@testing-library/jest-dom": "^4.2.4",
