@@ -3,7 +3,6 @@
   "version": "1.1.12",
   "private": true,
   "dependencies": {
-    "@formatjs/cli": "^1.6.10",
     "@lokalise/node-api": "^3.0.3",
     "@reduxjs/toolkit": "^1.1.0",
     "@sentry/browser": "^5.15.0",
@@ -46,11 +45,12 @@
     "build": "REACT_APP_VERSION=$(node -pe 'require(\"./package.json\").version') react-scripts build",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
     "test": "react-scripts test",
-    "extract": "./node_modules/.bin/formatjs extract --out-file scripts/messages.json \"src/**/*.js\""
+    "translate": "NODE_ENV=development node processMessages.js"
   },
   "devDependencies": {
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
+    "extract-react-intl-messages": "^4.1.1",
     "husky": "^4.2.1",
     "lint-staged": "^10.0.7",
     "prettier": "^1.19.1",

@@ -1,5 +1,5 @@
 const { LokaliseApi } = require("@lokalise/node-api")
-const messages = require("./messages.json")
+const extractReactIntlMessages = require("extract-react-intl-messages")
 
 const LOKALISE_API_TOKEN = process.env.LOKALISE_API_TOKEN || false
 
@@ -13,15 +13,15 @@ console.log(`Init lokalise with API key ${LOKALISE_API_TOKEN}`)
 
 const client = new LokaliseApi({ apiKey: LOKALISE_API_TOKEN })
 
-const convertToLokalise = message => ({
-  key_name: message.id,
-  description: message.description || "",
+const convertToLokalise = (id, translation) => ({
+  key_name: id,
+  // description: message.description || "",
   platforms: ["web"],
   tags: ["website"],
   translations: [
     {
       language_iso: "en",
-      translation: message.defaultMessage,
+      translation: translation,
     },
   ],
 })
@@ -40,13 +40,15 @@ const updateKeys = async () => {
 
   console.log(keyIds)
 
-  messages.map(async m => {
-    if (!keyIds.includes(m.id)) {
-      console.log(`Lokalise doesn't have key ${m.id}`)
-      keysToAdd.push(convertToLokalise(m))
+  const messages = require("./src/locale/en.json")
+
+  Object.keys(messages).map(async m => {
+    if (!keyIds.includes(m)) {
+      console.log(`Lokalise doesn't have key ${m}`)
+      keysToAdd.push(convertToLokalise(m, messages[m]))
     } else {
-      console.log(`Will update key ${m.id}`)
-      keysToUpdate.push(convertToLokalise(m))
+      console.log(`Will update key ${m}`)
+      keysToUpdate.push(convertToLokalise(m, messages[m]))
     }
   })
 
@@ -59,6 +61,26 @@ const updateKeys = async () => {
       console.error(error)
     }
   }
+
+  if (keysToUpdate.length) {
+    try {
+      await client.keys.bulk_update(keysToAdd, {
+        project_id: LOKALISE_PROJECT_ID,
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
 }
 
+const extractMessages = async () => {
+  const l = await extractReactIntlMessages(
+    ["en"],
+    "src/!(lib)/**/!(*.test).js",
+    "src/locale/",
+  )
+  console.log(l)
+}
+
+extractMessages()
 updateKeys()
