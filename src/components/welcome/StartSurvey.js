@@ -32,10 +32,12 @@ const StartSurvey = props => {
           })}
         </button>
       ) : (
-        intl.formatMessage({
-          id: "web.homepage.startSurveyStart",
-          defaultMessage: "Click here to start",
-        })
+        <Link className="button is-primary is-size-5" to={`/survey`}>
+          {intl.formatMessage({
+            id: "web.homepage.startSurveyStart",
+            defaultMessage: "Click here to start",
+          })}
+        </Link>
       )}
     </div>
   )
