@@ -1,8 +1,10 @@
 import React, { useMemo, useState, useEffect } from "react"
+import { useIntl } from "react-intl"
 import { evalExpression } from "../../lib/xpathexp"
 import Question from "./Question"
 
 const Steps = props => {
+  const intl = useIntl()
   const requiredMessage = ""
   const stepNames = props.stepNames
   const steps = props.steps || []
@@ -184,16 +186,21 @@ const Steps = props => {
           onClick={handlePreviousButtonClick}
           disabled={isFirstQuestion}
         >
-          &larr; Previous
+          &larr;{" "}
+          {intl.formatMessage({
+            id: "web.previous",
+            defaultMessage: "Previous",
+          })}
         </button>
         {!isLastQuestion && (
           <button className={nextButtonClasses} onClick={handleNextButtonClick}>
-            Next &rarr;
+            {intl.formatMessage({ id: "web.next", defaultMessage: "Next" })}{" "}
+            &rarr;
           </button>
         )}
         {isLastQuestion && (
           <button className={submitButtonClasses} onClick={handleSubmit}>
-            Submit
+            {intl.formatMessage({ id: "web.submit", defaultMessage: "Submit" })}
           </button>
         )}
       </div>

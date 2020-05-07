@@ -1,7 +1,9 @@
 import React from "react"
+import { useIntl } from "react-intl"
 import SingleBar from "../viz/SingleBar"
 
 const SummaryOfSymptoms = props => {
+  const intl = useIntl()
   const summaryScores = props.summaryScores
 
   function renderBarViz(scoreName) {
@@ -23,10 +25,18 @@ const SummaryOfSymptoms = props => {
 
   return (
     <section className="summary-of-symptoms-section card is-info">
-      <header>Today's scores</header>
+      <header>
+        {intl.formatMessage({
+          id: "web.tracker.score.header",
+          defaultMessage: "Todays scores.",
+        })}
+      </header>
       <p>
-        This section gives a score between no symptoms (0) and many severe
-        symptoms (3).
+        {intl.formatMessage({
+          id: "web.tracker.score.summary",
+          defaultMessage:
+            "This section gives a score between no symptoms (0) and many severe symptoms (3).",
+        })}
       </p>
       <div className="card-content">
         {Object.keys(summaryScores).map(renderBarViz)}

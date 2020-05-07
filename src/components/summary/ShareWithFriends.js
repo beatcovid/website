@@ -1,6 +1,9 @@
 import React from "react"
+import { useIntl } from "react-intl"
 
 const ShareWithFriends = () => {
+  const intl = useIntl()
+
   function createHtml() {
     return {
       __html: `
@@ -13,11 +16,19 @@ const ShareWithFriends = () => {
 
   return (
     <section className="share-section card is-info">
-      <header>Share with friends</header>
+      <header>
+        {intl.formatMessage({
+          id: "web.tracker.share.header",
+          defaultMessage: "Share with friends",
+        })}
+      </header>
       <div className="card-content">
         <p>
-          Let’s spread this Symptom Tracker quicker than COVID-19 spreads. Share
-          with your friends NOW.
+          {intl.formatMessage({
+            id: "web.tracker.share.summary",
+            defaultMessage:
+              "Let’s spread this Symptom Tracker quicker than COVID-19 spreads. Share with your friends NOW.",
+          })}
         </p>
 
         <div className="social-sharing">
