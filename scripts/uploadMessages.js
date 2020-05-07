@@ -54,7 +54,7 @@ const updateKeys = async () => {
 
   if (keysToAdd.length) {
     try {
-      await client.keys.create(keysToAdd, { project_id: LOKALISE_API_TOKEN })
+      await client.keys.create(keysToAdd, { project_id: LOKALISE_PROJECT_ID })
     } catch (error) {
       console.error(error)
     }
