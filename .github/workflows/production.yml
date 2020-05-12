@@ -23,4 +23,4 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          buildargs: REACT_APP_SENTRY_DSN,REACT_APP_ANALYTICS_ID,ENV
+          buildargs: REACT_APP_SENTRY_DSN,REACT_APP_ANALYTICS_ID,ENV,LOKALISE_API_TOKEN
