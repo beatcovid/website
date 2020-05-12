@@ -1,12 +1,15 @@
 import React from "react"
 import { IntlProvider } from "react-intl"
-import { getUserLocale } from "./UserLocale"
+import { localeToUse } from "./UserLocale"
+import messages from "../../locale/messages.json"
 
 const LocalIntlProvider = ({ children }) => {
-  const userLocale = getUserLocale()
-
   return (
-    <IntlProvider locale={userLocale} id={userLocale} messages={{}}>
+    <IntlProvider
+      locale={localeToUse}
+      id={localeToUse}
+      messages={messages[localeToUse]}
+    >
       {children}
     </IntlProvider>
   )

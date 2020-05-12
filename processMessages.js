@@ -1,3 +1,4 @@
+const fs = require("fs").promises
 const { LokaliseApi } = require("@lokalise/node-api")
 const extractReactIntlMessages = require("extract-react-intl-messages")
 
@@ -82,5 +83,74 @@ const extractMessages = async () => {
   console.log(l)
 }
 
-extractMessages()
-updateKeys()
+const downloadTranslations = async () => {
+  const translations = {}
+  const locales = []
+  let keys
+
+  try {
+    keys = await client.keys.list({
+      project_id: LOKALISE_PROJECT_ID,
+      filter_platforms: "web",
+      filter_tags: "website",
+      include_translations: 1,
+    })
+  } catch (error) {
+    console.error(error)
+    return false
+  }
+
+  keys.forEach(key => {
+    key.translations.forEach(translation => {
+      // if (translation.is_reviewed) {
+      let iso = translation.language_iso
+
+      if (!(iso in translations)) {
+        translations[iso] = {}
+      }
+
+      if (translation.translation && translation.words) {
+        translations[iso][key.key_name.web] = translation.translation
+      }
+    })
+  })
+
+  // console.log(translations)
+  Object.keys(translations).forEach(async locale => {
+    locales.push(locale)
+
+    try {
+      await fs.writeFile(
+        `src/locale/${locale}.json`,
+        JSON.stringify(translations[locale]),
+        { flag: "w" },
+      )
+    } catch (error) {
+      console.error(error)
+    }
+  })
+
+  try {
+    await fs.writeFile(
+      `src/locale/messages.json`,
+      JSON.stringify(translations),
+      {
+        flag: "w",
+      },
+    )
+  } catch (error) {
+    console.error(error)
+  }
+
+  try {
+    await fs.writeFile(`src/locale/locales.json`, JSON.stringify(locales), {
+      flag: "w",
+    })
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+downloadTranslations()
+// extractMessages()
+// updateKeys()

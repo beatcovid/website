@@ -1,7 +1,7 @@
 import Cookie from "js-cookie"
 import uniq from "uniq"
 
-const SUPPORTED_LOCALES = ["en"]
+const SUPPORTED_LOCALES = require("../../locale/locales.json")
 
 const DEFAULT_LOCALE = "en"
 
@@ -12,7 +12,12 @@ const LOCALE_ALIASES = {
   "en-GB": "en",
   "en-CA": "en",
   "en-AU": "en",
-  fr: "fr-FR",
+  "fr-FR": "fr",
+}
+
+const getQsParam = name => {
+  let params = new URL(document.location).searchParams
+  return params.get(name) || false
 }
 
 const getBrowserLocales = () => {
@@ -25,18 +30,40 @@ const getBrowserLocales = () => {
       navigator.systemLanguage,
     )
     .filter(locale => locale)
-    .map(locale => LOCALE_ALIASES[alias] || locale)
+    .map(locale => LOCALE_ALIASES[locale] || locale)
 
   return uniq(locales, null, true)
 }
 
-const pickLocale = proposedLocales => {
-  const browserLocales = getBrowserLocales()
+const getPreferredLocales = () => {
+  // @TODO sanity check the returns as valid / applicable locales
+
+  const locales = []
+    .concat(
+      getQsParam(PARAM_NAME),
+      Cookie.get(PARAM_NAME),
+      localStorage.getItem(PARAM_NAME),
+      getBrowserLocales(),
+    )
+    .filter(l => l)
+    .map(l => LOCALE_ALIASES[l] || l)
+
+  return locales
+}
+
+const getLocale = supportedLocales => {
+  const preferredLocales = getPreferredLocales()
   let result = null
 
-  for (let i = 0; i < browserLocales.length && result === null; i++) {
-    if (proposedLocales.indexOf(browserLocales[i]) !== -1) {
-      result = browserLocales[i]
+  for (let i = 0; i < preferredLocales.length && result === null; i++) {
+    console.log(
+      preferredLocales[i],
+      supportedLocales,
+      supportedLocales.indexOf(preferredLocales[i]),
+    )
+
+    if (supportedLocales.indexOf(preferredLocales[i]) !== -1) {
+      result = preferredLocales[i]
     }
   }
 
@@ -44,23 +71,9 @@ const pickLocale = proposedLocales => {
     result = DEFAULT_LOCALE
   }
 
+  console.log("User locale is is", result)
+
   return result
 }
 
-const localeToUse = pickLocale(supportedLocales)
-
-const getQsParam = name => {
-  let params = new URL(document.location).searchParams
-  return params.get(name) || false
-}
-
-export const getUserLocale = () => {
-  // @TODO sanity check the returns as valid / applicable locales
-  return (
-    getQsParam(PARAM_NAME) ||
-    Cookie.get(PARAM_NAME) ||
-    localStorage.getItem(PARAM_NAME) ||
-    navigator.language ||
-    "en"
-  )
-}
+export const localeToUse = getLocale(SUPPORTED_LOCALES)
