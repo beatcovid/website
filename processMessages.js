@@ -53,8 +53,6 @@ const updateKeys = async () => {
     }
   })
 
-  console.log(keysToAdd[0])
-
   if (keysToAdd.length) {
     try {
       await client.keys.create(keysToAdd, { project_id: LOKALISE_PROJECT_ID })
@@ -141,16 +139,8 @@ const downloadTranslations = async () => {
   } catch (error) {
     console.error(error)
   }
-
-  try {
-    await fs.writeFile(`src/locale/locales.json`, JSON.stringify(locales), {
-      flag: "w",
-    })
-  } catch (error) {
-    console.error(error)
-  }
 }
 
+extractMessages()
+updateKeys()
 downloadTranslations()
-// extractMessages()
-// updateKeys()
