@@ -1,5 +1,6 @@
 import axios from "axios"
 import * as cookies from "js-cookie"
+import { localeToUse } from "../lib/intl/UserLocale"
 
 const API_ROOT = process.env.REACT_APP_API_ENDPOINT
 const FORM_NAME = process.env.REACT_APP_FORM_NAME || "beatcovid19now"
@@ -10,6 +11,11 @@ const ALLOWED_HOSTS = [
   "beatcov-staging.com",
   "beatcovid.test",
 ]
+
+const getQsParam = name => {
+  let params = new URL(document.location).searchParams
+  return params.get(name) || false
+}
 
 const getApiRoot = () => {
   const currentHost = document.location.host
@@ -35,12 +41,20 @@ const agent = axios.create({
 
 agent.interceptors.request.use(
   config => {
+    config.headers = {}
+
+    config.headers["x-locale"] = localeToUse
+
     let uid_cookie_value = cookies.get("uid")
 
     if (uid_cookie_value && uid_cookie_value.length) {
-      config.headers = {
-        "x-uid": uid_cookie_value,
-      }
+      config.headers["x-uid"] = uid_cookie_value
+    }
+
+    let uid_qp_value = getQsParam("uid")
+
+    if (uid_qp_value) {
+      config.headers["x-uid"] = uid_qp_value
     }
 
     return config
