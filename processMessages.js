@@ -57,6 +57,7 @@ const updateKeys = async () => {
     try {
       await client.keys.create(keysToAdd, { project_id: LOKALISE_PROJECT_ID })
     } catch (error) {
+      console.error(`Add error`)
       console.error(error)
     }
   }
@@ -67,6 +68,7 @@ const updateKeys = async () => {
         project_id: LOKALISE_PROJECT_ID,
       })
     } catch (error) {
+      console.error(`Update error`)
       console.error(error)
     }
   }
@@ -83,7 +85,6 @@ const extractMessages = async () => {
 
 const downloadTranslations = async () => {
   const translations = {}
-  const locales = []
   let keys
 
   try {
@@ -126,6 +127,11 @@ const downloadTranslations = async () => {
   }
 }
 
+console.log(`Extracing messages ..`)
 extractMessages()
+
+console.log(`Updating keys ..`)
 updateKeys()
+
+console.log(`Downloading translations ..`)
 downloadTranslations()
