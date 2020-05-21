@@ -1,12 +1,9 @@
 import React, { useMemo } from "react"
-import { FormattedMessage, useIntl } from "react-intl"
+import { useIntl } from "react-intl"
 import { useLocation, Link } from "react-router-dom"
 
-const Footer = props => {
+const Footer = ({ appVersion, formVersion, sticky }) => {
   const intl = useIntl()
-  const appVersion = props.appVersion
-  const formVersion = props.formVersion
-  const sticky = props.sticky
   const { pathname } = useLocation()
   const isSurvey = useMemo(() => pathname === "/survey", [pathname])
 
