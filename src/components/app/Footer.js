@@ -2,7 +2,7 @@ import React, { useMemo } from "react"
 import { useIntl } from "react-intl"
 import { useLocation, Link } from "react-router-dom"
 
-const Footer = ({ appVersion, formVersion, sticky }) => {
+const Footer = ({ appVersion, formVersion, sticky, user }) => {
   const intl = useIntl()
   const { pathname } = useLocation()
   const isSurvey = useMemo(() => pathname === "/survey", [pathname])
@@ -40,6 +40,8 @@ const Footer = ({ appVersion, formVersion, sticky }) => {
 
       <p className="version-number">
         v{appVersion} {formVersion !== "" && <span>({formVersion})</span>}
+        <br />
+        {user && user.id && user.id}
       </p>
     </footer>
   )

@@ -18,7 +18,11 @@ import CalendarDatePage from "./pages/CalendarDatePage"
 import NoMatchPage from "./pages/NoMatchPage"
 import { logPageView } from "./utils/analyticsTracker"
 
-import { selectLoading, selectFormVersion } from "./store/schemaSlice"
+import {
+  selectLoading,
+  selectFormVersion,
+  selectUser,
+} from "./store/schemaSlice"
 import { selectTrackerLoading } from "./store/userSlice"
 
 import { selectRespondents, fetchStats } from "./store/statsSlice"
@@ -29,6 +33,7 @@ const HomeApp = () => {
   const appVersion = process.env.REACT_APP_VERSION || ""
   const formVersion = useSelector(selectFormVersion)
   const isLoading = useSelector(selectLoading)
+  const user = useSelector(selectUser)
   const isTrackerLoading = useSelector(selectTrackerLoading)
   const { pathname } = useLocation()
   const isMinimal = useMemo(
@@ -108,6 +113,7 @@ const HomeApp = () => {
         appVersion={appVersion}
         formVersion={formVersion}
         sticky={isCalendarPage}
+        user={user}
       />
     </>
   )

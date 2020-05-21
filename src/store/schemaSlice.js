@@ -123,6 +123,7 @@ export const selectLoading = state => state.schema.isLoading
 export const selectSubmitted = state => state.schema.isSubmitted
 export const selectUid = state => state.schema.uid
 export const selectUser = state => state.schema.user
+export const selectUserId = state => state.schema.user.id
 export const selectStart = state => state.schema.start
 export const selectSurvey = state => state.schema.survey
 export const selectFormVersion = state => state.schema.formVersion
