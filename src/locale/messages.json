@@ -95,7 +95,8 @@
     "web.tracker.thankyou.count": "<span>You are one of the</span>{count}<span>people using this Symptom Tracker</span>",
     "web.tracker.thankyou.header": "Today you helped us to learn more about COVID-19. Thank you.",
     "web.tracker.travelHeader": "International travel",
-    "web.twitter": "Twitter."
+    "web.twitter": "Twitter.",
+    "web.counter": "<strong>{count}</strong> people are helping{br} to #BeatCovid19Now"
   },
   "de": {},
   "fr": {
