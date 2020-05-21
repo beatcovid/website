@@ -19,9 +19,6 @@ const ThankYou = props => {
         </p>
 
         <div className="person-counter">
-          <span>You are one of the</span>
-          <span className="count">{countFormatted}</span>
-          <span>people using this Symptom Tracker</span>
           <FormattedMessage
             id="web.tracker.thankyou.count"
             defaultMessage="<span>You are one of the</span>{count}<span>people using this Symptom Tracker</span>"
