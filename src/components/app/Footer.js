@@ -1,7 +1,9 @@
 import React, { useMemo } from "react"
+import { FormattedMessage, useIntl } from "react-intl"
 import { useLocation, Link } from "react-router-dom"
 
 const Footer = props => {
+  const intl = useIntl()
   const appVersion = props.appVersion
   const formVersion = props.formVersion
   const sticky = props.sticky
@@ -25,14 +27,18 @@ const Footer = props => {
   return (
     <footer className={footerClasses()}>
       <p className="is-size-7">
-        No part of the Coronavirus Symptom Tracker may be copied, printed, or
-        re-produced for any purpose, including research, translation or
-        commercial, without the expressed written approval of Swinburne
-        University of Technology.
+        {intl.formatMessage({
+          id: "web.footer.dislaimer",
+          defaultMessage:
+            "No part of the Coronavirus Symptom Tracker may be copied, printed, or re-produced for any purpose, including research, translation or commercial, without the expressed written approval of Swinburne University of Technology.",
+        })}
       </p>
 
       <Link className="is-size-7" to={`/privacy`}>
-        Privacy Policy
+        {intl.formatMessage({
+          id: "web.footer.privacy",
+          defaultMessage: "Privacy Policy",
+        })}
       </Link>
 
       <p className="version-number">
