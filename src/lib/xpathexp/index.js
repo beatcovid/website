@@ -1,6 +1,6 @@
 import XPathJS from "enketo-xpathjs"
 import convert from "xml-js"
-import serializer from "xmlserializer"
+// import serializer from "xmlserializer"
 import invariant from "invariant"
 
 // @TODO make this binding optional if

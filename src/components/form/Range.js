@@ -2,12 +2,7 @@ import React, { useState, useEffect, useMemo } from "react"
 import InputRange from "react-input-range"
 import "react-input-range/lib/css/index.css"
 
-const Range = props => {
-  const name = props.name || ""
-  const label = props.label || ""
-  const value = props.value || ""
-  const valid = props.valid
-  const parameters = props.parameters || ""
+const Range = ({ label = "", value = "", parameters = "", onChange }) => {
   const numValue = useMemo(() => parseInt(value) || 1, [value])
   const [start, setStart] = useState(0)
   const [end, setEnd] = useState(10)
@@ -29,7 +24,7 @@ const Range = props => {
   }, [parameters])
 
   function handleChange(value) {
-    props.onChange(value)
+    onChange(value)
   }
 
   return (

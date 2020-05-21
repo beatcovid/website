@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from "react"
 import { useIntl, defineMessages } from "react-intl"
 import {
-  HtmlFormattedText,
   FormattedMessage,
   MarkdownFormattedText,
 } from "../../lib/intl/FormattedMessage"
@@ -58,7 +57,7 @@ const Faq = props => {
     <section ref={myRef} className="faq-section">
       <ul className="site-tabs is-toggle has-text-centered-mobile">
         <li className={currentSection === "section1" ? activeClass : ""}>
-          <a onClick={e => handleSectionToggle("section1", e)}>
+          <a href="/#" onClick={e => handleSectionToggle("section1", e)}>
             {intl.formatMessage({
               id: "web.faq.title1",
               defaultMessage: "What is COVID-19?",
@@ -66,7 +65,7 @@ const Faq = props => {
           </a>
         </li>
         <li className={currentSection === "section2" ? activeClass : ""}>
-          <a onClick={e => handleSectionToggle("section2", e)}>
+          <a href="/#" onClick={e => handleSectionToggle("section2", e)}>
             {intl.formatMessage({
               id: "web.faq.title2",
               defaultMessage: "What is the Symptom Tracker?",
@@ -74,7 +73,7 @@ const Faq = props => {
           </a>
         </li>
         <li className={currentSection === "section3" ? activeClass : ""}>
-          <a onClick={e => handleSectionToggle("section3", e)}>
+          <a href="/#" onClick={e => handleSectionToggle("section3", e)}>
             {intl.formatMessage({
               id: "web.faq.title3",
               defaultMessage: "What happens to my answers?",
@@ -82,7 +81,7 @@ const Faq = props => {
           </a>
         </li>
         <li className={currentSection === "section4" ? activeClass : ""}>
-          <a onClick={e => handleSectionToggle("section4", e)}>
+          <a href="/#" onClick={e => handleSectionToggle("section4", e)}>
             {intl.formatMessage({
               id: "web.faq.title4",
               defaultMessage: "Who has approved the Symptom Tracker?",

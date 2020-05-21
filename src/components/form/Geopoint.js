@@ -13,6 +13,7 @@ const Geopoint = props => {
   const valid = props.valid
   const stepInteracted = props.stepInteracted
   const [interacted, setInteracted] = useState(false)
+  // eslint-disable-next-line no-unused-vars
   const [geoLocation, setGeoLocation] = useState(null)
   const addressValue = useMemo(() => {
     return value && value.name ? value.name : ""

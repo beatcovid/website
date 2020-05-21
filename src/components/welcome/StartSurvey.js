@@ -17,7 +17,11 @@ const StartSurvey = props => {
           id="web.homepage.startSurvey"
           defaultMessage="By using the Symptom Tracker, you are indicating that you agree that your answers can be used in"
         />{" "}
-        <a aria-label="What happens to my answers?" onClick={handleShowSection}>
+        <a
+          aria-label="What happens to my answers?"
+          href="/#"
+          onClick={handleShowSection}
+        >
           <FormattedMessage
             id="web.homepage.startSurveyLinkText"
             defaultMessage="this way"
