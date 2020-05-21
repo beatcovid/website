@@ -96,7 +96,8 @@
     "web.tracker.thankyou.header": "Today you helped us to learn more about COVID-19. Thank you.",
     "web.tracker.travelHeader": "International travel",
     "web.twitter": "Twitter.",
-    "web.counter": "<strong>{count}</strong> people are helping{br} to #BeatCovid19Now"
+    "web.counter": "<strong>{count}</strong> people are helping{br} to #BeatCovid19Now",
+    "web.acknowledgement": "This website has been developed by a team of public health and\n            astrophysics/IT researchers and staff at <swinlink>Swinburne University of\n            Technology</swinlink> in partnership with <arqlink>Arq Group</arqlink>, Australia\n            and the COVID-19 Hackathon and marketing volunteers. This\n            will help determine the current and emerging COVID-19 symptoms of people\n            across the world. This will help you improve your understanding of your\n            health, follow changes and help us to advise health authorities about\n            what’s going on from the community’s perspective."
   },
   "de": {},
   "fr": {

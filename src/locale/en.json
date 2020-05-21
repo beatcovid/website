@@ -27,6 +27,7 @@
   "web.homepage.startSurveyLinkText": "this way",
   "web.homepage.startSurveyStart": "Click here to start",
   "web.next": "Next",
+  "web.notfound": "<h1>Page not found.</h1><p>You might have entered an incorrect address.</p><p>Back to <homelink>homepage</homelink></p>",
   "web.or": "or",
   "web.previous": "Previous",
   "web.submit": "Submit",
