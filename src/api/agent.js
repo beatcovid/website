@@ -71,7 +71,7 @@ export const api = {
   getStats: (formName = FORM_NAME) =>
     requests.get(`/api/form/stats/${formName}/`),
   getForm: (formName = FORM_NAME) =>
-    requests.get(`/api/form/schema/${formName}/`),
+    requests.get(`/api/form/schema/${formName}/?dt=` + Date.now()),
   getSubmissions: () => requests.get("/api/user/submissions/"),
   getTracker: () => requests.get("/api/tracker/"),
 }
