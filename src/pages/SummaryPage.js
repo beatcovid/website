@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { FormattedMessage, useIntl } from "react-intl"
 import parseISO from "date-fns/parseISO"
 import Result from "../components/summary/Result"
 import ThankYou from "../components/summary/ThankYou"
@@ -17,12 +18,48 @@ import {
 import { selectRespondents } from "../store/statsSlice"
 
 const SummaryPage = () => {
+  const intl = useIntl()
   const dispatch = useDispatch()
   const tracker = useSelector(selectTracker)
   const respondents = useSelector(selectRespondents)
   const isTrackerError = useSelector(selectIsTrackerError)
   const myRef = useRef(null)
   const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop)
+
+  const respiratoryLabel = intl.formatMessage({
+    id: "web.symtracker.label.respiratory",
+    defaultMessage: "Respiratory symptoms",
+  })
+
+  const labelGeneralSymptoms = intl.formatMessage({
+    id: "web.symtracker.label.general",
+    defaultMessage: "General Symptoms",
+  })
+
+  const labelPreviousScore = intl.formatMessage({
+    id: "web.symtracker.label.previousscore",
+    defaultMessage: "Your previous score",
+  })
+
+  // const labelNone = intl.formatMessage({
+  //   id: "web.symtracker.label.none",
+  //   defaultMessage: "None",
+  // })
+
+  // const labelSevere = intl.formatMessage({
+  //   id: "web.symtracker.label.severe",
+  //   defaultMessage: "Severe",
+  // })
+
+  // const labelNoDifficult = intl.formatMessage({
+  //   id: "web.symtracker.label.nodifficult",
+  //   defaultMessage: "No difficulty",
+  // })
+
+  // const labelGreatDifficult = intl.formatMessage({
+  //   id: "web.symtracker.label.greatdifficult",
+  //   defaultMessage: "great difficulty",
+  // })
 
   const timeSeries = useMemo(() => {
     const dataset = []
@@ -31,7 +68,7 @@ const SummaryPage = () => {
     if (tracker) {
       const trackerScores = tracker.scores
       keys = ["respiratory", "general"]
-      keyLabels = ["Respiratory symptoms", "General symptoms"]
+      keyLabels = [respiratoryLabel, labelGeneralSymptoms]
 
       keys.forEach((key, i) => {
         dataset[i] = []
@@ -50,7 +87,7 @@ const SummaryPage = () => {
       keyLabels,
       dataset,
     }
-  }, [tracker])
+  }, [tracker, respiratoryLabel, labelGeneralSymptoms])
 
   const showLineChart = useMemo(
     () => timeSeries.dataset.length > 0 && timeSeries.dataset[0].length > 1,
@@ -59,9 +96,12 @@ const SummaryPage = () => {
   const scoresSummary = useMemo(() => {
     const summary = {}
     const symptomLabels = {
-      respiratory: "Respiratory symptoms",
-      general: "General symptoms",
-      activity: "Ability to do daily activities",
+      respiratory: respiratoryLabel,
+      general: labelGeneralSymptoms,
+      activity: intl.formatMessage({
+        id: "web.symtracker.label.activities",
+        defaultMessage: "Ability to do daily activities",
+      }),
     }
     const symptomDomains = {
       respiratory: ["None", "Severe"],
@@ -80,7 +120,8 @@ const SummaryPage = () => {
       })
     }
     return summary
-  }, [tracker])
+  }, [tracker, respiratoryLabel, labelGeneralSymptoms, intl])
+
   const mainSymptoms = useMemo(() => {
     const symptoms = {
       headers: ["Main COVID-19 Symptoms", "Your score today"],
@@ -108,8 +149,15 @@ const SummaryPage = () => {
   const otherSymptoms = useMemo(() => {
     const symptoms = {
       headers: [
-        "Other symptoms of respiratory illnesses (maybe related to COVID&#8209;19)",
-        "Your score today",
+        intl.formatMessage({
+          id: "web.symtracker.labels.other",
+          defaultMessage:
+            "Other symptoms of respiratory illnesses (maybe related to COVID&#8209;19)",
+        }),
+        intl.formatMessage({
+          id: "web.symtracker.label.score",
+          defaultMessage: "Your score today",
+        }),
       ],
       scores: {},
     }
@@ -122,7 +170,7 @@ const SummaryPage = () => {
           })
         }
         if (index === 1) {
-          symptoms.headers.push("Your previous score")
+          symptoms.headers.push(labelPreviousScore)
           Object.keys(score.other).forEach(m => {
             symptoms.scores[m].prev = score.other[m]
           })
@@ -130,7 +178,7 @@ const SummaryPage = () => {
       })
     }
     return symptoms
-  }, [tracker])
+  }, [tracker, intl, labelPreviousScore])
 
   useEffect(() => {
     if (!tracker && !isTrackerError) {
@@ -153,12 +201,10 @@ const SummaryPage = () => {
 
             <div className="column">
               <div className="disclaimer-card card is-size-5">
-                The Symptom Tracker does not diagnose COVID-19 and it does not
-                provide medical advice. Please seek urgent medical help if you
-                have difficulty breathing. Contact your relevant local health
-                authority or medical practitioner for health advice about
-                COVID-19 and to find out what to do if you think you have
-                symptoms.
+                <FormattedMessage
+                  id="web.symtracker.disclaimer"
+                  defaultMessage="The Symptom Tracker does not diagnose COVID-19 and it does not provide medical advice. Please seek urgent medical help if you have difficulty breathing. Contact your relevant local health authority or medical practitioner for health advice about COVID-19 and to find out what to do if you think you have symptoms."
+                />
               </div>
             </div>
           </div>
@@ -172,7 +218,11 @@ const SummaryPage = () => {
                   className="button is-light is-size-7"
                   onClick={() => scrollToRef(myRef)}
                 >
-                  &darr; more detailed results
+                  &darr;{" "}
+                  {intl.formatMessage({
+                    id: "web.symtracker.moreresults",
+                    defaultMessage: "more detailed results",
+                  })}
                 </button>
               </div>
 
@@ -194,7 +244,12 @@ const SummaryPage = () => {
               <SummaryOfSymptoms summaryScores={scoresSummary} />
               {showLineChart && (
                 <section className="charts-section">
-                  <header>Your scores over time</header>
+                  <header>
+                    {intl.formatMessage({
+                      id: "web.symtracker.scorestime",
+                      defaultMessage: "Your scores over time",
+                    })}
+                  </header>
                   <MultiLine dataObj={timeSeries} />
                 </section>
               )}
