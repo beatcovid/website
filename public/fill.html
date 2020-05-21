@@ -1,11 +1,26 @@
 <html>
+<head>
 
+<style>
+
+.bookmarklet {
+  padding: 15px;
+  border: 1px solid silver;
+  background: #ccc;
+}
+
+body {
+  padding: 30px;
+}
+
+</style>
+</head>
 <body>
 
 <h1>Bookmarklet</h1>
 
 <p>Drag and drop the link below onto your browser bookmarks bar to create a shortcut that will fill in form selections</p>
-
-<p><a href="javascript:document.querySelectorAll(%22input%5Bvalue%5E%3D%27none%27%5D%22).forEach(i%20%3D%3E%20i.click())">Fill Form</a></p>
+<p>&nbsp;</p>
+<p><a href="javascript:document.querySelectorAll(%22input%5Bvalue%5E%3D%27none%27%5D%22).forEach(i%20%3D%3E%20i.click())" class="bookmarklet">Beatcov Fill Form</a></p>
 </body>
 </html>
