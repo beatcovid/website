@@ -113,21 +113,6 @@ const downloadTranslations = async () => {
     })
   })
 
-  // console.log(translations)
-  Object.keys(translations).forEach(async locale => {
-    locales.push(locale)
-
-    try {
-      await fs.writeFile(
-        `src/locale/${locale}.json`,
-        JSON.stringify(translations[locale]),
-        { flag: "w" },
-      )
-    } catch (error) {
-      console.error(error)
-    }
-  })
-
   try {
     await fs.writeFile(
       `src/locale/messages.json`,
