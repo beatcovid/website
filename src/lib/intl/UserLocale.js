@@ -1,5 +1,6 @@
 import Cookie from "js-cookie"
 import uniq from "uniq"
+import messagesDict from "../../locale/messages.json"
 
 const SUPPORTED_LOCALES = require("../../locale/locales.json")
 
@@ -13,6 +14,7 @@ const LOCALE_ALIASES = {
   "en-CA": "en",
   "en-AU": "en",
   "fr-FR": "fr",
+  ne: "ne_NP",
 }
 
 const getQsParam = name => {
@@ -56,11 +58,7 @@ const getLocale = supportedLocales => {
   let result = null
 
   for (let i = 0; i < preferredLocales.length && result === null; i++) {
-    console.log(
-      preferredLocales[i],
-      supportedLocales,
-      supportedLocales.indexOf(preferredLocales[i]),
-    )
+    console.log(preferredLocales[i], supportedLocales)
 
     if (supportedLocales.indexOf(preferredLocales[i]) !== -1) {
       result = preferredLocales[i]
@@ -71,9 +69,17 @@ const getLocale = supportedLocales => {
     result = DEFAULT_LOCALE
   }
 
-  console.log("User locale is is", result)
+  return result.replace("_", "-")
+}
 
-  return result
+const getMessages = localeToUse => {
+  let msgs = messagesDict[localeToUse.replace("-", "_")]
+
+  console.log(msgs)
+
+  return msgs
 }
 
 export const localeToUse = getLocale(SUPPORTED_LOCALES)
+
+export const messages = getMessages(localeToUse)
