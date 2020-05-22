@@ -14,6 +14,8 @@ console.log(`Init lokalise with API key ${LOKALISE_API_TOKEN}`)
 
 const client = new LokaliseApi({ apiKey: LOKALISE_API_TOKEN })
 
+process.env.NODE_ENV = "development"
+
 const convertToLokalise = (id, translation) => ({
   key_name: id,
   // description: message.description || "",
@@ -85,6 +87,7 @@ const extractMessages = async () => {
 
 const downloadTranslations = async () => {
   const translations = {}
+  const locales = []
   let keys
 
   try {
@@ -105,7 +108,9 @@ const downloadTranslations = async () => {
       let iso = translation.language_iso
 
       if (!(iso in translations)) {
+        console.log(`Found locale ${iso}`)
         translations[iso] = {}
+        locales.push(iso)
       }
 
       if (translation.translation && translation.words) {
@@ -125,13 +130,21 @@ const downloadTranslations = async () => {
   } catch (error) {
     console.error(error)
   }
+
+  try {
+    await fs.writeFile(`src/locale/locales.json`, JSON.stringify(locales), {
+      flag: "w",
+    })
+  } catch (error) {
+    console.error(error)
+  }
 }
 
-console.log(`Extracing messages ..`)
-extractMessages()
+// console.log(`Extracing messages ..`)
+// extractMessages()
 
-console.log(`Updating keys ..`)
-updateKeys()
+// console.log(`Updating keys ..`)
+// updateKeys()
 
 console.log(`Downloading translations ..`)
 downloadTranslations()
