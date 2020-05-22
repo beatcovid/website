@@ -101,7 +101,16 @@
     "web.notfound": "<h1>Page not found.</h1><p>You might have entered an incorrect address.</p><p>Back to <homelink>homepage</homelink></p>",
     "web.footer.dislaimer": "No part of the Coronavirus Symptom Tracker may be copied, printed, or re-produced for any purpose, including research, translation or commercial, without the expressed written approval of Swinburne University of Technology.",
     "web.footer.privacy": "Privacy Policy",
-    "web.footer.contacts": "<p>We do not expect that completing the Symptom Tracker will cause you any distress. However, if you are experiencing distress, please contact <lifeline>Lifeline</lifeline> or your local relevant crisis help line.</p><p>If you have any questions about the Symptom Tracker, please contact the Chief Investigator at the <swinlink>Centre for Global Health and Equity</swinlink>, <richard>Professor Richard Osborne</richard>.</p>"
+    "web.footer.contacts": "<p>We do not expect that completing the Symptom Tracker will cause you any distress. However, if you are experiencing distress, please contact <lifeline>Lifeline</lifeline> or your local relevant crisis help line.</p><p>If you have any questions about the Symptom Tracker, please contact the Chief Investigator at the <swinlink>Centre for Global Health and Equity</swinlink>, <richard>Professor Richard Osborne</richard>.</p>",
+    "web.symtracker.disclaimer": "The Symptom Tracker does not diagnose COVID-19 and it does not provide medical advice. Please seek urgent medical help if you have difficulty breathing. Contact your relevant local health authority or medical practitioner for health advice about COVID-19 and to find out what to do if you think you have symptoms.",
+    "web.symtracker.label.activities": "Ability to do daily activities",
+    "web.symtracker.label.general": "General Symptoms",
+    "web.symtracker.label.previousscore": "Your previous score",
+    "web.symtracker.label.respiratory": "Respiratory symptoms",
+    "web.symtracker.label.score": "Your score today",
+    "web.symtracker.labels.other": "Other symptoms of respiratory illnesses (maybe related to COVID&#8209;19)",
+    "web.symtracker.moreresults": "more detailed results",
+    "web.symtracker.scorestime": "Your scores over time"
   },
   "de": {},
   "fr": {
