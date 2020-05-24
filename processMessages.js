@@ -1,4 +1,5 @@
 const fs = require("fs").promises
+const yargs = require("yargs")
 const { LokaliseApi } = require("@lokalise/node-api")
 const extractReactIntlMessages = require("extract-react-intl-messages")
 
@@ -140,11 +141,32 @@ const downloadTranslations = async () => {
   }
 }
 
-// console.log(`Extracing messages ..`)
-// extractMessages()
-
-// console.log(`Updating keys ..`)
-// updateKeys()
-
-console.log(`Downloading translations ..`)
-downloadTranslations()
+yargs
+  .command(
+    "extract",
+    "extract messages",
+    () => {},
+    argv => {
+      console.log(`Extracing messages ..`)
+      extractMessages()
+    },
+  )
+  .command(
+    "update",
+    "update messages to lokalise",
+    () => {},
+    argv => {
+      console.log(`Updating keys ..`)
+      updateKeys()
+    },
+  )
+  .command(
+    "download",
+    "download messages from lokalise",
+    () => {},
+    argv => {
+      console.log(`Downloading translations ..`)
+      downloadTranslations()
+    },
+  )
+  .help().argv
