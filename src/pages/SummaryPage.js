@@ -5,6 +5,7 @@ import parseISO from "date-fns/parseISO"
 import Result from "../components/summary/Result"
 import ThankYou from "../components/summary/ThankYou"
 import TrackDaily from "../components/summary/TrackDaily"
+import FeedbackForm from "../components/summary/FeedbackForm"
 import ShareWithFriends from "../components/summary/ShareWithFriends"
 import PotentialExposureTable from "../components/summary/PotentialExposureTable"
 import SummaryOfSymptoms from "../components/summary/SummaryOfSymptoms"
@@ -253,6 +254,8 @@ const SummaryPage = () => {
                   <MultiLine dataObj={timeSeries} />
                 </section>
               )}
+
+              <FeedbackForm />
             </div>
 
             <div className="column">
