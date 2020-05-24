@@ -1,6 +1,7 @@
 import React, { useMemo, useEffect } from "react"
 import { useIntl } from "react-intl"
 import { useLocation, Link } from "react-router-dom"
+import FacebookLikeButton from "./FacebookLike"
 
 const Footer = ({ appVersion, formVersion, sticky, user }) => {
   const intl = useIntl()
@@ -50,6 +51,8 @@ const Footer = ({ appVersion, formVersion, sticky, user }) => {
         >
           Follow @BeatCovid19Now
         </a>
+
+        <FacebookLikeButton url="https://www.facebook.com/beatcovid19now/" />
       </div>
 
       <p className="version-number">
