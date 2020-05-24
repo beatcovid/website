@@ -16,6 +16,15 @@
     }
   }
 
+  .social-buttons {
+    margin-top: 1rem;
+
+    @include mobile {
+      margin-top: 0rem;
+      font-size: 7px;
+    }
+  }
+
   .version-number {
     font-size: 9px;
     margin-top: 1rem;

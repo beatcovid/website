@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React, { useMemo, useEffect } from "react"
 import { useIntl } from "react-intl"
 import { useLocation, Link } from "react-router-dom"
 
@@ -21,6 +21,10 @@ const Footer = ({ appVersion, formVersion, sticky, user }) => {
     return baseClasses
   }
 
+  useEffect(() => {
+    window.twttr.widgets.load()
+  }, [])
+
   return (
     <footer className={footerClasses()}>
       <p className="is-size-7">
@@ -37,6 +41,16 @@ const Footer = ({ appVersion, formVersion, sticky, user }) => {
           defaultMessage: "Privacy Policy",
         })}
       </Link>
+
+      <div className="social-buttons">
+        <a
+          href="https://twitter.com/BeatCovid19Now?ref_src=twsrc%5Etfw"
+          className="twitter-follow-button is-size-7"
+          data-show-count="false"
+        >
+          Follow @BeatCovid19Now
+        </a>
+      </div>
 
       <p className="version-number">
         v{appVersion} {formVersion !== "" && <span>({formVersion})</span>}
