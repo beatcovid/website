@@ -169,4 +169,14 @@ yargs
       downloadTranslations()
     },
   )
+  .command(
+    "all",
+    "run all",
+    () => {},
+    args => {
+      extractMessages()
+      updateKeys()
+      downloadTranslations()
+    },
+  )
   .help().argv
