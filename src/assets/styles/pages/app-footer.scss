@@ -19,6 +19,14 @@
   .social-buttons {
     margin-top: 1rem;
 
+    .twitter-button {
+      margin-right: 15px;
+    }
+
+    .facebook-button {
+      margin-top: -5px;
+    }
+
     @include mobile {
       margin-top: 0rem;
       font-size: 7px;

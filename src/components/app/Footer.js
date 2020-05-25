@@ -42,12 +42,16 @@ const Footer = ({ appVersion, formVersion, sticky, user }) => {
         })}
       </Link>
 
-      <div className="social-buttons">
-        <TwitterFollowButton url="https://twitter.com/BeatCovid19Now">
-          Follow @BeatCovid19Now
-        </TwitterFollowButton>
+      <div className="social-buttons columns">
+        <div className="column">
+          <TwitterFollowButton url="https://twitter.com/BeatCovid19Now">
+            Follow @BeatCovid19Now
+          </TwitterFollowButton>
+        </div>
 
-        <FacebookLikeButton url="https://www.facebook.com/beatcovid19now/" />
+        <div className="column">
+          <FacebookLikeButton url="https://www.facebook.com/beatcovid19now/" />
+        </div>
       </div>
 
       <p className="version-number">

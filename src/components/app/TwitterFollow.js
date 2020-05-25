@@ -51,15 +51,17 @@ export default class TwitterFollowButton extends Component {
 
   render() {
     return (
-      <a
-        id="twbutton"
-        ref="twbutton"
-        className="twitter-follow-button"
-        data-show-count="false"
-        href={this.props.url}
-      >
-        {this.props.children}
-      </a>
+      <div className="twitter-button">
+        <a
+          id="twbutton"
+          ref="twbutton"
+          className="twitter-follow-button"
+          data-show-count="false"
+          href={this.props.url}
+        >
+          {this.props.children}
+        </a>
+      </div>
     )
   }
 }
