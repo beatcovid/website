@@ -23,7 +23,9 @@ const Footer = ({ appVersion, formVersion, sticky, user }) => {
   }
 
   useEffect(() => {
-    window.twttr.widgets.load()
+    if (window.twitter && window.twitter.widgets) {
+      window.twttr.widgets.load()
+    }
   }, [])
 
   return (
