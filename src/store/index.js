@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit"
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit"
 import schemaReducer from "./schemaSlice"
 import surveyReducer from "./surveySlice"
 import statsReducer from "./statsSlice"
@@ -7,6 +7,9 @@ import submissionsReducer from "./submissionsSlice"
 import feedback from "./feedbackSlice"
 
 export default configureStore({
+  middleware: getDefaultMiddleware({
+    serializableCheck: false,
+  }),
   reducer: {
     schema: schemaReducer,
     survey: surveyReducer,

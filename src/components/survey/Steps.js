@@ -162,6 +162,7 @@ const Steps = props => {
       />
     )
   }
+
   function renderSteps(step) {
     const stepName = step.name
     const stepQuestions = step.questions

@@ -17,6 +17,7 @@ import {
   doSetCurrentStep,
   doSetGlobal,
   doSetSteps,
+  doFilterSteps,
   selectCurrentStep,
   selectSurveyVersion,
   selectSteps,
@@ -91,7 +92,11 @@ const SurveyPage = () => {
     if (userResults) {
       createSurveyResults()
     }
-  }, [userResults, surveySteps, google])
+  }, [userResults, surveySteps, google, dispatch])
+
+  useEffect(() => {
+    dispatch(doFilterSteps(surveyResults, userResults))
+  }, [surveyResults, userResults, dispatch])
 
   useEffect(() => {
     if (survey) {
@@ -101,7 +106,7 @@ const SurveyPage = () => {
     } else if (!formFetchError) {
       dispatch(doSchemaGet())
     }
-  }, [survey, formFetchError, dispatch])
+  }, [])
 
   useEffect(() => {
     if (user) {
@@ -153,7 +158,11 @@ const SurveyPage = () => {
   function handleResultsChange(stepName, questionName, answer) {
     const updatedSurveyResults = { ...surveyResults }
     updatedSurveyResults[stepName][questionName] = answer
+
+    // @TODO remove local component state and use redux state
     setSurveyResults(updatedSurveyResults)
+    // doSetResults(updatedSurveyResults)
+
     console.log("Survey results", updatedSurveyResults)
   }
 
