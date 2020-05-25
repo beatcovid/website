@@ -1,6 +1,7 @@
 import React, { useMemo, useEffect } from "react"
 import { useIntl } from "react-intl"
 import { useLocation, Link } from "react-router-dom"
+import TwitterFollowButton from "./TwitterFollow"
 import FacebookLikeButton from "./FacebookLike"
 
 const Footer = ({ appVersion, formVersion, sticky, user }) => {
@@ -22,11 +23,7 @@ const Footer = ({ appVersion, formVersion, sticky, user }) => {
     return baseClasses
   }
 
-  useEffect(() => {
-    if (window.twitter && window.twitter.widgets) {
-      window.twttr.widgets.load()
-    }
-  }, [])
+  useEffect(() => {}, [])
 
   return (
     <footer className={footerClasses()}>
@@ -46,13 +43,9 @@ const Footer = ({ appVersion, formVersion, sticky, user }) => {
       </Link>
 
       <div className="social-buttons">
-        <a
-          href="https://twitter.com/BeatCovid19Now?ref_src=twsrc%5Etfw"
-          className="twitter-follow-button is-size-7"
-          data-show-count="false"
-        >
+        <TwitterFollowButton url="https://twitter.com/BeatCovid19Now">
           Follow @BeatCovid19Now
-        </a>
+        </TwitterFollowButton>
 
         <FacebookLikeButton url="https://www.facebook.com/beatcovid19now/" />
       </div>
