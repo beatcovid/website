@@ -48,7 +48,9 @@ export default class FacebookLikeButton extends Component {
     setTimeout(function() {
       let elem = document.getElementById("fbbutton")
       if (elem.getAttribute("fb-xfbml-state") === null) {
-        window.FB.XFBML.parse()
+        if (window.FB) {
+          window.FB.XFBML.parse()
+        }
       }
     }, 1000)
   }
