@@ -33,7 +33,9 @@ const FeedbackForm = () => {
           })}
         </header>
 
-        {formError && <p className="help is-danger">{"Form error"}</p>}
+        {formError && (
+          <p className="help is-danger">{"Form error: " + formError}</p>
+        )}
 
         <div className="card-content">
           <p>
@@ -58,8 +60,13 @@ const FeedbackForm = () => {
             </div>
           )}
 
-          {!loading && completed && (
-            <p className="feedback-thanks">Thank you for your feedback!</p>
+          {!loading && completed && !formError && (
+            <p className="feedback-thanks">
+              {intl.formatMessage({
+                id: "web.tracker.feedback.success",
+                defaultMessage: "Thank you for your feedback!",
+              })}
+            </p>
           )}
 
           {errors && <p className="help is-danger">{errors[0]}</p>}
@@ -68,7 +75,6 @@ const FeedbackForm = () => {
             <button
               type="submit"
               className="button is-light is-size-7"
-              // onClick={}
               disabled={loading}
             >
               {intl.formatMessage({

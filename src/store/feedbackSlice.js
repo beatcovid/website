@@ -25,21 +25,29 @@ export const slice = createSlice({
   },
 })
 
-export const { setFeedback, setLoading, setIsCompleted } = slice.actions
+export const {
+  setFeedback,
+  setLoading,
+  setIsCompleted,
+  setError,
+} = slice.actions
 
-export const submitFeedback = (
-  isLoading,
-  isCompleted,
-  feedback,
-) => dispatch => {
+export const submitFeedback = feedback => dispatch => {
   dispatch(setLoading(true))
 
   api
-    .submitForm(feedback, "feedback")
+    .submitForm({ feedback }, "feedback")
     .then(r => {
+      if (r.error) {
+        dispatch(setError(r.error))
+      }
+
       console.log("feedback submitted", r)
     })
-    .catch(e => console.error(e))
+    .catch(e => {
+      dispatch(setError(e.error))
+      console.error(e)
+    })
     .then(() => {
       dispatch(setLoading(false))
       dispatch(setIsCompleted(true))
