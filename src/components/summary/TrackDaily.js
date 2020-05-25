@@ -1,6 +1,7 @@
 import React from "react"
-import { useIntl } from "react-intl"
+import { useIntl, FormattedMessage } from "react-intl"
 import ImgClock from "../../assets/img/24hourclock.png"
+import { Link } from "react-router-dom"
 
 const TrackDaily = () => {
   const intl = useIntl()
@@ -32,6 +33,16 @@ const TrackDaily = () => {
             defaultMessage:
               "You can monitor your own health by coming back every day to see how your symptoms change over time. The questions in the Symptom Tracker may change as we learn more about COVID-19.",
           })}
+        </p>
+
+        <p>
+          <FormattedMessage
+            id="web.tracker.daily.calendarlink"
+            defaultMessage="View your daily progress using the <trackerlink>tracker</trackerlink>"
+            values={{
+              trackerlink: (...p) => <Link to={"/calendar"}>{p}</Link>,
+            }}
+          />
         </p>
 
         <p>
