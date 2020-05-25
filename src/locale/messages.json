@@ -112,7 +112,12 @@
     "web.symtracker.label.score": "Your score today",
     "web.symtracker.labels.other": "Other symptoms of respiratory illnesses (maybe related to COVID&#8209;19)",
     "web.symtracker.moreresults": "more detailed results",
-    "web.symtracker.scorestime": "Your scores over time"
+    "web.symtracker.scorestime": "Your scores over time",
+    "web.symtracker.feedback.submit": "Submit feedback",
+    "web.tracker.daily.calendarlink": "View your daily progress using the <trackerlink>tracker</trackerlink>",
+    "web.tracker.feedback.header": "Feedback",
+    "web.tracker.feedback.question": "The researchers welcome any feedback about the Tracker .",
+    "web.tracker.feedback.success": "Thank you for your feedback!"
   },
   "de": {},
   "fr": {
