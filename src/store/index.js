@@ -4,6 +4,7 @@ import surveyReducer from "./surveySlice"
 import statsReducer from "./statsSlice"
 import userReducer from "./userSlice"
 import submissionsReducer from "./submissionsSlice"
+import feedback from "./feedbackSlice"
 
 export default configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export default configureStore({
     stats: statsReducer,
     user: userReducer,
     submissions: submissionsReducer,
+    feedback,
   },
 })

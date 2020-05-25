@@ -70,7 +70,7 @@
     .social-sharing {
       display: flex;
 
-      &>span {
+      & > span {
         display: block;
         width: 100%;
         margin-left: 3px;
@@ -191,4 +191,9 @@
   .data-value-col {
     width: 120px;
   }
+}
+
+.feedback-thanks {
+  font-weight: bold;
+  font-size: 1.3em;
 }

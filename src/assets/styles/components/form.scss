@@ -25,7 +25,7 @@
 }
 
 .survey-radio {
-  .radio+.radio {
+  .radio + .radio {
     margin-left: 0;
   }
 
@@ -139,7 +139,7 @@
         position: absolute;
         top: 12px;
 
-        &:checked~span {
+        &:checked ~ span {
           color: $pink;
           text-shadow: 1px 1px 1px $pink-lighter;
           font-weight: 700;
@@ -177,7 +177,7 @@
       position: absolute;
       top: 12px;
 
-      &:checked~span {
+      &:checked ~ span {
         color: $pink;
         text-shadow: 1px 1px 1px $pink-lighter;
         font-weight: 700;
@@ -261,4 +261,9 @@
       display: none;
     }
   }
+}
+
+.textarea {
+  min-height: 2rem;
+  width: 100%;
 }
