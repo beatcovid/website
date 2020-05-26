@@ -27,7 +27,7 @@ const ShareWithFriends = () => {
           {intl.formatMessage({
             id: "web.tracker.share.summary",
             defaultMessage:
-              "Let’s spread this Symptom Tracker quicker than COVID-19 spreads. Share with your friends NOW.",
+              "We are on the way to helping you, your community, and your local health authorities to beat COVID-19. Help your community now by sharing today.",
           })}
         </p>
 
