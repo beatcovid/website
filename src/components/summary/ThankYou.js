@@ -33,7 +33,7 @@ const ThankYou = props => {
           {intl.formatMessage({
             id: "web.tracker.thankyou.back",
             defaultMessage:
-              "Please come back tomorrow and ask your family, friends and colleagues to complete the Tracker. You are helping to speed up the progress to Beat COVID-19 Now.",
+              "Please come back soon and ask your family, friends and colleagues to complete the Tracker. You are helping to speed up the progress to Beat COVID-19 Now.",
           })}
         </p>
       </div>
