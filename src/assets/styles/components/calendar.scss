@@ -70,7 +70,7 @@
   }
 
   .calendar-icon-day:first-child:nth-last-child(4),
-  .calendar-icon-day:first-child:nth-last-child(4)~.calendar-icon-day {
+  .calendar-icon-day:first-child:nth-last-child(4) ~ .calendar-icon-day {
     margin-left: -5px;
     left: 4px;
 
@@ -105,7 +105,7 @@
   padding: 0.6rem 0 0.5rem;
 
   @include tablet {
-    bottom: 100px;
+    bottom: 160px;
     display: flex;
     align-items: center;
     justify-content: space-between;
