@@ -1,6 +1,6 @@
 {
   "name": "beat-covid19-now",
-  "version": "1.3.0-12",
+  "version": "1.3.0-13",
   "private": true,
   "dependencies": {
     "@lokalise/node-api": "^3.0.3",
