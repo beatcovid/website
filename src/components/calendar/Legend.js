@@ -5,7 +5,7 @@ const Legend = () => {
       <section>
         <div className="legend-item">
           <span className="legend-square is-success"></span>
-          <span className="legend-text">No risk</span>
+          <span className="legend-text">Low risk</span>
         </div>
         <div className="legend-item">
           <span className="legend-square is-warning"></span>
