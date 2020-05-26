@@ -117,7 +117,14 @@
     "web.tracker.daily.calendarlink": "View your daily progress using the <trackerlink>tracker</trackerlink>",
     "web.tracker.feedback.header": "Feedback",
     "web.tracker.feedback.question": "The researchers welcome any feedback about the Tracker .",
-    "web.tracker.feedback.success": "Thank you for your feedback!"
+    "web.tracker.feedback.success": "Thank you for your feedback!",
+    "web.calendar.contact1": "Last contact",
+    "web.calendar.risk1": "Low risk",
+    "web.calendar.risk2": "Moderate risk",
+    "web.calendar.risk3": "High risk",
+    "web.calendar.tested": "Tested",
+    "web.calendar.travel1": "Return travel",
+    "web.calendar.travel2": "Isolation"
   },
   "de": {},
   "fr": {
