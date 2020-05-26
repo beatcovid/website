@@ -5,6 +5,7 @@ import statsReducer from "./statsSlice"
 import userReducer from "./userSlice"
 import submissionsReducer from "./submissionsSlice"
 import feedback from "./feedbackSlice"
+import email from "./emailSlice"
 
 export default configureStore({
   middleware: getDefaultMiddleware({
@@ -17,5 +18,6 @@ export default configureStore({
     user: userReducer,
     submissions: submissionsReducer,
     feedback,
+    email,
   },
 })
