@@ -35,14 +35,13 @@ const updateKeys = async () => {
     project_id: LOKALISE_PROJECT_ID,
     filter_platforms: "web",
     filter_tags: "website",
+    include_translations: 1,
   })
 
   const keyIds = keys.map(k => k.key_name.web)
 
   const keysToAdd = []
   const keysToUpdate = []
-
-  console.log(keyIds)
 
   const messages = require("./src/locale/en.json")
 
@@ -51,8 +50,21 @@ const updateKeys = async () => {
       console.log(`Lokalise doesn't have key ${m}`)
       keysToAdd.push(convertToLokalise(m, messages[m]))
     } else {
-      console.log(`Will update key ${m}`)
-      keysToUpdate.push(convertToLokalise(m, messages[m]))
+      let currentKey = keys.find(k => k.key_name.web === m)
+      let currentTranslation = ""
+
+      if (currentKey) {
+        currentTranslation = currentKey.translations.find(
+          t => t.language_iso === "en",
+        ).translation
+      }
+
+      if (messages[m] !== currentTranslation) {
+        console.log(`Will update key ${m}`)
+        let newKey = convertToLokalise(m, messages[m])
+        newKey["key_id"] = currentKey["key_id"]
+        keysToUpdate.push(newKey)
+      }
     }
   })
 
@@ -63,17 +75,21 @@ const updateKeys = async () => {
       console.error(`Add error`)
       console.error(error)
     }
+  } else {
+    console.log(`No new keys to add`)
   }
 
   if (keysToUpdate.length) {
     try {
-      await client.keys.bulk_update(keysToAdd, {
+      await client.keys.bulk_update(keysToUpdate, {
         project_id: LOKALISE_PROJECT_ID,
       })
     } catch (error) {
       console.error(`Update error`)
       console.error(error)
     }
+  } else {
+    console.log(`No message updates so no keys to update`)
   }
 }
 
