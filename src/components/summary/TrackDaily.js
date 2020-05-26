@@ -38,7 +38,7 @@ const TrackDaily = () => {
         <p>
           <FormattedMessage
             id="web.tracker.daily.calendarlink"
-            defaultMessage="View your daily progress using the <trackerlink>tracker</trackerlink>"
+            defaultMessage="View your daily progress using the <trackerlink>calendar</trackerlink>"
             values={{
               trackerlink: (...p) => <Link to={"/calendar"}>{p}</Link>,
             }}
@@ -46,26 +46,20 @@ const TrackDaily = () => {
         </p>
 
         <p>
-          {intl.formatMessage({
-            id: "web.tracker.daily.follow",
-            defaultMessage: "Follow us on.",
-          })}{" "}
-          <a href="https://www.facebook.com/groups/453230132092365/">
-            {intl.formatMessage({
-              id: "web.facebook",
-              defaultMessage: "Facebook.",
-            })}
-          </a>{" "}
-          {intl.formatMessage({
-            id: "web.or",
-            defaultMessage: "or",
-          })}{" "}
-          <a href="https://twitter.com/BeatCovid19Now">
-            {intl.formatMessage({
-              id: "web.twitter",
-              defaultMessage: "Twitter.",
-            })}
-          </a>
+          <FormattedMessage
+            id="web.tracker.daily.follow"
+            defaultMessage="Follow our research and updates on <facebook>Facebook</facebook> or <twitter>Twitter</twitter>"
+            values={{
+              facebook: (...p) => (
+                <Link to={"https://www.facebook.com/groups/453230132092365/"}>
+                  {p}
+                </Link>
+              ),
+              twitter: (...p) => (
+                <Link to={"https://twitter.com/BeatCovid19Now"}>{p}</Link>
+              ),
+            }}
+          />
         </p>
       </div>
     </section>

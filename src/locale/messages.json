@@ -124,7 +124,11 @@
     "web.calendar.risk3": "High risk",
     "web.calendar.tested": "Tested",
     "web.calendar.travel1": "Return travel",
-    "web.calendar.travel2": "Isolation"
+    "web.calendar.travel2": "Isolation",
+    "web.symtracker.email.submit": "Subscribe email",
+    "web.tracker.email.header": "Email Subscribe",
+    "web.tracker.email.question": "Subscribe to receive emails and alerts in your inbox. Enter your email below.",
+    "web.tracker.email.success": "Thank you for subscribing!"
   },
   "de": {},
   "fr": {
