@@ -11,7 +11,7 @@ const TrackDaily = () => {
       <header>
         {intl.formatMessage({
           id: "web.tracker.daily.header",
-          defaultMessage: "Keep tracking daily",
+          defaultMessage: "Come back soon",
         })}
       </header>
       <div className="card-content">
