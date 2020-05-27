@@ -19,7 +19,7 @@ const TrackDaily = () => {
           {intl.formatMessage({
             id: "web.tracker.daily.learn",
             defaultMessage:
-              "We learn more about COVID-19 every day you come back to use the Symptom Tracker.",
+              "We learn more about COVID-19 every time you come back.",
           })}
         </p>
 
