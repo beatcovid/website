@@ -45,16 +45,20 @@ agent.interceptors.request.use(
 
     config.headers["x-locale"] = localeToUse
 
-    let uid_cookie_value = cookies.get("uid")
-
-    if (uid_cookie_value && uid_cookie_value.length) {
-      config.headers["x-uid"] = uid_cookie_value
-    }
-
     let uid_qp_value = getQsParam("uid")
 
     if (uid_qp_value) {
       config.headers["x-uid"] = uid_qp_value
+
+      // We return config from here if the query string parameter exists
+      // if you're doing anything in addition make sure it's above this
+      return config
+    }
+
+    let uid_cookie_value = cookies.get("uid")
+
+    if (uid_cookie_value && uid_cookie_value.length) {
+      config.headers["x-uid"] = uid_cookie_value
     }
 
     return config
